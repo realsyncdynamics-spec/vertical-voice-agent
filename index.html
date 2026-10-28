@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vertical Voice Agent – Sichere KI-Sprachassistenten für Handwerk, Metzgerei & Kanzleien</title>
+  <meta name="description" content="Branchenspezifische KI-Sprachassistenten mit Fail-Closed-Sicherheitsmodell für Handwerk, Metzgerei und Rechtsanwaltskanzleien. Eigenständiges Produkt von Dominik Steiner." />
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --bg-card: #111827;
+      --bg-elevated: #1e293b;
+      --border: #26334d;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-strong: #0284c7;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(11, 15, 25, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+    .brand-badge {
+      background: rgba(56, 189, 248, 0.14);
+      color: var(--accent);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+    nav { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+    nav a { color: var(--text-muted); font-size: 0.95rem; font-weight: 500; }
+    nav a:hover { color: var(--text); text-decoration: none; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 20px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      border: 1px solid transparent;
+      text-decoration: none !important;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(2, 132, 199, 0.35);
+    }
+    .btn-primary:hover { filter: brightness(1.08); transform: translateY(-1px); }
+    .btn-secondary {
+      background: var(--bg-elevated);
+      color: var(--text);
+      border-color: var(--border);
+    }
+    .btn-secondary:hover { border-color: var(--accent); }
+
+    /* Hero */
+    .hero {
+      padding: 84px 0 64px;
+      border-bottom: 1px solid var(--border);
+      background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.12), transparent 65%);
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(16, 185, 129, 0.12);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 5px 14px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(2.1rem, 4.5vw, 3.4rem);
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      max-width: 880px;
+      margin-bottom: 20px;
+    }
+    .hero p.lead {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 760px;
+      margin-bottom: 32px;
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 40px; }
+    .trust-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+    }
+    .trust-item {
+      background: rgba(17, 24, 39, 0.7);
+      border: 1px solid var(--border);
+      padding: 14px 18px;
+      border-radius: 12px;
+    }
+    .trust-item strong { display: block; font-size: 0.95rem; margin-bottom: 4px; color: var(--text); }
+    .trust-item span { font-size: 0.85rem; color: var(--text-muted); }
+
+    /* Sections */
+    section { padding: 72px 0; border-bottom: 1px solid var(--border); }
+    .section-header { margin-bottom: 40px; max-width: 760px; }
+    .section-header h2 {
+      font-size: clamp(1.6rem, 3vw, 2.25rem);
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .section-header p { color: var(--text-muted); font-size: 1.05rem; }
+
+    /* Branch Tabs */
+    .tabs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .tab-btn {
+      padding: 10px 18px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-muted);
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+    .tab-btn.active {
+      background: rgba(56, 189, 248, 0.16);
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+    .branch-panel {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+    @media (max-width: 860px) {
+      .branch-panel { grid-template-columns: 1fr; }
+    }
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      margin-right: 6px;
+      margin-bottom: 6px;
+    }
+    .badge-std { background: rgba(148, 163, 184, 0.15); color: #cbd5e1; }
+    .badge-elevated { background: rgba(245, 158, 11, 0.16); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
+    .badge-tool { background: rgba(56, 189, 248, 0.14); color: var(--accent); font-family: monospace; }
+
+    .greeting-box {
+      background: var(--bg-elevated);
+      border-left: 4px solid var(--accent);
+      padding: 18px;
+      border-radius: 10px;
+      margin: 18px 0;
+      font-style: italic;
+      color: #e2e8f0;
+    }
+    .rule-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 20px;
+    }
+    @media (max-width: 640px) {
+      .rule-grid { grid-template-columns: 1fr; }
+    }
+    .rule-card {
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .rule-card h4 { font-size: 0.92rem; margin-bottom: 10px; }
+    .rule-card ul { padding-left: 18px; font-size: 0.88rem; color: var(--text-muted); }
+    .rule-card ul li { margin-bottom: 6px; }
+
+    /* Fail-Closed Simulator */
+    .sim-box {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .sim-output {
+      background: #070a12;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.84rem;
+      color: #cbd5e1;
+      margin-top: 14px;
+      white-space: pre-wrap;
+    }
+
+    /* Pricing Cards */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    .price-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+    .price-card.featured {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent), 0 12px 32px rgba(2, 132, 199, 0.18);
+    }
+    .featured-tag {
+      position: absolute;
+      top: -12px;
+      right: 20px;
+      background: var(--accent-strong);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 999px;
+    }
+    .price-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 6px; }
+    .price-sub { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; }
+    .price-amount { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em; }
+    .price-amount span { font-size: 0.95rem; font-weight: 500; color: var(--text-muted); }
+    .price-tax { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 20px; }
+    .price-features { list-style: none; margin-bottom: 28px; }
+    .price-features li {
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(38, 51, 77, 0.5);
+      font-size: 0.92rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    /* Calculator */
+    .calc-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+    .calc-controls {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    input[type="range"] { flex: 1; min-width: 220px; accent-color: var(--accent); }
+    input[type="number"], input[type="text"], input[type="email"], select, textarea {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      width: 100%;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+    th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+    th { color: var(--text-muted); font-weight: 600; font-size: 0.84rem; text-transform: uppercase; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+    /* Form */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 820px) {
+      .form-grid { grid-template-columns: 1fr; }
+    }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 6px; color: #cbd5e1; }
+
+    /* Footer */
+    footer { padding: 56px 0; background: #070a12; color: var(--text-muted); font-size: 0.9rem; }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 32px;
+    }
+    .footer-grid h4 { color: var(--text); margin-bottom: 12px; font-size: 1rem; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav-bar">
+      <div class="brand">
+        <span>Vertical Voice Agent</span>
+        <span class="brand-badge">Grok Voice 3.0 · Fail-Closed</span>
+      </div>
+      <nav>
+        <a href="#branchen">Branchenvorlagen</a>
+        <a href="#sicherheit">Fail-Closed-Sicherheit</a>
+        <a href="#pakete">Pakete & Preise</a>
+        <a href="#rechner">Minutenrechner</a>
+        <a href="onboarding.html">Live-Onboarding</a>
+        <a href="#angebot" class="btn btn-primary">Angebot anfragen</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-eyebrow">Eigenständiges Produkt · Sicherheit zuerst · Klare Grenzen</div>
+        <h1>Der branchenspezifische KI-Sprachassistent für 8 Schlüsselbranchen im DACH-Markt.</h1>
+        <p class="lead">
+          Aufgebaut auf Grok Voice 3.0 als eigenständiges Angebot außerhalb von RealSyncDynamics.AI.
+          Mit striktem Fail-Closed-Sicherheitsmodell, transparenter KI-Kennzeichnung, kontrollierter Tool-Freigabe
+          und sofortiger Übergabe an Ihr Team bei kritischen Anliegen.
+        </p>
+        <div class="hero-actions">
+          <a href="#angebot" class="btn btn-primary">Jetzt Angebot anfragen</a>
+          <a href="onboarding.html" class="btn btn-secondary">Automatisiertes Branchen-Onboarding starten</a>
+        </div>
+        <div class="trust-strip">
+          <div class="trust-item">
+            <strong>Klare KI-Offenlegung</strong>
+            <span>Jedes Gespräch beginnt mit transparenter Kennzeichnung als KI-Assistent.</span>
+          </div>
+          <div class="trust-item">
+            <strong>Fail-Closed-Architektur</strong>
+            <span>Fehlt eine Freigabe oder ein Privacy-Review, bleiben alle Tools automatisch gesperrt.</span>
+          </div>
+          <div class="trust-item">
+            <strong>Kein ungefragtes Recording</strong>
+            <span>Keine Audio- oder Transkriptspeicherung ohne explizite Freigabe und Retention-Frist.</span>
+          </div>
+          <div class="trust-item">
+            <strong>Sofortiger Mensch-Handoff</strong>
+            <span>Direkte Weiterleitung bei Gasgeruch, schweren Allergien, Fristsachen oder Reklamationen.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BRANCHENVORLAGEN & SIMULATOR -->
+    <section id="branchen">
+      <div class="container">
+        <div class="section-header">
+          <h2>Acht spezialisierte Branchenvorlagen (Standard & Elevated)</h2>
+          <p>Jede Vorlage besitzt fest definierte Werkzeuge, Handoff-Trigger und verbotene Zusagen (Forbidden Claims). Eigenmächtige Abweichungen sind technisch ausgeschlossen.</p>
+        </div>
+
+        <div class="tabs">
+          <button class="tab-btn active" onclick="selectBranch('trades')" id="tab-trades">Handwerk (trades)</button>
+          <button class="tab-btn" onclick="selectBranch('butcher')" id="tab-butcher">Metzgerei (butcher)</button>
+          <button class="tab-btn" onclick="selectBranch('auto_repair')" id="tab-auto_repair">KFZ-Werkstatt (auto_repair)</button>
+          <button class="tab-btn" onclick="selectBranch('gastronomy')" id="tab-gastronomy">Gastronomie & Bäckerei (gastronomy)</button>
+          <button class="tab-btn" onclick="selectBranch('property_management')" id="tab-property_management">Hausverwaltung (property_management)</button>
+          <button class="tab-btn" onclick="selectBranch('law_office')" id="tab-law_office">Rechtsanwaltskanzlei (law_office)</button>
+          <button class="tab-btn" onclick="selectBranch('medical_practice')" id="tab-medical_practice">Arzt- & Zahnarztpraxis (medical_practice)</button>
+          <button class="tab-btn" onclick="selectBranch('tax_advisory')" id="tab-tax_advisory">Steuerberatung (tax_advisory)</button>
+        </div>
+
+        <div class="branch-panel">
+          <div>
+            <div id="branch-badges"></div>
+            <h3 id="branch-title" style="font-size: 1.5rem; margin: 8px 0;"></h3>
+            <p id="branch-desc" style="color: var(--text-muted); font-size: 0.95rem;"></p>
+
+            <div class="greeting-box" id="branch-greeting"></div>
+
+            <div style="margin-bottom: 12px;">
+              <strong style="font-size: 0.88rem; color: var(--text-muted); display: block; margin-bottom: 6px;">ERLAUBTE WERKZEUGE (TOOLS) NACH VALIDIERUNG:</strong>
+              <div id="branch-tools"></div>
+            </div>
+
+            <div class="rule-grid">
+              <div class="rule-card">
+                <h4 style="color: #34d399;">Zwingende Handoff-Trigger</h4>
+                <ul id="branch-triggers"></ul>
+              </div>
+              <div class="rule-card">
+                <h4 style="color: #f87171;">Verbotene Zusagen (Forbidden Claims)</h4>
+                <ul id="branch-forbidden"></ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="sim-box">
+            <div>
+              <h4 style="font-size: 1.05rem; margin-bottom: 6px;">Interaktiver Fail-Closed- & Trigger-Simulator</h4>
+              <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 14px;">
+                Testen Sie, wie der Agent auf kritische Anrufer-Aussagen oder fehlende Freigaben reagiert:
+              </p>
+              <div class="form-group">
+                <label for="sim-scenario">Testszenario wählen</label>
+                <select id="sim-scenario" onchange="runSimulation()"></select>
+              </div>
+            </div>
+            <div class="sim-output" id="sim-result"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAIL-CLOSED SICHERHEITSMODELL -->
+    <section id="sicherheit">
+      <div class="container">
+        <div class="section-header">
+          <h2>Fail-Closed-Sicherheitsmodell ohne Kompromisse</h2>
+          <p>Sicherheit zuerst, klare Grenzen: Wir geben keine pauschalen Compliance-Garantien ab und erteilen keine Rechtsberatung, sondern setzen technische Leitplanken vor jede Aktivierung.</p>
+        </div>
+        <div class="trust-strip">
+          <div class="trust-item">
+            <strong>1. Validierungs-Zwang</strong>
+            <span>Ohne gültige Agent-ID, Vorlagen-Zuordnung und aktive KI-Offenlegung bleibt der Agent im Status <code>draft</code> oder <code>paused</code>.</span>
+          </div>
+          <div class="trust-item">
+            <strong>2. Telefonie-Freigabe</strong>
+            <span>Der Telefonie-Kanal wird erst nach expliziter Freigabe aktiviert. Ohne Freigabe sind ausschließlich Web-Demos möglich.</span>
+          </div>
+          <div class="trust-item">
+            <strong>3. Elevated Privacy-Review (Kanzlei)</strong>
+            <span>Für Berufsgeheimnisträger (Vorlage <code>law_office</code>) ist eine dokumentierte Datenschutzprüfung zwingende technische Voraussetzung.</span>
+          </div>
+          <div class="trust-item">
+            <strong>4. Strikte Tool-Isolation</strong>
+            <span>In der Vorlage Metzgerei ist z. B. keine direkte Kalenderbuchung freigeschaltet; Anfragen werden sicher als Ticket erfasst.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAKETE & PREISE -->
+    <section id="pakete">
+      <div class="container">
+        <div class="section-header">
+          <h2>Transparente Pakete (DACH-Marktstandard, Stand 24.10.2026)</h2>
+          <p>Alle Preise verstehen sich monatlich netto zuzüglich 19 % gesetzlicher Umsatzsteuer. Keine versteckten Einrichtungsgebühren.</p>
+        </div>
+
+        <div class="pricing-grid">
+          <!-- STARTER -->
+          <div class="price-card">
+            <div>
+              <div class="price-title">Starter</div>
+              <div class="price-sub">Ideal für Metzgereien & Web-Anfragen</div>
+              <div class="price-amount">89 € <span>/ Monat</span></div>
+              <div class="price-tax">zzgl. 19 % MwSt. (105,91 € brutto)</div>
+              <ul class="price-features">
+                <li><span>Enthaltene Agenten</span><strong>1 Agent</strong></li>
+                <li><span>Kanäle</span><strong>Web</strong></li>
+                <li><span>Inklusivminuten</span><strong>500 Min. / Monat</strong></li>
+                <li><span>Folgepreis je weitere Minute</span><strong>0,18 € / Min.</strong></li>
+                <li><span>Data Sensitivity</span><strong>Standard</strong></li>
+              </ul>
+            </div>
+            <a href="#angebot" onclick="prefillOffer('starter', 'butcher', 500)" class="btn btn-secondary">Angebot anfragen</a>
+          </div>
+
+          <!-- PROFESSIONAL -->
+          <div class="price-card featured">
+            <div class="featured-tag">Empfohlen für Handwerk</div>
+            <div>
+              <div class="price-title">Professional</div>
+              <div class="price-sub">Für Handwerksbetriebe mit Telefonaufkommen</div>
+              <div class="price-amount">199 € <span>/ Monat</span></div>
+              <div class="price-tax">zzgl. 19 % MwSt. (236,81 € brutto)</div>
+              <ul class="price-features">
+                <li><span>Enthaltene Agenten</span><strong>1 Agent</strong></li>
+                <li><span>Kanäle</span><strong>Web + Telefonie-Option</strong></li>
+                <li><span>Inklusivminuten</span><strong>1.500 Min. / Monat</strong></li>
+                <li><span>Folgepreis je weitere Minute</span><strong>0,15 € / Min.</strong></li>
+                <li><span>Data Sensitivity</span><strong>Standard</strong></li>
+              </ul>
+            </div>
+            <a href="#angebot" onclick="prefillOffer('professional', 'trades', 1500)" class="btn btn-primary">Angebot anfragen</a>
+          </div>
+
+          <!-- KANZLEI -->
+          <div class="price-card">
+            <div>
+              <div class="price-title">Kanzlei</div>
+              <div class="price-sub">Für Rechtsanwaltskanzleien (Elevated Sensitivity)</div>
+              <div class="price-amount">349 € <span>/ Monat</span></div>
+              <div class="price-tax">zzgl. 19 % MwSt. (415,31 € brutto)</div>
+              <ul class="price-features">
+                <li><span>Enthaltene Agenten</span><strong>1 Agent</strong></li>
+                <li><span>Kanäle</span><strong>Web + Telefonie-Option</strong></li>
+                <li><span>Inklusivminuten</span><strong>1.200 Min. / Monat</strong></li>
+                <li><span>Folgepreis je weitere Minute</span><strong>0,18 € / Min.</strong></li>
+                <li><span>Privacy-Review</span><strong>Elevated Privacy-Review inkl.</strong></li>
+              </ul>
+            </div>
+            <a href="#angebot" onclick="prefillOffer('kanzlei', 'law_office', 1200)" class="btn btn-secondary">Angebot anfragen</a>
+          </div>
+        </div>
+
+        <!-- MINUTENRECHNER -->
+        <div id="rechner" class="calc-panel">
+          <h3 style="margin-bottom: 8px;">Interaktiver Minuten- & Kostenrechner</h3>
+          <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 20px;">
+            Berechnen Sie die exakten monatlichen Gesamtkosten (netto und brutto inkl. 19 % MwSt.) für Ihr erwartetes Gesprächsaufkommen:
+          </p>
+          <div class="calc-controls">
+            <label for="calc-range" style="font-weight: 600;">Monatliches Gesprächsvolumen:</label>
+            <input type="range" id="calc-range" min="100" max="4000" step="50" value="900" oninput="syncCalc(this.value)" />
+            <div style="width: 140px;">
+              <input type="number" id="calc-input" min="0" max="20000" value="900" oninput="syncCalc(this.value)" />
+            </div>
+            <span style="color: var(--text-muted); font-size: 0.9rem;">Minuten / Monat</span>
+          </div>
+          <div style="overflow-x: auto;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Paket</th>
+                  <th>Kanäle</th>
+                  <th class="num">Grundpreis (netto)</th>
+                  <th class="num">Inklusivminuten</th>
+                  <th class="num">Mehrminuten</th>
+                  <th class="num">Summe Netto</th>
+                  <th class="num">Summe Brutto (inkl. 19 % USt.)</th>
+                </tr>
+              </thead>
+              <tbody id="calc-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ANGEBOT ANFRAGEN -->
+    <section id="angebot">
+      <div class="container">
+        <div class="section-header">
+          <h2>Unverbindliches Angebot anfragen</h2>
+          <p>Wählen Sie Ihre Branche und Ihr Wunschpaket. Sie erhalten direkt eine strukturierte Angebotszusammenfassung für Ihre Anfrage bei Dominik Steiner.</p>
+        </div>
+
+        <div class="form-grid">
+          <div class="calc-panel">
+            <div class="form-group">
+              <label for="req-company">Betrieb / Kanzlei / Name *</label>
+              <input type="text" id="req-company" placeholder="z. B. SHK Meisterbetrieb Muster" oninput="updateOfferPreview()" />
+            </div>
+            <div class="form-group">
+              <label for="req-email">Geschäftliche E-Mail-Adresse *</label>
+              <input type="email" id="req-email" placeholder="kontakt@ihr-betrieb.de" oninput="updateOfferPreview()" />
+            </div>
+            <div class="form-group">
+              <label for="req-branch">Branchenvorlage</label>
+              <select id="req-branch" onchange="updateOfferPreview()">
+                <option value="trades">Handwerk (trades – standard)</option>
+                <option value="butcher">Metzgerei (butcher – standard)</option>
+                <option value="auto_repair">KFZ-Werkstatt & Autohaus (auto_repair – standard)</option>
+                <option value="gastronomy">Gastronomie & Bäckerei (gastronomy – standard)</option>
+                <option value="property_management">Hausverwaltung & Immobilien (property_management – standard)</option>
+                <option value="law_office">Rechtsanwaltskanzlei (law_office – elevated)</option>
+                <option value="medical_practice">Arzt- & Zahnarztpraxis (medical_practice – elevated)</option>
+                <option value="tax_advisory">Steuerberatung & Wirtschaftsprüfung (tax_advisory – elevated)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="req-pkg">Gewünschtes Paket</label>
+              <select id="req-pkg" onchange="updateOfferPreview()">
+                <option value="starter">Starter – 89,00 € / Monat zzgl. MwSt. (Web, 500 Min. inkl.)</option>
+                <option value="professional" selected>Professional – 199,00 € / Monat zzgl. MwSt. (Web + Telefonie-Option, 1.500 Min. inkl.)</option>
+                <option value="kanzlei">Kanzlei – 349,00 € / Monat zzgl. MwSt. (Elevated Privacy Review, 1.200 Min. inkl.)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="req-mins">Geschätzte Minuten pro Monat</label>
+              <input type="number" id="req-mins" value="1200" min="100" step="100" oninput="updateOfferPreview()" />
+            </div>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px;">
+              <a id="mailto-btn" href="#" class="btn btn-primary">Angebot per E-Mail anfragen</a>
+              <button type="button" class="btn btn-secondary" onclick="copyOfferText()">Anfragetext kopieren</button>
+            </div>
+            <p id="copy-status" style="font-size: 0.85rem; color: var(--success); margin-top: 10px; display: none;">
+              Anfragetext wurde in die Zwischenablage kopiert.
+            </p>
+          </div>
+
+          <div class="sim-box">
+            <div>
+              <h4 style="margin-bottom: 8px;">Vorschau Ihrer Angebotsanfrage</h4>
+              <p style="font-size: 0.85rem; color: var(--text-muted);">
+                Keine versteckten Klauseln: Alle Eckdaten basieren auf den verifizierten Vorlagen und Preisen (Stand 24.10.2026).
+              </p>
+            </div>
+            <div class="sim-output" id="offer-preview" style="flex: 1; margin-top: 14px;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER / IMPRESSUM -->
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <h4>Anbieterkennzeichnung (Impressum)</h4>
+        <p>
+          <strong>Dominik Steiner</strong><br />
+          Einzelunternehmen<br />
+          Schwarzburger Str. 31<br />
+          98724 Neuhaus am Rennweg<br />
+          Thüringen, Deutschland
+        </p>
+      </div>
+      <div>
+        <h4>Produktabgrenzung & Rechtliches</h4>
+        <p>
+          <strong>Vertical Voice Agent</strong> ist ein eigenständiges Produkt außerhalb von RealSyncDynamics.AI, aufgebaut auf Grok Voice 3.0.<br /><br />
+          Alle angegebenen Preise verstehen sich in Euro monatlich netto zuzüglich 19 % gesetzlicher Umsatzsteuer (regelbesteuert).
+        </p>
+      </div>
+      <div>
+        <h4>Sicherheit & Haftungshinweis</h4>
+        <p>
+          Der Sprachassistent gibt sich stets klar als KI-System zu erkennen. Es erfolgt keine Rechtsberatung, keine Fristenprüfung und keine garantierte Compliance-Zusage. Audio-Aufzeichnungen oder Transkriptspeicherungen sind standardmäßig deaktiviert (Fail-Closed).
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const BRANCH_DATA = {
+      trades: {
+        title: "Handwerk (Vorlage: trades)",
+        sensitivity: "standard",
+        desc: "Entwickelt für SHK-, Elektro-, Dachdecker- und Servicebetriebe. Nimmt Qualifizierungsdaten und Terminwünsche auf und leitet Notfälle sofort weiter.",
+        greeting: "„Guten Tag! Ich bin der KI-Sprachassistent Ihres Handwerksbetriebs. Wie kann ich Ihnen bei Terminanfragen oder einem Anliegen helfen? Hinweis: Bei akuter Gefahr wie Gasgeruch oder Rohrbruch verbinde ich Sie sofort weiter.“",
+        tools: ["lookup_kb", "create_ticket", "schedule_appointment", "handoff_human"],
+        triggers: ["Gefahr / Notfall", "Gasgeruch", "Wasserrohrbruch", "Stromausfall / Funkenflug", "Reklamation", "Wunsch nach Mitarbeiter"],
+        forbidden: ["Verbindliche Festpreiszusage ohne Vor-Ort-Prüfung", "Garantierte Sofortreparatur", "Notdienst-Einsatzzeitpunkt ohne Dispositionsfreigabe"],
+        scenarios: [
+          {
+            label: "Notfall: Gasgeruch + Frage nach Festpreis",
+            caller: "Im Keller riecht es stark nach Gasgeruch, können Sie mir sofort einen Festpreis sagen?",
+            decision: "IMMEDIATE_HUMAN_HANDOFF",
+            tool: "handoff_human",
+            reply: "Achtung: Bei Gasgeruch oder akuter Gefahr gebe ich keine Reparaturzusage oder Festpreise ab, sondern verbinde Sie sofort mit unserem Notdienst."
+          },
+          {
+            label: "Standard: Heizungswartung nächste Woche buchen",
+            caller: "Ich hätte gerne nächste Woche Dienstag einen Wartungstermin für die Heizung.",
+            decision: "STANDARD_TOOL_EXECUTION",
+            tool: "schedule_appointment",
+            reply: "Gerne, ich prüfe die freien Zeitfenster und trage Ihren Wunschtermin für die Heizungswartung ein."
+          }
+        ]
+      },
+      butcher: {
+        title: "Metzgerei (Vorlage: butcher)",
+        sensitivity: "standard",
+        desc: "Für Traditionsmetzgereien und Filialbetriebe. Beantwortet Sortiments- und Öffnungszeitenfragen, erfasst Vorbestellungen und schützt vor riskanten Allergie-Zusagen.",
+        greeting: "„Grüß Gott! Ich bin der KI-Sprachassistent Ihrer Metzgerei. Ich helfe Ihnen gerne bei Fragen zu unserem Sortiment, Öffnungszeiten oder Vorbestellungen. Für verbindliche Allergen-Auskünfte verbinde ich Sie direkt mit unserem Fachpersonal.“",
+        tools: ["lookup_kb", "create_ticket", "handoff_human"],
+        triggers: ["Schwere Allergie / Anaphylaxie-Risiko", "Reklamation", "Catering-Sonderanfrage", "Wunsch nach Fachpersonal"],
+        forbidden: ["Verbindliche Allergiegarantie", "Garantie auf 100 % Freiheit von Spuren/Kreuzkontamination", "Verbindliche Reservierung ausverkaufter Tagesware ohne Bestätigung"],
+        scenarios: [
+          {
+            label: "Trigger: Schwere Erdnuss-Allergie & Spurengarantie",
+            caller: "Mein Kind hat eine schwere Erdnuss-Allergie, garantieren Sie 100 % Spurenfreiheit?",
+            decision: "IMMEDIATE_HUMAN_HANDOFF",
+            tool: "handoff_human",
+            reply: "Für verbindliche Auskünfte zu Allergien und möglichen Spuren übernehme ich keine Garantie. Ich verbinde Sie sofort mit unserem Fachpersonal."
+          },
+          {
+            label: "Tool-Grenze: Anfrage nach Kalender-Terminbuchung",
+            caller: "Können Sie mir direkt einen Beratungstermin im Kalender buchen?",
+            decision: "TOOL_DENIED_BY_TEMPLATE",
+            tool: "create_ticket (Fallback)",
+            reply: "Die direkte Kalenderbuchung (schedule_appointment) ist in der Vorlage Metzgerei nicht freigegeben. Ich erstelle stattdessen ein Rückruf-Ticket für das Team."
+          }
+        ]
+      },
+      law_office: {
+        title: "Rechtsanwaltskanzlei (Vorlage: law_office)",
+        sensitivity: "elevated",
+        desc: "Für Kanzleien und Berufsgeheimnisträger. Aktivierung erfolgt ausschließlich nach dokumentierter Datenschutzprüfung (Elevated Privacy-Review).",
+        greeting: "„Guten Tag. Sie sprechen mit dem KI-Sprachassistenten der Kanzlei. Ich nehme gerne Ihr Anliegen oder einen Terminwunsch auf. Bitte beachten Sie, dass ich keine Rechtsberatung erteile, keine Fristen prüfe und durch dieses Gespräch noch kein Mandatsverhältnis entsteht. Handelt es sich um eine dringende Fristsache?“",
+        tools: ["lookup_kb", "create_ticket", "schedule_appointment", "handoff_human"],
+        triggers: ["Fristsache", "Eilrechtsschutz", "Haft / Durchsuchung", "Kündigung / Zustellung mit Fristablauf", "Mandatskonflikt / Beschwerde", "Wunsch nach Kanzleimitarbeiter"],
+        forbidden: ["Rechtsberatung", "Mandat angenommen", "Frist geprüft", "Erfolgsaussichten bewertet"],
+        scenarios: [
+          {
+            label: "Trigger: Kündigung zugestellt + Frage nach Klagefrist",
+            caller: "Mir wurde heute eine Kündigung zugestellt, wann läuft meine Frist ab und nehmen Sie das Mandat an?",
+            decision: "IMMEDIATE_HUMAN_HANDOFF",
+            tool: "handoff_human",
+            reply: "Da es sich um eine dringende Fristsache handelt, erteile ich keine Rechtsberatung, prüfe keine Fristen und nehme kein Mandat an, sondern verbinde Sie sofort mit dem Sekretariat."
+          },
+          {
+            label: "Fail-Closed-Test: Kanzlei ohne dokumentiertes Privacy-Review",
+            caller: "Guten Tag, ich möchte einen Erstberatungstermin vereinbaren.",
+            decision: "FAIL_CLOSED_BLOCKED (effective_status: paused)",
+            tool: "[] (Alle Tools gesperrt)",
+            reply: "BLOCKIERT: Für elevated sensitivity (law_office) fehlt privacy_review_documented=true. Es werden keine Tools freigegeben."
+          }
+        ]
+      }      ,
+      auto_repair: {
+        title: "KFZ-Werkstatt & Autohaus (Vorlage: auto_repair)",
+        sensitivity: "standard",
+        desc: "Für freie und markengebundene KFZ-Werkstätten. Nimmt Inspektions-, HU/AU- und Reifenwechseltermine auf und leitet Pannen oder Bremsdefekte sofort weiter.",
+        greeting: "„Guten Tag! Ich bin der KI-Sprachassistent Ihrer KFZ-Werkstatt. Ich helfe Ihnen gerne bei Werkstattterminen, Reifenwechsel oder Rückfragen. Bei einer akuten Panne, Unfall oder roter Warnleuchte verbinde ich Sie sofort mit unserem Serviceberater.“",
+        tools: ["lookup_kb", "create_ticket", "schedule_appointment", "handoff_human"],
+        triggers: ["Unfall / Panne auf der Straße", "Bremsausfall / rote Warnleuchte / Rauchentwicklung", "Reklamation nach Reparatur", "Wunsch nach Werkstattleiter"],
+        forbidden: ["Verbindliche Festpreis- oder Kostenvoranschlagszusage ohne Fahrzeugdiagnose", "Bestätigung der Weiterfahr-Sicherheit bei Brems- oder Lenkungsdefekt", "Garantierte HU/TÜV-Zuteilung ohne Prüfung"],
+        scenarios: [
+          {
+            label: "Notfall: Rote Warnleuchte & Bremsausfall",
+            caller: "Meine rote Warnleuchte brennt und die Bremse fällt fast aus, kann ich noch weiterfahren?",
+            decision: "IMMEDIATE_HUMAN_HANDOFF",
+            tool: "handoff_human",
+            reply: "Bei einer akuten Panne, einem Unfall oder Brems-/Warnleuchtendefekt treffe ich keine Aussage zur Weiterfahrt, sondern verbinde Sie sofort mit unserem Werkstattleiter."
+          },
+          {
+            label: "Standard: Reifenwechsel-Termin buchen",
+            caller: "Ich möchte nächste Woche einen Termin zum Reifenwechsel buchen.",
+            decision: "STANDARD_TOOL_EXECUTION",
+            tool: "schedule_appointment",
+            reply: "Gerne, ich prüfe die freien Hebebühnen-Zeiten und trage Ihren Reifenwechsel-Termin ein."
+          }
+        ]
+      },
+      gastronomy: {
+        title: "Gastronomie & Bäckerei (Vorlage: gastronomy)",
+        sensitivity: "standard",
+        desc: "Für Restaurants, Cafés und Bäckereien. Nimmt Tischreservierungen und Vorbestellungen auf und übergibt schwere Allergie- oder Bankettanfragen sofort.",
+        greeting: "„Herzlich willkommen! Ich bin der KI-Sprachassistent Ihres Gastronomiebetriebs. Gerne nehme ich Ihre Tischreservierung oder Vorbestellung auf. Für verbindliche Auskünfte zu Allergenen und Spuren verbinde ich Sie direkt mit unserer Serviceleitung.“",
+        tools: ["lookup_kb", "create_ticket", "schedule_appointment", "handoff_human"],
+        triggers: ["Schwere Lebensmittelallergie / Zöliakie / Anaphylaxie", "Reklamation", "Gruppenreservierung / Bankett ab 15 Personen", "Wunsch nach Serviceleitung"],
+        forbidden: ["Verbindliche Allergie- oder Spurenfreiheitsgarantie", "Garantie auf 100 % gluten- oder nussfreie Zubereitung ohne Kreuzkontamination", "Verbindliche Exklusivbuchung ohne Bestätigung der Betriebsleitung"],
+        scenarios: [
+          {
+            label: "Trigger: Schwere Zöliakie & Spurenfreiheit",
+            caller: "Ich habe schwere Zöliakie, können Sie garantieren, dass in der Küche keinerlei Spuren sind?",
+            decision: "IMMEDIATE_HUMAN_HANDOFF",
+            tool: "handoff_human",
+            reply: "Bei schweren Lebensmittelallergien oder Fragen zur Kreuzkontamination gebe ich keine Spurenfreiheitsgarantie ab, sondern verbinde Sie sofort mit unserer Serviceleitung."
+          },
+          {
+            label: "Standard: Tischreservierung für 4 Personen",
+            caller: "Wir möchten für Samstagabend um 19 Uhr einen Tisch für vier Personen reservieren.",
+            decision: "STANDARD_TOOL_EXECUTION",
+            tool: "schedule_appointment",
+            reply: "Gerne, ich habe Ihren Tisch für vier Personen am Samstag um 19:00 Uhr reserviert."
+          }
+        ]
+      },
+      property_management: {
+        title: "Hausverwaltung & Immobilien (Vorlage: property_management)",
+        sensitivity: "standard",
+        desc: "Für Hausverwaltungen und Wohnungsunternehmen. Erfasst strukturierte Schadensmeldungen und eskaliert Havarien wie Rohrbruch oder Aufzugsstörung sofort.",
+        greeting: "„Guten Tag! Sie sprechen mit dem KI-Sprachassistenten Ihrer Hausverwaltung. Ich erfasse gerne Ihre Schadensmeldung oder Ihr Mieteranliegen. Bei akuten Notfällen wie Rohrbruch, Heizungsausfall oder Aufzugsstörung verbinde ich Sie sofort mit dem Notdienst.“",
+        tools: ["lookup_kb", "create_ticket", "schedule_appointment", "handoff_human"],
+        triggers: ["Rohrbruch / Wasserschaden / Heizungsausfall im Winter", "Brand / Gasgeruch / Aufzugseinschluss", "Fristlose Kündigung / Mietrechtsstreit", "Wunsch nach Objektbetreuer"],
+        forbidden: ["Zusage einer Kostenübernahme oder Mietminderung", "Rechtsverbindliche Mietvertragszusage am Telefon", "Freigabe kostenpflichtiger Handwerkereinsätze ohne Deckungsprüfung"],
+        scenarios: [
+          {
+            label: "Havarie: Wasserrohrbruch in der Wohnung",
+            caller: "In der Wohnung über mir ist ein Rohrbruch und Wasser läuft durch die Decke!",
+            decision: "IMMEDIATE_HUMAN_HANDOFF",
+            tool: "handoff_human",
+            reply: "Bei einem akuten Gebäudenotfall wie Rohrbruch oder Heizungsausfall sage ich keine Kostenübernahme zu, sondern verbinde Sie sofort mit dem Havariedienst."
+          },
+          {
+            label: "Standard: Defekte Treppenhausbeleuchtung melden",
+            caller: "Im zweiten Stock ist die Treppenhauslampe defekt, bitte aufnehmen.",
+            decision: "STANDARD_TOOL_EXECUTION",
+            tool: "create_ticket",
+            reply: "Vielen Dank, ich habe die Schadensmeldung für den Hausmeisterdienst als Ticket erfasst."
+          }
+        ]
+      },
+      medical_practice: {
+        title: "Arzt- & Zahnarztpraxis (Vorlage: medical_practice)",
+        sensitivity: "elevated",
+        desc: "Für Arzt-, Facharzt- und Zahnarztpraxen (§ 203 StGB). Aktivierung ausschließlich nach dokumentierter Datenschutzprüfung (Elevated Privacy-Review).",
+        greeting: "„Guten Tag. Sie sprechen mit dem KI-Sprachassistenten der Praxis. Ich nehme gerne Ihren Terminwunsch oder Ihr Anliegen auf. Bitte beachten Sie, dass ich keine medizinische Beratung oder Diagnose erteile. Bei einem akuten Notfall wählen Sie bitte sofort die 112 oder lassen Sie sich direkt mit dem Praxisteam verbinden.“",
+        tools: ["lookup_kb", "create_ticket", "schedule_appointment", "handoff_human"],
+        triggers: ["Medizinischer Notfall / Atemnot / Brustschmerz / starke Blutung", "Akuter Schmerzfall", "Frage zu Labor- oder Befundergebnissen", "Wunsch nach medizinischem Fachpersonal"],
+        forbidden: ["Medizinische Diagnose oder Therapieempfehlung", "Verbindliche Zusage von Rezepten oder Arbeitsunfähigkeitsbescheinigungen ohne ärztliche Prüfung", "Telefonische Herausgabe sensibler Befunddaten"],
+        scenarios: [
+          {
+            label: "Notfall: Akute Brustschmerzen & Atemnot",
+            caller: "Ich habe plötzlich starke Brustschmerzen und bekomme schlecht Luft!",
+            decision: "IMMEDIATE_HUMAN_HANDOFF",
+            tool: "handoff_human",
+            reply: "Bei akuten Beschwerden oder Notfällen stelle ich keine Diagnose, sondern verbinde Sie sofort mit dem Praxisteam (bei Lebensgefahr bitte 112 wählen)."
+          },
+          {
+            label: "Standard: Regulärer Vorsorge-/Kontrolltermin",
+            caller: "Ich möchte gerne einen regulären Kontrolltermin im nächsten Monat vereinbaren.",
+            decision: "STANDARD_TOOL_EXECUTION",
+            tool: "schedule_appointment",
+            reply: "Gerne, ich trage Ihren Wunschtermin für die Kontrolluntersuchung im Praxiskalender ein."
+          }
+        ]
+      },
+      tax_advisory: {
+        title: "Steuerberatung & Wirtschaftsprüfung (Vorlage: tax_advisory)",
+        sensitivity: "elevated",
+        desc: "Für Steuerberatungskanzleien und Wirtschaftsprüfer. Erfordert dokumentiertes Privacy-Review (Elevated Sensitivity). Keine Fristprüfung oder Steuerberatung.",
+        greeting: "„Guten Tag. Sie sprechen mit dem KI-Sprachassistenten der Steuerberatungskanzlei. Ich nehme gerne Ihr Anliegen oder einen Terminwunsch auf. Bitte beachten Sie, dass ich keine steuerliche Beratung erteile und keine Fristen prüfe. Handelt es sich um einen dringenden Fristablauf beim Finanzamt?“",
+        tools: ["lookup_kb", "create_ticket", "schedule_appointment", "handoff_human"],
+        triggers: ["Finanzamt-Frist / Einspruchsfrist läuft ab", "Betriebsprüfung / Steuerfahndung / Vollstreckung", "Kontopfändung / Schätzungsbescheid", "Wunsch nach Steuerberater oder Fachmitarbeiter"],
+        forbidden: ["Verbindliche steuerliche Beratung oder Gestaltungsempfehlung", "Zusage, dass eine Steuer- oder Einspruchsfrist gewahrt oder verlängert wurde", "Mandatsannahme ohne schriftlichen Steuerberatungsvertrag"],
+        scenarios: [
+          {
+            label: "Trigger: Einspruchsfrist beim Finanzamt läuft heute ab",
+            caller: "Heute läuft meine Einspruchsfrist beim Finanzamt ab, können Sie die Frist verlängern?",
+            decision: "IMMEDIATE_HUMAN_HANDOFF",
+            tool: "handoff_human",
+            reply: "Bei laufenden Finanzamt-Fristen, Betriebsprüfung oder Pfändung gebe ich keine steuerliche Auskunft und prüfe keine Fristen, sondern verbinde Sie sofort mit dem Kanzleisekretariat."
+          },
+          {
+            label: "Standard: Jahresabschluss-Besprechungstermin",
+            caller: "Ich möchte gerne einen Termin für das Jahresabschlussgespräch vereinbaren.",
+            decision: "STANDARD_TOOL_EXECUTION",
+            tool: "schedule_appointment",
+            reply: "Gerne, ich habe Ihren Terminwunsch für das Jahresabschlussgespräch erfasst."
+          }
+        ]
+      }
+    };
+
+    const PACKAGES = {
+      starter: { name: "Starter", channels: "Web", base: 89, inc: 500, over: 0.18 },
+      professional: { name: "Professional", channels: "Web + Telefonie-Option", base: 199, inc: 1500, over: 0.15 },
+      kanzlei: { name: "Kanzlei", channels: "Web + Telefonie + Privacy-Review", base: 349, inc: 1200, over: 0.18 }
+    };
+
+    let currentBranch = "trades";
+
+    function selectBranch(key) {
+      currentBranch = key;
+      ["trades", "butcher", "auto_repair", "gastronomy", "property_management", "law_office", "medical_practice", "tax_advisory"].forEach(k => {
+        document.getElementById("tab-" + k).classList.toggle("active", k === key);
+      });
+      const b = BRANCH_DATA[key];
+      document.getElementById("branch-title").textContent = b.title;
+      document.getElementById("branch-desc").textContent = b.desc;
+      document.getElementById("branch-greeting").textContent = b.greeting;
+
+      const badgeHtml = b.sensitivity === "elevated"
+        ? '<span class="badge badge-elevated">Data Sensitivity: elevated (Privacy-Review Pflicht)</span>'
+        : '<span class="badge badge-std">Data Sensitivity: standard</span>';
+      document.getElementById("branch-badges").innerHTML = badgeHtml;
+
+      document.getElementById("branch-tools").innerHTML = b.tools
+        .map(t => `<span class="badge badge-tool">${t}</span>`)
+        .join("");
+
+      document.getElementById("branch-triggers").innerHTML = b.triggers
+        .map(t => `<li>${t}</li>`)
+        .join("");
+
+      document.getElementById("branch-forbidden").innerHTML = b.forbidden
+        .map(f => `<li>${f}</li>`)
+        .join("");
+
+      const sel = document.getElementById("sim-scenario");
+      sel.innerHTML = b.scenarios
+        .map((s, idx) => `<option value="${idx}">${s.label}</option>`)
+        .join("");
+      runSimulation();
+    }
+
+    function runSimulation() {
+      const b = BRANCH_DATA[currentBranch];
+      const idx = Number(document.getElementById("sim-scenario").value || 0);
+      const sc = b.scenarios[idx];
+      document.getElementById("sim-result").textContent =
+`[ANRUFER]: "${sc.caller}"
+
+[ENTSCHEIDUNG]: ${sc.decision}
+[AUSGEFÜHRTES TOOL]: ${sc.tool}
+
+[AGENT-ANTWORT]:
+"${sc.reply}"`;
+    }
+
+    function syncCalc(val) {
+      const mins = Math.max(0, Math.round(Number(val) || 0));
+      document.getElementById("calc-range").value = Math.min(4000, mins);
+      document.getElementById("calc-input").value = mins;
+
+      const rowsHtml = Object.values(PACKAGES).map(p => {
+        const extra = Math.max(0, mins - p.inc);
+        const extraEur = extra * p.over;
+        const net = p.base + extraEur;
+        const gross = net * 1.19;
+        return `<tr>
+          <td><strong>${p.name}</strong></td>
+          <td>${p.channels}</td>
+          <td class="num">${p.base.toFixed(2).replace(".", ",")} €</td>
+          <td class="num">${p.inc} Min.</td>
+          <td class="num">${extra} Min. (${extraEur.toFixed(2).replace(".", ",")} €)</td>
+          <td class="num"><strong>${net.toFixed(2).replace(".", ",")} €</strong></td>
+          <td class="num">${gross.toFixed(2).replace(".", ",")} €</td>
+        </tr>`;
+      }).join("");
+      document.getElementById("calc-tbody").innerHTML = rowsHtml;
+    }
+
+    function prefillOffer(pkg, branch, mins) {
+      document.getElementById("req-pkg").value = pkg;
+      document.getElementById("req-branch").value = branch;
+      document.getElementById("req-mins").value = mins;
+      updateOfferPreview();
+    }
+
+    function updateOfferPreview() {
+      const company = document.getElementById("req-company").value.trim() || "[Ihr Betrieb / Kanzlei]";
+      const email = document.getElementById("req-email").value.trim() || "[Ihre E-Mail]";
+      const branchKey = document.getElementById("req-branch").value;
+      const pkgKey = document.getElementById("req-pkg").value;
+      const mins = Math.max(0, Math.round(Number(document.getElementById("req-mins").value) || 0));
+
+      const b = BRANCH_DATA[branchKey];
+      const p = PACKAGES[pkgKey];
+      const extra = Math.max(0, mins - p.inc);
+      const extraEur = extra * p.over;
+      const net = p.base + extraEur;
+      const gross = net * 1.19;
+
+      const text =
+`ANGEBOTSANFRAGE – VERTICAL VOICE AGENT
+Anbieter: Dominik Steiner, Einzelunternehmen, Schwarzburger Str. 31, 98724 Neuhaus am Rennweg
+
+Interessent: ${company}
+Kontakt-E-Mail: ${email}
+Gewählte Branchenvorlage: ${b.title} (Sensitivity: ${b.sensitivity})
+Gewähltes Paket: ${p.name} (${p.channels})
+
+KALKULATION (Stand 24.10.2026):
+- Monatlicher Grundpreis: ${p.base.toFixed(2).replace(".", ",")} € netto (inkl. ${p.inc} Min.)
+- Geschätztes Volumen: ${mins} Min. / Monat
+- Mehrminuten (${extra} Min. à ${p.over.toFixed(2).replace(".", ",")} €): ${extraEur.toFixed(2).replace(".", ",")} € netto
+- Summe monatlich netto: ${net.toFixed(2).replace(".", ",")} €
+- Summe monatlich brutto (inkl. 19 % MwSt.): ${gross.toFixed(2).replace(".", ",")} €
+
+SICHERHEITSRAHMEN:
+- Fail-Closed-Validierung & Pflicht-KI-Kennzeichnung aktiv
+- Erlaubte Tools: ${b.tools.join(", ")}
+- Kein Recording ohne explizite Freigabe & Retention`;
+
+      document.getElementById("offer-preview").textContent = text;
+      const subject = encodeURIComponent(`Angebot anfragen: Vertical Voice Agent (${p.name} / ${branchKey})`);
+      const body = encodeURIComponent(text);
+      document.getElementById("mailto-btn").href = `mailto:realsyncdynamics@gmail.com?subject=${subject}&body=${body}`;
+    }
+
+    function copyOfferText() {
+      const text = document.getElementById("offer-preview").textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const st = document.getElementById("copy-status");
+        st.style.display = "block";
+        setTimeout(() => { st.style.display = "none"; }, 3000);
+      });
+    }
+
+    // Init
+    selectBranch("trades");
+    syncCalc(900);
+    updateOfferPreview();
+  </script>
+</body>
+</html>
