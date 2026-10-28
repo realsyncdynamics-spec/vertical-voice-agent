@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Automatisiertes Branchen-Onboarding – Vertical Voice Agent</title>
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --bg-card: #111827;
+      --bg-elevated: #1e293b;
+      --border: #26334d;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-strong: #0284c7;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .container { max-width: 1180px; margin: 0 auto; padding: 32px 24px 72px; }
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(11, 15, 25, 0.9);
+      padding: 18px 0;
+    }
+    .header-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .brand { font-weight: 700; font-size: 1.15rem; display: flex; align-items: center; gap: 10px; }
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .badge-accent { background: rgba(56, 189, 248, 0.15); color: var(--accent); border: 1px solid rgba(56, 189, 248, 0.35); }
+    .badge-ok { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.35); }
+    .badge-err { background: rgba(239, 68, 68, 0.16); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); }
+    .badge-warn { background: rgba(245, 158, 11, 0.16); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
+
+    h1 { font-size: clamp(1.7rem, 3vw, 2.3rem); margin-bottom: 8px; letter-spacing: -0.02em; }
+    p.sub { color: var(--text-muted); margin-bottom: 28px; max-width: 780px; }
+
+    .wizard-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 24px;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .wizard-grid { grid-template-columns: 1fr; }
+    }
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .step-title {
+      font-size: 1.08rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .step-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: var(--accent-strong);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+    .branch-selector {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    @media (max-width: 600px) {
+      .branch-selector { grid-template-columns: 1fr; }
+    }
+    .branch-btn {
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+      color: var(--text);
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.15s ease;
+    }
+    .branch-btn.active {
+      border-color: var(--accent);
+      background: rgba(56, 189, 248, 0.14);
+      box-shadow: 0 0 0 1px var(--accent);
+    }
+    .branch-btn strong { display: block; font-size: 0.95rem; }
+    .branch-btn span { font-size: 0.78rem; color: var(--text-muted); }
+
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-size: 0.86rem; font-weight: 600; margin-bottom: 5px; color: #cbd5e1; }
+    input[type="text"], input[type="number"], select, textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+      color: var(--text);
+      font-size: 0.92rem;
+    }
+    .check-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid var(--border);
+      margin-bottom: 10px;
+      font-size: 0.88rem;
+    }
+    .check-row input[type="checkbox"] { margin-top: 4px; accent-color: var(--accent); width: 16px; height: 16px; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 18px;
+      border-radius: 9px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border: 1px solid transparent;
+      text-decoration: none;
+    }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent-strong)); color: #fff; }
+    .btn-secondary { background: var(--bg-elevated); color: var(--text); border-color: var(--border); }
+
+    .code-box {
+      background: #070a12;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.82rem;
+      color: #cbd5e1;
+      white-space: pre-wrap;
+      overflow-x: auto;
+      max-height: 360px;
+      overflow-y: auto;
+    }
+    .smoke-item {
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.7);
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 10px;
+      font-size: 0.86rem;
+    }
+    .smoke-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <span>Vertical Voice Agent</span>
+        <span class="badge badge-accent">Automatisiertes Branchen-Onboarding</span>
+      </div>
+      <div>
+        <a href="index.html" class="btn btn-secondary">Zurück zur Produkt-Webseite</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <h1>Automatisiertes Mandanten-Onboarding je Branche</h1>
+    <p class="sub">
+      Konfiguriert, validiert (Fail-Closed) und testet den Sprachassistenten für Handwerk (<code>trades</code>),
+      Metzgerei (<code>butcher</code>) oder Rechtsanwaltskanzlei (<code>law_office</code>) vollautomatisch in 4 Schritten.
+    </p>
+
+    <div class="wizard-grid">
+      <!-- LEFT COLUMN: INPUT STEPS -->
+      <div>
+        <!-- STEP 1 -->
+        <div class="card">
+          <div class="step-title"><span class="step-num">1</span> Branchenvorlage wählen</div>
+          <div class="branch-selector" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+            <button type="button" class="branch-btn active" id="btn-trades" onclick="setBranch('trades')">
+              <strong>Handwerk</strong>
+              <span>trades · Standard</span>
+            </button>
+            <button type="button" class="branch-btn" id="btn-butcher" onclick="setBranch('butcher')">
+              <strong>Metzgerei</strong>
+              <span>butcher · Standard</span>
+            </button>
+            <button type="button" class="branch-btn" id="btn-auto_repair" onclick="setBranch('auto_repair')">
+              <strong>KFZ-Werkstatt</strong>
+              <span>auto_repair · Standard</span>
+            </button>
+            <button type="button" class="branch-btn" id="btn-gastronomy" onclick="setBranch('gastronomy')">
+              <strong>Gastronomie & Bäckerei</strong>
+              <span>gastronomy · Standard</span>
+            </button>
+            <button type="button" class="branch-btn" id="btn-property_management" onclick="setBranch('property_management')">
+              <strong>Hausverwaltung</strong>
+              <span>property_management · Standard</span>
+            </button>
+            <button type="button" class="branch-btn" id="btn-law_office" onclick="setBranch('law_office')">
+              <strong>Rechtsanwaltskanzlei</strong>
+              <span>law_office · Elevated</span>
+            </button>
+            <button type="button" class="branch-btn" id="btn-medical_practice" onclick="setBranch('medical_practice')">
+              <strong>Arzt- & Zahnarztpraxis</strong>
+              <span>medical_practice · Elevated</span>
+            </button>
+            <button type="button" class="branch-btn" id="btn-tax_advisory" onclick="setBranch('tax_advisory')">
+              <strong>Steuerberatung</strong>
+              <span>tax_advisory · Elevated</span>
+            </button>
+          </div>
+          <div id="branch-specific-hint" style="font-size: 0.85rem; color: var(--text-muted);"></div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="card">
+          <div class="step-title"><span class="step-num">2</span> Betriebsdaten & Paket zuordnen</div>
+          <div class="form-group">
+            <label for="ob-name">Mandanten- / Betriebsname *</label>
+            <input type="text" id="ob-name" value="SHK Meisterbetrieb Rennsteig" oninput="runOnboardingPipeline()" />
+          </div>
+          <div class="form-group">
+            <label for="ob-handoff" id="lbl-handoff">Notdienst- / Handoff-Ziel für sofortige Übergabe *</label>
+            <input type="text" id="ob-handoff" value="Bereitschaftsdienst +49 3679 000111" oninput="runOnboardingPipeline()" />
+          </div>
+          <div class="form-group">
+            <label for="ob-hours">Öffnungs- / Geschäftszeiten</label>
+            <input type="text" id="ob-hours" value="Mo–Fr 07:30–17:00 Uhr" oninput="runOnboardingPipeline()" />
+          </div>
+          <div class="form-group">
+            <label for="ob-pkg">Paket (Stand 24.10.2026, netto zzgl. 19 % MwSt.)</label>
+            <select id="ob-pkg" onchange="runOnboardingPipeline()">
+              <option value="starter">Starter – 89,00 €/Monat (Web-only, 500 Min. inkl., +0,18 €/Min.)</option>
+              <option value="professional" selected>Professional – 199,00 €/Monat (Web + Telefonie, 1.500 Min. inkl., +0,15 €/Min.)</option>
+              <option value="kanzlei">Kanzlei – 349,00 €/Monat (Elevated Privacy, Web + Telefonie, 1.200 Min. inkl., +0,18 €/Min.)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="ob-channel">Gewünschter Kanal</label>
+            <select id="ob-channel" onchange="runOnboardingPipeline()">
+              <option value="web">Web-Sprachassistent (web)</option>
+              <option value="telephony" selected>Telefonie + Web (telephony)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="card">
+          <div class="step-title"><span class="step-num">3</span> Fail-Closed Sicherheits- & Datenschutzfreigaben</div>
+          <label class="check-row">
+            <input type="checkbox" id="chk-disclosure" checked onchange="runOnboardingPipeline()" />
+            <div>
+              <strong>KI-Offenlegung in der Begrüßung aktiv (Pflicht)</strong><br />
+              <span style="color: var(--text-muted);">Der Agent gibt sich zu Beginn jedes Gesprächs klar als KI-Assistent zu erkennen.</span>
+            </div>
+          </label>
+          <label class="check-row" id="row-telephony">
+            <input type="checkbox" id="chk-telephony" checked onchange="runOnboardingPipeline()" />
+            <div>
+              <strong>Explizite Telefonie-Freigabe erteilt</strong><br />
+              <span style="color: var(--text-muted);">Pflicht bei Kanal <code>telephony</code> (erfordert Paket Professional oder Kanzlei).</span>
+            </div>
+          </label>
+          <label class="check-row" id="row-privacy">
+            <input type="checkbox" id="chk-privacy" onchange="runOnboardingPipeline()" />
+            <div>
+              <strong>Dokumentierte Datenschutzprüfung (Elevated Privacy-Review) liegt vor</strong><br />
+              <span style="color: var(--text-muted);">Zwingende Voraussetzung für Vorlage <code>law_office</code> (Berufsgeheimnisträger).</span>
+            </div>
+          </label>
+          <label class="check-row">
+            <input type="checkbox" id="chk-recording" onchange="toggleRecordingRow(); runOnboardingPipeline();" />
+            <div>
+              <strong>Audio-Aufzeichnung / Transkriptspeicherung aktivieren (Standard: Aus)</strong><br />
+              <span style="color: var(--text-muted);">Nur zulässig mit separater Freigabe und fester Aufbewahrungsfrist (Retention-Tage).</span>
+            </div>
+          </label>
+          <div id="recording-details" style="display: none; padding-left: 14px; margin-top: 8px;">
+            <label class="check-row">
+              <input type="checkbox" id="chk-rec-approved" onchange="runOnboardingPipeline()" />
+              <div><strong>Explizite Aufzeichnungs-Freigabe dokumentiert</strong></div>
+            </label>
+            <div class="form-group">
+              <label for="ob-retention">Aufbewahrungsfrist (Retention in Tagen, > 0)</label>
+              <input type="number" id="ob-retention" value="14" min="1" oninput="runOnboardingPipeline()" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: LIVE VALIDATION, SMOKE TESTS & EXPORT -->
+      <div>
+        <div class="card">
+          <div class="step-title" style="justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span class="step-num">4</span> Fail-Closed Gatekeeper & Live-Status
+            </div>
+            <span id="status-pill" class="badge badge-ok">ACTIVE</span>
+          </div>
+          <div id="validation-summary" style="margin-bottom: 16px; font-size: 0.9rem;"></div>
+
+          <h4 style="font-size: 0.92rem; margin-bottom: 10px; color: #cbd5e1;">Automatischer 3-Stufen-Branchen-Smoke-Test:</h4>
+          <div id="smoke-list"></div>
+        </div>
+
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
+            <h4 style="font-size: 0.95rem;">Generierte Mandanten-Konfiguration (JSON)</h4>
+            <div style="display: flex; gap: 8px;">
+              <button type="button" class="btn btn-primary" onclick="downloadJson()">Konfig (.json) speichern</button>
+              <button type="button" class="btn btn-secondary" onclick="downloadProtocol()">Onboarding-Protokoll (.md)</button>
+            </div>
+          </div>
+          <div class="code-box" id="json-preview"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const TEMPLATES = {
+      trades: {
+        label: "Handwerk",
+        sensitivity: "standard",
+        defaultPkg: "professional",
+        defaultChannel: "telephony",
+        defaultName: "SHK Meisterbetrieb Rennsteig",
+        defaultHandoff: "Bereitschaftsdienst +49 3679 000111",
+        handoffLabel: "Notdienst- / Bereitschafts-Kontakt für Gefahren-Handoff *",
+        hint: "Vorlage Handwerk (trades): Erlaubt Terminbuchung (schedule_appointment). Bei Gasgeruch, Rohrbruch oder Stromausfall erfolgt ein sofortiger Handoff ohne Preis-/Reparaturzusage.",
+        tools: ["lookup_kb", "create_ticket", "schedule_appointment", "handoff_human"],
+        triggers: ["Gefahr", "Gasgeruch", "Wasserrohrbruch", "Stromausfall", "Funkenflug", "Reklamation", "Wunsch nach Mitarbeiter"],
+        forbidden: ["Verbindliche Festpreiszusage ohne Vor-Ort-Prüfung", "Garantierte Sofortreparatur", "Notdienst-Einsatzzeitpunkt ohne Dispositionsfreigabe"],
+        greetingTpl: "Guten Tag! Sie sprechen mit dem KI-Sprachassistenten von {name}. Wie kann ich Ihnen bei einer Terminanfrage oder Störungsmeldung helfen? Hinweis: Bei akuter Gefahr wie Gasgeruch oder Wasserrohrbruch verbinde ich Sie sofort mit unserem Bereitschaftsdienst ({handoff}).",
+        smokeTests: [
+          { name: "1. Notfall-Handoff (Gasgeruch)", expectedActive: "IMMEDIATE_HUMAN_HANDOFF", toolActive: "handoff_human" },
+          { name: "2. Reguläre Terminbuchung (Heizungswartung)", expectedActive: "STANDARD_TOOL_EXECUTION", toolActive: "schedule_appointment" },
+          { name: "3. Verbotene Zusage (Festpreisgarantie)", expectedActive: "POLICY_REFUSAL_AND_HANDOFF", toolActive: "handoff_human" }
+        ]
+      },
+      butcher: {
+        label: "Metzgerei",
+        sensitivity: "standard",
+        defaultPkg: "starter",
+        defaultChannel: "web",
+        defaultName: "Landmetzgerei Thüringer Wald",
+        defaultHandoff: "Filialleitung / Fachpersonal Theke",
+        handoffLabel: "Fachpersonal-Kontakt für Allergen- & Reklamations-Handoff *",
+        hint: "Vorlage Metzgerei (butcher): Kein schedule_appointment freigegeben. Bei schweren Allergien oder Fragen nach Spurenfreiheit erfolgt sofortige Übergabe an das Fachpersonal.",
+        tools: ["lookup_kb", "create_ticket", "handoff_human"],
+        triggers: ["Schwere Allergie / Anaphylaxie-Risiko", "Reklamation", "Catering-Sonderanfrage", "Wunsch nach Fachpersonal"],
+        forbidden: ["Allergiegarantie", "Garantie auf 100 %ige Freiheit von Spuren/Kreuzkontamination", "Verbindliche Reservierung ausverkaufter Tagesware ohne Bestätigung"],
+        greetingTpl: "Grüß Gott! Ich bin der KI-Sprachassistent von {name}. Ich helfe Ihnen gerne bei Fragen zu unserem Sortiment, Öffnungszeiten oder Vorbestellungen. Für verbindliche Allergen-Auskünfte verbinde ich Sie direkt mit unserem Fachpersonal ({handoff}).",
+        smokeTests: [
+          { name: "1. Allergie-Handoff (Erdnuss / Spuren)", expectedActive: "IMMEDIATE_HUMAN_HANDOFF", toolActive: "handoff_human" },
+          { name: "2. Vorbestellung erfassen (Ticket)", expectedActive: "STANDARD_TOOL_EXECUTION", toolActive: "create_ticket" },
+          { name: "3. Tool-Sperre (Kalenderbuchung blockiert)", expectedActive: "TOOL_DENIED_BY_TEMPLATE", toolActive: "create_ticket (Fallback)" }
+        ]
+      },
+      law_office: {
+        label: "Rechtsanwaltskanzlei",
+        sensitivity: "elevated",
+        defaultPkg: "kanzlei",
+        defaultChannel: "telephony",
+        defaultName: "Rechtsanwaltskanzlei Muster & Kollegen",
+        defaultHandoff: "Kanzleisekretariat Durchwahl -10",
+        handoffLabel: "Sekretariats-Kontakt für Fristsachen & Eilrechtsschutz *",
+        hint: "Vorlage Kanzlei (law_office): Elevated Sensitivity! Aktivierung wird technisch blockiert, solange die dokumentierte Datenschutzprüfung nicht bestätigt ist. Keine Rechtsberatung, keine Fristenprüfung.",
+        tools: ["lookup_kb", "create_ticket", "schedule_appointment", "handoff_human"],
+        triggers: ["Fristsache", "Eilrechtsschutz", "Haft / Durchsuchung", "Kündigung / Zustellung mit Fristablauf", "Mandatskonflikt / Beschwerde", "Wunsch nach Kanzleimitarbeiter"],
+        forbidden: ["Rechtsberatung", "Mandat angenommen", "Frist geprüft", "Erfolgsaussichten bewertet"],
+        greetingTpl: "Guten Tag. Sie sprechen mit dem KI-Sprachassistenten von {name}. Ich nehme gerne Ihr Anliegen oder einen Terminwunsch auf. Bitte beachten Sie, dass ich keine Rechtsberatung erteile, keine Fristen prüfe und durch dieses Gespräch noch kein Mandatsverhältnis entsteht. Bei dringenden Fristsachen verbinde ich Sie direkt mit dem Sekretariat ({handoff}).",
+        smokeTests: [
+          { name: "1. Fristsache-Handoff (Kündigung / Klagefrist)", expectedActive: "IMMEDIATE_HUMAN_HANDOFF", toolActive: "handoff_human" },
+          { name: "2. Terminwunsch Sekretariat", expectedActive: "STANDARD_TOOL_EXECUTION", toolActive: "schedule_appointment" },
+          { name: "3. Verbotene Zusage (Rechtsberatung / Mandatsannahme)", expectedActive: "POLICY_REFUSAL_AND_HANDOFF", toolActive: "handoff_human" }
+        ]
+      }      ,
+      auto_repair: {
+        label: "KFZ-Werkstatt & Autohaus",
+        sensitivity: "standard",
+        defaultPkg: "professional",
+        defaultChannel: "telephony",
+        defaultName: "Autohaus & Meisterwerkstatt Rennsteig",
+        defaultHandoff: "Werkstattleitung +49 3679 000222",
+        handoffLabel: "Werkstattleiter- / Pannen-Kontakt für Sofort-Handoff *",
+        hint: "Vorlage KFZ-Werkstatt (auto_repair): Erlaubt Werkstatt-Terminbuchung. Bei Unfall, Panne oder Brems-/Warnleuchtendefekt erfolgt sofortiger Handoff ohne Weiterfahr-Freigabe.",
+        tools: ["lookup_kb", "create_ticket", "schedule_appointment", "handoff_human"],
+        triggers: ["Unfall / Panne auf der Straße", "Bremsausfall / rote Warnleuchte / Rauchentwicklung", "Reklamation nach Reparatur", "Wunsch nach Werkstattleiter"],
+        forbidden: ["Verbindliche Festpreis- oder Kostenvoranschlagszusage ohne Fahrzeugdiagnose", "Bestätigung der Weiterfahr-Sicherheit bei Brems- oder Lenkungsdefekt", "Garantierte HU/TÜV-Zuteilung ohne Prüfung"],
+        greetingTpl: "Guten Tag! Sie sprechen mit dem KI-Sprachassistenten von {name}. Ich nehme gerne Ihren Wunsch für Werkstatttermine, Inspektion oder Reifenwechsel auf. Bei einer akuten Panne, Unfall oder roter Warnleuchte verbinde ich Sie sofort mit unserer Serviceannahme ({handoff}).",
+        smokeTests: [
+          { name: "1. Pannen-/Sicherheits-Handoff (Bremsausfall)", expectedActive: "IMMEDIATE_HUMAN_HANDOFF", toolActive: "handoff_human" },
+          { name: "2. Standard-Werkstatttermin (Reifenwechsel)", expectedActive: "STANDARD_TOOL_EXECUTION", toolActive: "schedule_appointment" },
+          { name: "3. Verbotene Zusage (TÜV-Plakette garantieren)", expectedActive: "POLICY_REFUSAL_AND_HANDOFF", toolActive: "handoff_human" }
+        ]
+      },
+      gastronomy: {
+        label: "Gastronomie & Bäckerei",
+        sensitivity: "standard",
+        defaultPkg: "starter",
+        defaultChannel: "web",
+        defaultName: "Gasthaus & Bäckerei Waldblick",
+        defaultHandoff: "Serviceleitung Restaurant",
+        handoffLabel: "Serviceleitungs-Kontakt für Allergie- & Bankett-Handoff *",
+        hint: "Vorlage Gastronomie (gastronomy): Erlaubt Tischreservierungen. Bei schweren Allergien (Zöliakie/Erdnuss) erfolgt sofortige Übergabe ohne Spurenfreiheitsgarantie.",
+        tools: ["lookup_kb", "create_ticket", "schedule_appointment", "handoff_human"],
+        triggers: ["Schwere Lebensmittelallergie / Zöliakie / Anaphylaxie", "Reklamation", "Gruppenreservierung / Bankett ab 15 Personen", "Wunsch nach Serviceleitung"],
+        forbidden: ["Verbindliche Allergie- oder Spurenfreiheitsgarantie", "Garantie auf 100 % gluten- oder nussfreie Zubereitung ohne Kreuzkontamination", "Verbindliche Exklusivbuchung ohne Bestätigung der Betriebsleitung"],
+        greetingTpl: "Herzlich willkommen! Ich bin der KI-Sprachassistent von {name}. Gerne nehme ich Ihre Tischreservierung oder Vorbestellung auf. Für verbindliche Auskünfte zu schweren Allergien und Spuren verbinde ich Sie direkt mit unserer Serviceleitung ({handoff}).",
+        smokeTests: [
+          { name: "1. Allergie-Handoff (Zöliakie / Spuren)", expectedActive: "IMMEDIATE_HUMAN_HANDOFF", toolActive: "handoff_human" },
+          { name: "2. Standard-Tischreservierung (4 Personen)", expectedActive: "STANDARD_TOOL_EXECUTION", toolActive: "schedule_appointment" },
+          { name: "3. Verbotene Zusage (100% ohne Kreuzkontamination)", expectedActive: "POLICY_REFUSAL_AND_HANDOFF", toolActive: "handoff_human" }
+        ]
+      },
+      property_management: {
+        label: "Hausverwaltung & Immobilien",
+        sensitivity: "standard",
+        defaultPkg: "professional",
+        defaultChannel: "telephony",
+        defaultName: "Hausverwaltung Thüringer Immobilien",
+        defaultHandoff: "24h-Havariedienst +49 3679 000333",
+        handoffLabel: "Havariedienst- / Objektbetreuer-Kontakt für Notfall-Handoff *",
+        hint: "Vorlage Hausverwaltung (property_management): Nimmt Schadensmeldungen auf und leitet Rohrbruch, Heizungsausfall oder Aufzugseinschluss sofort weiter.",
+        tools: ["lookup_kb", "create_ticket", "schedule_appointment", "handoff_human"],
+        triggers: ["Rohrbruch / Wasserschaden / Heizungsausfall im Winter", "Brand / Gasgeruch / Aufzugseinschluss", "Fristlose Kündigung / Mietrechtsstreit", "Wunsch nach Objektbetreuer"],
+        forbidden: ["Zusage einer Kostenübernahme oder Mietminderung", "Rechtsverbindliche Mietvertragszusage am Telefon", "Freigabe kostenpflichtiger Handwerkereinsätze ohne Deckungsprüfung"],
+        greetingTpl: "Guten Tag! Sie sprechen mit dem KI-Sprachassistenten von {name}. Ich erfasse gerne Ihre Reparaturmeldung oder Ihr Mieteranliegen. Bei akuten Notfällen wie Rohrbruch, Heizungsausfall oder Aufzugseinschluss verbinde ich Sie sofort mit unserem Havariedienst ({handoff}).",
+        smokeTests: [
+          { name: "1. Havarie-Handoff (Rohrbruch / Wasserschaden)", expectedActive: "IMMEDIATE_HUMAN_HANDOFF", toolActive: "handoff_human" },
+          { name: "2. Standard-Mieteranliegen (Ticket)", expectedActive: "STANDARD_TOOL_EXECUTION", toolActive: "create_ticket" },
+          { name: "3. Verbotene Zusage (Mietminderung bestätigen)", expectedActive: "POLICY_REFUSAL_AND_HANDOFF", toolActive: "handoff_human" }
+        ]
+      },
+      medical_practice: {
+        label: "Arzt- & Zahnarztpraxis",
+        sensitivity: "elevated",
+        defaultPkg: "kanzlei",
+        defaultChannel: "telephony",
+        defaultName: "Gemeinschaftspraxis Dr. med. Muster",
+        defaultHandoff: "Praxis-Empfang Durchwahl -11",
+        handoffLabel: "Praxisteam-Kontakt für Schmerz- & Notfall-Handoff *",
+        hint: "Vorlage Arzt-/Zahnarztpraxis (medical_practice): Elevated Sensitivity (§ 203 StGB)! Zwingend dokumentierte Datenschutzprüfung erforderlich. Keine Diagnosen oder Befundauskünfte.",
+        tools: ["lookup_kb", "create_ticket", "schedule_appointment", "handoff_human"],
+        triggers: ["Medizinischer Notfall / Atemnot / Brustschmerz / starke Blutung", "Akuter Schmerzfall", "Frage zu Labor- oder Befundergebnissen", "Wunsch nach medizinischem Fachpersonal"],
+        forbidden: ["Medizinische Diagnose oder Therapieempfehlung", "Verbindliche Zusage von Rezepten oder Arbeitsunfähigkeitsbescheinigungen ohne ärztliche Prüfung", "Telefonische Herausgabe sensibler Befunddaten"],
+        greetingTpl: "Guten Tag. Sie sprechen mit dem KI-Sprachassistenten von {name}. Ich nehme gerne Ihren Terminwunsch auf. Bitte beachten Sie, dass ich keine medizinische Diagnose erteile und keine Befunde bespreche. Bei akuten Notfällen wählen Sie bitte 112 oder lassen Sie sich sofort mit unserem Praxisteam ({handoff}) verbinden.",
+        smokeTests: [
+          { name: "1. Notfall-Handoff (Atemnot / Brustschmerz)", expectedActive: "IMMEDIATE_HUMAN_HANDOFF", toolActive: "handoff_human" },
+          { name: "2. Standard-Vorsorgetermin buchen", expectedActive: "STANDARD_TOOL_EXECUTION", toolActive: "schedule_appointment" },
+          { name: "3. Verbotene Zusage (Diagnose stellen)", expectedActive: "POLICY_REFUSAL_AND_HANDOFF", toolActive: "handoff_human" }
+        ]
+      },
+      tax_advisory: {
+        label: "Steuerberatung & Wirtschaftsprüfung",
+        sensitivity: "elevated",
+        defaultPkg: "kanzlei",
+        defaultChannel: "telephony",
+        defaultName: "Steuerberatungskanzlei Muster & Partner",
+        defaultHandoff: "Kanzleisekretariat Durchwahl -20",
+        handoffLabel: "Sekretariats-Kontakt für Finanzamt-Fristen & Prüfungen *",
+        hint: "Vorlage Steuerberatung (tax_advisory): Elevated Sensitivity! Zwingend dokumentierte Datenschutzprüfung erforderlich. Keine Steuerberatung oder Fristverlängerungszusage.",
+        tools: ["lookup_kb", "create_ticket", "schedule_appointment", "handoff_human"],
+        triggers: ["Finanzamt-Frist / Einspruchsfrist läuft ab", "Betriebsprüfung / Steuerfahndung / Vollstreckung", "Kontopfändung / Schätzungsbescheid", "Wunsch nach Steuerberater oder Fachmitarbeiter"],
+        forbidden: ["Verbindliche steuerliche Beratung oder Gestaltungsempfehlung", "Zusage, dass eine Steuer- oder Einspruchsfrist gewahrt oder verlängert wurde", "Mandatsannahme ohne schriftlichen Steuerberatungsvertrag"],
+        greetingTpl: "Guten Tag. Sie sprechen mit dem KI-Sprachassistenten von {name}. Ich nehme gerne Ihren Terminwunsch oder Ihr Anliegen für das Kanzleiteam auf. Bitte beachten Sie, dass ich keine Steuerberatung erteile und keine Finanzamt-Fristen prüfe. Bei dringenden Fristsachen verbinde ich Sie direkt mit dem Sekretariat ({handoff}).",
+        smokeTests: [
+          { name: "1. Frist-Handoff (Finanzamt-Einspruchsfrist)", expectedActive: "IMMEDIATE_HUMAN_HANDOFF", toolActive: "handoff_human" },
+          { name: "2. Standard-Besprechungstermin", expectedActive: "STANDARD_TOOL_EXECUTION", toolActive: "schedule_appointment" },
+          { name: "3. Verbotene Zusage (Fristverlängerung zusagen)", expectedActive: "POLICY_REFUSAL_AND_HANDOFF", toolActive: "handoff_human" }
+        ]
+      }
+    };
+
+    const PKG_PRICES = {
+      starter: { name: "Starter", net: 89, min: 500, over: 0.18 },
+      professional: { name: "Professional", net: 199, min: 1500, over: 0.15 },
+      kanzlei: { name: "Kanzlei", net: 349, min: 1200, over: 0.18 }
+    };
+
+    let currentBranch = "trades";
+    let lastGeneratedRecord = null;
+
+    function slugify(str) {
+      return (str || "mandant").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "mandant";
+    }
+
+    function setBranch(bKey) {
+      currentBranch = bKey;
+      ["trades", "butcher", "auto_repair", "gastronomy", "property_management", "law_office", "medical_practice", "tax_advisory"].forEach(k => {
+        document.getElementById("btn-" + k).classList.toggle("active", k === bKey);
+      });
+      const tpl = TEMPLATES[bKey];
+      document.getElementById("ob-name").value = tpl.defaultName;
+      document.getElementById("ob-handoff").value = tpl.defaultHandoff;
+      document.getElementById("lbl-handoff").textContent = tpl.handoffLabel;
+      document.getElementById("ob-pkg").value = tpl.defaultPkg;
+      document.getElementById("ob-channel").value = tpl.defaultChannel;
+      document.getElementById("chk-telephony").checked = (tpl.defaultChannel === "telephony");
+      document.getElementById("chk-privacy").checked = (tpl.sensitivity === "elevated");
+      document.getElementById("branch-specific-hint").textContent = tpl.hint;
+      runOnboardingPipeline();
+    }
+
+    function toggleRecordingRow() {
+      const rec = document.getElementById("chk-recording").checked;
+      document.getElementById("recording-details").style.display = rec ? "block" : "none";
+    }
+
+    function runOnboardingPipeline() {
+      const tpl = TEMPLATES[currentBranch];
+      const name = document.getElementById("ob-name").value.trim();
+      const handoff = document.getElementById("ob-handoff").value.trim() || "Zentrale";
+      const hours = document.getElementById("ob-hours").value.trim();
+      const pkgKey = document.getElementById("ob-pkg").value;
+      const pkg = PKG_PRICES[pkgKey];
+      const channel = document.getElementById("ob-channel").value;
+
+      const aiDisc = document.getElementById("chk-disclosure").checked;
+      const telApp = document.getElementById("chk-telephony").checked;
+      const privDoc = document.getElementById("chk-privacy").checked;
+      const recEn = document.getElementById("chk-recording").checked;
+      const recApp = document.getElementById("chk-rec-approved").checked;
+      const retDays = Number(document.getElementById("ob-retention").value);
+
+      const errors = [];
+      if (!name) errors.push("MISSING_AGENT_ID_OR_NAME");
+      if (!aiDisc) errors.push("MISSING_AI_DISCLOSURE");
+      if (channel === "telephony" && !telApp) errors.push("TELEPHONY_WITHOUT_APPROVAL");
+      if (channel === "telephony" && pkgKey === "starter") errors.push("STARTER_PACKAGE_WEB_ONLY");
+      if (recEn && (!recApp || !Number.isInteger(retDays) || retDays <= 0)) {
+        errors.push("RECORDING_WITHOUT_APPROVAL_OR_RETENTION");
+      }
+      if (tpl.sensitivity === "elevated" && !privDoc) {
+        errors.push("MISSING_PRIVACY_REVIEW_FOR_ELEVATED");
+      }
+
+      const valid = errors.length === 0;
+      const effectiveStatus = valid ? "active" : "paused";
+      const enabledTools = valid ? tpl.tools : [];
+      const agentId = `vva-${currentBranch}-${slugify(name)}`;
+      const greeting = tpl.greetingTpl.replace("{name}", name || "Ihrem Betrieb").replace("{handoff}", handoff);
+
+      const pill = document.getElementById("status-pill");
+      if (valid) {
+        pill.className = "badge badge-ok";
+        pill.textContent = "ACTIVE · VALIDATED";
+        document.getElementById("validation-summary").innerHTML =
+          `<span style="color: #34d399; font-weight: 600;">Fail-Closed-Prüfung bestanden:</span> Alle Pflichtfreigaben liegen vor. Werkzeuge (<code>${enabledTools.join(", ")}</code>) sind aktiv freigeschaltet.`;
+      } else {
+        pill.className = "badge badge-err";
+        pill.textContent = "PAUSED · FAIL-CLOSED";
+        document.getElementById("validation-summary").innerHTML =
+          `<span style="color: #f87171; font-weight: 600;">Fail-Closed-Sperre aktiv (${errors.join(", ")}):</span> Status auf <code>paused</code> gesetzt, alle Werkzeuge gesperrt (<code>enabled_tools: []</code>).`;
+      }
+
+      // Render smoke tests
+      const smokeHtml = tpl.smokeTests.map(st => {
+        const decision = valid ? st.expectedActive : "FAIL_CLOSED_BLOCKED";
+        const tool = valid ? st.toolActive : "null (gesperrt)";
+        const badgeClass = valid ? "badge-ok" : "badge-warn";
+        return `<div class="smoke-item">
+          <div class="smoke-head">
+            <span>${st.name}</span>
+            <span class="badge ${badgeClass}">${decision}</span>
+          </div>
+          <div style="color: var(--text-muted); font-size: 0.82rem;">Ausgeführtes Tool: <code>${tool}</code></div>
+        </div>`;
+      }).join("");
+      document.getElementById("smoke-list").innerHTML = smokeHtml;
+
+      lastGeneratedRecord = {
+        agent_id: agentId,
+        tenant_name: name,
+        provider: "Dominik Steiner, Einzelunternehmen, Schwarzburger Str. 31, 98724 Neuhaus am Rennweg",
+        product_scope: "Standalone product outside RealSyncDynamics.AI",
+        template: currentBranch,
+        package: {
+          key: pkgKey,
+          name: pkg.name,
+          price_eur_net_monthly: pkg.net,
+          included_minutes: pkg.min,
+          overage_eur_per_min: pkg.over
+        },
+        channel: channel,
+        requested_status: "active",
+        effective_status: effectiveStatus,
+        valid: valid,
+        data_sensitivity: tpl.sensitivity,
+        enabled_tools: enabledTools,
+        handoff_contact: handoff,
+        opening_hours: hours,
+        greeting: greeting,
+        handoff_triggers: tpl.triggers,
+        forbidden_claims: tpl.forbidden,
+        compliance_flags: {
+          ai_disclosure_enabled: aiDisc,
+          telephony_approved: telApp,
+          privacy_review_documented: privDoc,
+          recording_enabled: recEn,
+          recording_approved: recEn ? recApp : false,
+          retention_days: recEn ? retDays : null
+        },
+        validation_errors: errors
+      };
+
+      document.getElementById("json-preview").textContent = JSON.stringify(lastGeneratedRecord, null, 2);
+    }
+
+    function downloadJson() {
+      if (!lastGeneratedRecord) return;
+      const blob = new Blob([JSON.stringify(lastGeneratedRecord, null, 2)], { type: "application/json" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = `${lastGeneratedRecord.agent_id}.json`;
+      a.click();
+    }
+
+    function downloadProtocol() {
+      if (!lastGeneratedRecord) return;
+      const r = lastGeneratedRecord;
+      const md = `# Onboarding-Protokoll – ${r.tenant_name}
+- **Agent-ID:** \`${r.agent_id}\`
+- **Branchenvorlage:** \`${r.template}\` (Sensitivity: \`${r.data_sensitivity}\`)
+- **Paket:** ${r.package.name} (${r.package.price_eur_net_monthly} € netto/Monat zzgl. 19 % MwSt.)
+- **Kanal:** \`${r.channel}\`
+- **Fail-Closed-Validierung:** \`valid=${r.valid}\` -> Effektiver Status: \`${r.effective_status}\`
+- **Freigegebene Tools:** ${r.enabled_tools.length ? r.enabled_tools.join(", ") : "[] (gesperrt)"}
+- **Validierungsfehler:** ${r.validation_errors.length ? r.validation_errors.join(", ") : "Keine"}
+
+## Konfigurierte Begrüßung
+> ${r.greeting}
+`;
+      const blob = new Blob([md], { type: "text/markdown" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = `${r.agent_id}_onboarding.md`;
+      a.click();
+    }
+
+    // Init
+    setBranch("trades");
+  </script>
+</body>
+</html>
