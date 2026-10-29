@@ -1,89 +1,163 @@
-# Vertical Voice Agent – Produktmappe & 8 Branchenvorlagen (Stand: 28.10.2026)
+# Vertical Voice Agent – Produktmappe
 
-**Anbieter:** Dominik Steiner (Einzelunternehmen)  
-**Anschrift:** Schwarzburger Str. 31, 98724 Neuhaus am Rennweg, Thüringen, Deutschland  
-**Produktstatus:** Eigenständiges Sprachassistenten-Produkt außerhalb von RealSyncDynamics.AI  
-**Sicherheitsarchitektur:** Fail-Closed Gatekeeper-Modell (KI-Offenlegungspflicht, strikte Tool-Begrenzung, keine garantierten Compliance-Versprechen, keine Rechts-, Medizin- oder Steuerberatung)
-
----
-
-## 1. Pakete & Konditionen (Monatlich, netto zzgl. 19 % MwSt.)
-
-| Paket | Monatlicher Grundpreis | Kanäle & Umfang | Inklusivminuten | Mehrminutenpreis | Empfohlene Branchen |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Starter** | **89,00 € netto** *(105,91 € brutto)* | 1 Agent · Web-Assistent | 500 Min. | 0,18 €/Min. netto | Metzgerei (`butcher`), Gastronomie & Bäckerei (`gastronomy`) |
-| **Professional** | **199,00 € netto** *(236,81 € brutto)* | 1 Agent · Web + Telefonie-Option | 1.500 Min. | 0,15 €/Min. netto | Handwerk (`trades`), KFZ-Werkstatt (`auto_repair`), Hausverwaltung (`property_management`) |
-| **Kanzlei / Praxis (Elevated)** | **349,00 € netto** *(415,31 € brutto)* | 1 Agent · Elevated Privacy-Review inkl. · Web + Telefonie-Option | 1.200 Min. | 0,18 €/Min. netto | Rechtsanwaltskanzlei (`law_office`), Arzt- & Zahnarztpraxis (`medical_practice`), Steuerberatung (`tax_advisory`) |
-
-> **Nächster Schritt zur Bereitstellung:** Verbindliche Einrichtung erfolgt über **„Angebot anfragen“**.
+**Stand:** 29.10.2026  
+**Anbieter:** Dominik Steiner, Einzelunternehmen, Schwarzburger Str. 31, 98724 Neuhaus am Rennweg (Thüringen, Deutschland)  
+**Produktstatus:** Eigenständiges Produkt außerhalb von RealSyncDynamics.AI
 
 ---
 
-## 2. Die 8 Branchenvorlagen im Überblick
+## 1. Was ist der Vertical Voice Agent?
 
-### A. Standard-Sensitivity Branchen (5 Vorlagen)
+Ein KI-Sprachassistent für kleine und mittlere Betriebe, vorkonfiguriert für 8 Branchen. Er beantwortet Standardfragen, nimmt Anliegen und Rückrufbitten auf, bucht – wo freigegeben – Termine und übergibt kritische Fälle sofort an Menschen.
 
-1. **Handwerk (`trades`)**
-   - **Freigegebene Tools:** `lookup_kb`, `create_ticket`, `schedule_appointment`, `handoff_human`
-   - **Zwingende Handoff-Trigger:** Akute Gefahr, Gasgeruch, Wasserrohrbruch, Stromausfall, Funkenflug, Reklamation
-   - **Verbotene Zusagen:** Verbindliche Festpreiszusage ohne Vor-Ort-Prüfung, garantierte Sofortreparatur
+- **Sicherheit zuerst:** Der Assistent darf nur, was die Branchenvorlage ausdrücklich erlaubt. Fehlt eine Freigabe, ist er gesperrt (Fail-Closed).
+- **Klare Grenzen:** keine Rechts-, Medizin- oder Steuerberatung, keine garantierte Compliance-Zusage.
+- **Transparenz:** Jede Begrüßung weist darauf hin, dass ein KI-Assistent spricht.
+- **Kanäle:** Web-Sprachassistent; Telefonie optional ab Paket Professional (nach ausdrücklicher Freigabe).
 
-2. **Metzgerei (`butcher`)**
-   - **Freigegebene Tools:** `lookup_kb`, `create_ticket`, `handoff_human` *(kein `schedule_appointment`)*
-   - **Zwingende Handoff-Trigger:** Schwere Allergie / Anaphylaxie, Reklamation, Catering-Sonderwunsch
-   - **Verbotene Zusagen:** Verbindliche Allergie- oder Spurenfreiheitsgarantie
+## 2. Fail-Closed-Sicherheitsmodell
 
-3. **KFZ-Werkstatt & Autohaus (`auto_repair`)**
-   - **Freigegebene Tools:** `lookup_kb`, `create_ticket`, `schedule_appointment`, `handoff_human`
-   - **Zwingende Handoff-Trigger:** Unfall, Panne, Bremsausfall, rote Warnleuchte, Rauchentwicklung, Reklamation
-   - **Verbotene Zusagen:** Kostenvoranschlag ohne Diagnose, Weiterfahr-Freigabe bei Brems-/Lenkungsdefekt, garantierte HU/TÜV-Plakette
+Ein Assistent wird nur aktiv, wenn alle Pflichtfreigaben vorliegen. Bei jedem Fehler wird er auf „pausiert“ gesetzt und alle Werkzeuge sind gesperrt.
 
-4. **Gastronomie & Bäckerei (`gastronomy`)**
-   - **Freigegebene Tools:** `lookup_kb`, `create_ticket`, `schedule_appointment`, `handoff_human`
-   - **Zwingende Handoff-Trigger:** Schwere Lebensmittelallergie / Zöliakie, Reklamation, Bankett / Gruppe ab 15 Personen
-   - **Verbotene Zusagen:** 100 % Spuren-/Kreuzkontaminationsfreiheit, Exklusivbuchung ohne Bestätigung der Betriebsleitung
+| Regel | Wirkung |
+|---|---|
+| KI-Offenlegung | Pflicht in jeder Begrüßung; ohne sie keine Aktivierung |
+| Werkzeuge | nur wenn Assistent aktiv **und** Konfiguration gültig; nur die Werkzeuge der Branchenvorlage |
+| Telefonie | nur mit ausdrücklicher Freigabe; nicht im Paket Starter |
+| Aufzeichnung / Transkripte | nur mit ausdrücklicher Freigabe **und** festgelegter Aufbewahrungsfrist (Tage > 0) |
+| Sensible Branchen (elevated) | Kanzlei, Praxis, Steuerberatung: Aktivierung erst nach dokumentierter Datenschutzprüfung |
+| Kritische Stichworte | sofortige Übergabe an Mitarbeitende (siehe Branchenvorlagen) |
+| Verbotene Zusagen | werden abgelehnt und an Mitarbeitende übergeben |
 
-5. **Hausverwaltung & Immobilien (`property_management`)**
-   - **Freigegebene Tools:** `lookup_kb`, `create_ticket`, `schedule_appointment`, `handoff_human`
-   - **Zwingende Handoff-Trigger:** Rohrbruch, Wasserschaden, Heizungsausfall im Winter, Aufzugseinschluss, Mietrechtsstreit
-   - **Verbotene Zusagen:** Zusage von Mietminderung oder Kostenübernahme, rechtsverbindliche Mietvertragszusage am Telefon
+## 3. Die 8 Branchenvorlagen
+
+| Branche | Sensibilität | Werkzeuge | Terminbuchung | Empfohlenes Paket |
+|---|---|---|---|---|
+| Handwerk (`trades`) | standard | `lookup_kb`, `create_ticket`, `schedule_appointment`, `handoff_human` | ja | Professional |
+| Metzgerei (`butcher`) | standard | `lookup_kb`, `create_ticket`, `handoff_human` | **nein** (Rückruf-Ticket) | Starter |
+| Rechtsanwaltskanzlei (`law_office`) | erhöht (elevated) | `lookup_kb`, `create_ticket`, `schedule_appointment`, `handoff_human` | ja | Kanzlei / Praxis |
+| KFZ-Werkstatt & Autohaus (`auto_repair`) | standard | `lookup_kb`, `create_ticket`, `schedule_appointment`, `handoff_human` | ja | Professional |
+| Gastronomie & Bäckerei (`gastronomy`) | standard | `lookup_kb`, `create_ticket`, `schedule_appointment`, `handoff_human` | ja | Starter |
+| Hausverwaltung & Immobilien (`property_management`) | standard | `lookup_kb`, `create_ticket`, `schedule_appointment`, `handoff_human` | ja | Professional |
+| Arzt- & Zahnarztpraxis (`medical_practice`) | erhöht (elevated) | `lookup_kb`, `create_ticket`, `schedule_appointment`, `handoff_human` | ja | Kanzlei / Praxis |
+| Steuerberatung & Wirtschaftsprüfung (`tax_advisory`) | erhöht (elevated) | `lookup_kb`, `create_ticket`, `schedule_appointment`, `handoff_human` | ja | Kanzlei / Praxis |
+
+Werkzeuge: `lookup_kb` = Wissensabfrage (FAQ, Öffnungszeiten, Leistungen); `create_ticket` = Anliegen/Rückrufbitte als Ticket erfassen; `schedule_appointment` = Terminbuchung im Kalender; `handoff_human` = Übergabe an Mitarbeitende.
+
+### Handwerk (`trades`)
+- **Sensibilität:** standard
+- **Sofortige Übergabe an Menschen bei:** Gefahr, Gasgeruch, Wasserrohrbruch, Stromausfall, Funkenflug, Reklamation, Wunsch nach Mitarbeiter
+- **Verbotene Zusagen:** Verbindliche Festpreiszusage ohne Vor-Ort-Prüfung, Garantierte Sofortreparatur, Notdienst-Einsatzzeitpunkt ohne Dispositionsfreigabe
+- **Beispiel-Begrüßung:** „Guten Tag! Ich bin der KI-Sprachassistent Ihres Handwerksbetriebs. Wie kann ich Ihnen bei Terminanfragen oder einem Anliegen helfen? Hinweis: Bei akuter Gefahr wie Gasgeruch oder Rohrbruch verbinde ich Sie sofort weiter.“
+
+### Metzgerei (`butcher`)
+- **Sensibilität:** standard
+- **Sofortige Übergabe an Menschen bei:** Schwere Allergie / Anaphylaxie-Risiko, Reklamation, Catering-Sonderanfrage, Wunsch nach Fachpersonal
+- **Verbotene Zusagen:** Allergiegarantie, Garantie auf 100%ige Freiheit von Spuren/Kreuzkontamination, Verbindliche Reservierung ausverkaufter Tagesware ohne Bestätigung
+- **Beispiel-Begrüßung:** „Grüß Gott! Ich bin der KI-Sprachassistent Ihrer Metzgerei. Ich helfe Ihnen gerne bei Fragen zu unserem Sortiment, Öffnungszeiten oder Vorbestellungen. Für verbindliche Allergen-Auskünfte verbinde ich Sie direkt mit unserem Fachpersonal.“
+
+### Rechtsanwaltskanzlei (`law_office`)
+- **Sensibilität:** elevated – Aktivierung nur nach dokumentierter Datenschutzprüfung
+- **Sofortige Übergabe an Menschen bei:** Fristsache, Eilrechtsschutz, Haft / Durchsuchung, Kündigung / Zustellung mit Fristablauf, Mandatskonflikt / Beschwerde, Wunsch nach Kanzleimitarbeiter
+- **Verbotene Zusagen:** Rechtsberatung, Mandat angenommen, Frist geprüft, Erfolgsaussichten bewertet
+- **Beispiel-Begrüßung:** „Guten Tag. Sie sprechen mit dem KI-Sprachassistenten der Kanzlei. Ich nehme gerne Ihr Anliegen oder einen Terminwunsch auf. Bitte beachten Sie, dass ich keine Rechtsberatung erteile, keine Fristen prüfe und durch dieses Gespräch noch kein Mandatsverhältnis entsteht. Handelt es sich um eine dringende Fristsache?“
+
+### KFZ-Werkstatt & Autohaus (`auto_repair`)
+- **Sensibilität:** standard
+- **Sofortige Übergabe an Menschen bei:** Unfall / Panne auf der Straße, Bremsausfall / rote Warnleuchte / Rauchentwicklung, Reklamation nach Reparatur, Wunsch nach Werkstattleiter
+- **Verbotene Zusagen:** Verbindliche Festpreis- oder Kostenvoranschlagszusage ohne Fahrzeugdiagnose, Bestätigung der Weiterfahr-Sicherheit bei Brems- oder Lenkungsdefekt, Garantierte HU/TÜV-Zuteilung ohne Prüfung
+- **Beispiel-Begrüßung:** „Guten Tag! Ich bin der KI-Sprachassistent Ihrer KFZ-Werkstatt. Ich helfe Ihnen gerne bei Werkstattterminen, Reifenwechsel oder Rückfragen. Bei einer akuten Panne, Unfall oder roter Warnleuchte verbinde ich Sie sofort mit unserem Serviceberater.“
+
+### Gastronomie & Bäckerei (`gastronomy`)
+- **Sensibilität:** standard
+- **Sofortige Übergabe an Menschen bei:** Schwere Lebensmittelallergie / Zöliakie / Anaphylaxie, Reklamation, Gruppenreservierung / Bankett ab 15 Personen, Wunsch nach Serviceleitung
+- **Verbotene Zusagen:** Verbindliche Allergie- oder Spurenfreiheitsgarantie, Garantie auf 100 % gluten- oder nussfreie Zubereitung ohne Kreuzkontamination, Verbindliche Exklusivbuchung ohne Bestätigung der Betriebsleitung
+- **Beispiel-Begrüßung:** „Herzlich willkommen! Ich bin der KI-Sprachassistent Ihres Gastronomiebetriebs. Gerne nehme ich Ihre Tischreservierung oder Vorbestellung auf. Für verbindliche Auskünfte zu Allergenen und Spuren verbinde ich Sie direkt mit unserer Serviceleitung.“
+
+### Hausverwaltung & Immobilien (`property_management`)
+- **Sensibilität:** standard
+- **Sofortige Übergabe an Menschen bei:** Rohrbruch / Wasserschaden / Heizungsausfall im Winter, Brand / Gasgeruch / Aufzugseinschluss, Fristlose Kündigung / Mietrechtsstreit, Wunsch nach Objektbetreuer
+- **Verbotene Zusagen:** Zusage einer Kostenübernahme oder Mietminderung, Rechtsverbindliche Mietvertragszusage am Telefon, Freigabe kostenpflichtiger Handwerkereinsätze ohne Deckungsprüfung
+- **Beispiel-Begrüßung:** „Guten Tag! Sie sprechen mit dem KI-Sprachassistenten Ihrer Hausverwaltung. Ich erfasse gerne Ihre Schadensmeldung oder Ihr Mieteranliegen. Bei akuten Notfällen wie Rohrbruch, Heizungsausfall oder Aufzugsstörung verbinde ich Sie sofort mit dem Notdienst.“
+
+### Arzt- & Zahnarztpraxis (`medical_practice`)
+- **Sensibilität:** elevated – Aktivierung nur nach dokumentierter Datenschutzprüfung
+- **Sofortige Übergabe an Menschen bei:** Medizinischer Notfall / Atemnot / Brustschmerz / starke Blutung, Akuter Schmerzfall, Frage zu Labor- oder Befundergebnissen, Wunsch nach medizinischem Fachpersonal
+- **Verbotene Zusagen:** Medizinische Diagnose oder Therapieempfehlung, Verbindliche Zusage von Rezepten oder Arbeitsunfähigkeitsbescheinigungen ohne ärztliche Prüfung, Telefonische Herausgabe sensibler Befunddaten
+- **Beispiel-Begrüßung:** „Guten Tag. Sie sprechen mit dem KI-Sprachassistenten der Praxis. Ich nehme gerne Ihren Terminwunsch oder Ihr Anliegen auf. Bitte beachten Sie, dass ich keine medizinische Beratung oder Diagnose erteile. Bei einem akuten Notfall wählen Sie bitte sofort die 112 oder lassen Sie sich direkt mit dem Praxisteam verbinden.“
+
+### Steuerberatung & Wirtschaftsprüfung (`tax_advisory`)
+- **Sensibilität:** elevated – Aktivierung nur nach dokumentierter Datenschutzprüfung
+- **Sofortige Übergabe an Menschen bei:** Finanzamt-Frist / Einspruchsfrist läuft ab, Betriebsprüfung / Steuerfahndung / Vollstreckung, Kontopfändung / Schätzungsbescheid, Wunsch nach Steuerberater oder Fachmitarbeiter
+- **Verbotene Zusagen:** Verbindliche steuerliche Beratung oder Gestaltungsempfehlung, Zusage, dass eine Steuer- oder Einspruchsfrist gewahrt oder verlängert wurde, Mandatsannahme ohne schriftlichen Steuerberatungsvertrag
+- **Beispiel-Begrüßung:** „Guten Tag. Sie sprechen mit dem KI-Sprachassistenten der Steuerberatungskanzlei. Ich nehme gerne Ihr Anliegen oder einen Terminwunsch auf. Bitte beachten Sie, dass ich keine steuerliche Beratung erteile und keine Fristen prüfe. Handelt es sich um einen dringenden Fristablauf beim Finanzamt?“
+
+## 4. Pakete & Preise
+
+Alle Preise monatlich, netto zzgl. 19 % MwSt. Je Paket 1 Agent.
+
+| Paket | Preis netto | Preis brutto | Kanäle | Inklusivminuten | Jede weitere Minute (netto) |
+|---|---|---|---|---|---|
+| **Starter** | 89,00 € | 105,91 € | Web | 500 Min. | 0,18 € |
+| **Professional** | 199,00 € | 236,81 € | Web + Telefonie-Option | 1.500 Min. | 0,15 € |
+| **Kanzlei / Praxis** | 349,00 € | 415,31 € | Web + Telefonie-Option, Datenschutzprüfung (elevated) inkl. | 1.200 Min. | 0,18 € |
+
+**Rechenbeispiel Professional, 1.800 Min./Monat:** 199,00 € + 300 × 0,15 € = 244,00 € netto (290,36 € brutto).
+
+## 5. Kalenderanbindung – Ihre Wahl
+
+Für Branchen mit Terminbuchung wählen Sie beim Onboarding Ihren Kalender. Ohne Angabe gilt Google Kalender.
+
+| | Google Kalender (empfohlen) | Outlook Kalender (Alternative) |
+|---|---|---|
+| Rolle | Hauptkalender, Standard | unterstützte Alternative |
+| Verfügbarkeitsprüfung | vor jeder Buchung zweimal | vor jeder Buchung zweimal (zusätzlich abgesichert über eine Terminsuche) |
+| Termine über die Anbindung entfernen | möglich | **derzeit nicht möglich** – ggf. selbst in Outlook entfernen |
+| Zielkalender | Hauptkalender oder ein bestimmter Kalender (E-Mail-Adresse) | immer der Kalender des verbundenen Outlook-Kontos |
+| Hinweis | – | Bei der Outlook-Anbindung kann es zu Verbindungsproblemen kommen |
+
+## 6. Regeln für Terminbuchungen
+
+Ein Termin wird nur eingetragen, wenn **alle** Prüfungen bestehen. Andernfalls wird nicht gebucht, die Ablehnung protokolliert und dem Anrufer ein anderer Termin oder ein Rückruf angeboten.
+
+1. **Freigabe:** Betrieb aktiv und gültig, Terminbuchung in der Branchenvorlage erlaubt, bei sensiblen Branchen Datenschutzprüfung dokumentiert.
+2. **Zeitzone:** Europe/Berlin; der Termin muss in der Zukunft liegen.
+3. **Öffnungszeiten:** Der Termin muss vollständig in einem Öffnungsfenster liegen. Standard ohne Angabe: Mo–Fr 08:00–18:00, Sa/So geschlossen (nie rund um die Uhr).
+4. **Feiertage & Betriebsferien:** frei eintragbare Schließtage und Betriebsferien; optional automatisch die gesetzlichen Feiertage des Bundeslands (Standard Thüringen). Ohne Eintrag wird nichts gesperrt.
+5. **Freie Zeit im Kalender:** Prüfung vor der Vormerkung.
+6. **Zweite Prüfung direkt vor dem Eintragen:** muss frisch sein (höchstens 5 Minuten alt) und „frei“ ergeben; sonst keine Buchung.
+7. **Zielkalender:** optional pro Betrieb (E-Mail-Format); wird er zwischen Prüfung und Eintrag geändert, bricht die Buchung ab. Ohne Angabe: Hauptkalender des verbundenen Kontos.
+
+Ist die Kalenderprüfung nicht möglich oder fehlerhaft, wird ebenfalls **nicht** gebucht.
+
+## 7. Onboarding in 4 Schritten
+
+1. **Branchenvorlage wählen** – eine der 8 Vorlagen.
+2. **Betriebsdaten & Paket** – Name, Übergabe-Kontakt, Öffnungszeiten, Paket, Kanal, Kalender (Google oder Outlook, optional Zielkalender).
+3. **Sicherheits- & Datenschutzfreigaben** – KI-Offenlegung, Telefonie-Freigabe, Datenschutzprüfung (elevated), Aufzeichnung nur mit Freigabe und Aufbewahrungsfrist.
+4. **Fail-Closed-Prüfung & Live-Status** – automatische Validierung und Branchen-Testgespräche; nur bei vollständigen Freigaben aktiv, sonst pausiert.
+
+Ergebnis: Konfiguration, Onboarding-Protokoll und unverbindliches Angebot inkl. gewähltem Kalender.
+
+## 8. Links
+
+- **Verkaufsseite:** https://realsyncdynamics-spec.github.io/vertical-voice-agent/
+- **Onboarding-Assistent:** https://realsyncdynamics-spec.github.io/vertical-voice-agent/onboarding.html
+- **Produktmappe (dieses Dokument):** https://realsyncdynamics-spec.github.io/vertical-voice-agent/vertical-voice-agent-produktmappe.md
+- **GitHub-Repository:** https://github.com/realsyncdynamics-spec/vertical-voice-agent
+
+## 9. Angebot anfragen
+
+Unverbindliches Angebot über **„Angebot anfragen“** auf der Verkaufsseite (https://realsyncdynamics-spec.github.io/vertical-voice-agent/#angebot) oder per E-Mail an realsyncdynamics@gmail.com. Verbindlich sind ausschließlich die Konditionen im schriftlichen Angebot.
 
 ---
 
-### B. Elevated-Sensitivity Branchen (3 Vorlagen – Dokumentierte Datenschutzprüfung Pflicht)
+## Impressum
 
-6. **Rechtsanwaltskanzlei (`law_office`)**
-   - **Freigegebene Tools:** `lookup_kb`, `create_ticket`, `schedule_appointment`, `handoff_human`
-   - **Zwingende Handoff-Trigger:** Fristsache, Kündigung, Eilrechtsschutz, Durchsuchung, Haftsache, Mandatskonflikt
-   - **Verbotene Zusagen:** Rechtsberatung, Bestätigung einer Mandatsannahme, Aussage dass eine Frist geprüft oder gewahrt wurde
+Dominik Steiner, Einzelunternehmen  
+Schwarzburger Str. 31  
+98724 Neuhaus am Rennweg  
+Thüringen, Deutschland  
+E-Mail: realsyncdynamics@gmail.com
 
-7. **Arzt- & Zahnarztpraxis (`medical_practice` – § 203 StGB)**
-   - **Freigegebene Tools:** `lookup_kb`, `create_ticket`, `schedule_appointment`, `handoff_human`
-   - **Zwingende Handoff-Trigger:** Atemnot, Brustschmerz, starke Blutung, akuter Schmerzfall, Fragen zu Labor-/Befundergebnissen
-   - **Verbotene Zusagen:** Medizinische Diagnose oder Therapieempfehlung, Rezept-/AU-Zusage ohne ärztliche Prüfung, telefonische Befundherausgabe
-
-8. **Steuerberatung & Wirtschaftsprüfung (`tax_advisory`)**
-   - **Freigegebene Tools:** `lookup_kb`, `create_ticket`, `schedule_appointment`, `handoff_human`
-   - **Zwingende Handoff-Trigger:** Ablaufende Finanzamt- oder Einspruchsfrist, Betriebsprüfung, Steuerfahndung, Kontopfändung
-   - **Verbotene Zusagen:** Verbindliche Steuerberatung, Zusage einer Fristverlängerung beim Finanzamt, Mandatsannahme ohne Vertrag
-
----
-
-## 3. Aktive Mandanten-Profile für Dominik Steiner (100 % Smoke-Test-Abdeckung)
-
-Alle 8 Branchenprofile sind unter `/cursor/stores/store-8d5bca21-00e8-4084-a05f-43646dd48d75/vertical-voice-agent/tenants/` validiert und aktiv:
-- `dominik-steiner-trades` (Handwerk · Professional · 3/3 Smoke-Tests bestanden)
-- `dominik-steiner-butcher` (Metzgerei · Starter · 3/3 Smoke-Tests bestanden)
-- `dominik-steiner-auto_repair` (KFZ-Werkstatt · Professional · 3/3 Smoke-Tests bestanden)
-- `dominik-steiner-gastronomy` (Gastronomie & Bäckerei · Starter · 3/3 Smoke-Tests bestanden)
-- `dominik-steiner-property_management` (Hausverwaltung · Professional · 3/3 Smoke-Tests bestanden)
-- `dominik-steiner-law_office` (Rechtsanwaltskanzlei · Kanzlei · Elevated Privacy-Review OK · 3/3 Smoke-Tests bestanden)
-- `dominik-steiner-medical_practice` (Arzt- & Zahnarztpraxis · Kanzlei · Elevated Privacy-Review OK · 3/3 Smoke-Tests bestanden)
-- `dominik-steiner-tax_advisory` (Steuerberatung · Kanzlei · Elevated Privacy-Review OK · 3/3 Smoke-Tests bestanden)
-
-## 4. Kalenderanbindung – Ihre Wahl
-Bei Branchen mit Terminbuchung wählen Sie beim Onboarding Ihren Kalender:
-- **Google Kalender (empfohlen, Standard):** Hauptkalender für Terminbuchungen. Freie Zeiten werden vor jeder Buchung zweimal geprüft; Termine lassen sich über die Anbindung auch wieder entfernen.
-- **Outlook Kalender (Alternative):** wird unterstützt. Bei der Outlook-Anbindung kann es zu Verbindungsproblemen kommen. Termine können über die Anbindung derzeit nicht gelöscht werden – abgesagte oder fehlerhafte Termine müssen Sie ggf. selbst in Outlook entfernen. Gebucht wird immer im Kalender des verbundenen Outlook-Kontos.
-- Ohne Angabe gilt Google Kalender. Optional kann ein bestimmter Zielkalender (E-Mail-Adresse) hinterlegt werden; ohne Angabe wird der Hauptkalender des verbundenen Kontos genutzt.
-- Für beide gilt: Buchung nur innerhalb der Öffnungszeiten, nicht an Feiertagen oder in Betriebsferien und nur bei freiem Zeitfenster.
+*Der Vertical Voice Agent erteilt keine Rechts-, Medizin- oder Steuerberatung und gibt keine garantierte Compliance-Zusage.*
