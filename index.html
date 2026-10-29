@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vertical Voice Agent – Sichere KI-Sprachassistenten für Handwerk, Metzgerei & Kanzleien</title>
-  <meta name="description" content="Branchenspezifische KI-Sprachassistenten mit Fail-Closed-Sicherheitsmodell für Handwerk, Metzgerei und Rechtsanwaltskanzleien. Eigenständiges Produkt von Dominik Steiner." />
+  <meta name="description" content="Branchenspezifische KI-Sprachassistenten mit Fail-Closed-Sicherheitsmodell für 8 Branchen – von Handwerk und Metzgerei bis Kanzlei, Praxis und Steuerberatung. Eigenständiges Produkt von Dominik Steiner." />
   <style>
     :root {
       --bg: #0b0f19;
@@ -363,6 +363,7 @@
         <a href="#branchen">Branchenvorlagen</a>
         <a href="#sicherheit">Fail-Closed-Sicherheit</a>
         <a href="#pakete">Pakete & Preise</a>
+        <a href="#kalender">Kalender</a>
         <a href="#rechner">Minutenrechner</a>
         <a href="onboarding.html">Live-Onboarding</a>
         <a href="#angebot" class="btn btn-primary">Angebot anfragen</a>
@@ -544,8 +545,8 @@
           <!-- KANZLEI -->
           <div class="price-card">
             <div>
-              <div class="price-title">Kanzlei</div>
-              <div class="price-sub">Für Rechtsanwaltskanzleien (Elevated Sensitivity)</div>
+              <div class="price-title">Kanzlei / Praxis</div>
+              <div class="price-sub">Für Rechtsanwaltskanzleien, Arzt- & Zahnarztpraxen und Steuerberatung (Elevated Sensitivity)</div>
               <div class="price-amount">349 € <span>/ Monat</span></div>
               <div class="price-tax">zzgl. 19 % MwSt. (415,31 € brutto)</div>
               <ul class="price-features">
@@ -557,6 +558,42 @@
               </ul>
             </div>
             <a href="#angebot" onclick="prefillOffer('kanzlei', 'law_office', 1200)" class="btn btn-secondary">Angebot anfragen</a>
+          </div>
+        </div>
+
+        <!-- KALENDERWAHL -->
+        <div id="kalender" class="calc-panel" style="margin-bottom: 28px;">
+          <h3 style="margin-bottom: 8px;">Kalenderanbindung – Ihre Wahl</h3>
+          <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 16px;">
+            Für Branchen mit Terminbuchung wählen Sie beim Onboarding Ihren Kalender. Ohne Angabe gilt Google Kalender.
+            Gebucht wird nur innerhalb Ihrer Öffnungszeiten, nicht an Feiertagen oder in Betriebsferien und nur bei freiem Zeitfenster.
+          </p>
+          <div class="pricing-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+            <div class="price-card">
+              <div>
+                <div class="price-title">Google Kalender</div>
+                <div class="price-sub">Empfohlen – Hauptkalender</div>
+                <ul class="price-features">
+                  <li><span>Verfügbarkeitsprüfung</span><strong>vor jeder Buchung zweimal</strong></li>
+                  <li><span>Termine entfernen</span><strong>über die Anbindung möglich</strong></li>
+                  <li><span>Zielkalender</span><strong>Hauptkalender oder wählbar</strong></li>
+                </ul>
+              </div>
+            </div>
+            <div class="price-card">
+              <div>
+                <div class="price-title">Outlook Kalender</div>
+                <div class="price-sub">Unterstützte Alternative</div>
+                <ul class="price-features">
+                  <li><span>Verfügbarkeitsprüfung</span><strong>vor jeder Buchung zweimal</strong></li>
+                  <li><span>Termine entfernen</span><strong>über die Anbindung derzeit nicht möglich</strong></li>
+                  <li><span>Zielkalender</span><strong>Kalender des verbundenen Kontos</strong></li>
+                </ul>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 10px;">
+                  Hinweis: Bei der Outlook-Anbindung kann es zu Verbindungsproblemen kommen. Abgesagte oder fehlerhafte Termine müssen Sie ggf. selbst in Outlook entfernen.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -630,7 +667,14 @@
               <select id="req-pkg" onchange="updateOfferPreview()">
                 <option value="starter">Starter – 89,00 € / Monat zzgl. MwSt. (Web, 500 Min. inkl.)</option>
                 <option value="professional" selected>Professional – 199,00 € / Monat zzgl. MwSt. (Web + Telefonie-Option, 1.500 Min. inkl.)</option>
-                <option value="kanzlei">Kanzlei – 349,00 € / Monat zzgl. MwSt. (Elevated Privacy Review, 1.200 Min. inkl.)</option>
+                <option value="kanzlei">Kanzlei / Praxis – 349,00 € / Monat zzgl. MwSt. (Elevated Privacy Review, 1.200 Min. inkl.)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="req-calendar">Kalender für Terminbuchungen</label>
+              <select id="req-calendar" onchange="updateOfferPreview()">
+                <option value="google" selected>Google Kalender (empfohlen)</option>
+                <option value="outlook">Outlook Kalender (Alternative – Termine über Anbindung nicht löschbar)</option>
               </select>
             </div>
             <div class="form-group">
@@ -896,7 +940,7 @@
     const PACKAGES = {
       starter: { name: "Starter", channels: "Web", base: 89, inc: 500, over: 0.18 },
       professional: { name: "Professional", channels: "Web + Telefonie-Option", base: 199, inc: 1500, over: 0.15 },
-      kanzlei: { name: "Kanzlei", channels: "Web + Telefonie + Privacy-Review", base: 349, inc: 1200, over: 0.18 }
+      kanzlei: { name: "Kanzlei / Praxis", channels: "Web + Telefonie + Privacy-Review", base: 349, inc: 1200, over: 0.18 }
     };
 
     let currentBranch = "trades";
@@ -985,6 +1029,7 @@
       const branchKey = document.getElementById("req-branch").value;
       const pkgKey = document.getElementById("req-pkg").value;
       const mins = Math.max(0, Math.round(Number(document.getElementById("req-mins").value) || 0));
+      const calChoice = document.getElementById("req-calendar").value;
 
       const b = BRANCH_DATA[branchKey];
       const p = PACKAGES[pkgKey];
@@ -1001,6 +1046,11 @@ Interessent: ${company}
 Kontakt-E-Mail: ${email}
 Gewählte Branchenvorlage: ${b.title} (Sensitivity: ${b.sensitivity})
 Gewähltes Paket: ${p.name} (${p.channels})
+Kalender: ${b.tools.includes("schedule_appointment")
+  ? (calChoice === "outlook"
+      ? "Outlook Kalender (Alternative; Hinweis: Verbindungsprobleme möglich, Termine über die Anbindung derzeit nicht löschbar)"
+      : "Google Kalender (empfohlen)")
+  : "entfällt – in dieser Branchenvorlage keine Terminbuchung freigegeben"}
 
 KALKULATION (Stand 24.10.2026):
 - Monatlicher Grundpreis: ${p.base.toFixed(2).replace(".", ",")} € netto (inkl. ${p.inc} Min.)
