@@ -144,6 +144,7 @@ Ergebnis: Konfiguration, Onboarding-Protokoll und unverbindliches Angebot inkl. 
 - **Verkaufsseite:** https://realsyncdynamics-spec.github.io/vertical-voice-agent/
 - **Onboarding-Assistent:** https://realsyncdynamics-spec.github.io/vertical-voice-agent/onboarding.html
 - **Produktmappe (dieses Dokument):** https://realsyncdynamics-spec.github.io/vertical-voice-agent/vertical-voice-agent-produktmappe.md
+- **Vertriebs-Pitch-Deck (.pptx):** https://realsyncdynamics-spec.github.io/vertical-voice-agent/vertical-voice-agent-pitch-deck.pptx
 - **GitHub-Repository:** https://github.com/realsyncdynamics-spec/vertical-voice-agent
 
 ## 9. Angebot anfragen
