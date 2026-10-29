@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Klickanleitung für Kunden – Vertical Voice Agent Self-Service-Onboarding</title>
+  <meta name="description" content="Schritt-für-Schritt-Klickanleitung: So richten Sie den Vertical Voice Agent selbst ein – ohne Angebotsanfrage." />
+  <style>
+    body { margin:0; background:#0b0f19; color:#e5e7eb; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Helvetica,Arial,sans-serif; line-height:1.6; }
+    header { background:#111827; border-bottom:1px solid #1f2937; padding:14px 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
+    header a { color:#e5e7eb; text-decoration:none; margin-left:14px; }
+    .btn { display:inline-block; padding:9px 16px; border-radius:8px; font-weight:600; text-decoration:none; }
+    .btn-primary { background:linear-gradient(135deg,#38bdf8,#0284c7); color:#fff !important; }
+    main { max-width:880px; margin:0 auto; padding:28px 20px 80px; }
+    h1 { font-size:1.8rem; margin-bottom:6px; } h2 { margin-top:34px; font-size:1.25rem; color:#38bdf8; }
+    .step { background:#111827; border:1px solid #1f2937; border-radius:12px; padding:16px 20px; margin:14px 0; }
+    .ui { background:#1e293b; border:1px solid #334155; border-radius:6px; padding:1px 7px; font-weight:600; white-space:nowrap; }
+    table { width:100%; border-collapse:collapse; font-size:0.9rem; } td,th { border-bottom:1px solid #1f2937; padding:7px 6px; text-align:left; vertical-align:top; }
+    .note { color:#94a3b8; font-size:0.9rem; } .warn { border-left:3px solid #f59e0b; padding-left:10px; }
+    a { color:#38bdf8; }
+  </style>
+</head>
+<body>
+  <header>
+    <strong>Vertical Voice Agent · Klickanleitung</strong>
+    <nav><a href="index.html">Startseite</a><a href="onboarding.html" class="btn btn-primary">Onboarding starten</a></nav>
+  </header>
+  <main>
+    <h1>Klickanleitung für Kunden</h1>
+    <p>Mit dieser Anleitung richten Sie Ihren Sprachassistenten komplett selbst ein. Eine Angebotsanfrage ist <strong>nicht</strong> nötig. Dauer: ca. 10 Minuten. Bei Fragen klicken Sie jederzeit unten rechts auf <span class="ui">💬 Fragen? Hilfe-Bot</span>.</p>
+
+    <h2>Vorbereitung</h2>
+    <div class="step">
+      Legen Sie bereit: Betriebsname, eine Telefonnummer oder Person für dringende Übergaben, Ihre Öffnungszeiten, geplante Betriebsferien und die Information, ob Sie Google Kalender oder Outlook nutzen.
+    </div>
+
+    <h2>Schritt 1 – Branche wählen</h2>
+    <div class="step">
+      <p>1. Öffnen Sie <a href="onboarding.html">onboarding.html</a>.<br/>2. Klicken Sie im Kasten <span class="ui">1 Branchenvorlage wählen</span> auf Ihre Branche, z. B. <span class="ui">Handwerk</span>.</p>
+      <p class="note">Die Branche legt fest, was der Assistent darf. Beispiel: In der Metzgerei sind keine Terminbuchungen freigegeben – Terminwünsche werden als Rückrufbitte erfasst. Kanzlei, Arzt-/Zahnarztpraxis und Steuerberatung brauchen eine dokumentierte Datenschutzprüfung.</p>
+    </div>
+
+    <h2>Schritt 2 – Betriebsdaten, Paket, Kanal, Kalender</h2>
+    <div class="step">
+      <table>
+        <tr><th>Feld</th><th>Was eintragen / anklicken</th></tr>
+        <tr><td><span class="ui">Mandanten- / Betriebsname</span></td><td>Name Ihres Betriebs, so wie der Assistent ihn nennen soll.</td></tr>
+        <tr><td><span class="ui">Handoff-Ziel</span></td><td>Nummer oder Stelle, an die bei Notfällen und kritischen Anliegen sofort übergeben wird.</td></tr>
+        <tr><td><span class="ui">Paket</span></td><td>Starter 89 € (nur Web, 500 Min.), Professional 199 € (Web + Telefonie-Option, 1.500 Min.), Kanzlei / Praxis 349 € (inkl. Datenschutzprüfung, 1.200 Min.) – jeweils netto/Monat zzgl. 19 % MwSt.; weitere Minuten 0,18 € / 0,15 € / 0,18 €.</td></tr>
+        <tr><td><span class="ui">Gewünschter Kanal</span></td><td>„Web-Sprachassistent“ oder „Telefonie + Web“ (Telefonie nicht im Starter-Paket).</td></tr>
+        <tr><td><span class="ui">Kalender für Terminbuchungen</span></td><td><strong>Google Kalender (empfohlen)</strong> oder Outlook Kalender (Alternative).</td></tr>
+        <tr><td><span class="ui">Zielkalender</span></td><td>Optional eine Kalender-E-Mail-Adresse. Leer lassen = Hauptkalender Ihres Kontos.</td></tr>
+        <tr><td><span class="ui">Outlook-Postfach</span></td><td>Nur bei Outlook sichtbar: die Adresse Ihres verbundenen Outlook-Kontos.</td></tr>
+      </table>
+      <p class="note warn">Outlook-Hinweis: Bei der Outlook-Anbindung kann es zu Verbindungsproblemen kommen. Termine lassen sich über die Anbindung derzeit nicht löschen – abgesagte oder fehlerhafte Termine müssen Sie ggf. selbst in Outlook entfernen.</p>
+    </div>
+
+    <h2>Schritt 3 – Öffnungszeiten, Feiertage, Betriebsferien</h2>
+    <div class="step">
+      <p>1. Tragen Sie je Wochentag <span class="ui">von</span> und <span class="ui">bis</span> ein oder setzen Sie das Häkchen <span class="ui">geschlossen</span>.<br/>
+      2. Lassen Sie <span class="ui">Gesetzliche Feiertage automatisch sperren</span> angehakt und wählen Sie Ihr <span class="ui">Bundesland</span>.<br/>
+      3. Tragen Sie unter <span class="ui">Schließtage & Betriebsferien</span> je Zeile einen Eintrag ein, z. B. <code>2027-08-02 bis 2027-08-13 Betriebsferien</code> oder <code>2026-11-20 Inventur</code>.</p>
+      <p class="note">Termine werden nur gebucht, wenn sie vollständig in den Öffnungszeiten liegen, nicht auf Feiertage oder Schließzeiten fallen und der Kalender frei ist. Direkt vor dem Eintragen wird der Kalender ein zweites Mal geprüft. Ohne eigene Zeiten gilt Mo–Fr 08:00–18:00, Wochenende geschlossen.</p>
+    </div>
+
+    <h2>Schritt 4 – Freigaben setzen</h2>
+    <div class="step">
+      <table>
+        <tr><th>Häkchen</th><th>Bedeutung</th></tr>
+        <tr><td><span class="ui">KI-Offenlegung</span></td><td>Pflicht. Der Assistent sagt in jeder Begrüßung, dass ein KI-Assistent spricht.</td></tr>
+        <tr><td><span class="ui">Telefonie-Freigabe</span></td><td>Nur nötig, wenn Sie „Telefonie + Web“ gewählt haben.</td></tr>
+        <tr><td><span class="ui">Datenschutzprüfung dokumentiert</span></td><td>Pflicht für Kanzlei, Arzt-/Zahnarztpraxis und Steuerberatung.</td></tr>
+        <tr><td><span class="ui">Aufzeichnung</span></td><td>Optional. Wenn aktiviert, zusätzlich Freigabe und Aufbewahrungsfrist in Tagen angeben.</td></tr>
+      </table>
+    </div>
+
+    <h2>Schritt 5 – Status prüfen</h2>
+    <div class="step">
+      Rechts oben muss <span class="ui">ACTIVE · VALIDATED</span> stehen. Steht dort <span class="ui">PAUSED · FAIL-CLOSED</span>, nennt der rote Hinweis, was fehlt (z. B. <code>TELEPHONY_WITHOUT_APPROVAL</code> = Telefonie-Häkchen fehlt, <code>MISSING_PRIVACY_REVIEW_FOR_ELEVATED</code> = Datenschutz-Häkchen fehlt, <code>CLOSURE_CONFIG_INVALID</code> = Schließtag falsch geschrieben). Darunter sehen Sie die automatischen Testgespräche Ihrer Branche.
+    </div>
+
+    <h2>Schritt 6 – Herunterladen & fertig</h2>
+    <div class="step">
+      1. Klicken Sie auf <span class="ui">Konfig (.json) speichern</span>.<br/>2. Klicken Sie auf <span class="ui">Onboarding-Protokoll (.md)</span>.<br/>
+      <p class="note">Beide Dateien enthalten keine Passwörter oder Zugangsdaten. Die Kalenderverbindung stellen Sie mit Ihrem eigenen Google- oder Outlook-Konto her.</p>
+    </div>
+
+    <h2>Gut zu wissen</h2>
+    <div class="step">
+      Der Assistent gibt keine Rechts-, Medizin- oder Steuerberatung und keine garantierte Compliance-Zusage. Bei Gefahr oder Notfällen übergibt er sofort an Ihr Team. Ein schriftliches Angebot ist optional und kann auf der <a href="index.html#angebot">Startseite</a> erzeugt werden.
+      <p class="note">Anbieter: Dominik Steiner, Einzelunternehmen, Schwarzburger Str. 31, 98724 Neuhaus am Rennweg · Eigenständiges Produkt außerhalb von RealSyncDynamics.AI · realsyncdynamics@gmail.com</p>
+    </div>
+  </main>
+  <script src="chatbot.js"></script>
+</body>
+</html>

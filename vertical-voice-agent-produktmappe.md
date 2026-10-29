@@ -130,26 +130,34 @@ Ein Termin wird nur eingetragen, wenn **alle** Prüfungen bestehen. Andernfalls 
 
 Ist die Kalenderprüfung nicht möglich oder fehlerhaft, wird ebenfalls **nicht** gebucht.
 
-## 7. Onboarding in 4 Schritten
+## 7. Self-Service-Onboarding in 6 Schritten
+
+Sie richten den Assistenten komplett selbst ein – eine Angebotsanfrage ist nicht nötig. Eine Klickanleitung erklärt jedes Feld, und ein Hilfe-Bot beantwortet Fragen jederzeit.
 
 1. **Branchenvorlage wählen** – eine der 8 Vorlagen.
-2. **Betriebsdaten & Paket** – Name, Übergabe-Kontakt, Öffnungszeiten, Paket, Kanal, Kalender (Google oder Outlook, optional Zielkalender).
-3. **Sicherheits- & Datenschutzfreigaben** – KI-Offenlegung, Telefonie-Freigabe, Datenschutzprüfung (elevated), Aufzeichnung nur mit Freigabe und Aufbewahrungsfrist.
-4. **Fail-Closed-Prüfung & Live-Status** – automatische Validierung und Branchen-Testgespräche; nur bei vollständigen Freigaben aktiv, sonst pausiert.
+2. **Betriebsdaten, Paket, Kanal & Kalender** – Name, Übergabe-Kontakt, Paket, Kanal, Kalender (Google oder Outlook, optional Zielkalender).
+3. **Öffnungszeiten, Feiertage & Betriebsferien** – Zeiten je Wochentag, gesetzliche Feiertage je Bundesland, eigene Schließzeiten.
+4. **Sicherheits- & Datenschutzfreigaben** – KI-Offenlegung, Telefonie-Freigabe, Datenschutzprüfung (elevated), Aufzeichnung nur mit Freigabe und Aufbewahrungsfrist.
+5. **Fail-Closed-Prüfung & Live-Status** – automatische Validierung und Branchen-Testgespräche; nur bei vollständigen Freigaben aktiv, sonst pausiert.
+6. **Herunterladen** – Konfiguration (.json, ohne Zugangsdaten) und Onboarding-Protokoll (.md).
 
-Ergebnis: Konfiguration, Onboarding-Protokoll und unverbindliches Angebot inkl. gewähltem Kalender.
+Ein schriftliches Angebot ist optional.
+
+**Hilfe-Bot:** Auf allen Seiten unten rechts. Er beantwortet Fragen zu Paketen, Onboarding, Kalender, Terminbuchung und Sicherheit auf Basis dieser Produktangaben, läuft vollständig im Browser (keine Daten werden gesendet), gibt keine Rechts-, Medizin- oder Steuerberatung und verweist bei Notfällen auf 112/110.
 
 ## 8. Links
 
 - **Verkaufsseite:** https://realsyncdynamics-spec.github.io/vertical-voice-agent/
-- **Onboarding-Assistent:** https://realsyncdynamics-spec.github.io/vertical-voice-agent/onboarding.html
+- **Self-Service-Onboarding:** https://realsyncdynamics-spec.github.io/vertical-voice-agent/onboarding.html
+- **Klickanleitung für Kunden:** https://realsyncdynamics-spec.github.io/vertical-voice-agent/anleitung.html
 - **Produktmappe (dieses Dokument):** https://realsyncdynamics-spec.github.io/vertical-voice-agent/vertical-voice-agent-produktmappe.md
 - **Vertriebs-Pitch-Deck (.pptx):** https://realsyncdynamics-spec.github.io/vertical-voice-agent/vertical-voice-agent-pitch-deck.pptx
 - **GitHub-Repository:** https://github.com/realsyncdynamics-spec/vertical-voice-agent
 
-## 9. Angebot anfragen
+## 9. Selbst starten oder Angebot anfragen
 
-Unverbindliches Angebot über **„Angebot anfragen“** auf der Verkaufsseite (https://realsyncdynamics-spec.github.io/vertical-voice-agent/#angebot) oder per E-Mail an realsyncdynamics@gmail.com. Verbindlich sind ausschließlich die Konditionen im schriftlichen Angebot.
+Am schnellsten: selbst einrichten unter https://realsyncdynamics-spec.github.io/vertical-voice-agent/onboarding.html.
+Optional: unverbindliches Angebot über **„Angebot anfragen“** auf der Verkaufsseite (https://realsyncdynamics-spec.github.io/vertical-voice-agent/#angebot) oder per E-Mail an realsyncdynamics@gmail.com. Verbindlich sind ausschließlich die Konditionen im schriftlichen Angebot.
 
 ---
 

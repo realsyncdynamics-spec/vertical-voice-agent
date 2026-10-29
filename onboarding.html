@@ -189,20 +189,36 @@
     <div class="header-inner">
       <div class="brand">
         <span>Vertical Voice Agent</span>
-        <span class="badge badge-accent">Automatisiertes Branchen-Onboarding</span>
+        <span class="badge badge-accent">Self-Service-Onboarding</span>
       </div>
       <div>
-        <a href="index.html" class="btn btn-secondary">Zurück zur Produkt-Webseite</a>
+        <a href="anleitung.html" class="btn btn-secondary">Klickanleitung</a>
+        <a href="index.html" class="btn btn-secondary">Zur Produkt-Webseite</a>
       </div>
     </div>
   </header>
 
   <div class="container">
-    <h1>Automatisiertes Mandanten-Onboarding je Branche</h1>
+    <h1>Self-Service-Onboarding – in 6 Schritten selbst einrichten</h1>
     <p class="sub">
-      Konfiguriert, validiert (Fail-Closed) und testet den Sprachassistenten für Handwerk (<code>trades</code>),
-      Metzgerei (<code>butcher</code>) oder Rechtsanwaltskanzlei (<code>law_office</code>) vollautomatisch in 4 Schritten.
+      Sie richten Ihren Sprachassistenten komplett selbst ein – ohne Angebotsanfrage. Jede Eingabe wird sofort geprüft (Fail-Closed),
+      rechts sehen Sie live den Status und die Testgespräche. Am Ende laden Sie Konfiguration und Protokoll herunter.
     </p>
+    <div class="card" style="border-color: var(--accent);">
+      <div class="step-title">So geht's – Kurzanleitung</div>
+      <ol style="margin: 0 0 0 18px; font-size: 0.9rem; line-height: 1.7; color: #cbd5e1;">
+        <li><strong>Schritt 1:</strong> Klicken Sie auf Ihre Branche (z. B. „Handwerk“).</li>
+        <li><strong>Schritt 2:</strong> Betriebsname, Übergabe-Kontakt, Paket, Kanal und Kalender (Google empfohlen) auswählen.</li>
+        <li><strong>Schritt 3:</strong> Öffnungszeiten je Tag eintragen, Feiertage aktivieren, Betriebsferien eintragen.</li>
+        <li><strong>Schritt 4:</strong> Häkchen bei den Freigaben setzen (KI-Offenlegung Pflicht; Telefonie/Datenschutz je nach Paket und Branche).</li>
+        <li><strong>Schritt 5:</strong> Rechts muss „ACTIVE · VALIDATED“ stehen – sonst nennt der rote Hinweis, was fehlt.</li>
+        <li><strong>Schritt 6:</strong> „Konfig (.json) speichern“ und „Onboarding-Protokoll (.md)“ klicken – fertig.</li>
+      </ol>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 8px;">
+        Ausführlich mit Erklärung jedes Feldes: <a href="anleitung.html" style="color: var(--accent);">Klickanleitung für Kunden</a>.
+        Fragen? Unten rechts auf <strong>„💬 Fragen? Hilfe-Bot“</strong> klicken – jederzeit verfügbar.
+      </p>
+    </div>
 
     <div class="wizard-grid">
       <!-- LEFT COLUMN: INPUT STEPS -->
@@ -259,8 +275,8 @@
             <input type="text" id="ob-handoff" value="Bereitschaftsdienst +49 3679 000111" oninput="runOnboardingPipeline()" />
           </div>
           <div class="form-group">
-            <label for="ob-hours">Öffnungs- / Geschäftszeiten</label>
-            <input type="text" id="ob-hours" value="Mo–Fr 07:30–17:00 Uhr" oninput="runOnboardingPipeline()" />
+            <input type="hidden" id="ob-hours" value="" />
+            <span style="font-size: 0.82rem; color: var(--text-muted);">Öffnungszeiten, Feiertage und Betriebsferien tragen Sie in Schritt 3 ein.</span>
           </div>
           <div class="form-group">
             <label for="ob-pkg">Paket (Stand 24.10.2026, netto zzgl. 19 % MwSt.)</label>
@@ -295,9 +311,93 @@
           </div>
         </div>
 
+        <!-- STEP 3: HOURS / HOLIDAYS -->
+        <div class="card" id="card-hours">
+          <div class="step-title"><span class="step-num">3</span> Öffnungszeiten, Feiertage & Betriebsferien</div>
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">Termine werden nur innerhalb dieser Zeiten gebucht (Europe/Berlin). Ohne Eintrag gilt Mo–Fr 08:00–18:00, Wochenende geschlossen.</p>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:0.88rem;">
+              <span style="width:84px;">Montag</span>
+              <input type="time" id="bh-mon-from" value="08:00" style="width:110px;" oninput="runOnboardingPipeline()" />
+              <span>bis</span>
+              <input type="time" id="bh-mon-to" value="18:00" style="width:110px;" oninput="runOnboardingPipeline()" />
+              <label style="display:flex;align-items:center;gap:4px;"><input type="checkbox" id="bh-mon-closed"  onchange="runOnboardingPipeline()" /> geschlossen</label>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:0.88rem;">
+              <span style="width:84px;">Dienstag</span>
+              <input type="time" id="bh-tue-from" value="08:00" style="width:110px;" oninput="runOnboardingPipeline()" />
+              <span>bis</span>
+              <input type="time" id="bh-tue-to" value="18:00" style="width:110px;" oninput="runOnboardingPipeline()" />
+              <label style="display:flex;align-items:center;gap:4px;"><input type="checkbox" id="bh-tue-closed"  onchange="runOnboardingPipeline()" /> geschlossen</label>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:0.88rem;">
+              <span style="width:84px;">Mittwoch</span>
+              <input type="time" id="bh-wed-from" value="08:00" style="width:110px;" oninput="runOnboardingPipeline()" />
+              <span>bis</span>
+              <input type="time" id="bh-wed-to" value="18:00" style="width:110px;" oninput="runOnboardingPipeline()" />
+              <label style="display:flex;align-items:center;gap:4px;"><input type="checkbox" id="bh-wed-closed"  onchange="runOnboardingPipeline()" /> geschlossen</label>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:0.88rem;">
+              <span style="width:84px;">Donnerstag</span>
+              <input type="time" id="bh-thu-from" value="08:00" style="width:110px;" oninput="runOnboardingPipeline()" />
+              <span>bis</span>
+              <input type="time" id="bh-thu-to" value="18:00" style="width:110px;" oninput="runOnboardingPipeline()" />
+              <label style="display:flex;align-items:center;gap:4px;"><input type="checkbox" id="bh-thu-closed"  onchange="runOnboardingPipeline()" /> geschlossen</label>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:0.88rem;">
+              <span style="width:84px;">Freitag</span>
+              <input type="time" id="bh-fri-from" value="08:00" style="width:110px;" oninput="runOnboardingPipeline()" />
+              <span>bis</span>
+              <input type="time" id="bh-fri-to" value="18:00" style="width:110px;" oninput="runOnboardingPipeline()" />
+              <label style="display:flex;align-items:center;gap:4px;"><input type="checkbox" id="bh-fri-closed"  onchange="runOnboardingPipeline()" /> geschlossen</label>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:0.88rem;">
+              <span style="width:84px;">Samstag</span>
+              <input type="time" id="bh-sat-from" value="09:00" style="width:110px;" oninput="runOnboardingPipeline()" />
+              <span>bis</span>
+              <input type="time" id="bh-sat-to" value="13:00" style="width:110px;" oninput="runOnboardingPipeline()" />
+              <label style="display:flex;align-items:center;gap:4px;"><input type="checkbox" id="bh-sat-closed" checked onchange="runOnboardingPipeline()" /> geschlossen</label>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:0.88rem;">
+              <span style="width:84px;">Sonntag</span>
+              <input type="time" id="bh-sun-from" value="09:00" style="width:110px;" oninput="runOnboardingPipeline()" />
+              <span>bis</span>
+              <input type="time" id="bh-sun-to" value="13:00" style="width:110px;" oninput="runOnboardingPipeline()" />
+              <label style="display:flex;align-items:center;gap:4px;"><input type="checkbox" id="bh-sun-closed" checked onchange="runOnboardingPipeline()" /> geschlossen</label>
+            </div>
+          <label class="check-row" style="margin-top:10px;">
+            <input type="checkbox" id="chk-holidays" checked onchange="runOnboardingPipeline()" />
+            <span>Gesetzliche Feiertage automatisch sperren – Bundesland:
+              <select id="ob-region" onchange="runOnboardingPipeline()" style="margin-left:6px;">
+                <option value="BW">Baden-Württemberg</option>
+                <option value="BY">Bayern</option>
+                <option value="BE">Berlin</option>
+                <option value="BB">Brandenburg</option>
+                <option value="HB">Bremen</option>
+                <option value="HH">Hamburg</option>
+                <option value="HE">Hessen</option>
+                <option value="MV">Mecklenburg-Vorpommern</option>
+                <option value="NI">Niedersachsen</option>
+                <option value="NW">Nordrhein-Westfalen</option>
+                <option value="RP">Rheinland-Pfalz</option>
+                <option value="SL">Saarland</option>
+                <option value="SN">Sachsen</option>
+                <option value="ST">Sachsen-Anhalt</option>
+                <option value="SH">Schleswig-Holstein</option>
+                <option value="TH" selected>Thüringen</option>
+              </select>
+            </span>
+          </label>
+          <div class="form-group" style="margin-top:10px;">
+            <label for="ob-closures">Schließtage & Betriebsferien (optional, eine Zeile je Eintrag)</label>
+            <textarea id="ob-closures" rows="3" placeholder="2026-12-24 bis 2026-12-26 Weihnachten&#10;2027-08-02 bis 2027-08-13 Betriebsferien&#10;2026-11-20 Inventur" oninput="runOnboardingPipeline()" style="width:100%;background:var(--bg-elevated);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:8px;font-family:inherit;"></textarea>
+            <span style="font-size:0.8rem;color:var(--text-muted);">Format: JJJJ-MM-TT oder JJJJ-MM-TT bis JJJJ-MM-TT, danach optional eine Bezeichnung.</span>
+          </div>
+          <div id="hours-note" style="font-size:0.82rem;color:var(--text-muted);"></div>
+        </div>
+
         <!-- STEP 3 -->
         <div class="card">
-          <div class="step-title"><span class="step-num">3</span> Fail-Closed Sicherheits- & Datenschutzfreigaben</div>
+          <div class="step-title"><span class="step-num">4</span> Fail-Closed Sicherheits- & Datenschutzfreigaben</div>
           <label class="check-row">
             <input type="checkbox" id="chk-disclosure" checked onchange="runOnboardingPipeline()" />
             <div>
@@ -344,7 +444,7 @@
         <div class="card">
           <div class="step-title" style="justify-content: space-between;">
             <div style="display: flex; align-items: center; gap: 10px;">
-              <span class="step-num">4</span> Fail-Closed Gatekeeper & Live-Status
+              <span class="step-num">5</span> Fail-Closed-Prüfung & Live-Status
             </div>
             <span id="status-pill" class="badge badge-ok">ACTIVE</span>
           </div>
@@ -356,12 +456,13 @@
 
         <div class="card">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
-            <h4 style="font-size: 0.95rem;">Generierte Mandanten-Konfiguration (JSON)</h4>
+            <h4 style="font-size: 0.95rem;"><span class="step-num">6</span> Konfiguration & Protokoll herunterladen</h4>
             <div style="display: flex; gap: 8px;">
               <button type="button" class="btn btn-primary" onclick="downloadJson()">Konfig (.json) speichern</button>
               <button type="button" class="btn btn-secondary" onclick="downloadProtocol()">Onboarding-Protokoll (.md)</button>
             </div>
           </div>
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:8px;">Die Datei enthält alle Einstellungen (ohne Passwörter oder Zugangsdaten). Damit ist Ihr Self-Service-Onboarding abgeschlossen; die Kalenderverbindung (Google oder Outlook) erfolgt mit Ihrem eigenen Konto.</p>
           <div class="code-box" id="json-preview"></div>
         </div>
       </div>
@@ -563,7 +664,27 @@
       const tpl = TEMPLATES[currentBranch];
       const name = document.getElementById("ob-name").value.trim();
       const handoff = document.getElementById("ob-handoff").value.trim() || "Zentrale";
-      const hours = document.getElementById("ob-hours").value.trim();
+      const DAYK = ["mon","tue","wed","thu","fri","sat","sun"], DAYL = ["Mo","Di","Mi","Do","Fr","Sa","So"];
+      const businessHours = {}; const hourErrs = [];
+      DAYK.forEach(k => {
+        const closed = document.getElementById(`bh-${k}-closed`).checked;
+        const f = document.getElementById(`bh-${k}-from`).value, t = document.getElementById(`bh-${k}-to`).value;
+        if (closed) { businessHours[k] = []; return; }
+        if (!f || !t || f >= t) hourErrs.push(k);
+        businessHours[k] = [[f, t]];
+      });
+      const hours = DAYK.map((k,i) => `${DAYL[i]} ${businessHours[k].length ? businessHours[k][0].join("–") : "geschlossen"}`).join(", ");
+      const applyHolidays = document.getElementById("chk-holidays").checked;
+      const region = document.getElementById("ob-region").value;
+      const closures = []; const closureErrs = [];
+      document.getElementById("ob-closures").value.split("\n").map(l => l.trim()).filter(Boolean).forEach(line => {
+        const m = line.match(/^(\d{4}-\d{2}-\d{2})(?:\s*(?:bis|-|–)\s*(\d{4}-\d{2}-\d{2}))?\s*(.*)$/);
+        if (!m || (m[2] && m[2] < m[1]) || isNaN(Date.parse(m[1]))) { closureErrs.push(line); return; }
+        closures.push({ from: m[1], to: m[2] || m[1], label: m[3] || "Geschlossen" });
+      });
+      document.getElementById("hours-note").textContent = closures.length ? `${closures.length} Schließzeitraum/-räume erfasst.` : "";
+      const hasBooking = TEMPLATES[currentBranch].tools.includes("schedule_appointment");
+      document.getElementById("card-hours").style.opacity = hasBooking ? "1" : "0.6";
       const pkgKey = document.getElementById("ob-pkg").value;
       const pkg = PKG_PRICES[pkgKey];
       const channel = document.getElementById("ob-channel").value;
@@ -594,6 +715,8 @@
       if (calProvider === "outlook_calendar" && calId && calId.toLowerCase() !== outlookMailbox.toLowerCase()) {
         errors.push("CALENDAR_ID_UNSUPPORTED_FOR_OUTLOOK");
       }
+      if (hourErrs.length) errors.push("BUSINESS_HOURS_CONFIG_INVALID");
+      if (closureErrs.length) errors.push("CLOSURE_CONFIG_INVALID");
       if (tpl.sensitivity === "elevated" && !privDoc) {
         errors.push("MISSING_PRIVACY_REVIEW_FOR_ELEVATED");
       }
@@ -653,6 +776,12 @@
         enabled_tools: enabledTools,
         handoff_contact: handoff,
         opening_hours: hours,
+        business_hours: businessHours,
+        apply_public_holidays: applyHolidays,
+        ...(applyHolidays ? { holiday_region: region } : {}),
+        closed_dates: [],
+        company_closures: closures,
+        timezone: "Europe/Berlin",
         calendar_provider: calProvider,
         ...(calId ? { calendar_id: calId } : {}),
         ...(calProvider === "outlook_calendar" && outlookMailbox ? { outlook_own_mailbox: outlookMailbox } : {}),
@@ -690,6 +819,8 @@
 - **Branchenvorlage:** \`${r.template}\` (Sensitivity: \`${r.data_sensitivity}\`)
 - **Paket:** ${r.package.name} (${r.package.price_eur_net_monthly} € netto/Monat zzgl. 19 % MwSt.)
 - **Kanal:** \`${r.channel}\`
+- **Öffnungszeiten:** ${r.opening_hours}
+- **Feiertage:** ${r.apply_public_holidays ? "gesetzliche Feiertage " + r.holiday_region + " gesperrt" : "nicht automatisch"} · **Schließzeiten:** ${r.company_closures.length ? r.company_closures.map(c => c.from + (c.to !== c.from ? " bis " + c.to : "") + " " + c.label).join("; ") : "keine"}
 - **Kalender:** \`${r.calendar_provider}\` ${r.calendar_provider === "google_calendar" ? "(empfohlen)" : "(Alternative – Termine über Anbindung nicht löschbar, ggf. selbst aufräumen)"} · Zielkalender: ${r.calendar_id || "Hauptkalender des verbundenen Kontos"}
 - **Fail-Closed-Validierung:** \`valid=${r.valid}\` -> Effektiver Status: \`${r.effective_status}\`
 - **Freigegebene Tools:** ${r.enabled_tools.length ? r.enabled_tools.join(", ") : "[] (gesperrt)"}
@@ -708,5 +839,6 @@
     // Init
     setBranch("trades");
   </script>
+  <script src="chatbot.js"></script>
 </body>
 </html>

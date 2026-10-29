@@ -365,8 +365,9 @@
         <a href="#pakete">Pakete & Preise</a>
         <a href="#kalender">Kalender</a>
         <a href="#rechner">Minutenrechner</a>
-        <a href="onboarding.html">Live-Onboarding</a>
-        <a href="#angebot" class="btn btn-primary">Angebot anfragen</a>
+        <a href="anleitung.html">Klickanleitung</a>
+        <a href="#angebot">Angebot (optional)</a>
+        <a href="onboarding.html" class="btn btn-primary">Jetzt selbst einrichten</a>
       </nav>
     </div>
   </header>
@@ -383,8 +384,9 @@
           und sofortiger Übergabe an Ihr Team bei kritischen Anliegen.
         </p>
         <div class="hero-actions">
-          <a href="#angebot" class="btn btn-primary">Jetzt Angebot anfragen</a>
-          <a href="onboarding.html" class="btn btn-secondary">Automatisiertes Branchen-Onboarding starten</a>
+          <a href="onboarding.html" class="btn btn-primary">Jetzt selbst einrichten (Self-Service)</a>
+          <a href="anleitung.html" class="btn btn-secondary">Klickanleitung ansehen</a>
+          <a href="#" onclick="window.vvaChatOpen && window.vvaChatOpen(); return false;" class="btn btn-secondary">💬 Frage an den Hilfe-Bot</a>
         </div>
         <div class="trust-strip">
           <div class="trust-item">
@@ -520,7 +522,8 @@
                 <li><span>Data Sensitivity</span><strong>Standard</strong></li>
               </ul>
             </div>
-            <a href="#angebot" onclick="prefillOffer('starter', 'butcher', 500)" class="btn btn-secondary">Angebot anfragen</a>
+            <a href="onboarding.html" class="btn btn-secondary">Selbst einrichten</a>
+            <a href="#angebot" onclick="prefillOffer('starter', 'butcher', 500)" style="display:block;text-align:center;margin-top:8px;font-size:0.85rem;color:var(--text-muted);">Optional: schriftliches Angebot</a>
           </div>
 
           <!-- PROFESSIONAL -->
@@ -539,7 +542,8 @@
                 <li><span>Data Sensitivity</span><strong>Standard</strong></li>
               </ul>
             </div>
-            <a href="#angebot" onclick="prefillOffer('professional', 'trades', 1500)" class="btn btn-primary">Angebot anfragen</a>
+            <a href="onboarding.html" class="btn btn-primary">Selbst einrichten</a>
+            <a href="#angebot" onclick="prefillOffer('professional', 'trades', 1500)" style="display:block;text-align:center;margin-top:8px;font-size:0.85rem;color:var(--text-muted);">Optional: schriftliches Angebot</a>
           </div>
 
           <!-- KANZLEI -->
@@ -557,7 +561,8 @@
                 <li><span>Privacy-Review</span><strong>Elevated Privacy-Review inkl.</strong></li>
               </ul>
             </div>
-            <a href="#angebot" onclick="prefillOffer('kanzlei', 'law_office', 1200)" class="btn btn-secondary">Angebot anfragen</a>
+            <a href="onboarding.html" class="btn btn-secondary">Selbst einrichten</a>
+            <a href="#angebot" onclick="prefillOffer('kanzlei', 'law_office', 1200)" style="display:block;text-align:center;margin-top:8px;font-size:0.85rem;color:var(--text-muted);">Optional: schriftliches Angebot</a>
           </div>
         </div>
 
@@ -641,8 +646,8 @@
     <section id="angebot">
       <div class="container">
         <div class="section-header">
-          <h2>Unverbindliches Angebot anfragen</h2>
-          <p>Wählen Sie Ihre Branche und Ihr Wunschpaket. Sie erhalten direkt eine strukturierte Angebotszusammenfassung für Ihre Anfrage bei Dominik Steiner.</p>
+          <h2>Optional: Schriftliches Angebot</h2>
+          <p>Nicht nötig für den Start – Sie können alles im <a href="onboarding.html" style="color: var(--accent);">Self-Service-Onboarding</a> selbst einrichten. Wer ein schriftliches Angebot von Dominik Steiner möchte, erstellt hier die Zusammenfassung.</p>
         </div>
 
         <div class="form-grid">
@@ -1090,5 +1095,6 @@ SICHERHEITSRAHMEN:
     syncCalc(900);
     updateOfferPreview();
   </script>
+  <script src="chatbot.js"></script>
 </body>
 </html>
