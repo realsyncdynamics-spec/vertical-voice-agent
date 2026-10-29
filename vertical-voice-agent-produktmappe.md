@@ -80,3 +80,10 @@ Alle 8 Branchenprofile sind unter `/cursor/stores/store-8d5bca21-00e8-4084-a05f-
 - `dominik-steiner-law_office` (Rechtsanwaltskanzlei · Kanzlei · Elevated Privacy-Review OK · 3/3 Smoke-Tests bestanden)
 - `dominik-steiner-medical_practice` (Arzt- & Zahnarztpraxis · Kanzlei · Elevated Privacy-Review OK · 3/3 Smoke-Tests bestanden)
 - `dominik-steiner-tax_advisory` (Steuerberatung · Kanzlei · Elevated Privacy-Review OK · 3/3 Smoke-Tests bestanden)
+
+## 4. Kalenderanbindung – Ihre Wahl
+Bei Branchen mit Terminbuchung wählen Sie beim Onboarding Ihren Kalender:
+- **Google Kalender (empfohlen, Standard):** Hauptkalender für Terminbuchungen. Freie Zeiten werden vor jeder Buchung zweimal geprüft; Termine lassen sich über die Anbindung auch wieder entfernen.
+- **Outlook Kalender (Alternative):** wird unterstützt. Bei der Outlook-Anbindung kann es zu Verbindungsproblemen kommen. Termine können über die Anbindung derzeit nicht gelöscht werden – abgesagte oder fehlerhafte Termine müssen Sie ggf. selbst in Outlook entfernen. Gebucht wird immer im Kalender des verbundenen Outlook-Kontos.
+- Ohne Angabe gilt Google Kalender. Optional kann ein bestimmter Zielkalender (E-Mail-Adresse) hinterlegt werden; ohne Angabe wird der Hauptkalender des verbundenen Kontos genutzt.
+- Für beide gilt: Buchung nur innerhalb der Öffnungszeiten, nicht an Feiertagen oder in Betriebsferien und nur bei freiem Zeitfenster.

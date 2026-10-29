@@ -277,6 +277,22 @@
               <option value="telephony" selected>Telefonie + Web (telephony)</option>
             </select>
           </div>
+          <div class="form-group">
+            <label for="ob-calendar">Kalender für Terminbuchungen</label>
+            <select id="ob-calendar" onchange="runOnboardingPipeline()">
+              <option value="google_calendar" selected>Google Kalender (empfohlen, Hauptkalender)</option>
+              <option value="outlook_calendar">Outlook Kalender (Alternative)</option>
+            </select>
+            <div id="ob-calendar-note" style="color: var(--text-muted); font-size: 0.82rem; margin-top: 6px;"></div>
+          </div>
+          <div class="form-group">
+            <label for="ob-calendar-id">Zielkalender (optional, E-Mail-Adresse)</label>
+            <input type="email" id="ob-calendar-id" placeholder="leer = Hauptkalender des verbundenen Kontos" oninput="runOnboardingPipeline()" />
+          </div>
+          <div class="form-group" id="row-outlook-mailbox" style="display:none;">
+            <label for="ob-outlook-mailbox">Outlook-Postfach des verbundenen Kontos (nur Outlook, optional)</label>
+            <input type="email" id="ob-outlook-mailbox" placeholder="z. B. termine@ihr-betrieb.de" oninput="runOnboardingPipeline()" />
+          </div>
         </div>
 
         <!-- STEP 3 -->
@@ -316,7 +332,7 @@
               <div><strong>Explizite Aufzeichnungs-Freigabe dokumentiert</strong></div>
             </label>
             <div class="form-group">
-              <label for="ob-retention">Aufbewahrungsfrist (Retention in Tagen, > 0)</label>
+              <label for="ob-retention">Aufbewahrungsfrist (Retention in Tagen, &gt; 0)</label>
               <input type="number" id="ob-retention" value="14" min="1" oninput="runOnboardingPipeline()" />
             </div>
           </div>
@@ -551,6 +567,13 @@
       const pkgKey = document.getElementById("ob-pkg").value;
       const pkg = PKG_PRICES[pkgKey];
       const channel = document.getElementById("ob-channel").value;
+      const calProvider = document.getElementById("ob-calendar").value || "google_calendar";
+      const calId = document.getElementById("ob-calendar-id").value.trim();
+      const outlookMailbox = document.getElementById("ob-outlook-mailbox").value.trim();
+      document.getElementById("row-outlook-mailbox").style.display = calProvider === "outlook_calendar" ? "" : "none";
+      document.getElementById("ob-calendar-note").textContent = calProvider === "outlook_calendar"
+        ? "Hinweis: Bei Outlook kann es zu Verbindungsproblemen kommen. Termine lassen sich über die Anbindung derzeit nicht löschen – abgesagte Termine müssen Sie ggf. selbst in Outlook entfernen. Gebucht wird immer im Kalender des verbundenen Outlook-Kontos."
+        : "Empfohlen: Freie Zeiten werden vor jeder Buchung zweimal geprüft; Termine lassen sich über die Anbindung auch wieder entfernen.";
 
       const aiDisc = document.getElementById("chk-disclosure").checked;
       const telApp = document.getElementById("chk-telephony").checked;
@@ -566,6 +589,10 @@
       if (channel === "telephony" && pkgKey === "starter") errors.push("STARTER_PACKAGE_WEB_ONLY");
       if (recEn && (!recApp || !Number.isInteger(retDays) || retDays <= 0)) {
         errors.push("RECORDING_WITHOUT_APPROVAL_OR_RETENTION");
+      }
+      if (calId && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(calId)) errors.push("CALENDAR_ID_INVALID");
+      if (calProvider === "outlook_calendar" && calId && calId.toLowerCase() !== outlookMailbox.toLowerCase()) {
+        errors.push("CALENDAR_ID_UNSUPPORTED_FOR_OUTLOOK");
       }
       if (tpl.sensitivity === "elevated" && !privDoc) {
         errors.push("MISSING_PRIVACY_REVIEW_FOR_ELEVATED");
@@ -626,6 +653,9 @@
         enabled_tools: enabledTools,
         handoff_contact: handoff,
         opening_hours: hours,
+        calendar_provider: calProvider,
+        ...(calId ? { calendar_id: calId } : {}),
+        ...(calProvider === "outlook_calendar" && outlookMailbox ? { outlook_own_mailbox: outlookMailbox } : {}),
         greeting: greeting,
         handoff_triggers: tpl.triggers,
         forbidden_claims: tpl.forbidden,
@@ -660,6 +690,7 @@
 - **Branchenvorlage:** \`${r.template}\` (Sensitivity: \`${r.data_sensitivity}\`)
 - **Paket:** ${r.package.name} (${r.package.price_eur_net_monthly} € netto/Monat zzgl. 19 % MwSt.)
 - **Kanal:** \`${r.channel}\`
+- **Kalender:** \`${r.calendar_provider}\` ${r.calendar_provider === "google_calendar" ? "(empfohlen)" : "(Alternative – Termine über Anbindung nicht löschbar, ggf. selbst aufräumen)"} · Zielkalender: ${r.calendar_id || "Hauptkalender des verbundenen Kontos"}
 - **Fail-Closed-Validierung:** \`valid=${r.valid}\` -> Effektiver Status: \`${r.effective_status}\`
 - **Freigegebene Tools:** ${r.enabled_tools.length ? r.enabled_tools.join(", ") : "[] (gesperrt)"}
 - **Validierungsfehler:** ${r.validation_errors.length ? r.validation_errors.join(", ") : "Keine"}
