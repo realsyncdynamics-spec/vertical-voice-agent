@@ -48,3 +48,6 @@ flowchart LR
 | Werkzeuge | nur `terminwunsch_aufnehmen` aufgerufen (korrekte Felder), keine fremden Werkzeuge |
 | Terminbestätigung | Modell: „…eine Bestätigung kann ich nicht geben. Wir melden uns zur Bestätigung.“ |
 | `lead_erfassen` | im Smoke nicht aufgerufen – Modell fragte wiederholt nach der (optionalen) Adresse. Prompt nachschärfen. |
+
+## Nachtest 30.10.2026 (Prompt nachgeschärft, Test-Worker neu deployt)
+Adresse/Dringlichkeit bei `lead_erfassen` ausdrücklich optional (System-Prompt, Werkzeugbeschreibung, Feldbeschreibung). Live-Smoke 9/9: `lead_erfassen` aufgerufen mit Name, Rückrufnummer, Anliegen – ohne Adresse; `terminwunsch_aufnehmen` ohne feste Zusage („Wir melden uns zur Bestätigung.“). Telefonie weiterhin aus.

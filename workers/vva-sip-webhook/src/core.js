@@ -91,7 +91,7 @@ export function sessionConfig(t, tpl) {
   const voice = VOICES.includes(String(t.voice_id || "").toLowerCase()) ? t.voice_id.toLowerCase() : "eve";
   const tools = enabledTools(t, tpl);
   const S = {
-    lead_erfassen: { description: "Anliegen/Rückrufbitte erfassen, nachdem der Anrufer die Zusammenfassung bestätigt hat.", parameters: { type: "object", properties: { name: { type: "string" }, rueckrufnummer: { type: "string" }, anliegen: { type: "string" }, adresse: { type: "string" }, dringlichkeit: { type: "string", enum: ["normal", "hoch", "notfall"] } }, required: ["name", "rueckrufnummer", "anliegen"] } },
+    lead_erfassen: { description: "Anliegen/Rückrufbitte erfassen. Pflicht nur: name, rueckrufnummer, anliegen. adresse und dringlichkeit sind optional – ohne sie aufrufen, wenn der Anrufer sie nicht nennt.", parameters: { type: "object", properties: { name: { type: "string" }, rueckrufnummer: { type: "string" }, anliegen: { type: "string" }, adresse: { type: "string", description: "optional, nie erzwingen" }, dringlichkeit: { type: "string", enum: ["normal", "hoch", "notfall"] } }, required: ["name", "rueckrufnummer", "anliegen"] } },
     terminwunsch_aufnehmen: { description: "Terminwunsch notieren. KEINE Terminbestätigung – immer sagen: 'Wir melden uns zur Bestätigung.'", parameters: { type: "object", properties: { name: { type: "string" }, rueckrufnummer: { type: "string" }, wunschzeitraum: { type: "string" }, anliegen: { type: "string" } }, required: ["name", "rueckrufnummer", "wunschzeitraum"] } },
     an_mensch_uebergeben: { description: "An einen Menschen übergeben (Notfall/Trigger, Beschwerde, Wunsch nach Mitarbeiter, Unsicherheit).", parameters: { type: "object", properties: { grund: { type: "string" }, zusammenfassung: { type: "string" } }, required: ["grund", "zusammenfassung"] } },
   };
@@ -99,7 +99,8 @@ export function sessionConfig(t, tpl) {
   if (!/\bKI\b|KI-/.test(greeting)) greeting = "Sie sprechen mit einem KI-Assistenten. " + greeting;
   const instructions = [
     `Du bist der KI-Telefonassistent von ${t.tenant_name || t.agent_id} (${tpl.label}). Deutsch, höchstens zwei Sätze pro Antwort. Der KI-Hinweis wurde bereits gesprochen.`,
-    "Fehlende Angaben einzeln erfragen, Zusammenfassung vorlesen, Bestätigung abwarten, dann eine Aktion ausführen.",
+    "Fehlende PFLICHTangaben einzeln erfragen, Zusammenfassung vorlesen, Bestätigung abwarten, dann eine Aktion ausführen.",
+    "lead_erfassen braucht nur Name, Rückrufnummer und Anliegen. Adresse und Dringlichkeit sind freiwillig: höchstens einmal anbieten, nie darauf bestehen, nie deswegen warten. Sobald die drei Pflichtangaben bestätigt sind, sofort lead_erfassen aufrufen.",
     "Termine NIE bestätigen. Nur als Wunsch aufnehmen und sagen: 'Wir melden uns zur Bestätigung.'",
     "Sofort an_mensch_uebergeben bei: " + (tpl.handoff_triggers || []).join(", ") + ". Bei Lebensgefahr auf 112 hinweisen.",
     "Niemals zusagen: " + (tpl.forbidden_claims || []).join("; ") + ". Keine Rechts-, Medizin- oder Steuerberatung.",
