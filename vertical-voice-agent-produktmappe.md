@@ -189,8 +189,8 @@ Die Hörbeispiele auf der Website sind mit Grok TTS erzeugt (castor, ursa, atlas
 ## Telefonassistent: mehr als eine Ansage
 
 - **Mehrstufiger Dialog:** Begrüßung mit KI-Hinweis → Anliegen erkennen → fehlende Angaben einzeln nachfragen (Name, Rückrufnummer, Wunschtermin, Anliegen) → Zusammenfassung vorlesen und bestätigen lassen → erst dann Aktion.
-- **Werkzeuge (nur laut Vorlage):** `lookup_kb` (Öffnungszeiten, Betriebsinfos), `create_ticket` (Rückrufbitte), `schedule_appointment` (wo freigegeben), `handoff_human`.
-- **Termine:** Prüfung von Öffnungszeiten, Feiertagen, Betriebsferien und Kalender (Google oder Outlook, zweifach) vor jeder Buchung. Ist kein Termin möglich, bietet der Assistent eine andere Zeit oder eine Rückrufbitte an.
+- **Drei Aktionen am Telefon (nur laut Vorlage, serverseitig geprüft):** `lead_erfassen` (Name, Rückrufnummer, Anliegen, optional Adresse und Dringlichkeit), `terminwunsch_aufnehmen` (nur Wunsch – „Wir melden uns zur Bestätigung.“), `an_mensch_uebergeben` (Grund und Zusammenfassung; scheitert die Weiterleitung, entsteht eine Rückrufbitte). Jede Aktion wird pro Anruf protokolliert.
+- **Termine:** Am Telefon wird kein Termin fest gebucht. Im Web-Assistenten: Prüfung von Öffnungszeiten, Feiertagen, Betriebsferien und Kalender (Google oder Outlook, zweifach) vor jeder Buchung. Ist kein Termin möglich, bietet der Assistent eine andere Zeit oder eine Rückrufbitte an.
 - **Sofortige Übergabe:** branchenspezifische Trigger (z. B. Gasgeruch, Unfall, Fristsache, Atemnot), verbotene Zusagen oder Wunsch nach einem Menschen.
 - **Grenzen:** keine Rechts-, Medizin- oder Steuerberatung, keine Fristprüfung, keine Allergie- oder Spurenfreiheitsgarantie. Elevated-Branchen erst nach dokumentierter Datenschutzprüfung.
 - **Fail-Closed:** nicht freigeschalteter Agent → nur Hinweisansage, keine Werkzeuge.

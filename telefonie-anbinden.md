@@ -23,6 +23,7 @@ Ihr Telefonassistent läuft auf **Grok Voice 3.0** (xAI Speech to Speech). Telef
 - **Bevorzugt: Telnyx.** Die Anbindung an Grok Voice ist von xAI dokumentiert. Deutsche Ortsrufnummern sind verfügbar, Verbindungsdaten und Aufzeichnungen können in Deutschland (Frankfurt) gespeichert werden. Alternative: Twilio.
 - **Ihre Nummer behalten Sie.** Bei Ihrem bisherigen Anbieter (z. B. Telekom, sipgate, easybell) richten Sie eine Rufumleitung ein – sofort, bei besetzt oder nach einigen Sekunden – auf die Nummer Ihres Assistenten. Klassische deutsche SIP-Trunks wie sipgate oder easybell leiten Anrufe nicht direkt an Grok Voice weiter; dafür ist die Rufumleitung der einfachste Weg.
 - **Ehrlicher Datenschutzhinweis:** Die Sprachverarbeitung erfolgt durch xAI (Grok Voice). Dabei werden Gesprächsinhalte auch außerhalb der EU verarbeitet. Wir sagen deshalb **keine** reine EU-Verarbeitung zu; Details stehen in Ihrem Auftragsverarbeitungsvertrag und den Datenschutzhinweisen.
+- **Nachvollziehbar und begrenzt:** Pro Anruf wird ein Aktionsprotokoll geführt (Beginn, Ende, Dauer, Aktionen, Übergabe, Fehler – kein Audio; Mitschrift nur, wenn Sie sie aktivieren; Aufbewahrungsfrist einstellbar). Höchstdauer pro Anruf (Standard 10 Minuten), Minutenbudget pro Monat und maximale gleichzeitige Anrufe sind fest eingestellt.
 - **Kein Testanschluss:** Es gibt auf dieser Website keine Live-Rufnummer. Ihr Anschluss wird erst nach Ihrer Telefonie-Freigabe aktiv.
 
 ## So wird angebunden (technischer Ablauf)
@@ -31,7 +32,7 @@ Ihr Telefonassistent läuft auf **Grok Voice 3.0** (xAI Speech to Speech). Telef
 2. **Trunk beim Anbieter einrichten:** Ziel `sip:{Ihre-Nummer}@sip.voice.x.ai;transport=tls` (alternativ TCP/UDP Port 5060).
 3. **Eingehender Anruf:** xAI sendet ein signiertes Ereignis `realtime.call.incoming`; wir prüfen die Signatur und lesen die `call_id`.
 4. **Assistent übernimmt:** Verbindung `wss://api.x.ai/v1/realtime?call_id=…`, Konfiguration Ihres Mandanten (Stimme, Regeln, nur freigegebene Werkzeuge), Begrüßung mit KI-Hinweis wörtlich.
-5. **Im Gespräch:** Anliegen klären, Zusammenfassung bestätigen lassen, dann Rückrufbitte, Auskunft oder Termin (nach Öffnungszeiten-, Feiertags- und Kalenderprüfung). Kritische Stichworte führen – unabhängig vom Sprachmodell – zu einer festen Übergabe-Ansage und Weiterleitung an Ihre Übergabe-Nummer.
+5. **Im Gespräch:** Anliegen klären, Zusammenfassung bestätigen lassen, dann genau eine von drei Aktionen: **Anliegen erfassen**, **Terminwunsch aufnehmen** (am Telefon wird kein Termin fest zugesagt – „Wir melden uns zur Bestätigung.“) oder **an einen Menschen übergeben**. Klappt die Weiterleitung nicht, legt der Assistent eine Rückrufbitte an und sagt das dem Anrufer. Kritische Stichworte führen – unabhängig vom Sprachmodell – zu einer festen Übergabe-Ansage und Weiterleitung an Ihre Übergabe-Nummer.
 
 ## Was der Assistent am Telefon kann
 

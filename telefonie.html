@@ -78,6 +78,7 @@ hr+h2{border-top:0;padding-top:0}hr{border:0;border-top:1px solid #DFE4ED;margin
 <li><strong>Bevorzugt: Telnyx.</strong> Die Anbindung an Grok Voice ist von xAI dokumentiert. Deutsche Ortsrufnummern sind verfügbar, Verbindungsdaten und Aufzeichnungen können in Deutschland (Frankfurt) gespeichert werden. Alternative: Twilio.</li>
 <li><strong>Ihre Nummer behalten Sie.</strong> Bei Ihrem bisherigen Anbieter (z. B. Telekom, sipgate, easybell) richten Sie eine Rufumleitung ein – sofort, bei besetzt oder nach einigen Sekunden – auf die Nummer Ihres Assistenten. Klassische deutsche SIP-Trunks wie sipgate oder easybell leiten Anrufe nicht direkt an Grok Voice weiter; dafür ist die Rufumleitung der einfachste Weg.</li>
 <li><strong>Ehrlicher Datenschutzhinweis:</strong> Die Sprachverarbeitung erfolgt durch xAI (Grok Voice). Dabei werden Gesprächsinhalte auch außerhalb der EU verarbeitet. Wir sagen deshalb <strong>keine</strong> reine EU-Verarbeitung zu; Details stehen in Ihrem Auftragsverarbeitungsvertrag und den Datenschutzhinweisen.</li>
+<li><strong>Nachvollziehbar und begrenzt:</strong> Pro Anruf wird ein Aktionsprotokoll geführt (Beginn, Ende, Dauer, Aktionen, Übergabe, Fehler – kein Audio; Mitschrift nur, wenn Sie sie aktivieren; Aufbewahrungsfrist einstellbar). Höchstdauer pro Anruf (Standard 10 Minuten), Minutenbudget pro Monat und maximale gleichzeitige Anrufe sind fest eingestellt.</li>
 <li><strong>Kein Testanschluss:</strong> Es gibt auf dieser Website keine Live-Rufnummer. Ihr Anschluss wird erst nach Ihrer Telefonie-Freigabe aktiv.</li>
 </ul>
 <h2>So wird angebunden (technischer Ablauf)</h2>
@@ -86,7 +87,7 @@ hr+h2{border-top:0;padding-top:0}hr{border:0;border-top:1px solid #DFE4ED;margin
 <li><strong>Trunk beim Anbieter einrichten:</strong> Ziel <code>sip:{Ihre-Nummer}@sip.voice.x.ai;transport=tls</code> (alternativ TCP/UDP Port 5060).</li>
 <li><strong>Eingehender Anruf:</strong> xAI sendet ein signiertes Ereignis <code>realtime.call.incoming</code>; wir prüfen die Signatur und lesen die <code>call_id</code>.</li>
 <li><strong>Assistent übernimmt:</strong> Verbindung <code>wss://api.x.ai/v1/realtime?call_id=…</code>, Konfiguration Ihres Mandanten (Stimme, Regeln, nur freigegebene Werkzeuge), Begrüßung mit KI-Hinweis wörtlich.</li>
-<li><strong>Im Gespräch:</strong> Anliegen klären, Zusammenfassung bestätigen lassen, dann Rückrufbitte, Auskunft oder Termin (nach Öffnungszeiten-, Feiertags- und Kalenderprüfung). Kritische Stichworte führen – unabhängig vom Sprachmodell – zu einer festen Übergabe-Ansage und Weiterleitung an Ihre Übergabe-Nummer.</li>
+<li><strong>Im Gespräch:</strong> Anliegen klären, Zusammenfassung bestätigen lassen, dann genau eine von drei Aktionen: <strong>Anliegen erfassen</strong>, <strong>Terminwunsch aufnehmen</strong> (am Telefon wird kein Termin fest zugesagt – „Wir melden uns zur Bestätigung.“) oder <strong>an einen Menschen übergeben</strong>. Klappt die Weiterleitung nicht, legt der Assistent eine Rückrufbitte an und sagt das dem Anrufer. Kritische Stichworte führen – unabhängig vom Sprachmodell – zu einer festen Übergabe-Ansage und Weiterleitung an Ihre Übergabe-Nummer.</li>
 </ol>
 <h2>Was der Assistent am Telefon kann</h2>
 <ul>
