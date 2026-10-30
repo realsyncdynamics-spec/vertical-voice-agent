@@ -34,5 +34,17 @@ flowchart LR
 |---|---|---|
 | Worker | `vva-sip-webhook-test` | noch nicht angelegt |
 | D1 | `vva_telephony_test` | noch nicht angelegt |
-| Secrets | eigener xAI-Key + Webhook-Secret (noch nicht gesetzt) | eigener Prod-Key, getrennt |
+| Secrets | `XAI_API_KEY`, `XAI_WEBHOOK_SECRET` gesetzt (30.10.2026) | eigener Prod-Key, getrennt |
 | Telefonie | aus | aus |
+
+## Live-Smoke 30.10.2026 (ohne PSTN)
+| Prüfung | Ergebnis |
+|---|---|
+| `/health` Test-Worker | secrets_configured=true, telephony_enabled=false |
+| Signierter `realtime.call.incoming` | 200, `accepted:false`, `TELEPHONY_DISABLED` (kein Session-Beitritt) |
+| Replay gleicher webhook-id | `duplicate` |
+| Falsche Signatur | 401 |
+| xAI-WebSocket ohne `call_id` mit unserer Session-Konfiguration | akzeptiert, keine Fehler |
+| Werkzeuge | nur `terminwunsch_aufnehmen` aufgerufen (korrekte Felder), keine fremden Werkzeuge |
+| Terminbestätigung | Modell: „…eine Bestätigung kann ich nicht geben. Wir melden uns zur Bestätigung.“ |
+| `lead_erfassen` | im Smoke nicht aufgerufen – Modell fragte wiederholt nach der (optionalen) Adresse. Prompt nachschärfen. |
