@@ -10,13 +10,20 @@ Ihr Telefonassistent läuft auf **Grok Voice 3.0** (xAI Speech to Speech). Telef
 |---|---|---|
 | Paket Professional oder Kanzlei / Praxis | Sie | Starter ist Web-only |
 | Eigene Rufnummer (Festnetz/Mobil, E.164, z. B. +49 3679 …) | Sie | Ihre bestehende Nummer oder eine neue Nummer Ihres Anbieters |
-| SIP-Trunk bei einem Telefonie-Anbieter | Sie / wir gemeinsam | z. B. Twilio Elastic SIP Trunking, Telnyx, Bandwidth oder ein deutscher SIP-Trunk-Anbieter, der SIP über TLS/TCP unterstützt |
+| Rufnummer beim Telefonie-Anbieter | Sie / wir gemeinsam | bevorzugt Telnyx (deutsche Ortsrufnummer), alternativ Twilio |
 | Weiterleitung auf den Assistenten | Sie | Rufumleitung (sofort, bei besetzt oder nach X Sekunden) von Ihrer Nummer auf die Trunk-Nummer |
 | Übergabe-Nummer (E.164) | Sie | Dorthin verbindet der Assistent bei Notfällen und auf Wunsch |
 | Telefonie-Freigabe (`telephony_approved`) | Sie, ausdrücklich | Im Onboarding, Schritt 4 |
 | KI-Offenlegung aktiv | Pflicht | Jede Begrüßung nennt den KI-Assistenten |
 | Datenschutzprüfung dokumentiert | Pflicht für Kanzlei, Praxis, Steuerberatung | Ohne sie bleiben alle Werkzeuge gesperrt |
 | Aufzeichnung | standardmäßig aus | Nur mit ausdrücklicher Freigabe und Aufbewahrungsfrist |
+
+## Empfohlener Anbieter und Ihre bestehende Rufnummer
+
+- **Bevorzugt: Telnyx.** Die Anbindung an Grok Voice ist von xAI dokumentiert. Deutsche Ortsrufnummern sind verfügbar, Verbindungsdaten und Aufzeichnungen können in Deutschland (Frankfurt) gespeichert werden. Alternative: Twilio.
+- **Ihre Nummer behalten Sie.** Bei Ihrem bisherigen Anbieter (z. B. Telekom, sipgate, easybell) richten Sie eine Rufumleitung ein – sofort, bei besetzt oder nach einigen Sekunden – auf die Nummer Ihres Assistenten. Klassische deutsche SIP-Trunks wie sipgate oder easybell leiten Anrufe nicht direkt an Grok Voice weiter; dafür ist die Rufumleitung der einfachste Weg.
+- **Ehrlicher Datenschutzhinweis:** Die Sprachverarbeitung erfolgt durch xAI (Grok Voice). Dabei werden Gesprächsinhalte auch außerhalb der EU verarbeitet. Wir sagen deshalb **keine** reine EU-Verarbeitung zu; Details stehen in Ihrem Auftragsverarbeitungsvertrag und den Datenschutzhinweisen.
+- **Kein Testanschluss:** Es gibt auf dieser Website keine Live-Rufnummer. Ihr Anschluss wird erst nach Ihrer Telefonie-Freigabe aktiv.
 
 ## So wird angebunden (technischer Ablauf)
 

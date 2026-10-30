@@ -38,9 +38,9 @@ hr+h2{border-top:0;padding-top:0}hr{border:0;border-top:1px solid #DFE4ED;margin
 <td>Ihre bestehende Nummer oder eine neue Nummer Ihres Anbieters</td>
 </tr>
 <tr>
-<td>SIP-Trunk bei einem Telefonie-Anbieter</td>
+<td>Rufnummer beim Telefonie-Anbieter</td>
 <td>Sie / wir gemeinsam</td>
-<td>z. B. Twilio Elastic SIP Trunking, Telnyx, Bandwidth oder ein deutscher SIP-Trunk-Anbieter, der SIP über TLS/TCP unterstützt</td>
+<td>bevorzugt Telnyx (deutsche Ortsrufnummer), alternativ Twilio</td>
 </tr>
 <tr>
 <td>Weiterleitung auf den Assistenten</td>
@@ -73,6 +73,13 @@ hr+h2{border-top:0;padding-top:0}hr{border:0;border-top:1px solid #DFE4ED;margin
 <td>Nur mit ausdrücklicher Freigabe und Aufbewahrungsfrist</td>
 </tr>
 </tbody></table></div>
+<h2>Empfohlener Anbieter und Ihre bestehende Rufnummer</h2>
+<ul>
+<li><strong>Bevorzugt: Telnyx.</strong> Die Anbindung an Grok Voice ist von xAI dokumentiert. Deutsche Ortsrufnummern sind verfügbar, Verbindungsdaten und Aufzeichnungen können in Deutschland (Frankfurt) gespeichert werden. Alternative: Twilio.</li>
+<li><strong>Ihre Nummer behalten Sie.</strong> Bei Ihrem bisherigen Anbieter (z. B. Telekom, sipgate, easybell) richten Sie eine Rufumleitung ein – sofort, bei besetzt oder nach einigen Sekunden – auf die Nummer Ihres Assistenten. Klassische deutsche SIP-Trunks wie sipgate oder easybell leiten Anrufe nicht direkt an Grok Voice weiter; dafür ist die Rufumleitung der einfachste Weg.</li>
+<li><strong>Ehrlicher Datenschutzhinweis:</strong> Die Sprachverarbeitung erfolgt durch xAI (Grok Voice). Dabei werden Gesprächsinhalte auch außerhalb der EU verarbeitet. Wir sagen deshalb <strong>keine</strong> reine EU-Verarbeitung zu; Details stehen in Ihrem Auftragsverarbeitungsvertrag und den Datenschutzhinweisen.</li>
+<li><strong>Kein Testanschluss:</strong> Es gibt auf dieser Website keine Live-Rufnummer. Ihr Anschluss wird erst nach Ihrer Telefonie-Freigabe aktiv.</li>
+</ul>
 <h2>So wird angebunden (technischer Ablauf)</h2>
 <ol>
 <li><strong>Nummer bei xAI registrieren:</strong> <code>POST https://api.x.ai/v2/phone-numbers</code> mit <code>origin: &quot;byo_trunk&quot;</code>, Ihrer Nummer, unserer Webhook-Adresse und SIP-Absicherung (IP-Allowlist oder Digest). Das Signatur-Geheimnis wird sicher serverseitig abgelegt, niemals im Repository.</li>

@@ -1,0 +1,24 @@
+name = "vva-sip-webhook"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+
+# Mandanten-Konfiguration (wird von export_worker_config.py erzeugt; keine Secrets darin)
+[[kv_namespaces]]
+binding = "VVA_TENANTS"
+id = "6fdcfb1963204e94bcb59dd450599dac"
+
+[[durable_objects.bindings]]
+name = "CALLS"
+class_name = "CallSession"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["CallSession"]
+
+[vars]
+TELEPHONY_ENABLED = "false"   # Not-Aus: "false" = jeder Anruf nur Sperransage + Auflegen
+SIGNATURE_TOLERANCE_SEC = "300"
+
+# Secrets NUR per `wrangler secret put` setzen, niemals hier eintragen:
+#   XAI_API_KEY            – xAI API-Key (serverseitig)
+#   XAI_WEBHOOK_SECRET     – Signing-Secret aus POST /v2/phone-numbers (whsec_...)
