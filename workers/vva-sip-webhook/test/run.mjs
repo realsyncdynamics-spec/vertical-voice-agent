@@ -103,6 +103,10 @@ async function make(bindings) {
   const tplOf = async (k) => JSON.parse((await db.prepare("SELECT data FROM templates WHERE key=?").bind(k).first()).data);
   const sl = core.sessionConfig({ ...JSON.parse(cfgAfter), template: "law_office" }, await tplOf("law_office"));
   ok("Einsatzort nur branchenabhängig (Handwerk ja, Kanzlei nein, nie Pflichtfeld)", s.session.instructions.includes("Einsatzort") && sl.session.instructions.includes("NICHT nach einer Adresse") && !s.session.tools.find((x) => x.name === "lead_erfassen").parameters.required.includes("adresse"));
+  const sh = core.sessionConfig({ ...JSON.parse(cfgAfter), opening_hours: { "Mo–Fr": "08:00–17:00" } }, await tplOf("trades"));
+  ok("Öffnungszeiten in instructions", sh.session.instructions.includes("Mo–Fr: 08:00–17:00") && sh.session.instructions.includes("KEINE Adresse"));
+  const st = {}; const a1 = core.addressGuard(st, "B", { assistantText: "Wann haben Sie geöffnet? Mo bis Fr." }); const a2 = core.addressGuard(st, "B", { assistantText: "An welcher Adresse soll repariert werden?" }); const a3 = core.addressGuard(st, "B", { toolName: "lead_erfassen", toolArgs: {} });
+  ok("Adress-Guard: sperrt nach erster Frage genau einmal", a1 === null && a2 && a2.includes("NIE WIEDER") && a3 === null && st.asked && st.captured);
   ok("Begrüßung enthält KI-Hinweis", /KI-Assistent/.test(s.greeting));
   t = await core.runTool(env, "c-does-not-exist", "lead_erfassen", { name: "a", rueckrufnummer: "b", anliegen: "c" }); ok("Werkzeug ohne aktiven Anruf -> abgelehnt", t.status === "abgelehnt");
   const bTasks = (await db.prepare("SELECT COUNT(*) n FROM tasks WHERE agent_id='t-b'").first()).n; ok("Mandantentrennung: B hat keine Aufgaben aus A-Anruf", bTasks === 0);

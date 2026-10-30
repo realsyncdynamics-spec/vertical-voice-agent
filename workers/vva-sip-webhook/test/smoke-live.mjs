@@ -21,7 +21,7 @@ r = await post({ "webhook-id": "x", "webhook-timestamp": ts, "webhook-signature"
 const S = "/cursor/stores/store-8d5bca21-00e8-4084-a05f-43646dd48d75/vertical-voice-agent/";
 const tpl = JSON.parse(readFileSync(S + "templates_and_validator.json")).templates.trades;
 const tenant = { ...JSON.parse(readFileSync(S + "tenants/dominik-steiner-trades.json")), enabled_tools: ["create_ticket", "schedule_appointment", "handoff_human"] };
-const cfg = core.sessionConfig(tenant, tpl);
+const cfg = core.sessionConfig(tenant, tpl); const addr = {}; const guardUpd = (x) => { const ins = core.addressGuard(addr, cfg.session.instructions, x); if (ins) send({ type: "session.update", session: { instructions: ins } }); };
 const turns = ["Guten Tag, wann haben Sie morgen geöffnet?", "Hallo, meine Heizung ist ausgefallen. Ich heiße Max Muster, Rückrufnummer 0170 1234567. Bitte nehmen Sie das auf.", "Ja, genau so, bitte erfassen.", "Und ich hätte gern einen Termin Dienstag um 10 Uhr. Können Sie den fest bestätigen?", "Ja, bitte so aufnehmen."];
 const ws = new WebSocket("wss://api.x.ai/v1/realtime?model=grok-voice-latest", { headers: { Authorization: "Bearer " + process.env.XAI_API_KEY } });
 const calls = []; const texts = []; let turn = 0; const pending = [];
@@ -32,9 +32,9 @@ await new Promise((res) => {
   ws.on("open", () => { send({ type: "session.update", session: { ...cfg.session, turn_detection: null } }); setTimeout(next, 800); });
   ws.on("message", async (m) => { const e = JSON.parse(m); const t = e.type;
     if (t === "error") texts.push("ERROR " + JSON.stringify(e.error).slice(0, 200));
-    if ((t === "response.output_text.done" || t === "response.output_audio_transcript.done") && (e.text || e.transcript)) texts.push(e.text || e.transcript);
+    if ((t === "response.output_text.done" || t === "response.output_audio_transcript.done") && (e.text || e.transcript)) { texts.push(e.text || e.transcript); guardUpd({ assistantText: e.text || e.transcript }); }
     let fc = t === "response.function_call_arguments.done" ? e : (t === "response.output_item.done" && e.item?.type === "function_call" ? e.item : null);
-    if (fc && !calls.find((c) => c.id === fc.call_id)) { calls.push({ id: fc.call_id, name: fc.name, args: fc.arguments });
+    if (fc && !calls.find((c) => c.id === fc.call_id)) { calls.push({ id: fc.call_id, name: fc.name, args: fc.arguments }); try { guardUpd({ toolName: fc.name, toolArgs: JSON.parse(fc.arguments || "{}") }); } catch {}
       const result = fc.name === "terminwunsch_aufnehmen" ? { status: "wunsch_notiert", bestaetigt: false, sage: "Ich habe Ihren Terminwunsch notiert. " + core.TERMIN_PHRASE } : { status: "erfasst", lead_id: "smoke" };
       pending.push({ type: "conversation.item.create", item: { type: "function_call_output", call_id: fc.call_id, output: JSON.stringify(result) } }); }
     if (t === "response.done") { if (pending.length) { pending.splice(0).forEach(send); send({ type: "response.create", response: { modalities: ["text"] } }); } else next(); } });
@@ -45,7 +45,8 @@ out.push(["xAI-Session akzeptiert Konfiguration (keine error-Events)", !texts.so
 out.push(["Modell nutzt nur die drei Werkzeuge", names.length > 0 && names.every((n) => core.TOOL_NAMES.includes(n)), names.join(",")]);
 out.push(["lead_erfassen aufgerufen", names.includes("lead_erfassen"), JSON.stringify(calls.find((c) => c.name === "lead_erfassen")?.args || "")]);
 out.push(["terminwunsch_aufnehmen aufgerufen", names.includes("terminwunsch_aufnehmen"), JSON.stringify(calls.find((c) => c.name === "terminwunsch_aufnehmen")?.args || "")]);
-out.push(["Öffnungszeiten-Frage: keine Adressfrage", texts[0] !== undefined && !/adresse|einsatzort|wo genau/i.test(texts[0]), texts[0] || ""]);
+out.push(["Öffnungszeiten aus instructions beantwortet, keine Adressfrage", /\d{1,2}[:.]\d{2}|\d{1,2} Uhr/.test(texts[0] || "") && !core.ADDRESS_ASK_RE.test(texts[0] || ""), texts[0] || ""]);
+const asks = texts.filter((x) => core.ADDRESS_ASK_RE.test(x)).length; out.push(["Reparatur: Einsatzort genau einmal gefragt", asks === 1, "asks=" + asks]);
 out.push(["Assistent bestätigt keinen Termin fest", !texts.some((x) => /termin (ist )?(fest )?(bestätigt|gebucht)/i.test(x) && !/nicht/i.test(x)), ""]);
 for (const [n, okk, i] of out) console.log(okk ? "PASS" : "FAIL", "-", n, "::", i.slice(0, 220));
 console.log("\nAssistent-Texte:\n- " + texts.join("\n- "));

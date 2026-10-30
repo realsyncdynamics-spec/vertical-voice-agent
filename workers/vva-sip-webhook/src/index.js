@@ -8,7 +8,7 @@
  * Tool-Calls und Session-Events kommen NUR über diese WebSocket-Verbindung, nicht per Webhook.
  * Secrets (wrangler secret put, test/prod getrennt): XAI_API_KEY, XAI_WEBHOOK_SECRET.
  */
-import { admit, runTool, handoffResult, endCall, transcript, logAction, guard, purge } from "./core.js";
+import { addressGuard, admit, runTool, handoffResult, endCall, transcript, logAction, guard, purge } from "./core.js";
 const xai = (env) => env.XAI_BASE || "https://api.x.ai";
 
 export default {
@@ -78,7 +78,8 @@ export class CallSession {
     send({ type: "session.update", session: cfg.session });
     // Begrüßung mit KI-Hinweis; laut SIP-Doku beginnt der Agent mit response.create
     send({ type: "response.create", response: { instructions: `Sage wörtlich: "${cfg.greeting}"` } });
-    const pending = []; const seen = new Set(); let locked = false;
+    const pending = []; const seen = new Set(); let locked = false; const addr = {};
+    const addrUpdate = (x) => { const ins = addressGuard(addr, cfg.session.instructions, x); if (ins) { send({ type: "session.update", session: { instructions: ins } }); logAction(this.env, call_id, cfg.agent_id, "address_guard", "LOCKED", { asked: !!addr.asked, captured: !!addr.captured }, null); } };
     ws.addEventListener("message", async (m) => {
       if (typeof m.data !== "string") return;
       let ev; try { ev = JSON.parse(m.data); } catch { return; }
@@ -96,12 +97,14 @@ export class CallSession {
         }
         return;
       }
-      if (t === "response.output_audio_transcript.done") { await transcript(this.env, call_id, "assistent", ev.transcript || ""); return; }
+      if (t === "response.output_audio_transcript.done") { addrUpdate({ assistantText: ev.transcript }); await transcript(this.env, call_id, "assistent", ev.transcript || ""); return; }
       let fc = null;
       if (t === "response.function_call_arguments.done") fc = ev;
       else if (t === "response.output_item.done" && ev.item?.type === "function_call") fc = ev.item;
       if (fc && !seen.has(fc.call_id)) {
         seen.add(fc.call_id);
+        let parsed = {}; try { parsed = JSON.parse(fc.arguments || "{}"); } catch {}
+        addrUpdate({ toolName: fc.name, toolArgs: parsed });
         let result = await runTool(this.env, call_id, fc.name, fc.arguments);
         if (result.status === "uebergabe") result = await this.refer(call_id, result, null);
         pending.push({ type: "conversation.item.create", item: { type: "function_call_output", call_id: fc.call_id, output: JSON.stringify(result) } });

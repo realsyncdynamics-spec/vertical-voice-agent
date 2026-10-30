@@ -57,3 +57,8 @@ Kein globales Pflichtfeld. Nur Handwerk (Reparatur/Wartung/Notfall), Kfz (Panne 
 
 ## Go-live-Reihenfolge
 1. Telnyx DE-Nummer → 2. xAI DPA + ZDR (erst Test-Team, Smoke, dann Prod) → 3. Prod-Secrets + erster Mandant → 4. Testanrufe → 5. Stripe-Name. Details: `GO_LIVE.md`.
+
+## Öffnungszeiten + Einsatzort-Guard (30.10.2026)
+- Öffnungszeiten, FAQ-Snippets und aktuelles Datum (Europe/Berlin) stehen in den `session.update`-instructions (kein viertes Werkzeug). Mandantenfelder: `opening_hours`, `faq`.
+- Einsatzort höchstens einmal: Prompt-Regel + Code-Guard in der Durable Object (`addressGuard`: asked/captured → `session.update` mit Sperrhinweis, protokolliert als `address_guard`).
+- Tests lokal 37/37, Live-Smoke 11/11 (Öffnungszeiten korrekt für „morgen“, Adresse genau einmal, Lead erfasst, Terminwunsch unbestätigt).
