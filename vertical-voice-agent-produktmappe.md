@@ -170,3 +170,6 @@ Thüringen, Deutschland
 E-Mail: realsyncdynamics@gmail.com
 
 *Der Vertical Voice Agent erteilt keine Rechts-, Medizin- oder Steuerberatung und gibt keine garantierte Compliance-Zusage.*
+
+## Sprachdemos (Stand 30.10.2026)
+Landingpage-Abschnitt „Stimmen anhören“ (#stimmen) und Onboarding: 6 deutsche Beispielaufnahmen (Handwerk, Gastronomie/Bäckerei, KFZ, Metzgerei, Hausverwaltung, Arztpraxis), erzeugt mit Microsoft Edge Neural TTS (Conrad, Katja, Killian, Amala). Illustrativ; Stimme und Ansprache werden im Onboarding festgelegt. Keine Rechts-, Medizin-, Steuer- oder Allergenauskünfte in den Skripten.
