@@ -1,0 +1,46 @@
+# Telefonie anbinden
+
+**Stand:** 30.10.2026 · Vertical Voice Agent (eigenständiges Produkt außerhalb von RealSyncDynamics.AI)
+
+Ihr Telefonassistent läuft auf **Grok Voice 3.0** (xAI Speech to Speech). Telefonie ist **standardmäßig gesperrt**: Bis alle Punkte unten erfüllt und freigegeben sind, bleibt der Agent im Status *Entwurf/pausiert* und ist nur als Web-Demo nutzbar. Auf dieser Website gibt es bewusst **keine Live-Rufnummer** zum Testen.
+
+## Was Sie brauchen
+
+| Punkt | Wer | Hinweis |
+|---|---|---|
+| Paket Professional oder Kanzlei / Praxis | Sie | Starter ist Web-only |
+| Eigene Rufnummer (Festnetz/Mobil, E.164, z. B. +49 3679 …) | Sie | Ihre bestehende Nummer oder eine neue Nummer Ihres Anbieters |
+| SIP-Trunk bei einem Telefonie-Anbieter | Sie / wir gemeinsam | z. B. Twilio Elastic SIP Trunking, Telnyx, Bandwidth oder ein deutscher SIP-Trunk-Anbieter, der SIP über TLS/TCP unterstützt |
+| Weiterleitung auf den Assistenten | Sie | Rufumleitung (sofort, bei besetzt oder nach X Sekunden) von Ihrer Nummer auf die Trunk-Nummer |
+| Übergabe-Nummer (E.164) | Sie | Dorthin verbindet der Assistent bei Notfällen und auf Wunsch |
+| Telefonie-Freigabe (`telephony_approved`) | Sie, ausdrücklich | Im Onboarding, Schritt 4 |
+| KI-Offenlegung aktiv | Pflicht | Jede Begrüßung nennt den KI-Assistenten |
+| Datenschutzprüfung dokumentiert | Pflicht für Kanzlei, Praxis, Steuerberatung | Ohne sie bleiben alle Werkzeuge gesperrt |
+| Aufzeichnung | standardmäßig aus | Nur mit ausdrücklicher Freigabe und Aufbewahrungsfrist |
+
+## So wird angebunden (technischer Ablauf)
+
+1. **Nummer bei xAI registrieren:** `POST https://api.x.ai/v2/phone-numbers` mit `origin: "byo_trunk"`, Ihrer Nummer, unserer Webhook-Adresse und SIP-Absicherung (IP-Allowlist oder Digest). Das Signatur-Geheimnis wird sicher serverseitig abgelegt, niemals im Repository.
+2. **Trunk beim Anbieter einrichten:** Ziel `sip:{Ihre-Nummer}@sip.voice.x.ai;transport=tls` (alternativ TCP/UDP Port 5060).
+3. **Eingehender Anruf:** xAI sendet ein signiertes Ereignis `realtime.call.incoming`; wir prüfen die Signatur und lesen die `call_id`.
+4. **Assistent übernimmt:** Verbindung `wss://api.x.ai/v1/realtime?call_id=…`, Konfiguration Ihres Mandanten (Stimme, Regeln, nur freigegebene Werkzeuge), Begrüßung mit KI-Hinweis wörtlich.
+5. **Im Gespräch:** Anliegen klären, Zusammenfassung bestätigen lassen, dann Rückrufbitte, Auskunft oder Termin (nach Öffnungszeiten-, Feiertags- und Kalenderprüfung). Kritische Stichworte führen – unabhängig vom Sprachmodell – zu einer festen Übergabe-Ansage und Weiterleitung an Ihre Übergabe-Nummer.
+
+## Was der Assistent am Telefon kann
+
+- Mehrstufiger Dialog mit Rückfragen und Bestätigung
+- Werkzeuge nur laut Branchenvorlage: Auskunft (`lookup_kb`), Rückrufbitte (`create_ticket`), Termin (`schedule_appointment`), Übergabe (`handoff_human`)
+- Kalender: Google oder Outlook
+- Sofortige Übergabe bei branchenspezifischen Notfällen und Beschwerden
+
+## Was er nicht tut
+
+- Keine Rechts-, Medizin- oder Steuerberatung, keine Fristprüfung, keine Diagnose
+- Keine Allergie- oder Spurenfreiheitsgarantie, keine verbindlichen Preis- oder Einsatzzusagen
+- Keine garantierte Compliance-Zusage; Sie bleiben für Ihre Freigaben verantwortlich
+
+## Status ohne Freigabe
+
+Fehlt eine Pflichtfreigabe, antwortet ein Anruf nur mit: „Dieser Sprachassistent ist aktuell nicht freigeschaltet. Bitte wenden Sie sich direkt an den Betrieb.“ – keine Werkzeuge, keine Datenerfassung.
+
+[Jetzt im Onboarding einrichten](onboarding.html)

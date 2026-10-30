@@ -1,0 +1,100 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Telefonie anbinden – Vertical Voice Agent</title><link rel="canonical" href="https://voice.realsyncdynamicsai.de/telefonie.html">
+<meta name="description" content="Telefonie anbinden: Rufnummer, SIP-Trunk, Freigaben. Vertical Voice Agent auf Grok Voice 3.0, fail-closed bis zur Freigabe.">
+<meta property="og:title" content="Telefonie anbinden – Vertical Voice Agent"><meta property="og:url" content="https://voice.realsyncdynamicsai.de/telefonie.html"><meta property="og:image" content="https://voice.realsyncdynamicsai.de/og-image.png"><meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230A1020'/%3E%3Crect x='8' y='8' width='16' height='16' rx='4' fill='%23C7CFDE'/%3E%3C/svg%3E"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Inter+Tight:wght@500&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>body{margin:0;font:300 16px/1.65 Inter,system-ui,sans-serif;color:#0A1020;background:#fff}
+.top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding:20px clamp(20px,6vw,80px);border-bottom:1px solid #DFE4ED;font:500 12px Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.top nav{display:flex;flex-wrap:wrap;gap:18px}.top a{color:#4A5878;text-decoration:none}.top b{font:500 14px 'Inter Tight',sans-serif;letter-spacing:.14em}
+main{max-width:900px;margin:0 auto;padding:48px 20px 80px}
+h1{font:500 clamp(32px,5vw,56px)/1.05 'Inter Tight',sans-serif;letter-spacing:-.035em;margin:0 0 24px}
+h2{font:500 28px/1.15 'Inter Tight',sans-serif;letter-spacing:-.02em;margin:56px 0 12px;padding-top:24px;border-top:1px solid #DFE4ED}h3{font:500 20px 'Inter Tight',sans-serif}
+p,li{color:#2A3550}strong{font-weight:500;color:#0A1020}code{font:500 12px 'JetBrains Mono',monospace;background:#EEF1F6;padding:2px 5px;border-radius:4px}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;margin:16px 0}th,td{text-align:left;padding:10px 12px;border-bottom:1px solid #DFE4ED;vertical-align:top}th{font:500 11px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A95AC}
+hr+h2{border-top:0;padding-top:0}hr{border:0;border-top:1px solid #DFE4ED;margin:32px 0}a{color:#0A1020}
+.cta{display:inline-block;margin-top:40px;padding:16px 28px;border-radius:8px;background:linear-gradient(145deg,#1F2A44,#0A1020);color:#F2F5FA!important;text-decoration:none;font:500 14px Inter,sans-serif;letter-spacing:.06em;text-transform:uppercase}
+@media print{.top,.cta{display:none}}</style></head><body>
+<div class="top"><b>Vertical Voice Agent</b><nav><a href="./">Startseite</a><a href="./#stimmen">Stimmen</a><a href="./#pakete">Pakete</a><a href="produktmappe.html">Produktmappe</a><a href="telefonie-anbinden.md">Markdown</a><a href="onboarding.html" style="color:#0A1020">Selbst einrichten</a></nav></div>
+<main><h1>Telefonie anbinden</h1>
+<p><strong>Stand:</strong> 30.10.2026 · Vertical Voice Agent (eigenständiges Produkt außerhalb von RealSyncDynamics.AI)</p>
+<p>Ihr Telefonassistent läuft auf <strong>Grok Voice 3.0</strong> (xAI Speech to Speech). Telefonie ist <strong>standardmäßig gesperrt</strong>: Bis alle Punkte unten erfüllt und freigegeben sind, bleibt der Agent im Status <em>Entwurf/pausiert</em> und ist nur als Web-Demo nutzbar. Auf dieser Website gibt es bewusst <strong>keine Live-Rufnummer</strong> zum Testen.</p>
+<h2>Was Sie brauchen</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Punkt</th>
+<th>Wer</th>
+<th>Hinweis</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Paket Professional oder Kanzlei / Praxis</td>
+<td>Sie</td>
+<td>Starter ist Web-only</td>
+</tr>
+<tr>
+<td>Eigene Rufnummer (Festnetz/Mobil, E.164, z. B. +49 3679 …)</td>
+<td>Sie</td>
+<td>Ihre bestehende Nummer oder eine neue Nummer Ihres Anbieters</td>
+</tr>
+<tr>
+<td>SIP-Trunk bei einem Telefonie-Anbieter</td>
+<td>Sie / wir gemeinsam</td>
+<td>z. B. Twilio Elastic SIP Trunking, Telnyx, Bandwidth oder ein deutscher SIP-Trunk-Anbieter, der SIP über TLS/TCP unterstützt</td>
+</tr>
+<tr>
+<td>Weiterleitung auf den Assistenten</td>
+<td>Sie</td>
+<td>Rufumleitung (sofort, bei besetzt oder nach X Sekunden) von Ihrer Nummer auf die Trunk-Nummer</td>
+</tr>
+<tr>
+<td>Übergabe-Nummer (E.164)</td>
+<td>Sie</td>
+<td>Dorthin verbindet der Assistent bei Notfällen und auf Wunsch</td>
+</tr>
+<tr>
+<td>Telefonie-Freigabe (<code>telephony_approved</code>)</td>
+<td>Sie, ausdrücklich</td>
+<td>Im Onboarding, Schritt 4</td>
+</tr>
+<tr>
+<td>KI-Offenlegung aktiv</td>
+<td>Pflicht</td>
+<td>Jede Begrüßung nennt den KI-Assistenten</td>
+</tr>
+<tr>
+<td>Datenschutzprüfung dokumentiert</td>
+<td>Pflicht für Kanzlei, Praxis, Steuerberatung</td>
+<td>Ohne sie bleiben alle Werkzeuge gesperrt</td>
+</tr>
+<tr>
+<td>Aufzeichnung</td>
+<td>standardmäßig aus</td>
+<td>Nur mit ausdrücklicher Freigabe und Aufbewahrungsfrist</td>
+</tr>
+</tbody></table></div>
+<h2>So wird angebunden (technischer Ablauf)</h2>
+<ol>
+<li><strong>Nummer bei xAI registrieren:</strong> <code>POST https://api.x.ai/v2/phone-numbers</code> mit <code>origin: &quot;byo_trunk&quot;</code>, Ihrer Nummer, unserer Webhook-Adresse und SIP-Absicherung (IP-Allowlist oder Digest). Das Signatur-Geheimnis wird sicher serverseitig abgelegt, niemals im Repository.</li>
+<li><strong>Trunk beim Anbieter einrichten:</strong> Ziel <code>sip:{Ihre-Nummer}@sip.voice.x.ai;transport=tls</code> (alternativ TCP/UDP Port 5060).</li>
+<li><strong>Eingehender Anruf:</strong> xAI sendet ein signiertes Ereignis <code>realtime.call.incoming</code>; wir prüfen die Signatur und lesen die <code>call_id</code>.</li>
+<li><strong>Assistent übernimmt:</strong> Verbindung <code>wss://api.x.ai/v1/realtime?call_id=…</code>, Konfiguration Ihres Mandanten (Stimme, Regeln, nur freigegebene Werkzeuge), Begrüßung mit KI-Hinweis wörtlich.</li>
+<li><strong>Im Gespräch:</strong> Anliegen klären, Zusammenfassung bestätigen lassen, dann Rückrufbitte, Auskunft oder Termin (nach Öffnungszeiten-, Feiertags- und Kalenderprüfung). Kritische Stichworte führen – unabhängig vom Sprachmodell – zu einer festen Übergabe-Ansage und Weiterleitung an Ihre Übergabe-Nummer.</li>
+</ol>
+<h2>Was der Assistent am Telefon kann</h2>
+<ul>
+<li>Mehrstufiger Dialog mit Rückfragen und Bestätigung</li>
+<li>Werkzeuge nur laut Branchenvorlage: Auskunft (<code>lookup_kb</code>), Rückrufbitte (<code>create_ticket</code>), Termin (<code>schedule_appointment</code>), Übergabe (<code>handoff_human</code>)</li>
+<li>Kalender: Google oder Outlook</li>
+<li>Sofortige Übergabe bei branchenspezifischen Notfällen und Beschwerden</li>
+</ul>
+<h2>Was er nicht tut</h2>
+<ul>
+<li>Keine Rechts-, Medizin- oder Steuerberatung, keine Fristprüfung, keine Diagnose</li>
+<li>Keine Allergie- oder Spurenfreiheitsgarantie, keine verbindlichen Preis- oder Einsatzzusagen</li>
+<li>Keine garantierte Compliance-Zusage; Sie bleiben für Ihre Freigaben verantwortlich</li>
+</ul>
+<h2>Status ohne Freigabe</h2>
+<p>Fehlt eine Pflichtfreigabe, antwortet ein Anruf nur mit: „Dieser Sprachassistent ist aktuell nicht freigeschaltet. Bitte wenden Sie sich direkt an den Betrieb.“ – keine Werkzeuge, keine Datenerfassung.</p>
+<p><a href="onboarding.html">Jetzt im Onboarding einrichten</a></p>
+<a class="cta" href="onboarding.html">Jetzt selbst einrichten</a></main></body></html>

@@ -194,3 +194,7 @@ Die Hörbeispiele auf der Website sind mit Grok TTS erzeugt (castor, ursa, atlas
 - **Sofortige Übergabe:** branchenspezifische Trigger (z. B. Gasgeruch, Unfall, Fristsache, Atemnot), verbotene Zusagen oder Wunsch nach einem Menschen.
 - **Grenzen:** keine Rechts-, Medizin- oder Steuerberatung, keine Fristprüfung, keine Allergie- oder Spurenfreiheitsgarantie. Elevated-Branchen erst nach dokumentierter Datenschutzprüfung.
 - **Fail-Closed:** nicht freigeschalteter Agent → nur Hinweisansage, keine Werkzeuge.
+
+## Telefonie anbinden
+
+Telefonie läuft über Grok Voice 3.0 per SIP (eigene Rufnummer, SIP-Trunk bei einem Anbieter, Weiterleitung auf `sip.voice.x.ai`). Bis zur ausdrücklichen Telefonie-Freigabe – bei Kanzlei, Praxis und Steuerberatung zusätzlich nach dokumentierter Datenschutzprüfung – bleibt der Agent gesperrt. Kritische Stichworte führen unabhängig vom Sprachmodell zu einer festen Übergabe-Ansage. Details: [Telefonie anbinden](telefonie.html).
