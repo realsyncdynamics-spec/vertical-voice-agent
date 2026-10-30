@@ -38,7 +38,7 @@
     { k: ["anbieter","impressum","wer","kontakt","firma","steiner"],
       a: "Anbieter: Dominik Steiner, Einzelunternehmen, Schwarzburger Str. 31, 98724 Neuhaus am Rennweg (Thüringen). Der Vertical Voice Agent ist ein eigenständiges Produkt außerhalb von RealSyncDynamics.AI. Kontakt: realsyncdynamics@gmail.com." },
     { k: ["pitch","deck","präsentation","produktmappe","unterlagen"],
-      a: "Unterlagen: Produktmappe (vertical-voice-agent-produktmappe.md) und Vertriebs-Pitch-Deck (vertical-voice-agent-pitch-deck.pptx) – beide auf der Startseite verlinkt." },
+      a: "Unterlagen: Produktmappe (produktmappe.html) und Vertriebs-Pitch-Deck (vertical-voice-agent-pitch-deck.pptx) – beide auf der Startseite verlinkt." },
     { k: ["übergabe","mitarbeiter","mensch","handoff","weiterleiten"],
       a: "Bei kritischen Stichworten (z. B. Gasgeruch, Rohrbruch, Allergie, Fristsache, medizinischer Notfall) übergibt der Assistent sofort an Ihr Team. Den Übergabe-Kontakt tragen Sie im Onboarding in Schritt 2 ein." }
   ];
