@@ -1,0 +1,32 @@
+{
+  "engine": "xAI Grok TTS (POST /v1/tts)",
+  "language": "de",
+  "generated_at": "2026-10-30T09:20+01:00",
+  "files": {
+    "handwerk.mp3": {
+      "voice_id": "castor",
+      "text": "Guten Tag, Malerbetrieb Sonnenberg, hier spricht der KI-Assistent. Ich nehme gern Ihre Terminanfrage oder Ihr Anliegen auf und frage kurz nach Name, Rückrufnummer und Wunschtermin. Einen verbindlichen Preis nennt Ihnen unser Team nach der Besichtigung. Möchten Sie lieber direkt mit einem Mitarbeiter sprechen? Dann verbinde ich Sie gern."
+    },
+    "gastronomie.mp3": {
+      "voice_id": "ursa",
+      "text": "Schönen guten Tag, Landbäckerei am Markt, hier ist der KI-Assistent. Gern nehme ich Ihre Vorbestellung oder Tischreservierung auf. Bei Fragen zu Allergien oder Zutaten verbinde ich Sie direkt mit unserem Team, denn dazu gebe ich selbst keine Auskunft. Was darf ich für Sie notieren?"
+    },
+    "kfz.mp3": {
+      "voice_id": "atlas",
+      "text": "Guten Tag, Autowerkstatt Rennsteig, Sie sprechen mit dem KI-Assistenten. Ich vereinbare gern einen Werkstatttermin für Inspektion, Reifenwechsel oder Reparatur und prüfe dafür direkt unseren Kalender. Bei einer Panne oder einem Unfall verbinde ich Sie sofort mit der Werkstattleitung."
+    },
+    "metzgerei.mp3": {
+      "voice_id": "sal",
+      "text": "Grüß Gott, Metzgerei Bergwiese, hier ist der KI-Assistent. Ich nehme gern Ihre Vorbestellung auf. Bei Fragen zu Allergenen verbinde ich Sie mit unserem Fachpersonal."
+    },
+    "hausverwaltung.mp3": {
+      "voice_id": "rigel",
+      "text": "Guten Tag, Hausverwaltung Thüringer Wald, hier spricht der KI-Assistent. Ich nehme Ihre Schadensmeldung gern auf: Objekt, Art des Schadens und wie wir Sie erreichen. Bei einem akuten Notfall wie Wasserrohrbruch oder Gasgeruch verbinde ich Sie sofort mit unserem Havariedienst."
+    },
+    "praxis.mp3": {
+      "voice_id": "aurora",
+      "text": "Guten Tag, Praxis Dr. Lindner, Sie sprechen mit dem KI-Assistenten der Praxis. Ich helfe Ihnen gern bei der Terminvereinbarung. Medizinische Fragen beantwortet ausschließlich unser Praxisteam, dorthin verbinde ich Sie gern. Bei Lebensgefahr wählen Sie bitte sofort die 112."
+    }
+  },
+  "note": "Betriebsnamen fiktiv, Beispiele illustrativ."
+}

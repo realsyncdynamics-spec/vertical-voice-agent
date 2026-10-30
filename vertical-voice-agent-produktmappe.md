@@ -184,7 +184,7 @@ Ihr Assistent spricht mit einer der **28 integrierten Grok-Stimmen** (Grok Voice
 | Kanzlei, Praxis, Steuerberatung (elevated) | lux, liora, aurora, celeste |
 | Alle Stimmen | ara, eve, leo, rex, sal, altair, atlas, aurora, carina, castor, celeste, cosmo, helios, helix, iris, kepler, liora, lumen, luna, lux, naksh, orion, perseus, rigel, sirius, ursa, zagan, zenith |
 
-Die Hörbeispiele auf der Website sind Interim-Aufnahmen (Systemstimme). Im Betrieb spricht der Assistent über Grok Voice mit der gewählten Stimme.
+Die Hörbeispiele auf der Website sind mit Grok TTS erzeugt (castor, ursa, atlas, sal, rigel, aurora). Im Betrieb spricht der Assistent über Grok Voice mit der gewählten Stimme.
 
 ## Telefonassistent: mehr als eine Ansage
 
