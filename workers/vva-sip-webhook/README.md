@@ -7,7 +7,7 @@ Steuerebene für VVA-Telefonie (xAI SIP → Webhook → Durable Object pro call_
 |---|---|---|---|
 | Test | `vva-sip-webhook-test` | `vva_telephony_test` | aus |
 | Alt (KV, wird ersetzt) | `vva-sip-webhook` | – | aus |
-| Prod | noch nicht angelegt | – | aus |
+| Prod | `vva-sip-webhook-prod` (`wrangler deploy --env production`) | `vva_telephony_prod` | aus |
 
 ## Secrets (nur Namen – Werte nie im Repo)
 | Name | Test | Prod |

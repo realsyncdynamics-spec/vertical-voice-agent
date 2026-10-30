@@ -32,8 +32,8 @@ flowchart LR
 ## Umgebungen
 | | Test | Prod |
 |---|---|---|
-| Worker | `vva-sip-webhook-test` | noch nicht angelegt |
-| D1 | `vva_telephony_test` | noch nicht angelegt |
+| Worker | `vva-sip-webhook-test` | `vva-sip-webhook-prod` (ohne Secrets, 503) |
+| D1 | `vva_telephony_test` | `vva_telephony_prod` (nur Vorlagen) |
 | Secrets | `XAI_API_KEY`, `XAI_WEBHOOK_SECRET` gesetzt (30.10.2026) | eigener Prod-Key, getrennt |
 | Telefonie | aus | aus |
 
@@ -51,3 +51,9 @@ flowchart LR
 
 ## Nachtest 30.10.2026 (Prompt nachgeschärft, Test-Worker neu deployt)
 Adresse/Dringlichkeit bei `lead_erfassen` ausdrücklich optional (System-Prompt, Werkzeugbeschreibung, Feldbeschreibung). Live-Smoke 9/9: `lead_erfassen` aufgerufen mit Name, Rückrufnummer, Anliegen – ohne Adresse; `terminwunsch_aufnehmen` ohne feste Zusage („Wir melden uns zur Bestätigung.“). Telefonie weiterhin aus.
+
+## Einsatzort (30.10.2026)
+Kein globales Pflichtfeld. Nur Handwerk (Reparatur/Wartung/Notfall), Kfz (Panne vor Ort) und Hausverwaltung (Schaden) fragen einmal danach; bei Öffnungszeiten-Fragen nie. Live-Smoke 10/10.
+
+## Go-live-Reihenfolge
+1. Telnyx DE-Nummer → 2. xAI DPA + ZDR (erst Test-Team, Smoke, dann Prod) → 3. Prod-Secrets + erster Mandant → 4. Testanrufe → 5. Stripe-Name. Details: `GO_LIVE.md`.

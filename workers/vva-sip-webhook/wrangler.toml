@@ -25,3 +25,29 @@ TELEPHONY_ENABLED = "false"
 SIGNATURE_TOLERANCE_SEC = "300"
 # Secrets nur per `wrangler secret put` – eigener Key für test und prod:
 #   XAI_API_KEY, XAI_WEBHOOK_SECRET
+
+# ---------- Produktion (getrennt von Test) ----------
+# Deploy: wrangler deploy --env production
+# Secrets (eigener Prod-Key!): wrangler secret put XAI_API_KEY --env production
+#                              wrangler secret put XAI_WEBHOOK_SECRET --env production   (Signing-Secret von xAI bei Nummern-Registrierung)
+# Ohne Secrets antwortet der Webhook mit 503 (fail-closed).
+[env.production]
+name = "vva-sip-webhook-prod"
+
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "vva_telephony_prod"
+database_id = "REPLACE_WITH_PROD_D1_ID"
+migrations_dir = "migrations"
+
+[[env.production.durable_objects.bindings]]
+name = "CALLS"
+class_name = "CallSession"
+
+[env.production.triggers]
+crons = ["17 3 * * *"]
+
+[env.production.vars]
+VVA_ENV = "production"
+TELEPHONY_ENABLED = "false"
+SIGNATURE_TOLERANCE_SEC = "300"

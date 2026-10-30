@@ -47,6 +47,12 @@ Ihr Telefonassistent läuft auf **Grok Voice 3.0** (xAI Speech to Speech). Telef
 - Keine Allergie- oder Spurenfreiheitsgarantie, keine verbindlichen Preis- oder Einsatzzusagen
 - Keine garantierte Compliance-Zusage; Sie bleiben für Ihre Freigaben verantwortlich
 
+## Datenschutzhinweis für Anrufer (Vorlage)
+
+> Sie sprechen mit einem KI-Assistenten von **[Betrieb]**. Verantwortlich für die Verarbeitung ist **[Betrieb, Anschrift, Kontakt]**. Ihr Gespräch wird in Echtzeit von der Sprach-KI Grok Voice der xAI (USA) verarbeitet; dabei werden Daten auch außerhalb der EU verarbeitet (weltweit, abgesichert über EU-Standardvertragsklauseln im Auftragsverarbeitungsvertrag). xAI speichert Gesprächsinhalte nicht (Zero Data Retention). Wir speichern kein Audio. Gespeichert werden nur Ihr Anliegen, Name und Rückrufnummer sowie ein Aktionsprotokoll des Anrufs; eine Mitschrift nur, wenn der Betrieb sie aktiviert hat. Löschung nach **[X] Tagen**. Zweck: Bearbeitung Ihres Anliegens (Art. 6 Abs. 1 lit. b bzw. f DSGVO). Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung, Widerspruch und Beschwerde bei einer Aufsichtsbehörde. Möchten Sie nicht mit der KI sprechen, sagen Sie „Mitarbeiter“ – wir verbinden Sie oder rufen zurück.
+
+Dieser Text ist eine Vorlage und ersetzt keine Rechtsberatung. Telefonie wird erst freigeschaltet, wenn Zero Data Retention bei xAI aktiv und der Auftragsverarbeitungsvertrag unterschrieben ist. Wir sagen keine reine EU-Verarbeitung zu.
+
 ## Status ohne Freigabe
 
 Fehlt eine Pflichtfreigabe, antwortet ein Anruf nur mit: „Dieser Sprachassistent ist aktuell nicht freigeschaltet. Bitte wenden Sie sich direkt an den Betrieb.“ – keine Werkzeuge, keine Datenerfassung.

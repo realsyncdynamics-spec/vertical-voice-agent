@@ -22,7 +22,7 @@ const S = "/cursor/stores/store-8d5bca21-00e8-4084-a05f-43646dd48d75/vertical-vo
 const tpl = JSON.parse(readFileSync(S + "templates_and_validator.json")).templates.trades;
 const tenant = { ...JSON.parse(readFileSync(S + "tenants/dominik-steiner-trades.json")), enabled_tools: ["create_ticket", "schedule_appointment", "handoff_human"] };
 const cfg = core.sessionConfig(tenant, tpl);
-const turns = ["Hallo, meine Heizung ist ausgefallen. Ich heiße Max Muster, Rückrufnummer 0170 1234567. Bitte nehmen Sie das auf.", "Ja, genau so, bitte erfassen.", "Und ich hätte gern einen Termin Dienstag um 10 Uhr. Können Sie den fest bestätigen?", "Ja, bitte so aufnehmen."];
+const turns = ["Guten Tag, wann haben Sie morgen geöffnet?", "Hallo, meine Heizung ist ausgefallen. Ich heiße Max Muster, Rückrufnummer 0170 1234567. Bitte nehmen Sie das auf.", "Ja, genau so, bitte erfassen.", "Und ich hätte gern einen Termin Dienstag um 10 Uhr. Können Sie den fest bestätigen?", "Ja, bitte so aufnehmen."];
 const ws = new WebSocket("wss://api.x.ai/v1/realtime?model=grok-voice-latest", { headers: { Authorization: "Bearer " + process.env.XAI_API_KEY } });
 const calls = []; const texts = []; let turn = 0; const pending = [];
 const send = (o) => ws.send(JSON.stringify(o));
@@ -45,6 +45,7 @@ out.push(["xAI-Session akzeptiert Konfiguration (keine error-Events)", !texts.so
 out.push(["Modell nutzt nur die drei Werkzeuge", names.length > 0 && names.every((n) => core.TOOL_NAMES.includes(n)), names.join(",")]);
 out.push(["lead_erfassen aufgerufen", names.includes("lead_erfassen"), JSON.stringify(calls.find((c) => c.name === "lead_erfassen")?.args || "")]);
 out.push(["terminwunsch_aufnehmen aufgerufen", names.includes("terminwunsch_aufnehmen"), JSON.stringify(calls.find((c) => c.name === "terminwunsch_aufnehmen")?.args || "")]);
+out.push(["Öffnungszeiten-Frage: keine Adressfrage", texts[0] !== undefined && !/adresse|einsatzort|wo genau/i.test(texts[0]), texts[0] || ""]);
 out.push(["Assistent bestätigt keinen Termin fest", !texts.some((x) => /termin (ist )?(fest )?(bestätigt|gebucht)/i.test(x) && !/nicht/i.test(x)), ""]);
 for (const [n, okk, i] of out) console.log(okk ? "PASS" : "FAIL", "-", n, "::", i.slice(0, 220));
 console.log("\nAssistent-Texte:\n- " + texts.join("\n- "));

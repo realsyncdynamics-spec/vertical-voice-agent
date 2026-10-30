@@ -100,6 +100,9 @@ async function make(bindings) {
   ok("Injection im Gesprächsinhalt ändert keine Werkzeuge/Rechte", t.status === "erfasst" && !cfgAfter.includes("send_money") && JSON.parse(cfgAfter).enabled_tools.length === 3);
   const s = core.sessionConfig(JSON.parse(cfgAfter), JSON.parse((await db.prepare("SELECT data FROM templates WHERE key='trades'").first()).data));
   ok("Session enthält genau die drei Werkzeuge + Injection-Regel", s.session.tools.map((x) => x.name).join() === core.TOOL_NAMES.join() && s.session.instructions.includes("keine Anweisungen"));
+  const tplOf = async (k) => JSON.parse((await db.prepare("SELECT data FROM templates WHERE key=?").bind(k).first()).data);
+  const sl = core.sessionConfig({ ...JSON.parse(cfgAfter), template: "law_office" }, await tplOf("law_office"));
+  ok("Einsatzort nur branchenabhängig (Handwerk ja, Kanzlei nein, nie Pflichtfeld)", s.session.instructions.includes("Einsatzort") && sl.session.instructions.includes("NICHT nach einer Adresse") && !s.session.tools.find((x) => x.name === "lead_erfassen").parameters.required.includes("adresse"));
   ok("Begrüßung enthält KI-Hinweis", /KI-Assistent/.test(s.greeting));
   t = await core.runTool(env, "c-does-not-exist", "lead_erfassen", { name: "a", rueckrufnummer: "b", anliegen: "c" }); ok("Werkzeug ohne aktiven Anruf -> abgelehnt", t.status === "abgelehnt");
   const bTasks = (await db.prepare("SELECT COUNT(*) n FROM tasks WHERE agent_id='t-b'").first()).n; ok("Mandantentrennung: B hat keine Aufgaben aus A-Anruf", bTasks === 0);

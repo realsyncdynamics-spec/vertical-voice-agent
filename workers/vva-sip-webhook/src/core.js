@@ -7,6 +7,12 @@ export const TOOL_NAMES = ["lead_erfassen", "terminwunsch_aufnehmen", "an_mensch
 export const TERMIN_PHRASE = "Wir melden uns zur Bestätigung.";
 // Vorlagen-Werkzeuge -> Telefon-Aktion
 const MAP = { create_ticket: "lead_erfassen", schedule_appointment: "terminwunsch_aufnehmen", handoff_human: "an_mensch_uebergeben" };
+// Einsatzort je Branche: nur erfragen, wenn das Anliegen einen Vor-Ort-Einsatz braucht. Nie global Pflicht.
+export const ONSITE = {
+  trades: "Einsatzort (Adresse), wenn es um Reparatur, Wartung, Installation oder einen Notfall vor Ort geht",
+  auto_repair: "Standort des Fahrzeugs, nur bei Panne/Abschleppen/Einsatz vor Ort (nicht bei Werkstatttermin)",
+  property_management: "Objektadresse und Wohnung, bei Schadensmeldung oder Reparaturbedarf",
+};
 const DEF = { max_call_minutes: 10, monthly_minute_budget: 300, max_parallel_calls: 2, retention_days: 30, transcript_enabled: false };
 const E164 = /^\+\d{8,15}$/;
 export const now = () => new Date().toISOString();
@@ -90,8 +96,9 @@ export async function admit(env, { call_id, from, to }) {
 export function sessionConfig(t, tpl) {
   const voice = VOICES.includes(String(t.voice_id || "").toLowerCase()) ? t.voice_id.toLowerCase() : "eve";
   const tools = enabledTools(t, tpl);
+  const onsite = tpl.einsatzort === false ? null : (tpl.einsatzort || ONSITE[t.template] || null);
   const S = {
-    lead_erfassen: { description: "Anliegen/Rückrufbitte erfassen. Pflicht nur: name, rueckrufnummer, anliegen. adresse und dringlichkeit sind optional – ohne sie aufrufen, wenn der Anrufer sie nicht nennt.", parameters: { type: "object", properties: { name: { type: "string" }, rueckrufnummer: { type: "string" }, anliegen: { type: "string" }, adresse: { type: "string", description: "optional, nie erzwingen" }, dringlichkeit: { type: "string", enum: ["normal", "hoch", "notfall"] } }, required: ["name", "rueckrufnummer", "anliegen"] } },
+    lead_erfassen: { description: "Anliegen/Rückrufbitte erfassen. Pflicht nur: name, rueckrufnummer, anliegen. adresse und dringlichkeit sind optional – ohne sie aufrufen, wenn der Anrufer sie nicht nennt.", parameters: { type: "object", properties: { name: { type: "string" }, rueckrufnummer: { type: "string" }, anliegen: { type: "string" }, adresse: { type: "string", description: onsite ? "Einsatzort, nur wenn Vor-Ort-Einsatz nötig und genannt; sonst weglassen" : "weglassen" }, dringlichkeit: { type: "string", enum: ["normal", "hoch", "notfall"] } }, required: ["name", "rueckrufnummer", "anliegen"] } },
     terminwunsch_aufnehmen: { description: "Terminwunsch notieren. KEINE Terminbestätigung – immer sagen: 'Wir melden uns zur Bestätigung.'", parameters: { type: "object", properties: { name: { type: "string" }, rueckrufnummer: { type: "string" }, wunschzeitraum: { type: "string" }, anliegen: { type: "string" } }, required: ["name", "rueckrufnummer", "wunschzeitraum"] } },
     an_mensch_uebergeben: { description: "An einen Menschen übergeben (Notfall/Trigger, Beschwerde, Wunsch nach Mitarbeiter, Unsicherheit).", parameters: { type: "object", properties: { grund: { type: "string" }, zusammenfassung: { type: "string" } }, required: ["grund", "zusammenfassung"] } },
   };
@@ -100,7 +107,8 @@ export function sessionConfig(t, tpl) {
   const instructions = [
     `Du bist der KI-Telefonassistent von ${t.tenant_name || t.agent_id} (${tpl.label}). Deutsch, höchstens zwei Sätze pro Antwort. Der KI-Hinweis wurde bereits gesprochen.`,
     "Fehlende PFLICHTangaben einzeln erfragen, Zusammenfassung vorlesen, Bestätigung abwarten, dann eine Aktion ausführen.",
-    "lead_erfassen braucht nur Name, Rückrufnummer und Anliegen. Adresse und Dringlichkeit sind freiwillig: höchstens einmal anbieten, nie darauf bestehen, nie deswegen warten. Sobald die drei Pflichtangaben bestätigt sind, sofort lead_erfassen aufrufen.",
+    "lead_erfassen braucht nur Name, Rückrufnummer und Anliegen. Sobald diese bestätigt sind, lead_erfassen aufrufen.",
+    onsite ? `Einsatzort: Frage EINMAL nach dem ${onsite}. Hat der Anrufer ihn nicht zur Hand, ohne ihn erfassen. Bei Fragen zu Öffnungszeiten, Preisen allgemein oder Erreichbarkeit NIE nach einer Adresse fragen.` : "Frage NICHT nach einer Adresse.",
     "Termine NIE bestätigen. Nur als Wunsch aufnehmen und sagen: 'Wir melden uns zur Bestätigung.'",
     "Sofort an_mensch_uebergeben bei: " + (tpl.handoff_triggers || []).join(", ") + ". Bei Lebensgefahr auf 112 hinweisen.",
     "Niemals zusagen: " + (tpl.forbidden_claims || []).join("; ") + ". Keine Rechts-, Medizin- oder Steuerberatung.",
