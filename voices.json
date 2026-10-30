@@ -1,0 +1,41 @@
+{
+  "source": "xAI Grok TTS / Grok Voice – 28 integrierte, mehrsprachige Stimmen (docs.x.ai, Stand 15.10.2026)",
+  "engine": "grok_voice",
+  "default_voice_id": "eve",
+  "language": "de",
+  "note": "Alle Stimmen sprechen Deutsch; Charakter laut xAI-Beschreibung. voice_id ist case-insensitive, gespeichert wird lowercase.",
+  "recommended": {
+    "standard": ["castor", "atlas", "celeste", "ursa", "rigel", "lux", "ara", "rex", "sal"],
+    "elevated": ["lux", "liora", "aurora", "celeste"]
+  },
+  "voices": [
+    {"voice_id": "ara", "name": "Ara", "beschreibung": "Warm und freundlich", "einsatz": "Empfang, Allgemein"},
+    {"voice_id": "eve", "name": "Eve", "beschreibung": "Energetisch und positiv (britischer Akzent im Englischen)", "einsatz": "Standardstimme"},
+    {"voice_id": "leo", "name": "Leo", "beschreibung": "Bestimmt und kraftvoll (britischer Akzent im Englischen)", "einsatz": "Ansagen"},
+    {"voice_id": "rex", "name": "Rex", "beschreibung": "Selbstsicher und klar", "einsatz": "Werkstatt, Handwerk"},
+    {"voice_id": "sal", "name": "Sal", "beschreibung": "Ruhig und ausgewogen", "einsatz": "Allgemein"},
+    {"voice_id": "altair", "name": "Altair", "beschreibung": "Elegant, gediegen, hochwertig", "einsatz": "Werbung, Sprecher"},
+    {"voice_id": "atlas", "name": "Atlas", "beschreibung": "Souverän, bestimmt und beruhigend", "einsatz": "Vertrieb, Assistent"},
+    {"voice_id": "aurora", "name": "Aurora", "beschreibung": "Gelassen, beständig, freundlich-hell", "einsatz": "Support, Assistent"},
+    {"voice_id": "carina", "name": "Carina", "beschreibung": "Sanft, einfühlsam, beruhigend", "einsatz": "Wellness, Support"},
+    {"voice_id": "castor", "name": "Castor", "beschreibung": "Sympathisch, bodenständig, locker", "einsatz": "Vertrieb, Support"},
+    {"voice_id": "celeste", "name": "Celeste", "beschreibung": "Mitfühlend, sicher und beruhigend", "einsatz": "Support, Assistent"},
+    {"voice_id": "cosmo", "name": "Cosmo", "beschreibung": "Hell, neugierig, gut verständlich", "einsatz": "Bildung, Podcast"},
+    {"voice_id": "helios", "name": "Helios", "beschreibung": "Fröhlich, energiegeladen, vielseitig", "einsatz": "Assistent"},
+    {"voice_id": "helix", "name": "Helix", "beschreibung": "Kühn, dynamisch, temporeich", "einsatz": "Kommentar, Podcast"},
+    {"voice_id": "iris", "name": "Iris", "beschreibung": "Freundlich, gut gelaunt, charmant", "einsatz": "Vertrieb, Support"},
+    {"voice_id": "kepler", "name": "Kepler", "beschreibung": "Ideenreich, zukunftsgewandt, charismatisch", "einsatz": "Werbung, Podcast"},
+    {"voice_id": "liora", "name": "Liora", "beschreibung": "Ruhig, geerdet, klar", "einsatz": "Wellness, Assistent"},
+    {"voice_id": "lumen", "name": "Lumen", "beschreibung": "Warm, wortgewandt, einnehmend", "einsatz": "Bildung, Werbung"},
+    {"voice_id": "luna", "name": "Luna", "beschreibung": "Sanft, geduldig, fürsorglich", "einsatz": "Bildung, Assistent"},
+    {"voice_id": "lux", "name": "Lux", "beschreibung": "Geerdet, ruhig, besonnen", "einsatz": "Wellness, Sprecher"},
+    {"voice_id": "naksh", "name": "Naksh", "beschreibung": "Warm, nachdenklich, weise (indischer Akzent im Englischen)", "einsatz": "Assistent, Support"},
+    {"voice_id": "orion", "name": "Orion", "beschreibung": "Voll, filmisch, resonant", "einsatz": "Hörbuch, Sprecher"},
+    {"voice_id": "perseus", "name": "Perseus", "beschreibung": "Stark, selbstbewusst, vertrauenswürdig", "einsatz": "Werbung, Sprecher"},
+    {"voice_id": "rigel", "name": "Rigel", "beschreibung": "Präzise, professionell, ruhig-souverän", "einsatz": "Assistent, Support"},
+    {"voice_id": "sirius", "name": "Sirius", "beschreibung": "Schlagfertig, clever, verspielt", "einsatz": "Kommentar, Figuren"},
+    {"voice_id": "ursa", "name": "Ursa", "beschreibung": "Freundlich, warm, verlässlich", "einsatz": "Assistent, Podcast"},
+    {"voice_id": "zagan", "name": "Zagan", "beschreibung": "Kraftvoll, dramatisch, markant", "einsatz": "Figuren, Erzähler"},
+    {"voice_id": "zenith", "name": "Zenith", "beschreibung": "Scharf, fokussiert, zielstrebig", "einsatz": "Vertrieb, Werbung"}
+  ]
+}

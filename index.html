@@ -95,6 +95,9 @@ footer .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr
 footer strong{font-weight:500;color:#0A1020}
 footer .eyebrow{margin-bottom:12px}
 a:focus-visible,button:focus-visible{outline:2px solid #0A1020;outline-offset:3px;border-radius:6px}
+.gv-wrap{margin-top:80px}.gv-h{margin:16px 0 0;font:500 clamp(26px,3vw,40px)/1.1 'Inter Tight',sans-serif;letter-spacing:-.03em}
+.gv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1px;background:#DFE4ED;border:1px solid #DFE4ED;margin-top:12px}
+.gv{background:#fff;padding:18px 20px;display:flex;flex-direction:column;gap:4px}.gv b{font:500 18px 'Inter Tight',sans-serif}.gv code{font:500 11px 'JetBrains Mono',monospace;color:#8A95AC}.gv span{font:300 13px/1.45 'Inter',sans-serif;color:#4A5878}
 @media (max-width:600px){.stage{height:260px}.hero{padding-top:32px}nav{padding:18px 20px}.plan{padding:32px 24px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -166,7 +169,29 @@ a:focus-visible,button:focus-visible{outline:2px solid #0A1020;outline-offset:3p
     <div class="vd-card"><button class="vd-btn" data-src="audio/hausverwaltung.mp3" aria-label="Hausverwaltung abspielen">▶</button><div class="vd-txt"><strong>Hausverwaltung</strong><span>Schadensmeldung · ruhig, weiblich</span><div class="vd-bar"><i></i></div></div></div>
     <div class="vd-card"><button class="vd-btn" data-src="audio/praxis.mp3" aria-label="Arztpraxis abspielen">▶</button><div class="vd-txt"><strong>Arztpraxis (Elevated)</strong><span>Terminassistenz · ruhig, ohne med. Auskunft</span><div class="vd-bar"><i></i></div></div></div>
   </div>
-  <p class="note">Beispielaufnahmen – Ihre Stimme und Ansprache werden im Onboarding festgelegt. Die Beispiele sind illustrativ; Betriebsnamen sind fiktiv.</p>
+  <p class="note">Interim-Beispielaufnahmen (Systemstimme, noch nicht Grok). Im Betrieb spricht Ihr Assistent mit der Grok-Stimme, die Sie im Onboarding wählen. Die Beispiele sind illustrativ; Betriebsnamen sind fiktiv.</p>
+
+  <div class="gv-wrap">
+    <div class="eyebrow">Grok Voice · 28 Stimmen</div>
+    <h3 class="gv-h">Ihre Stimme wählen Sie selbst.</h3>
+    <p class="p" style="margin-top:12px">Im Onboarding wählen Sie eine der 28 integrierten Grok-Stimmen – alle sprechen Deutsch. Standard ist <code>eve</code>. Unsere Empfehlungen:</p>
+    <div class="eyebrow" style="margin-top:28px">Empfohlen für Betriebe (DACH)</div>
+    <div class="gv-grid"><div class="gv"><b>Castor</b><code>castor</code><span>Sympathisch, bodenständig, locker</span></div><div class="gv"><b>Atlas</b><code>atlas</code><span>Souverän, bestimmt und beruhigend</span></div><div class="gv"><b>Celeste</b><code>celeste</code><span>Mitfühlend, sicher und beruhigend</span></div><div class="gv"><b>Ursa</b><code>ursa</code><span>Freundlich, warm, verlässlich</span></div><div class="gv"><b>Rigel</b><code>rigel</code><span>Präzise, professionell, ruhig-souverän</span></div><div class="gv"><b>Lux</b><code>lux</code><span>Geerdet, ruhig, besonnen</span></div><div class="gv"><b>Ara</b><code>ara</code><span>Warm und freundlich</span></div><div class="gv"><b>Rex</b><code>rex</code><span>Selbstsicher und klar</span></div><div class="gv"><b>Sal</b><code>sal</code><span>Ruhig und ausgewogen</span></div></div>
+    <div class="eyebrow" style="margin-top:28px">Empfohlen für Kanzlei · Praxis · Steuerberatung (Elevated)</div>
+    <div class="gv-grid"><div class="gv"><b>Lux</b><code>lux</code><span>Geerdet, ruhig, besonnen</span></div><div class="gv"><b>Liora</b><code>liora</code><span>Ruhig, geerdet, klar</span></div><div class="gv"><b>Aurora</b><code>aurora</code><span>Gelassen, beständig, freundlich-hell</span></div><div class="gv"><b>Celeste</b><code>celeste</code><span>Mitfühlend, sicher und beruhigend</span></div></div>
+    <p class="note">Alle Stimmen: ara, eve, leo, rex, sal, altair, atlas, aurora, carina, castor, celeste, cosmo, helios, helix, iris, kepler, liora, lumen, luna, lux, naksh, orion, perseus, rigel, sirius, ursa, zagan, zenith. Katalog als <a class="ul" href="voices.json">voices.json</a>. <a class="ul" href="onboarding.html">Stimme im Onboarding wählen</a></p>
+  </div>
+
+  <div class="gv-wrap" id="telefon">
+    <div class="eyebrow">Telefonassistent</div>
+    <h3 class="gv-h">Mehr als eine Ansage.</h3>
+    <div class="facts" style="margin-top:8px">
+      <div><div class="eyebrow">Dialog</div><div class="t" style="font-size:22px">Versteht das Anliegen</div><p>Begrüßung mit KI-Hinweis, Anliegen erfragen, fehlende Angaben einzeln nachfragen, Zusammenfassung bestätigen lassen.</p></div>
+      <div><div class="eyebrow">Termine</div><div class="t" style="font-size:22px">Bucht, wo freigegeben</div><p>Prüft Öffnungszeiten, Feiertage, Betriebsferien und Ihren Google- oder Outlook-Kalender zweifach vor jeder Buchung.</p></div>
+      <div><div class="eyebrow">Rückruf</div><div class="t" style="font-size:22px">Nimmt Anliegen auf</div><p>Ohne Buchungsfreigabe (z. B. Metzgerei) wird ein Rückruf-Ticket mit Name, Nummer und Anliegen erstellt.</p></div>
+      <div><div class="eyebrow">Übergabe</div><div class="t" style="font-size:22px">Verbindet sofort</div><p>Branchen-Trigger wie Gasgeruch, Unfall, Fristsache oder Atemnot führen direkt zu Ihrem Team. Keine Rechts-, Medizin- oder Steuerberatung.</p></div>
+    </div>
+  </div>
 </section>
 
 <section class="sec" id="sicherheit">

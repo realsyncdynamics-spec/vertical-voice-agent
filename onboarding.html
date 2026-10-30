@@ -183,6 +183,7 @@
     }
     .smoke-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; font-weight: 600; }
   </style>
+<style>.vp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}.vp-card{text-align:left;padding:10px 12px;border-radius:10px;border:1px solid rgba(127,127,127,.35);background:rgba(127,127,127,.06);color:inherit;cursor:pointer;font:inherit}.vp-card b{display:block;font-size:.92rem}.vp-card span{display:block;font-size:.76rem;opacity:.75;margin-top:2px}.vp-card.on{border-color:#60a5fa;background:rgba(96,165,250,.16);box-shadow:0 0 0 1px #60a5fa}.vp-card .tag{font-size:.65rem;letter-spacing:.06em;text-transform:uppercase;color:#60a5fa;margin-top:4px}</style>
 </head>
 <body>
   <header>
@@ -224,7 +225,7 @@
       <!-- LEFT COLUMN: INPUT STEPS -->
       <div>
         <!-- STEP 1 -->
-        <div class="card" style="margin-bottom:20px"><div id="stimmen"><style>.vd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:18px}.vd-card{display:flex;gap:14px;align-items:center;padding:14px 16px;border:1px solid rgba(127,127,127,.3);border-radius:12px;background:rgba(127,127,127,.06)}.vd-btn{flex:0 0 48px;height:48px;border-radius:50%;border:0;background:#2563eb;color:#fff;font-size:1.1rem;cursor:pointer}.vd-btn.on{background:#16a34a}.vd-txt{flex:1;display:flex;flex-direction:column;gap:3px;font-size:.95rem}.vd-txt span{opacity:.75;font-size:.85rem}.vd-bar{height:4px;background:rgba(127,127,127,.25);border-radius:2px;overflow:hidden;margin-top:6px}.vd-bar i{display:block;height:100%;width:0;background:#2563eb}.vd-note{font-size:.85rem;opacity:.8;margin-top:14px}</style><h2>Stimmen anhören – vor dem Start</h2><p>Kurze Beispiele, wie Ihr Telefonassistent am Telefon klingt – ohne Anmeldung, einfach abspielen.</p><div class="vd-grid"><div class="vd-card"><button class="vd-btn" data-src="audio/handwerk.mp3" aria-label="Handwerk abspielen">▶</button><div class="vd-txt"><strong>Handwerk</strong><span>Malerbetrieb · freundlich, männlich</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/gastronomie.mp3" aria-label="Gastronomie & Bäckerei abspielen">▶</button><div class="vd-txt"><strong>Gastronomie & Bäckerei</strong><span>Vorbestellung · warm, weiblich</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/kfz.mp3" aria-label="KFZ-Werkstatt abspielen">▶</button><div class="vd-txt"><strong>KFZ-Werkstatt</strong><span>Terminannahme · klar, männlich</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/metzgerei.mp3" aria-label="Metzgerei abspielen">▶</button><div class="vd-txt"><strong>Metzgerei</strong><span>Kurze Ladenbegrüßung · männlich</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/hausverwaltung.mp3" aria-label="Hausverwaltung abspielen">▶</button><div class="vd-txt"><strong>Hausverwaltung</strong><span>Schadensmeldung · ruhig, weiblich</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/praxis.mp3" aria-label="Arztpraxis (erhöhte Stufe) abspielen">▶</button><div class="vd-txt"><strong>Arztpraxis (erhöhte Stufe)</strong><span>Terminassistenz · ruhig, ohne med. Auskunft</span><div class="vd-bar"><i></i></div></div></div></div><p class="vd-note">Beispielaufnahmen – Ihre Stimme und Ansprache werden im Onboarding festgelegt. Die Beispiele sind illustrativ; Betriebsnamen sind fiktiv.</p><script>(function(){var a=new Audio(),cur=null;a.preload="none";function reset(){if(cur){cur.textContent="▶";cur.classList.remove("on");cur.parentNode.querySelector(".vd-bar i").style.width="0"}}document.querySelectorAll(".vd-btn").forEach(function(b){b.addEventListener("click",function(){if(cur===b&&!a.paused){a.pause();b.textContent="▶";b.classList.remove("on");return}if(cur!==b){reset();a.src=b.dataset.src;cur=b}a.play();b.textContent="❚❚";b.classList.add("on")})});a.addEventListener("timeupdate",function(){if(cur&&a.duration)cur.parentNode.querySelector(".vd-bar i").style.width=(a.currentTime/a.duration*100)+"%"});a.addEventListener("ended",function(){reset();cur=null})})();</script></div>
+        <div class="card" style="margin-bottom:20px"><div id="stimmen"><style>.vd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:18px}.vd-card{display:flex;gap:14px;align-items:center;padding:14px 16px;border:1px solid rgba(127,127,127,.3);border-radius:12px;background:rgba(127,127,127,.06)}.vd-btn{flex:0 0 48px;height:48px;border-radius:50%;border:0;background:#2563eb;color:#fff;font-size:1.1rem;cursor:pointer}.vd-btn.on{background:#16a34a}.vd-txt{flex:1;display:flex;flex-direction:column;gap:3px;font-size:.95rem}.vd-txt span{opacity:.75;font-size:.85rem}.vd-bar{height:4px;background:rgba(127,127,127,.25);border-radius:2px;overflow:hidden;margin-top:6px}.vd-bar i{display:block;height:100%;width:0;background:#2563eb}.vd-note{font-size:.85rem;opacity:.8;margin-top:14px}</style><h2>Stimmen anhören – vor dem Start</h2><p>Kurze Beispiele, wie Ihr Telefonassistent am Telefon klingt – ohne Anmeldung, einfach abspielen.</p><div class="vd-grid"><div class="vd-card"><button class="vd-btn" data-src="audio/handwerk.mp3" aria-label="Handwerk abspielen">▶</button><div class="vd-txt"><strong>Handwerk</strong><span>Malerbetrieb · freundlich, männlich</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/gastronomie.mp3" aria-label="Gastronomie & Bäckerei abspielen">▶</button><div class="vd-txt"><strong>Gastronomie & Bäckerei</strong><span>Vorbestellung · warm, weiblich</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/kfz.mp3" aria-label="KFZ-Werkstatt abspielen">▶</button><div class="vd-txt"><strong>KFZ-Werkstatt</strong><span>Terminannahme · klar, männlich</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/metzgerei.mp3" aria-label="Metzgerei abspielen">▶</button><div class="vd-txt"><strong>Metzgerei</strong><span>Kurze Ladenbegrüßung · männlich</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/hausverwaltung.mp3" aria-label="Hausverwaltung abspielen">▶</button><div class="vd-txt"><strong>Hausverwaltung</strong><span>Schadensmeldung · ruhig, weiblich</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/praxis.mp3" aria-label="Arztpraxis (erhöhte Stufe) abspielen">▶</button><div class="vd-txt"><strong>Arztpraxis (erhöhte Stufe)</strong><span>Terminassistenz · ruhig, ohne med. Auskunft</span><div class="vd-bar"><i></i></div></div></div></div><p class="vd-note">Interim-Beispielaufnahmen (Systemstimme, noch nicht Grok). Im Betrieb spricht Ihr Assistent mit der Grok-Stimme, die Sie im Onboarding wählen. Die Beispiele sind illustrativ; Betriebsnamen sind fiktiv.</p><script>(function(){var a=new Audio(),cur=null;a.preload="none";function reset(){if(cur){cur.textContent="▶";cur.classList.remove("on");cur.parentNode.querySelector(".vd-bar i").style.width="0"}}document.querySelectorAll(".vd-btn").forEach(function(b){b.addEventListener("click",function(){if(cur===b&&!a.paused){a.pause();b.textContent="▶";b.classList.remove("on");return}if(cur!==b){reset();a.src=b.dataset.src;cur=b}a.play();b.textContent="❚❚";b.classList.add("on")})});a.addEventListener("timeupdate",function(){if(cur&&a.duration)cur.parentNode.querySelector(".vd-bar i").style.width=(a.currentTime/a.duration*100)+"%"});a.addEventListener("ended",function(){reset();cur=null})})();</script></div>
 </div>
 <div class="card">
           <div class="step-title"><span class="step-num">1</span> Branchenvorlage wählen</div>
@@ -294,6 +295,14 @@
               <option value="web">Web-Sprachassistent (web)</option>
               <option value="telephony" selected>Telefonie + Web (telephony)</option>
             </select>
+          </div>
+          <div class="form-group" id="voice-picker">
+            <label>Stimme Ihres Assistenten (Grok Voice)</label>
+            <div style="color: var(--text-muted); font-size: 0.82rem; margin-bottom: 8px;">Alle 28 Grok-Stimmen sprechen Deutsch. Empfohlen für Ihre Branche sind oben markiert. Standard: <code>eve</code>.</div>
+            <input type="hidden" id="ob-voice" value="eve" />
+            <div id="vp-rec" class="vp-grid"></div>
+            <details style="margin-top:10px"><summary style="cursor:pointer;font-size:0.85rem">Alle 28 Stimmen anzeigen</summary><div id="vp-all" class="vp-grid" style="margin-top:8px"></div></details>
+            <div id="vp-selected" style="font-size:0.85rem;margin-top:8px"></div>
           </div>
           <div class="form-group">
             <label for="ob-calendar">Kalender für Terminbuchungen</label>
@@ -640,6 +649,22 @@
       return (str || "mandant").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "mandant";
     }
 
+
+    const GROK_VOICES = [{"voice_id": "ara", "name": "Ara", "beschreibung": "Warm und freundlich"}, {"voice_id": "eve", "name": "Eve", "beschreibung": "Energetisch und positiv (britischer Akzent im Englischen)"}, {"voice_id": "leo", "name": "Leo", "beschreibung": "Bestimmt und kraftvoll (britischer Akzent im Englischen)"}, {"voice_id": "rex", "name": "Rex", "beschreibung": "Selbstsicher und klar"}, {"voice_id": "sal", "name": "Sal", "beschreibung": "Ruhig und ausgewogen"}, {"voice_id": "altair", "name": "Altair", "beschreibung": "Elegant, gediegen, hochwertig"}, {"voice_id": "atlas", "name": "Atlas", "beschreibung": "Souverän, bestimmt und beruhigend"}, {"voice_id": "aurora", "name": "Aurora", "beschreibung": "Gelassen, beständig, freundlich-hell"}, {"voice_id": "carina", "name": "Carina", "beschreibung": "Sanft, einfühlsam, beruhigend"}, {"voice_id": "castor", "name": "Castor", "beschreibung": "Sympathisch, bodenständig, locker"}, {"voice_id": "celeste", "name": "Celeste", "beschreibung": "Mitfühlend, sicher und beruhigend"}, {"voice_id": "cosmo", "name": "Cosmo", "beschreibung": "Hell, neugierig, gut verständlich"}, {"voice_id": "helios", "name": "Helios", "beschreibung": "Fröhlich, energiegeladen, vielseitig"}, {"voice_id": "helix", "name": "Helix", "beschreibung": "Kühn, dynamisch, temporeich"}, {"voice_id": "iris", "name": "Iris", "beschreibung": "Freundlich, gut gelaunt, charmant"}, {"voice_id": "kepler", "name": "Kepler", "beschreibung": "Ideenreich, zukunftsgewandt, charismatisch"}, {"voice_id": "liora", "name": "Liora", "beschreibung": "Ruhig, geerdet, klar"}, {"voice_id": "lumen", "name": "Lumen", "beschreibung": "Warm, wortgewandt, einnehmend"}, {"voice_id": "luna", "name": "Luna", "beschreibung": "Sanft, geduldig, fürsorglich"}, {"voice_id": "lux", "name": "Lux", "beschreibung": "Geerdet, ruhig, besonnen"}, {"voice_id": "naksh", "name": "Naksh", "beschreibung": "Warm, nachdenklich, weise (indischer Akzent im Englischen)"}, {"voice_id": "orion", "name": "Orion", "beschreibung": "Voll, filmisch, resonant"}, {"voice_id": "perseus", "name": "Perseus", "beschreibung": "Stark, selbstbewusst, vertrauenswürdig"}, {"voice_id": "rigel", "name": "Rigel", "beschreibung": "Präzise, professionell, ruhig-souverän"}, {"voice_id": "sirius", "name": "Sirius", "beschreibung": "Schlagfertig, clever, verspielt"}, {"voice_id": "ursa", "name": "Ursa", "beschreibung": "Freundlich, warm, verlässlich"}, {"voice_id": "zagan", "name": "Zagan", "beschreibung": "Kraftvoll, dramatisch, markant"}, {"voice_id": "zenith", "name": "Zenith", "beschreibung": "Scharf, fokussiert, zielstrebig"}];
+    const VOICE_REC = {"trades": ["castor", "rex", "atlas", "ursa"], "butcher": ["ursa", "castor", "ara", "sal"], "law_office": ["lux", "liora", "aurora", "celeste"], "auto_repair": ["rex", "atlas", "rigel", "castor"], "gastronomy": ["ara", "ursa", "celeste", "sal"], "property_management": ["rigel", "celeste", "atlas", "sal"], "medical_practice": ["celeste", "aurora", "liora", "lux"], "tax_advisory": ["lux", "liora", "aurora", "celeste"]};
+    const VOICE_IDS = GROK_VOICES.map(v => v.voice_id);
+    function voiceCard(v, recSet) {
+      const on = document.getElementById("ob-voice").value === v.voice_id;
+      return `<button type="button" class="vp-card${on ? " on" : ""}" onclick="pickVoice('${v.voice_id}')" aria-pressed="${on}"><b>${v.name}</b><span>${v.beschreibung}</span>${recSet.includes(v.voice_id) ? '<div class="tag">Empfohlen</div>' : ""}</button>`;
+    }
+    function renderVoicePicker() {
+      const recSet = VOICE_REC[currentBranch] || [];
+      document.getElementById("vp-rec").innerHTML = recSet.map(id => voiceCard(GROK_VOICES.find(v => v.voice_id === id), recSet)).join("");
+      document.getElementById("vp-all").innerHTML = GROK_VOICES.map(v => voiceCard(v, recSet)).join("");
+      const sel = GROK_VOICES.find(v => v.voice_id === document.getElementById("ob-voice").value);
+      document.getElementById("vp-selected").innerHTML = sel ? `Gewählt: <b>${sel.name}</b> (<code>${sel.voice_id}</code>) – ${sel.beschreibung}` : "";
+    }
+    function pickVoice(id) { document.getElementById("ob-voice").value = id; renderVoicePicker(); runOnboardingPipeline(); }
     function setBranch(bKey) {
       currentBranch = bKey;
       ["trades", "butcher", "auto_repair", "gastronomy", "property_management", "law_office", "medical_practice", "tax_advisory"].forEach(k => {
@@ -654,6 +679,8 @@
       document.getElementById("chk-telephony").checked = (tpl.defaultChannel === "telephony");
       document.getElementById("chk-privacy").checked = (tpl.sensitivity === "elevated");
       document.getElementById("branch-specific-hint").textContent = tpl.hint;
+      document.getElementById("ob-voice").value = (VOICE_REC[bKey] || ["eve"])[0];
+      renderVoicePicker();
       runOnboardingPipeline();
     }
 
@@ -705,7 +732,9 @@
       const recApp = document.getElementById("chk-rec-approved").checked;
       const retDays = Number(document.getElementById("ob-retention").value);
 
+      const voiceId = (document.getElementById("ob-voice").value || "eve").toLowerCase();
       const errors = [];
+      if (!VOICE_IDS.includes(voiceId)) errors.push("INVALID_VOICE_ID");
       if (!name) errors.push("MISSING_AGENT_ID_OR_NAME");
       if (!aiDisc) errors.push("MISSING_AI_DISCLOSURE");
       if (channel === "telephony" && !telApp) errors.push("TELEPHONY_WITHOUT_APPROVAL");
@@ -787,6 +816,8 @@
         calendar_provider: calProvider,
         ...(calId ? { calendar_id: calId } : {}),
         ...(calProvider === "outlook_calendar" && outlookMailbox ? { outlook_own_mailbox: outlookMailbox } : {}),
+        voice_id: voiceId,
+        voice_engine: "grok_voice",
         greeting: greeting,
         handoff_triggers: tpl.triggers,
         forbidden_claims: tpl.forbidden,

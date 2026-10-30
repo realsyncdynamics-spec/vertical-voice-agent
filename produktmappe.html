@@ -306,4 +306,36 @@ Optional: unverbindliches Angebot über <strong>„Angebot anfragen“</strong> 
 <p><em>Der Vertical Voice Agent erteilt keine Rechts-, Medizin- oder Steuerberatung und gibt keine garantierte Compliance-Zusage.</em></p>
 <h2>Sprachdemos (Stand 30.10.2026)</h2>
 <p>Landingpage-Abschnitt „Stimmen anhören“ (#stimmen) und Onboarding: 6 deutsche Beispielaufnahmen (Handwerk, Gastronomie/Bäckerei, KFZ, Metzgerei, Hausverwaltung, Arztpraxis), erzeugt mit Microsoft Edge Neural TTS (Conrad, Katja, Killian, Amala). Illustrativ; Stimme und Ansprache werden im Onboarding festgelegt. Keine Rechts-, Medizin-, Steuer- oder Allergenauskünfte in den Skripten.</p>
+<h2>Grok-Stimmen (Stand 30.10.2026)</h2>
+<p>Ihr Assistent spricht mit einer der <strong>28 integrierten Grok-Stimmen</strong> (Grok Voice / Grok TTS). Alle Stimmen sprechen Deutsch; die Wahl erfolgt im Self-Service-Onboarding und wird als <code>voice_id</code> in der Mandantenkonfiguration gespeichert. Standard: <code>eve</code>. Unbekannte <code>voice_id</code> → Agent bleibt pausiert (Fail-Closed).</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Empfehlung</th>
+<th>Stimmen</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Betriebe (DACH, standard)</td>
+<td>castor, atlas, celeste, ursa, rigel, lux, ara, rex, sal</td>
+</tr>
+<tr>
+<td>Kanzlei, Praxis, Steuerberatung (elevated)</td>
+<td>lux, liora, aurora, celeste</td>
+</tr>
+<tr>
+<td>Alle Stimmen</td>
+<td>ara, eve, leo, rex, sal, altair, atlas, aurora, carina, castor, celeste, cosmo, helios, helix, iris, kepler, liora, lumen, luna, lux, naksh, orion, perseus, rigel, sirius, ursa, zagan, zenith</td>
+</tr>
+</tbody></table></div>
+<p>Die Hörbeispiele auf der Website sind Interim-Aufnahmen (Systemstimme). Im Betrieb spricht der Assistent über Grok Voice mit der gewählten Stimme.</p>
+<h2>Telefonassistent: mehr als eine Ansage</h2>
+<ul>
+<li><strong>Mehrstufiger Dialog:</strong> Begrüßung mit KI-Hinweis → Anliegen erkennen → fehlende Angaben einzeln nachfragen (Name, Rückrufnummer, Wunschtermin, Anliegen) → Zusammenfassung vorlesen und bestätigen lassen → erst dann Aktion.</li>
+<li><strong>Werkzeuge (nur laut Vorlage):</strong> <code>lookup_kb</code> (Öffnungszeiten, Betriebsinfos), <code>create_ticket</code> (Rückrufbitte), <code>schedule_appointment</code> (wo freigegeben), <code>handoff_human</code>.</li>
+<li><strong>Termine:</strong> Prüfung von Öffnungszeiten, Feiertagen, Betriebsferien und Kalender (Google oder Outlook, zweifach) vor jeder Buchung. Ist kein Termin möglich, bietet der Assistent eine andere Zeit oder eine Rückrufbitte an.</li>
+<li><strong>Sofortige Übergabe:</strong> branchenspezifische Trigger (z. B. Gasgeruch, Unfall, Fristsache, Atemnot), verbotene Zusagen oder Wunsch nach einem Menschen.</li>
+<li><strong>Grenzen:</strong> keine Rechts-, Medizin- oder Steuerberatung, keine Fristprüfung, keine Allergie- oder Spurenfreiheitsgarantie. Elevated-Branchen erst nach dokumentierter Datenschutzprüfung.</li>
+<li><strong>Fail-Closed:</strong> nicht freigeschalteter Agent → nur Hinweisansage, keine Werkzeuge.</li>
+</ul>
 <a class="cta" href="onboarding.html">Jetzt selbst einrichten</a></main></body></html>

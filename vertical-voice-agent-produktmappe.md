@@ -173,3 +173,24 @@ E-Mail: realsyncdynamics@gmail.com
 
 ## Sprachdemos (Stand 30.10.2026)
 Landingpage-Abschnitt „Stimmen anhören“ (#stimmen) und Onboarding: 6 deutsche Beispielaufnahmen (Handwerk, Gastronomie/Bäckerei, KFZ, Metzgerei, Hausverwaltung, Arztpraxis), erzeugt mit Microsoft Edge Neural TTS (Conrad, Katja, Killian, Amala). Illustrativ; Stimme und Ansprache werden im Onboarding festgelegt. Keine Rechts-, Medizin-, Steuer- oder Allergenauskünfte in den Skripten.
+
+## Grok-Stimmen (Stand 30.10.2026)
+
+Ihr Assistent spricht mit einer der **28 integrierten Grok-Stimmen** (Grok Voice / Grok TTS). Alle Stimmen sprechen Deutsch; die Wahl erfolgt im Self-Service-Onboarding und wird als `voice_id` in der Mandantenkonfiguration gespeichert. Standard: `eve`. Unbekannte `voice_id` → Agent bleibt pausiert (Fail-Closed).
+
+| Empfehlung | Stimmen |
+|---|---|
+| Betriebe (DACH, standard) | castor, atlas, celeste, ursa, rigel, lux, ara, rex, sal |
+| Kanzlei, Praxis, Steuerberatung (elevated) | lux, liora, aurora, celeste |
+| Alle Stimmen | ara, eve, leo, rex, sal, altair, atlas, aurora, carina, castor, celeste, cosmo, helios, helix, iris, kepler, liora, lumen, luna, lux, naksh, orion, perseus, rigel, sirius, ursa, zagan, zenith |
+
+Die Hörbeispiele auf der Website sind Interim-Aufnahmen (Systemstimme). Im Betrieb spricht der Assistent über Grok Voice mit der gewählten Stimme.
+
+## Telefonassistent: mehr als eine Ansage
+
+- **Mehrstufiger Dialog:** Begrüßung mit KI-Hinweis → Anliegen erkennen → fehlende Angaben einzeln nachfragen (Name, Rückrufnummer, Wunschtermin, Anliegen) → Zusammenfassung vorlesen und bestätigen lassen → erst dann Aktion.
+- **Werkzeuge (nur laut Vorlage):** `lookup_kb` (Öffnungszeiten, Betriebsinfos), `create_ticket` (Rückrufbitte), `schedule_appointment` (wo freigegeben), `handoff_human`.
+- **Termine:** Prüfung von Öffnungszeiten, Feiertagen, Betriebsferien und Kalender (Google oder Outlook, zweifach) vor jeder Buchung. Ist kein Termin möglich, bietet der Assistent eine andere Zeit oder eine Rückrufbitte an.
+- **Sofortige Übergabe:** branchenspezifische Trigger (z. B. Gasgeruch, Unfall, Fristsache, Atemnot), verbotene Zusagen oder Wunsch nach einem Menschen.
+- **Grenzen:** keine Rechts-, Medizin- oder Steuerberatung, keine Fristprüfung, keine Allergie- oder Spurenfreiheitsgarantie. Elevated-Branchen erst nach dokumentierter Datenschutzprüfung.
+- **Fail-Closed:** nicht freigeschalteter Agent → nur Hinweisansage, keine Werkzeuge.
