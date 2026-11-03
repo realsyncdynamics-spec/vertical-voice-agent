@@ -31,6 +31,10 @@ test('the configuration cannot falsely activate live calls or tools', () => {
   assert.match(html, /const enabledTools = \[\]/);
   assert.match(html, /enabled_tools: enabledTools/);
   assert.match(html, /ENTWURF · GEPRÜFT/);
+  assert.match(html, /document\.getElementById\("chk-telephony"\)\.checked = false/);
+  assert.match(html, /document\.getElementById\("chk-privacy"\)\.checked = false/);
+  assert.match(html, /MISSING_HUMAN_HANDOFF/);
+  assert.doesNotMatch(html, /id="ob-name" value="SHK Meisterbetrieb Rennsteig"/);
   assert.doesNotMatch(html, /pill\.textContent = "ACTIVE · VALIDATED"/);
   assert.match(html, /\(SIMULATION\)/);
 });
