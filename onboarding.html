@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Automatisiertes Branchen-Onboarding – Vertical Voice Agent</title>
+  <title>Voice Agent einrichten – RealSync Dynamics AI</title>
+  <meta name="description" content="Voice Agent konfigurieren: Branche, Betrieb, Paket, Stimme, Zeiten, Freigaben und Export. Nur Vorschau – keine Live-Aktivierung." />
+  <link rel="stylesheet" href="onboarding-brand.css" />
   <style>
     :root {
       --bg: #0b0f19;
@@ -189,23 +191,32 @@
   <header>
     <div class="header-inner">
       <div class="brand">
-        <span>Vertical Voice Agent</span>
-        <span class="badge badge-accent">Self-Service-Onboarding</span>
+        <a class="brand-name" href="https://realsyncdynamicsai.de/unternehmen">RealSyncDynamics<span class="brand-dot">.AI</span></a>
+        <span class="badge badge-accent">VOICE AGENT · VORSCHAU</span>
       </div>
       <div>
-        <a href="anleitung.html" class="btn btn-secondary">Klickanleitung</a>
-        <a href="index.html" class="btn btn-secondary">Zur Produkt-Webseite</a>
+        <a href="https://realsyncdynamicsai.de/unternehmen" class="btn btn-secondary">Zur Landing</a>
+        <a href="index.html" class="btn btn-secondary">Produktübersicht</a>
       </div>
     </div>
   </header>
 
   <div class="container">
-    <h1>Self-Service-Onboarding – in 6 Schritten selbst einrichten</h1>
+    <p class="eyebrow">REALSYNC DYNAMICS.AI / VOICE AGENT STUDIO</p>
+    <h1>Ihr Voice Agent. <em>In sechs Schritten konfiguriert.</em></h1>
     <p class="sub">
-      Sie richten Ihren Sprachassistenten komplett selbst ein – ohne Angebotsanfrage. Jede Eingabe wird sofort geprüft (Fail-Closed),
-      rechts sehen Sie live den Status und die Testgespräche. Am Ende laden Sie Konfiguration und Protokoll herunter.
+      Wählen Sie Branche, Betriebsdaten und Sicherheitsvorgaben. Die Konfiguration wird lokal geprüft und kann heruntergeladen werden. Eine produktive Telefonie-Aktivierung oder Bestellung erfolgt hier nicht.
     </p>
-    <div class="card" style="border-color: var(--accent);">
+    <nav class="voice-step-nav" aria-label="Onboarding-Schritte">
+      <a href="#step-1"><span>01</span> Branche</a>
+      <a href="#step-2"><span>02</span> Betrieb &amp; Paket</a>
+      <a href="#step-3"><span>03</span> Öffnungszeiten</a>
+      <a href="#step-4"><span>04</span> Freigaben</a>
+      <a href="#step-5"><span>05</span> Prüfung</a>
+      <a href="#step-6"><span>06</span> Export</a>
+    </nav>
+    <div class="voice-preview-notice" role="note"><strong>Einrichtungsvorschau – keine Live-Schaltung</strong><span>Telefonie bleibt deaktiviert. Der Prüfstatus bezieht sich ausschließlich auf die Konfiguration.</span></div>
+    <div class="card quick-guide">
       <div class="step-title">So geht's – Kurzanleitung</div>
       <ol style="margin: 0 0 0 18px; font-size: 0.9rem; line-height: 1.7; color: #cbd5e1;">
         <li><strong>Schritt 1:</strong> Klicken Sie auf Ihre Branche (z. B. „Handwerk“).</li>
@@ -227,7 +238,7 @@
         <!-- STEP 1 -->
         <div class="card" style="margin-bottom:20px"><div id="stimmen"><style>.vd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:18px}.vd-card{display:flex;gap:14px;align-items:center;padding:14px 16px;border:1px solid rgba(127,127,127,.3);border-radius:12px;background:rgba(127,127,127,.06)}.vd-btn{flex:0 0 48px;height:48px;border-radius:50%;border:0;background:#2563eb;color:#fff;font-size:1.1rem;cursor:pointer}.vd-btn.on{background:#16a34a}.vd-txt{flex:1;display:flex;flex-direction:column;gap:3px;font-size:.95rem}.vd-txt span{opacity:.75;font-size:.85rem}.vd-bar{height:4px;background:rgba(127,127,127,.25);border-radius:2px;overflow:hidden;margin-top:6px}.vd-bar i{display:block;height:100%;width:0;background:#2563eb}.vd-note{font-size:.85rem;opacity:.8;margin-top:14px}</style><h2>Stimmen anhören – vor dem Start</h2><p>Kurze Beispiele, wie Ihr Telefonassistent am Telefon klingt – ohne Anmeldung, einfach abspielen.</p><div class="vd-grid"><div class="vd-card"><button class="vd-btn" data-src="audio/handwerk.mp3?v=grok1" aria-label="Handwerk abspielen">▶</button><div class="vd-txt"><strong>Handwerk</strong><span>Malerbetrieb · Grok-Stimme castor</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/gastronomie.mp3?v=grok1" aria-label="Gastronomie & Bäckerei abspielen">▶</button><div class="vd-txt"><strong>Gastronomie & Bäckerei</strong><span>Vorbestellung · Grok-Stimme ursa</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/kfz.mp3?v=grok1" aria-label="KFZ-Werkstatt abspielen">▶</button><div class="vd-txt"><strong>KFZ-Werkstatt</strong><span>Terminannahme · Grok-Stimme atlas</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/metzgerei.mp3?v=grok1" aria-label="Metzgerei abspielen">▶</button><div class="vd-txt"><strong>Metzgerei</strong><span>Kurze Ladenbegrüßung · Grok-Stimme sal</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/hausverwaltung.mp3?v=grok1" aria-label="Hausverwaltung abspielen">▶</button><div class="vd-txt"><strong>Hausverwaltung</strong><span>Schadensmeldung · Grok-Stimme rigel</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/praxis.mp3?v=grok1" aria-label="Arztpraxis (erhöhte Stufe) abspielen">▶</button><div class="vd-txt"><strong>Arztpraxis (erhöhte Stufe)</strong><span>Terminassistenz · Grok-Stimme aurora, ohne med. Auskunft</span><div class="vd-bar"><i></i></div></div></div></div><p class="vd-note">Beispielaufnahmen mit Grok Voice (xAI Grok TTS). Ihre eigene Stimme wählen Sie im Onboarding aus allen 28 Grok-Stimmen. Betriebsnamen sind fiktiv. Die Beispiele sind illustrativ.</p><script>(function(){var a=new Audio(),cur=null;a.preload="none";function reset(){if(cur){cur.textContent="▶";cur.classList.remove("on");cur.parentNode.querySelector(".vd-bar i").style.width="0"}}document.querySelectorAll(".vd-btn").forEach(function(b){b.addEventListener("click",function(){if(cur===b&&!a.paused){a.pause();b.textContent="▶";b.classList.remove("on");return}if(cur!==b){reset();a.src=b.dataset.src;cur=b}a.play();b.textContent="❚❚";b.classList.add("on")})});a.addEventListener("timeupdate",function(){if(cur&&a.duration)cur.parentNode.querySelector(".vd-bar i").style.width=(a.currentTime/a.duration*100)+"%"});a.addEventListener("ended",function(){reset();cur=null})})();</script></div>
 </div>
-<div class="card">
+<div class="card voice-step" id="step-1">
           <div class="step-title"><span class="step-num">1</span> Branchenvorlage wählen</div>
           <div class="branch-selector" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
             <button type="button" class="branch-btn active" id="btn-trades" onclick="setBranch('trades')">
@@ -267,8 +278,8 @@
         </div>
 
         <!-- STEP 2 -->
-        <div class="card">
-          <div class="step-title"><span class="step-num">2</span> Betriebsdaten & Paket zuordnen</div>
+        <div class="card voice-step" id="step-2">
+          <div class="step-title"><span class="step-num">2</span> Betriebsdaten &amp; Paket zuordnen</div>
           <div class="form-group">
             <label for="ob-name">Mandanten- / Betriebsname *</label>
             <input type="text" id="ob-name" value="SHK Meisterbetrieb Rennsteig" oninput="runOnboardingPipeline()" />
@@ -323,7 +334,7 @@
         </div>
 
         <!-- STEP 3: HOURS / HOLIDAYS -->
-        <div class="card" id="card-hours">
+        <div class="card voice-step" id="step-3"><span id="card-hours" class="legacy-anchor" aria-hidden="true"></span>
           <div class="step-title"><span class="step-num">3</span> Öffnungszeiten, Feiertage & Betriebsferien</div>
           <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">Termine werden nur innerhalb dieser Zeiten gebucht (Europe/Berlin). Ohne Eintrag gilt Mo–Fr 08:00–18:00, Wochenende geschlossen.</p>
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:0.88rem;">
@@ -407,8 +418,8 @@
         </div>
 
         <!-- STEP 3 -->
-        <div class="card">
-          <div class="step-title"><span class="step-num">4</span> Fail-Closed Sicherheits- & Datenschutzfreigaben</div>
+        <div class="card voice-step" id="step-4">
+          <div class="step-title"><span class="step-num">4</span> Sicherheit &amp; Datenschutzfreigaben</div>
           <label class="check-row">
             <input type="checkbox" id="chk-disclosure" checked onchange="runOnboardingPipeline()" />
             <div>
@@ -452,20 +463,20 @@
 
       <!-- RIGHT COLUMN: LIVE VALIDATION, SMOKE TESTS & EXPORT -->
       <div>
-        <div class="card">
+        <div class="card voice-step" id="step-5">
           <div class="step-title" style="justify-content: space-between;">
             <div style="display: flex; align-items: center; gap: 10px;">
-              <span class="step-num">5</span> Fail-Closed-Prüfung & Live-Status
+              <span class="step-num">5</span> Konfiguration prüfen
             </div>
-            <span id="status-pill" class="badge badge-ok">ACTIVE</span>
+            <span id="status-pill" class="badge badge-warn" role="status" aria-live="polite">VORSCHAU · PRÜFUNG</span>
           </div>
           <div id="validation-summary" style="margin-bottom: 16px; font-size: 0.9rem;"></div>
 
-          <h4 style="font-size: 0.92rem; margin-bottom: 10px; color: #cbd5e1;">Automatischer 3-Stufen-Branchen-Smoke-Test:</h4>
+          <h4 style="font-size: 0.92rem; margin-bottom: 10px;">Simulierte Branchen-Testfälle – keine echten Anrufe:</h4>
           <div id="smoke-list"></div>
         </div>
 
-        <div class="card">
+        <div class="card voice-step" id="step-6">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
             <h4 style="font-size: 0.95rem;"><span class="step-num">6</span> Konfiguration & Protokoll herunterladen</h4>
             <div style="display: flex; gap: 8px;">
@@ -473,7 +484,7 @@
               <button type="button" class="btn btn-secondary" onclick="downloadProtocol()">Onboarding-Protokoll (.md)</button>
             </div>
           </div>
-          <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:8px;">Die Datei enthält alle Einstellungen (ohne Passwörter oder Zugangsdaten). Damit ist Ihr Self-Service-Onboarding abgeschlossen; die Kalenderverbindung (Google oder Outlook) erfolgt mit Ihrem eigenen Konto.</p>
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:8px;">Die Datei enthält alle Einstellungen (ohne Passwörter oder Zugangsdaten). Dies ist ausschließlich ein Konfigurationsentwurf. Erst nach separater Vertrags-, Datenschutz- und Telefoniefreigabe kann die Aktivierung erfolgen.</p>
           <div class="code-box" id="json-preview"></div>
         </div>
       </div>
