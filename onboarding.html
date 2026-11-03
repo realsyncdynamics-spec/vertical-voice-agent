@@ -187,7 +187,7 @@
   </style>
 <style>.vp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}.vp-card{text-align:left;padding:10px 12px;border-radius:10px;border:1px solid rgba(127,127,127,.35);background:rgba(127,127,127,.06);color:inherit;cursor:pointer;font:inherit}.vp-card b{display:block;font-size:.92rem}.vp-card span{display:block;font-size:.76rem;opacity:.75;margin-top:2px}.vp-card.on{border-color:#60a5fa;background:rgba(96,165,250,.16);box-shadow:0 0 0 1px #60a5fa}.vp-card .tag{font-size:.65rem;letter-spacing:.06em;text-transform:uppercase;color:#60a5fa;margin-top:4px}</style>
 </head>
-<body>
+<body class="voice-onboarding">
   <header>
     <div class="header-inner">
       <div class="brand">
@@ -724,7 +724,7 @@
       });
       document.getElementById("hours-note").textContent = closures.length ? `${closures.length} Schließzeitraum/-räume erfasst.` : "";
       const hasBooking = TEMPLATES[currentBranch].tools.includes("schedule_appointment");
-      document.getElementById("card-hours").style.opacity = hasBooking ? "1" : "0.6";
+      document.getElementById("step-3").style.opacity = hasBooking ? "1" : "0.6";
       const pkgKey = document.getElementById("ob-pkg").value;
       const pkg = PKG_PRICES[pkgKey];
       const channel = document.getElementById("ob-channel").value;
@@ -764,28 +764,30 @@
       }
 
       const valid = errors.length === 0;
-      const effectiveStatus = valid ? "active" : "paused";
-      const enabledTools = valid ? tpl.tools : [];
+      // Local validation only. No telephony/runtime enablement and no auto deploy.
+      const effectiveStatus = valid ? "draft_validated" : "paused";
+      const proposedTools = valid ? tpl.tools : [];
+      const enabledTools = [];
       const agentId = `vva-${currentBranch}-${slugify(name)}`;
       const greeting = tpl.greetingTpl.replace("{name}", name || "Ihrem Betrieb").replace("{handoff}", handoff);
 
       const pill = document.getElementById("status-pill");
       if (valid) {
         pill.className = "badge badge-ok";
-        pill.textContent = "ACTIVE · VALIDATED";
+        pill.textContent = "ENTWURF · GEPRÜFT";
         document.getElementById("validation-summary").innerHTML =
-          `<span style="color: #34d399; font-weight: 600;">Fail-Closed-Prüfung bestanden:</span> Alle Pflichtfreigaben liegen vor. Werkzeuge (<code>${enabledTools.join(", ")}</code>) sind aktiv freigeschaltet.`;
+          `<span style="color: #34d399; font-weight: 600;">Lokale Konfiguration geprüft:</span> Vorgesehene Werkzeuge: <code>${proposedTools.join(", ")}</code>. Produktive Ausführung bleibt gesperrt.`;
       } else {
         pill.className = "badge badge-err";
-        pill.textContent = "PAUSED · FAIL-CLOSED";
+        pill.textContent = "ENTWURF · GESPERRT";
         document.getElementById("validation-summary").innerHTML =
           `<span style="color: #f87171; font-weight: 600;">Fail-Closed-Sperre aktiv (${errors.join(", ")}):</span> Status auf <code>paused</code> gesetzt, alle Werkzeuge gesperrt (<code>enabled_tools: []</code>).`;
       }
 
       // Render smoke tests
       const smokeHtml = tpl.smokeTests.map(st => {
-        const decision = valid ? st.expectedActive : "FAIL_CLOSED_BLOCKED";
-        const tool = valid ? st.toolActive : "null (gesperrt)";
+        const decision = valid ? st.expectedActive + " (SIMULATION)" : "FAIL_CLOSED_BLOCKED";
+        const tool = valid ? st.toolActive + " (Simulation)" : "null (gesperrt)";
         const badgeClass = valid ? "badge-ok" : "badge-warn";
         return `<div class="smoke-item">
           <div class="smoke-head">
@@ -811,11 +813,14 @@
           overage_eur_per_min: pkg.over
         },
         channel: channel,
-        requested_status: "active",
+        requested_status: "draft",
+        runtime_status: "not_deployed",
+        validation_only: true,
         effective_status: effectiveStatus,
         valid: valid,
         data_sensitivity: tpl.sensitivity,
         enabled_tools: enabledTools,
+        proposed_tools: proposedTools,
         handoff_contact: handoff,
         opening_hours: hours,
         business_hours: businessHours,
