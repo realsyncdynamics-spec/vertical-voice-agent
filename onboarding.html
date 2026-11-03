@@ -282,11 +282,11 @@
           <div class="step-title"><span class="step-num">2</span> Betriebsdaten &amp; Paket zuordnen</div>
           <div class="form-group">
             <label for="ob-name">Mandanten- / Betriebsname *</label>
-            <input type="text" id="ob-name" value="SHK Meisterbetrieb Rennsteig" oninput="runOnboardingPipeline()" />
+            <input type="text" id="ob-name" value="" placeholder="Name Ihres Unternehmens" oninput="runOnboardingPipeline()" />
           </div>
           <div class="form-group">
             <label for="ob-handoff" id="lbl-handoff">Notdienst- / Handoff-Ziel für sofortige Übergabe *</label>
-            <input type="text" id="ob-handoff" value="Bereitschaftsdienst +49 3679 000111" oninput="runOnboardingPipeline()" />
+            <input type="text" id="ob-handoff" value="" placeholder="Echte Rufnummer oder Handoff-Kontakt Ihres Betriebs" oninput="runOnboardingPipeline()" />
           </div>
           <div class="form-group">
             <input type="hidden" id="ob-hours" value="" />
@@ -428,7 +428,7 @@
             </div>
           </label>
           <label class="check-row" id="row-telephony">
-            <input type="checkbox" id="chk-telephony" checked onchange="runOnboardingPipeline()" />
+            <input type="checkbox" id="chk-telephony" onchange="runOnboardingPipeline()" />
             <div>
               <strong>Explizite Telefonie-Freigabe erteilt</strong><br />
               <span style="color: var(--text-muted);">Pflicht bei Kanal <code>telephony</code> (erfordert Paket Professional oder Kanzlei).</span>
@@ -682,13 +682,14 @@
         document.getElementById("btn-" + k).classList.toggle("active", k === bKey);
       });
       const tpl = TEMPLATES[bKey];
-      document.getElementById("ob-name").value = tpl.defaultName;
-      document.getElementById("ob-handoff").value = tpl.defaultHandoff;
+      document.getElementById("ob-name").placeholder = `z. B. ${tpl.defaultName}`;
+      document.getElementById("ob-handoff").placeholder = `z. B. ${tpl.defaultHandoff}`;
       document.getElementById("lbl-handoff").textContent = tpl.handoffLabel;
       document.getElementById("ob-pkg").value = tpl.defaultPkg;
       document.getElementById("ob-channel").value = tpl.defaultChannel;
-      document.getElementById("chk-telephony").checked = (tpl.defaultChannel === "telephony");
-      document.getElementById("chk-privacy").checked = (tpl.sensitivity === "elevated");
+      // Explicit customer approval must never be preselected by a template.
+      document.getElementById("chk-telephony").checked = false;
+      document.getElementById("chk-privacy").checked = false;
       document.getElementById("branch-specific-hint").textContent = tpl.hint;
       document.getElementById("ob-voice").value = (VOICE_REC[bKey] || ["eve"])[0];
       renderVoicePicker();
@@ -703,7 +704,8 @@
     function runOnboardingPipeline() {
       const tpl = TEMPLATES[currentBranch];
       const name = document.getElementById("ob-name").value.trim();
-      const handoff = document.getElementById("ob-handoff").value.trim() || "Zentrale";
+      const handoffInput = document.getElementById("ob-handoff").value.trim();
+      const handoff = handoffInput || "Noch keine Übergabe konfiguriert";
       const DAYK = ["mon","tue","wed","thu","fri","sat","sun"], DAYL = ["Mo","Di","Mi","Do","Fr","Sa","So"];
       const businessHours = {}; const hourErrs = [];
       DAYK.forEach(k => {
@@ -749,6 +751,7 @@
       if (!name) errors.push("MISSING_AGENT_ID_OR_NAME");
       if (!aiDisc) errors.push("MISSING_AI_DISCLOSURE");
       if (channel === "telephony" && !telApp) errors.push("TELEPHONY_WITHOUT_APPROVAL");
+      if (channel === "telephony" && !handoffInput) errors.push("MISSING_HUMAN_HANDOFF");
       if (channel === "telephony" && pkgKey === "starter") errors.push("STARTER_PACKAGE_WEB_ONLY");
       if (recEn && (!recApp || !Number.isInteger(retDays) || retDays <= 0)) {
         errors.push("RECORDING_WITHOUT_APPROVAL_OR_RETENTION");
