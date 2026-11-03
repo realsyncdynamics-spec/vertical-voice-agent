@@ -1,0 +1,37 @@
+name: Voice onboarding design and browser QA
+on:
+  push:
+    branches:
+      - feat/voice-onboarding-unified-realsync-20261103
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  static:
+    name: Static contract checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - run: node --test test/onboarding-design.test.mjs
+  browser:
+    name: Responsive browser and draft-only QA
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Install isolated Playwright runner
+        run: npm install --no-save --no-package-lock playwright@1.56.1
+      - run: npx playwright install --with-deps chromium
+      - name: Verify live-preview safety and mobile layout
+        run: node test/onboarding-browser.mjs
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: voice-onboarding-responsive-screenshots
+          path: screenshots/
+          if-no-files-found: ignore
