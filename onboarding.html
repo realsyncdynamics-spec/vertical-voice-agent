@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Automatisiertes Branchen-Onboarding – Vertical Voice Agent</title>
+  <title>Voice Agent einrichten – RealSync Dynamics AI</title>
+  <meta name="description" content="Voice Agent konfigurieren: Branche, Betrieb, Paket, Stimme, Zeiten, Freigaben und Export. Nur Vorschau – keine Live-Aktivierung." />
+  <link rel="stylesheet" href="onboarding-brand.css" />
   <style>
     :root {
       --bg: #0b0f19;
@@ -185,41 +187,50 @@
   </style>
 <style>.vp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}.vp-card{text-align:left;padding:10px 12px;border-radius:10px;border:1px solid rgba(127,127,127,.35);background:rgba(127,127,127,.06);color:inherit;cursor:pointer;font:inherit}.vp-card b{display:block;font-size:.92rem}.vp-card span{display:block;font-size:.76rem;opacity:.75;margin-top:2px}.vp-card.on{border-color:#60a5fa;background:rgba(96,165,250,.16);box-shadow:0 0 0 1px #60a5fa}.vp-card .tag{font-size:.65rem;letter-spacing:.06em;text-transform:uppercase;color:#60a5fa;margin-top:4px}</style>
 </head>
-<body>
+<body class="voice-onboarding">
   <header>
     <div class="header-inner">
       <div class="brand">
-        <span>Vertical Voice Agent</span>
-        <span class="badge badge-accent">Self-Service-Onboarding</span>
+        <a class="brand-name" href="https://realsyncdynamicsai.de/unternehmen">RealSyncDynamics<span class="brand-dot">.AI</span></a>
+        <span class="badge badge-accent">VOICE AGENT · VORSCHAU</span>
       </div>
       <div>
-        <a href="anleitung.html" class="btn btn-secondary">Klickanleitung</a>
-        <a href="index.html" class="btn btn-secondary">Zur Produkt-Webseite</a>
+        <a href="https://realsyncdynamicsai.de/unternehmen" class="btn btn-secondary">Zur Landing</a>
+        <a href="index.html" class="btn btn-secondary">Produktübersicht</a>
       </div>
     </div>
   </header>
 
   <div class="container">
-    <h1>Self-Service-Onboarding – in 6 Schritten selbst einrichten</h1>
+    <p class="eyebrow">REALSYNC DYNAMICS.AI / VOICE AGENT STUDIO</p>
+    <h1>Ihr Voice Agent. <em>In sechs Schritten konfiguriert.</em></h1>
     <p class="sub">
-      Sie richten Ihren Sprachassistenten komplett selbst ein – ohne Angebotsanfrage. Jede Eingabe wird sofort geprüft (Fail-Closed),
-      rechts sehen Sie live den Status und die Testgespräche. Am Ende laden Sie Konfiguration und Protokoll herunter.
+      Wählen Sie Branche, Betriebsdaten und Sicherheitsvorgaben. Die Konfiguration wird lokal geprüft und kann heruntergeladen werden. Eine produktive Telefonie-Aktivierung oder Bestellung erfolgt hier nicht.
     </p>
-    <div class="card" style="border-color: var(--accent);">
-      <div class="step-title">So geht's – Kurzanleitung</div>
+    <nav class="voice-step-nav" aria-label="Onboarding-Schritte">
+      <a href="#step-1"><span>01</span> Branche</a>
+      <a href="#step-2"><span>02</span> Betrieb &amp; Paket</a>
+      <a href="#step-3"><span>03</span> Öffnungszeiten</a>
+      <a href="#step-4"><span>04</span> Freigaben</a>
+      <a href="#step-5"><span>05</span> Prüfung</a>
+      <a href="#step-6"><span>06</span> Export</a>
+    </nav>
+    <div class="voice-preview-notice" role="note"><strong>Einrichtungsvorschau – keine Live-Schaltung</strong><span>Telefonie bleibt deaktiviert. Der Prüfstatus bezieht sich ausschließlich auf die Konfiguration.</span></div>
+    <details class="card quick-guide">
+      <summary class="step-title">So geht's – Kurzanleitung <span class="guide-arrow" aria-hidden="true">+</span></summary>
       <ol style="margin: 0 0 0 18px; font-size: 0.9rem; line-height: 1.7; color: #cbd5e1;">
         <li><strong>Schritt 1:</strong> Klicken Sie auf Ihre Branche (z. B. „Handwerk“).</li>
         <li><strong>Schritt 2:</strong> Betriebsname, Übergabe-Kontakt, Paket, Kanal und Kalender (Google empfohlen) auswählen.</li>
         <li><strong>Schritt 3:</strong> Öffnungszeiten je Tag eintragen, Feiertage aktivieren, Betriebsferien eintragen.</li>
         <li><strong>Schritt 4:</strong> Häkchen bei den Freigaben setzen (KI-Offenlegung Pflicht; Telefonie/Datenschutz je nach Paket und Branche).</li>
-        <li><strong>Schritt 5:</strong> Rechts muss „ACTIVE · VALIDATED“ stehen – sonst nennt der rote Hinweis, was fehlt.</li>
+        <li><strong>Schritt 5:</strong> In Schritt 5 muss „ENTWURF · GEPRÜFT“ stehen – das bedeutet keine produktive Freischaltung.</li>
         <li><strong>Schritt 6:</strong> „Konfig (.json) speichern“ und „Onboarding-Protokoll (.md)“ klicken – fertig.</li>
       </ol>
       <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 8px;">
         Ausführlich mit Erklärung jedes Feldes: <a href="anleitung.html" style="color: var(--accent);">Klickanleitung für Kunden</a>.
         Fragen? Unten rechts auf <strong>„💬 Fragen? Hilfe-Bot“</strong> klicken – jederzeit verfügbar.
       </p>
-    </div>
+    </details>
 
     <div class="wizard-grid">
       <!-- LEFT COLUMN: INPUT STEPS -->
@@ -227,7 +238,7 @@
         <!-- STEP 1 -->
         <div class="card" style="margin-bottom:20px"><div id="stimmen"><style>.vd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:18px}.vd-card{display:flex;gap:14px;align-items:center;padding:14px 16px;border:1px solid rgba(127,127,127,.3);border-radius:12px;background:rgba(127,127,127,.06)}.vd-btn{flex:0 0 48px;height:48px;border-radius:50%;border:0;background:#2563eb;color:#fff;font-size:1.1rem;cursor:pointer}.vd-btn.on{background:#16a34a}.vd-txt{flex:1;display:flex;flex-direction:column;gap:3px;font-size:.95rem}.vd-txt span{opacity:.75;font-size:.85rem}.vd-bar{height:4px;background:rgba(127,127,127,.25);border-radius:2px;overflow:hidden;margin-top:6px}.vd-bar i{display:block;height:100%;width:0;background:#2563eb}.vd-note{font-size:.85rem;opacity:.8;margin-top:14px}</style><h2>Stimmen anhören – vor dem Start</h2><p>Kurze Beispiele, wie Ihr Telefonassistent am Telefon klingt – ohne Anmeldung, einfach abspielen.</p><div class="vd-grid"><div class="vd-card"><button class="vd-btn" data-src="audio/handwerk.mp3?v=grok1" aria-label="Handwerk abspielen">▶</button><div class="vd-txt"><strong>Handwerk</strong><span>Malerbetrieb · Grok-Stimme castor</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/gastronomie.mp3?v=grok1" aria-label="Gastronomie & Bäckerei abspielen">▶</button><div class="vd-txt"><strong>Gastronomie & Bäckerei</strong><span>Vorbestellung · Grok-Stimme ursa</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/kfz.mp3?v=grok1" aria-label="KFZ-Werkstatt abspielen">▶</button><div class="vd-txt"><strong>KFZ-Werkstatt</strong><span>Terminannahme · Grok-Stimme atlas</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/metzgerei.mp3?v=grok1" aria-label="Metzgerei abspielen">▶</button><div class="vd-txt"><strong>Metzgerei</strong><span>Kurze Ladenbegrüßung · Grok-Stimme sal</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/hausverwaltung.mp3?v=grok1" aria-label="Hausverwaltung abspielen">▶</button><div class="vd-txt"><strong>Hausverwaltung</strong><span>Schadensmeldung · Grok-Stimme rigel</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/praxis.mp3?v=grok1" aria-label="Arztpraxis (erhöhte Stufe) abspielen">▶</button><div class="vd-txt"><strong>Arztpraxis (erhöhte Stufe)</strong><span>Terminassistenz · Grok-Stimme aurora, ohne med. Auskunft</span><div class="vd-bar"><i></i></div></div></div></div><p class="vd-note">Beispielaufnahmen mit Grok Voice (xAI Grok TTS). Ihre eigene Stimme wählen Sie im Onboarding aus allen 28 Grok-Stimmen. Betriebsnamen sind fiktiv. Die Beispiele sind illustrativ.</p><script>(function(){var a=new Audio(),cur=null;a.preload="none";function reset(){if(cur){cur.textContent="▶";cur.classList.remove("on");cur.parentNode.querySelector(".vd-bar i").style.width="0"}}document.querySelectorAll(".vd-btn").forEach(function(b){b.addEventListener("click",function(){if(cur===b&&!a.paused){a.pause();b.textContent="▶";b.classList.remove("on");return}if(cur!==b){reset();a.src=b.dataset.src;cur=b}a.play();b.textContent="❚❚";b.classList.add("on")})});a.addEventListener("timeupdate",function(){if(cur&&a.duration)cur.parentNode.querySelector(".vd-bar i").style.width=(a.currentTime/a.duration*100)+"%"});a.addEventListener("ended",function(){reset();cur=null})})();</script></div>
 </div>
-<div class="card">
+<div class="card voice-step" id="step-1">
           <div class="step-title"><span class="step-num">1</span> Branchenvorlage wählen</div>
           <div class="branch-selector" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
             <button type="button" class="branch-btn active" id="btn-trades" onclick="setBranch('trades')">
@@ -267,15 +278,15 @@
         </div>
 
         <!-- STEP 2 -->
-        <div class="card">
-          <div class="step-title"><span class="step-num">2</span> Betriebsdaten & Paket zuordnen</div>
+        <div class="card voice-step" id="step-2">
+          <div class="step-title"><span class="step-num">2</span> Betriebsdaten &amp; Paket zuordnen</div>
           <div class="form-group">
             <label for="ob-name">Mandanten- / Betriebsname *</label>
-            <input type="text" id="ob-name" value="SHK Meisterbetrieb Rennsteig" oninput="runOnboardingPipeline()" />
+            <input type="text" id="ob-name" value="" placeholder="Name Ihres Unternehmens" oninput="runOnboardingPipeline()" />
           </div>
           <div class="form-group">
             <label for="ob-handoff" id="lbl-handoff">Notdienst- / Handoff-Ziel für sofortige Übergabe *</label>
-            <input type="text" id="ob-handoff" value="Bereitschaftsdienst +49 3679 000111" oninput="runOnboardingPipeline()" />
+            <input type="text" id="ob-handoff" value="" placeholder="Echte Rufnummer oder Handoff-Kontakt Ihres Betriebs" oninput="runOnboardingPipeline()" />
           </div>
           <div class="form-group">
             <input type="hidden" id="ob-hours" value="" />
@@ -323,7 +334,7 @@
         </div>
 
         <!-- STEP 3: HOURS / HOLIDAYS -->
-        <div class="card" id="card-hours">
+        <div class="card voice-step" id="step-3"><span id="card-hours" class="legacy-anchor" aria-hidden="true"></span>
           <div class="step-title"><span class="step-num">3</span> Öffnungszeiten, Feiertage & Betriebsferien</div>
           <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:10px;">Termine werden nur innerhalb dieser Zeiten gebucht (Europe/Berlin). Ohne Eintrag gilt Mo–Fr 08:00–18:00, Wochenende geschlossen.</p>
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:0.88rem;">
@@ -407,8 +418,8 @@
         </div>
 
         <!-- STEP 3 -->
-        <div class="card">
-          <div class="step-title"><span class="step-num">4</span> Fail-Closed Sicherheits- & Datenschutzfreigaben</div>
+        <div class="card voice-step" id="step-4">
+          <div class="step-title"><span class="step-num">4</span> Sicherheit &amp; Datenschutzfreigaben</div>
           <label class="check-row">
             <input type="checkbox" id="chk-disclosure" checked onchange="runOnboardingPipeline()" />
             <div>
@@ -417,7 +428,7 @@
             </div>
           </label>
           <label class="check-row" id="row-telephony">
-            <input type="checkbox" id="chk-telephony" checked onchange="runOnboardingPipeline()" />
+            <input type="checkbox" id="chk-telephony" onchange="runOnboardingPipeline()" />
             <div>
               <strong>Explizite Telefonie-Freigabe erteilt</strong><br />
               <span style="color: var(--text-muted);">Pflicht bei Kanal <code>telephony</code> (erfordert Paket Professional oder Kanzlei).</span>
@@ -452,20 +463,20 @@
 
       <!-- RIGHT COLUMN: LIVE VALIDATION, SMOKE TESTS & EXPORT -->
       <div>
-        <div class="card">
+        <div class="card voice-step" id="step-5">
           <div class="step-title" style="justify-content: space-between;">
             <div style="display: flex; align-items: center; gap: 10px;">
-              <span class="step-num">5</span> Fail-Closed-Prüfung & Live-Status
+              <span class="step-num">5</span> Konfiguration prüfen
             </div>
-            <span id="status-pill" class="badge badge-ok">ACTIVE</span>
+            <span id="status-pill" class="badge badge-warn" role="status" aria-live="polite">VORSCHAU · PRÜFUNG</span>
           </div>
           <div id="validation-summary" style="margin-bottom: 16px; font-size: 0.9rem;"></div>
 
-          <h4 style="font-size: 0.92rem; margin-bottom: 10px; color: #cbd5e1;">Automatischer 3-Stufen-Branchen-Smoke-Test:</h4>
+          <h4 style="font-size: 0.92rem; margin-bottom: 10px;">Simulierte Branchen-Testfälle – keine echten Anrufe:</h4>
           <div id="smoke-list"></div>
         </div>
 
-        <div class="card">
+        <div class="card voice-step" id="step-6">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
             <h4 style="font-size: 0.95rem;"><span class="step-num">6</span> Konfiguration & Protokoll herunterladen</h4>
             <div style="display: flex; gap: 8px;">
@@ -473,7 +484,7 @@
               <button type="button" class="btn btn-secondary" onclick="downloadProtocol()">Onboarding-Protokoll (.md)</button>
             </div>
           </div>
-          <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:8px;">Die Datei enthält alle Einstellungen (ohne Passwörter oder Zugangsdaten). Damit ist Ihr Self-Service-Onboarding abgeschlossen; die Kalenderverbindung (Google oder Outlook) erfolgt mit Ihrem eigenen Konto.</p>
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:8px;">Die Datei enthält alle Einstellungen (ohne Passwörter oder Zugangsdaten). Dies ist ausschließlich ein Konfigurationsentwurf. Erst nach separater Vertrags-, Datenschutz- und Telefoniefreigabe kann die Aktivierung erfolgen.</p>
           <div class="code-box" id="json-preview"></div>
         </div>
       </div>
@@ -671,13 +682,14 @@
         document.getElementById("btn-" + k).classList.toggle("active", k === bKey);
       });
       const tpl = TEMPLATES[bKey];
-      document.getElementById("ob-name").value = tpl.defaultName;
-      document.getElementById("ob-handoff").value = tpl.defaultHandoff;
+      document.getElementById("ob-name").placeholder = `z. B. ${tpl.defaultName}`;
+      document.getElementById("ob-handoff").placeholder = `z. B. ${tpl.defaultHandoff}`;
       document.getElementById("lbl-handoff").textContent = tpl.handoffLabel;
       document.getElementById("ob-pkg").value = tpl.defaultPkg;
       document.getElementById("ob-channel").value = tpl.defaultChannel;
-      document.getElementById("chk-telephony").checked = (tpl.defaultChannel === "telephony");
-      document.getElementById("chk-privacy").checked = (tpl.sensitivity === "elevated");
+      // Explicit customer approval must never be preselected by a template.
+      document.getElementById("chk-telephony").checked = false;
+      document.getElementById("chk-privacy").checked = false;
       document.getElementById("branch-specific-hint").textContent = tpl.hint;
       document.getElementById("ob-voice").value = (VOICE_REC[bKey] || ["eve"])[0];
       renderVoicePicker();
@@ -692,7 +704,8 @@
     function runOnboardingPipeline() {
       const tpl = TEMPLATES[currentBranch];
       const name = document.getElementById("ob-name").value.trim();
-      const handoff = document.getElementById("ob-handoff").value.trim() || "Zentrale";
+      const handoffInput = document.getElementById("ob-handoff").value.trim();
+      const handoff = handoffInput || "Noch keine Übergabe konfiguriert";
       const DAYK = ["mon","tue","wed","thu","fri","sat","sun"], DAYL = ["Mo","Di","Mi","Do","Fr","Sa","So"];
       const businessHours = {}; const hourErrs = [];
       DAYK.forEach(k => {
@@ -713,7 +726,7 @@
       });
       document.getElementById("hours-note").textContent = closures.length ? `${closures.length} Schließzeitraum/-räume erfasst.` : "";
       const hasBooking = TEMPLATES[currentBranch].tools.includes("schedule_appointment");
-      document.getElementById("card-hours").style.opacity = hasBooking ? "1" : "0.6";
+      document.getElementById("step-3").style.opacity = hasBooking ? "1" : "0.6";
       const pkgKey = document.getElementById("ob-pkg").value;
       const pkg = PKG_PRICES[pkgKey];
       const channel = document.getElementById("ob-channel").value;
@@ -738,6 +751,7 @@
       if (!name) errors.push("MISSING_AGENT_ID_OR_NAME");
       if (!aiDisc) errors.push("MISSING_AI_DISCLOSURE");
       if (channel === "telephony" && !telApp) errors.push("TELEPHONY_WITHOUT_APPROVAL");
+      if (channel === "telephony" && !handoffInput) errors.push("MISSING_HUMAN_HANDOFF");
       if (channel === "telephony" && pkgKey === "starter") errors.push("STARTER_PACKAGE_WEB_ONLY");
       if (recEn && (!recApp || !Number.isInteger(retDays) || retDays <= 0)) {
         errors.push("RECORDING_WITHOUT_APPROVAL_OR_RETENTION");
@@ -753,28 +767,30 @@
       }
 
       const valid = errors.length === 0;
-      const effectiveStatus = valid ? "active" : "paused";
-      const enabledTools = valid ? tpl.tools : [];
+      // Local validation only. No telephony/runtime enablement and no auto deploy.
+      const effectiveStatus = valid ? "draft_validated" : "paused";
+      const proposedTools = valid ? tpl.tools : [];
+      const enabledTools = [];
       const agentId = `vva-${currentBranch}-${slugify(name)}`;
       const greeting = tpl.greetingTpl.replace("{name}", name || "Ihrem Betrieb").replace("{handoff}", handoff);
 
       const pill = document.getElementById("status-pill");
       if (valid) {
         pill.className = "badge badge-ok";
-        pill.textContent = "ACTIVE · VALIDATED";
+        pill.textContent = "ENTWURF · GEPRÜFT";
         document.getElementById("validation-summary").innerHTML =
-          `<span style="color: #34d399; font-weight: 600;">Fail-Closed-Prüfung bestanden:</span> Alle Pflichtfreigaben liegen vor. Werkzeuge (<code>${enabledTools.join(", ")}</code>) sind aktiv freigeschaltet.`;
+          `<span style="color: #34d399; font-weight: 600;">Lokale Konfiguration geprüft:</span> Vorgesehene Werkzeuge: <code>${proposedTools.join(", ")}</code>. Produktive Ausführung bleibt gesperrt.`;
       } else {
         pill.className = "badge badge-err";
-        pill.textContent = "PAUSED · FAIL-CLOSED";
+        pill.textContent = "ENTWURF · GESPERRT";
         document.getElementById("validation-summary").innerHTML =
           `<span style="color: #f87171; font-weight: 600;">Fail-Closed-Sperre aktiv (${errors.join(", ")}):</span> Status auf <code>paused</code> gesetzt, alle Werkzeuge gesperrt (<code>enabled_tools: []</code>).`;
       }
 
       // Render smoke tests
       const smokeHtml = tpl.smokeTests.map(st => {
-        const decision = valid ? st.expectedActive : "FAIL_CLOSED_BLOCKED";
-        const tool = valid ? st.toolActive : "null (gesperrt)";
+        const decision = valid ? st.expectedActive + " (SIMULATION)" : "FAIL_CLOSED_BLOCKED";
+        const tool = valid ? st.toolActive + " (Simulation)" : "null (gesperrt)";
         const badgeClass = valid ? "badge-ok" : "badge-warn";
         return `<div class="smoke-item">
           <div class="smoke-head">
@@ -800,11 +816,14 @@
           overage_eur_per_min: pkg.over
         },
         channel: channel,
-        requested_status: "active",
+        requested_status: "draft",
+        runtime_status: "not_deployed",
+        validation_only: true,
         effective_status: effectiveStatus,
         valid: valid,
         data_sensitivity: tpl.sensitivity,
         enabled_tools: enabledTools,
+        proposed_tools: proposedTools,
         handoff_contact: handoff,
         opening_hours: hours,
         business_hours: businessHours,

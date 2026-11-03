@@ -1,0 +1,260 @@
+/*
+ * RealSync Voice Onboarding · shared visual language with landing v6.
+ * Standalone static page; no remote font calls or backend coupling.
+ * All rules scoped to .voice-onboarding to preserve other VVA pages.
+ */
+html:root {
+  --bg: #121212;
+  --bg-card: #171717;
+  --bg-elevated: #202020;
+  --border: rgba(255,255,255,.13);
+  --text: #f4f4f2;
+  --text-muted: #b9b9b6;
+  --accent: #d6ae52;
+  --accent-strong: #a87928;
+  --radius: 10px;
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+.voice-onboarding {
+  background: #121212;
+  color: #f4f4f2;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+.voice-onboarding header {
+  background: rgba(18,18,18,.96);
+  border-bottom: 1px solid rgba(214,174,82,.25);
+}
+.voice-onboarding .container {
+  max-width: 1200px;
+  padding: clamp(20px,4vw,58px) clamp(16px,4vw,42px) 72px;
+}
+.voice-onboarding .header-inner {
+  max-width: 1200px;
+  padding: 0 clamp(16px,4vw,42px);
+}
+.voice-onboarding .brand { flex-wrap: wrap; gap: 12px; }
+.voice-onboarding .brand-name {
+  color: #f4f4f2;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.2rem,2.3vw,1.6rem);
+  font-weight: 400;
+  text-decoration: none;
+}
+.voice-onboarding .brand-dot { color: #d6ae52; }
+.voice-onboarding .eyebrow {
+  color: #d6ae52;
+  font: 600 .68rem/1.6 ui-monospace, "JetBrains Mono", monospace;
+  letter-spacing: .2em;
+  margin: 0 0 12px;
+}
+.voice-onboarding h1,
+.voice-onboarding h2,
+.voice-onboarding .step-title,
+.voice-onboarding .quick-guide .step-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  letter-spacing: -.022em;
+}
+.voice-onboarding h1 {
+  max-width: 920px;
+  font-size: clamp(2.05rem,5vw,4.15rem);
+  line-height: 1.08;
+  margin-bottom: 18px;
+  text-wrap: balance;
+}
+.voice-onboarding h1 em { color: #d6ae52; font-weight: 400; }
+.voice-onboarding p.sub {
+  font-size: clamp(.95rem,1.3vw,1.1rem);
+  line-height: 1.7;
+  max-width: 74ch;
+  margin-bottom: 20px;
+}
+.voice-onboarding .badge-accent {
+  color: #e9c66f;
+  background: rgba(214,174,82,.1);
+  border-color: rgba(214,174,82,.38);
+  border-radius: 4px;
+  letter-spacing: .08em;
+}
+.voice-onboarding .card {
+  background: #171717;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 10px;
+  padding: clamp(17px,2.25vw,27px);
+}
+.voice-onboarding .step-title {
+  font-size: clamp(1.25rem,2vw,1.65rem);
+  font-weight: 400;
+  line-height: 1.2;
+  color: #f4f4f2;
+  flex-wrap: wrap;
+}
+.voice-onboarding .step-num {
+  background: rgba(214,174,82,.12);
+  color: #e9c66f;
+  border: 1px solid rgba(214,174,82,.42);
+  border-radius: 5px;
+  width: 34px;
+  height: 34px;
+  font: 600 .78rem ui-monospace, monospace;
+}
+.voice-onboarding .voice-step { scroll-margin-top: 20px; }
+.voice-onboarding .voice-step:target { border-color: rgba(214,174,82,.65); }
+.voice-onboarding .voice-step-nav {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: x proximity;
+  padding: 0 0 8px;
+  margin-bottom: 15px;
+}
+.voice-onboarding .voice-step-nav a {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 7px;
+  min-height: 46px;
+  padding: 9px 13px;
+  color: #c9c9c6;
+  font-size: .82rem;
+  font-weight: 550;
+  white-space: nowrap;
+  background: #171717;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 6px;
+  text-decoration: none;
+  scroll-snap-align: start;
+}
+.voice-onboarding .voice-step-nav a:hover,
+.voice-onboarding .voice-step-nav a:focus-visible {
+  color: #e9c66f;
+  border-color: rgba(214,174,82,.7);
+}
+.voice-onboarding .voice-step-nav span {
+  color: #d6ae52;
+  font: 600 .73rem ui-monospace, monospace;
+}
+.voice-onboarding .voice-preview-notice {
+  border-left: 3px solid #d6ae52;
+  background: rgba(214,174,82,.075);
+  padding: 12px 17px;
+  color: #c9c9c6;
+  font-size: .85rem;
+  margin: 0 0 22px;
+}
+.voice-onboarding .voice-preview-notice strong {
+  display: block;
+  color: #f4f4f2;
+  margin-bottom: 2px;
+}
+.voice-onboarding .wizard-grid { grid-template-columns: minmax(0,1.05fr) minmax(0,.95fr); }
+.voice-onboarding .wizard-grid > div { min-width: 0; }
+.voice-onboarding .branch-selector { grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); }
+.voice-onboarding .branch-btn,
+.voice-onboarding .vp-card {
+  background: #222;
+  border-color: rgba(255,255,255,.2);
+  border-radius: 6px;
+}
+.voice-onboarding .branch-btn.active,
+.voice-onboarding .vp-card.on {
+  border-color: #d6ae52;
+  background: rgba(214,174,82,.12);
+  box-shadow: inset 0 0 0 1px rgba(214,174,82,.55);
+}
+.voice-onboarding .vp-card .tag { color: #d6ae52; }
+.voice-onboarding .vd-btn,
+.voice-onboarding .vd-bar i { background: #947030; }
+.voice-onboarding .vd-btn.on { background: #177457; }
+.voice-onboarding .form-group label { color: #e4e4e2; }
+.voice-onboarding input[type="text"],
+.voice-onboarding input[type="email"],
+.voice-onboarding input[type="tel"],
+.voice-onboarding input[type="number"],
+.voice-onboarding input[type="time"],
+.voice-onboarding select,
+.voice-onboarding textarea {
+  background: #222;
+  border: 1px solid rgba(255,255,255,.22);
+  color: #f4f4f2;
+  border-radius: 6px;
+  max-width: 100%;
+  min-height: 42px;
+}
+.voice-onboarding .check-row {
+  background: rgba(255,255,255,.025);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 7px;
+}
+.voice-onboarding .btn {
+  min-height: 44px;
+  border-radius: 6px;
+  font: 600 .8rem Inter, system-ui, sans-serif;
+}
+.voice-onboarding .btn-primary {
+  background: linear-gradient(180deg,#d6ae52,#a87928);
+  color: #121212;
+}
+.voice-onboarding .btn-secondary {
+  border-color: rgba(214,174,82,.34);
+  color: #f4f4f2;
+  background: rgba(255,255,255,.04);
+}
+.voice-onboarding .btn:hover { filter: brightness(1.1); }
+.voice-onboarding .badge-ok {
+  color: #8ee6c2;
+  border-color: rgba(16,185,129,.5);
+}
+.voice-onboarding .code-box {
+  background: #101010;
+  color: #d6d6d1;
+  border-color: rgba(255,255,255,.16);
+}
+.voice-onboarding .smoke-item {
+  background: #202020;
+  border-radius: 7px;
+  border-color: rgba(255,255,255,.12);
+}
+.voice-onboarding .quick-guide { border-color: rgba(214,174,82,.35); }
+.voice-onboarding .quick-guide summary {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 30px;
+  margin: 0;
+}
+.voice-onboarding .quick-guide summary::-webkit-details-marker { display: none; }
+.voice-onboarding .quick-guide summary::marker { content: ''; }
+.voice-onboarding .quick-guide .guide-arrow { font: 500 1.4rem system-ui,sans-serif; color: #d6ae52; }
+.voice-onboarding .quick-guide[open] .guide-arrow { transform: rotate(45deg); }
+.voice-onboarding .quick-guide[open] summary { margin-bottom: 14px; }
+.voice-onboarding .quick-guide li { margin-bottom: 4px; }
+.voice-onboarding :focus-visible {
+  outline: 2px solid #e9c66f;
+  outline-offset: 3px;
+}
+@media (max-width: 900px) {
+  .voice-onboarding .wizard-grid { grid-template-columns: minmax(0,1fr); }
+}
+@media (max-width: 600px) {
+  .voice-onboarding .container { padding: 20px 16px 52px; }
+  .voice-onboarding .header-inner { align-items: flex-start; }
+  .voice-onboarding .header-inner > div:last-child { display: flex; flex-wrap: wrap; gap: 6px; }
+  .voice-onboarding .header-inner .btn { padding: 8px 12px; }
+  .voice-onboarding .card { padding: 16px; }
+  .voice-onboarding .branch-selector { grid-template-columns: repeat(2,minmax(0,1fr)) !important; }
+  .voice-onboarding .branch-btn { min-width: 0; padding: 11px; }
+  .voice-onboarding .step-title { align-items: flex-start; }
+  .voice-onboarding .wizard-grid input[type="time"] { width: min(35vw,130px) !important; }
+  .voice-onboarding .wizard-grid > div > .card { overflow-wrap: anywhere; }
+}
+@media (max-width: 380px) {
+  .voice-onboarding .branch-selector { grid-template-columns: 1fr !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html:root { scroll-behavior: auto; }
+  .voice-onboarding *, .voice-onboarding *::before, .voice-onboarding *::after { transition: none !important; animation: none !important; }
+}
