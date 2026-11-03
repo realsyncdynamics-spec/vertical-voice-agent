@@ -218,6 +218,20 @@ html:root {
   border-color: rgba(255,255,255,.12);
 }
 .voice-onboarding .quick-guide { border-color: rgba(214,174,82,.35); }
+.voice-onboarding .quick-guide summary {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 30px;
+  margin: 0;
+}
+.voice-onboarding .quick-guide summary::-webkit-details-marker { display: none; }
+.voice-onboarding .quick-guide summary::marker { content: ''; }
+.voice-onboarding .quick-guide .guide-arrow { font: 500 1.4rem system-ui,sans-serif; color: #d6ae52; }
+.voice-onboarding .quick-guide[open] .guide-arrow { transform: rotate(45deg); }
+.voice-onboarding .quick-guide[open] summary { margin-bottom: 14px; }
+.voice-onboarding .quick-guide li { margin-bottom: 4px; }
 .voice-onboarding :focus-visible {
   outline: 2px solid #e9c66f;
   outline-offset: 3px;
