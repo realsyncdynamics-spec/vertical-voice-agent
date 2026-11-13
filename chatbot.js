@@ -2,9 +2,9 @@
 (function () {
   const FAQ = [
     { k: ["preis","kosten","paket","pakete","starter","professional","kanzlei","praxis","euro","€","monat","mwst"],
-      a: "Es gibt drei Pakete (monatlich, netto zzgl. 19 % MwSt.): Starter 89 € (nur Web, 500 Minuten inklusive, danach 0,18 € pro Minute), Professional 199 € (Web plus Telefonie-Option, 1.500 Minuten, danach 0,15 €) und Kanzlei / Praxis 349 € (Web plus Telefonie-Option, Datenschutzprüfung inklusive, 1.200 Minuten, danach 0,18 €). Je Paket 1 Agent." },
+      a: "Es gibt drei Pakete (monatlich): Starter 89 € (nur Web, 500 Minuten inklusive, danach 0,18 € pro Minute), Professional 199 € (Web plus Telefonie-Option, 1.500 Minuten, danach 0,15 €) und Kanzlei / Praxis 349 € (Web plus Telefonie-Option, Datenschutzprüfung inklusive, 1.200 Minuten, danach 0,18 €). Je Paket 1 Agent. Gemäß § 19 UStG wird keine Umsatzsteuer berechnet." },
     { k: ["minute","minuten","inklusiv","mehrminuten","folgepreis","überschreit"],
-      a: "Inklusivminuten: Starter 500, Professional 1.500, Kanzlei / Praxis 1.200 pro Monat. Jede weitere Minute kostet netto 0,18 € (Starter), 0,15 € (Professional) bzw. 0,18 € (Kanzlei / Praxis). Den Minutenrechner finden Sie auf der Startseite unter „Minutenrechner“." },
+      a: "Inklusivminuten: Starter 500, Professional 1.500, Kanzlei / Praxis 1.200 pro Monat. Jede weitere Minute kostet 0,18 € (Starter), 0,15 € (Professional) bzw. 0,18 € (Kanzlei / Praxis). Den Minutenrechner finden Sie auf der Startseite unter „Minutenrechner“." },
     { k: ["branche","branchen","vorlage","handwerk","metzgerei","kfz","werkstatt","gastronomie","bäckerei","hausverwaltung","kanzlei","arzt","zahnarzt","steuer"],
       a: "Es gibt 8 Branchenvorlagen: Handwerk, Metzgerei, KFZ-Werkstatt & Autohaus, Gastronomie & Bäckerei, Hausverwaltung (Sensibilität standard) sowie Rechtsanwaltskanzlei, Arzt- & Zahnarztpraxis und Steuerberatung (erhöhte Sensibilität – Aktivierung nur nach dokumentierter Datenschutzprüfung)." },
     { k: ["metzgerei","metzger","fleischer"],
@@ -70,13 +70,19 @@
   function esc(s){return s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));}
   function init(){
     const btn = el("button","position:fixed;right:20px;bottom:20px;z-index:9999;border:none;border-radius:999px;padding:14px 18px;font-weight:600;cursor:pointer;color:#fff;background:linear-gradient(135deg,#38bdf8,#0284c7);box-shadow:0 8px 24px rgba(0,0,0,.4);font-family:inherit","💬 Fragen? Hilfe-Bot");
-    btn.id="vva-chat-button"; btn.setAttribute("aria-label","Hilfe-Chat öffnen");
+    btn.id="vva-chat-button";
+    btn.type="button";
+    btn.setAttribute("aria-label","Hilfe-Chat");
+    btn.setAttribute("aria-controls","vva-chatbot");
+    btn.setAttribute("aria-expanded","false");
     const box = el("div","position:fixed;right:20px;bottom:80px;z-index:9999;width:min(380px,calc(100vw - 40px));height:min(520px,calc(100vh - 120px));display:none;flex-direction:column;background:#111827;color:#e5e7eb;border:1px solid #334155;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.5);font-family:inherit;font-size:14px;overflow:hidden");
     box.id="vva-chatbot";
+    box.setAttribute("role","dialog");
+    box.setAttribute("aria-label","Hilfe-Bot · Vertical Voice Agent");
     box.innerHTML = '<div style="padding:12px 14px;background:#1e293b;display:flex;justify-content:space-between;align-items:center"><strong>Hilfe-Bot · Vertical Voice Agent</strong><button id="vva-x" style="background:none;border:none;color:#94a3b8;font-size:18px;cursor:pointer" aria-label="Schließen">×</button></div>'
       + '<div id="vva-log" style="flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px"></div>'
       + '<div id="vva-sugg" style="padding:0 12px 8px;display:flex;flex-wrap:wrap;gap:6px"></div>'
-      + '<form id="vva-form" style="display:flex;gap:6px;padding:10px;border-top:1px solid #334155"><input id="vva-in" autocomplete="off" placeholder="Ihre Frage …" style="flex:1;padding:9px;border-radius:8px;border:1px solid #334155;background:#0b0f19;color:#e5e7eb"/><button style="padding:9px 12px;border:none;border-radius:8px;background:#0284c7;color:#fff;cursor:pointer">Senden</button></form>'
+      + '<form id="vva-form" style="display:flex;gap:6px;padding:10px;border-top:1px solid #334155"><input aria-label="Ihre Frage" id="vva-in" autocomplete="off" placeholder="Ihre Frage …" style="flex:1;padding:9px;border-radius:8px;border:1px solid #334155;background:#0b0f19;color:#e5e7eb"/><button style="padding:9px 12px;border:none;border-radius:8px;background:#0284c7;color:#fff;cursor:pointer">Senden</button></form>'
       + '<div style="padding:6px 12px 10px;font-size:11px;color:#94a3b8">Automatischer Hilfe-Bot (kein Mensch, keine KI-Cloud, Ihre Eingaben verlassen den Browser nicht). Keine Rechts-, Medizin- oder Steuerberatung.</div>';
     document.body.appendChild(btn); document.body.appendChild(box);
     const log=box.querySelector("#vva-log");
@@ -85,10 +91,18 @@
     const sg=box.querySelector("#vva-sugg");
     SUGGEST.forEach(s=>{const b=el("button","border:1px solid #334155;background:#0b0f19;color:#cbd5e1;border-radius:999px;padding:4px 9px;font-size:12px;cursor:pointer",esc(s)); b.type="button"; b.onclick=()=>ask(s); sg.appendChild(b);});
     add("Hallo! Ich bin der automatische Hilfe-Bot. Fragen Sie mich jederzeit zu Paketen, Onboarding, Kalender, Terminbuchung oder Sicherheit.");
-    btn.onclick=()=>{box.style.display = box.style.display==="flex"?"none":"flex"; if(box.style.display==="flex") box.querySelector("#vva-in").focus();};
-    box.querySelector("#vva-x").onclick=()=>box.style.display="none";
+    function setOpen(open) {
+      box.style.display = open ? "flex" : "none";
+      btn.setAttribute("aria-expanded", String(open));
+      (open ? box.querySelector("#vva-in") : btn).focus();
+    }
+    btn.onclick=()=>setOpen(btn.getAttribute("aria-expanded") !== "true");
+    box.querySelector("#vva-x").onclick=()=>setOpen(false);
+    box.addEventListener("keydown", event => {
+      if (event.key === "Escape") setOpen(false);
+    });
     box.querySelector("#vva-form").onsubmit=e=>{e.preventDefault(); const i=box.querySelector("#vva-in"); ask(i.value); i.value="";};
-    window.vvaChatAnswer = answer; window.vvaChatOpen = ()=>{box.style.display="flex";};
+    window.vvaChatAnswer = answer; window.vvaChatOpen = ()=>setOpen(true);
   }
   if (document.readyState==="loading") document.addEventListener("DOMContentLoaded", init); else init();
 })();

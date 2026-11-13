@@ -225,7 +225,7 @@
       <!-- LEFT COLUMN: INPUT STEPS -->
       <div>
         <!-- STEP 1 -->
-        <div class="card" style="margin-bottom:20px"><div id="stimmen"><style>.vd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:18px}.vd-card{display:flex;gap:14px;align-items:center;padding:14px 16px;border:1px solid rgba(127,127,127,.3);border-radius:12px;background:rgba(127,127,127,.06)}.vd-btn{flex:0 0 48px;height:48px;border-radius:50%;border:0;background:#2563eb;color:#fff;font-size:1.1rem;cursor:pointer}.vd-btn.on{background:#16a34a}.vd-txt{flex:1;display:flex;flex-direction:column;gap:3px;font-size:.95rem}.vd-txt span{opacity:.75;font-size:.85rem}.vd-bar{height:4px;background:rgba(127,127,127,.25);border-radius:2px;overflow:hidden;margin-top:6px}.vd-bar i{display:block;height:100%;width:0;background:#2563eb}.vd-note{font-size:.85rem;opacity:.8;margin-top:14px}</style><h2>Stimmen anhören – vor dem Start</h2><p>Kurze Beispiele, wie Ihr Telefonassistent am Telefon klingt – ohne Anmeldung, einfach abspielen.</p><div class="vd-grid"><div class="vd-card"><button class="vd-btn" data-src="audio/handwerk.mp3?v=grok1" aria-label="Handwerk abspielen">▶</button><div class="vd-txt"><strong>Handwerk</strong><span>Malerbetrieb · Grok-Stimme castor</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/gastronomie.mp3?v=grok1" aria-label="Gastronomie & Bäckerei abspielen">▶</button><div class="vd-txt"><strong>Gastronomie & Bäckerei</strong><span>Vorbestellung · Grok-Stimme ursa</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/kfz.mp3?v=grok1" aria-label="KFZ-Werkstatt abspielen">▶</button><div class="vd-txt"><strong>KFZ-Werkstatt</strong><span>Terminannahme · Grok-Stimme atlas</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/metzgerei.mp3?v=grok1" aria-label="Metzgerei abspielen">▶</button><div class="vd-txt"><strong>Metzgerei</strong><span>Kurze Ladenbegrüßung · Grok-Stimme sal</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/hausverwaltung.mp3?v=grok1" aria-label="Hausverwaltung abspielen">▶</button><div class="vd-txt"><strong>Hausverwaltung</strong><span>Schadensmeldung · Grok-Stimme rigel</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/praxis.mp3?v=grok1" aria-label="Arztpraxis (erhöhte Stufe) abspielen">▶</button><div class="vd-txt"><strong>Arztpraxis (erhöhte Stufe)</strong><span>Terminassistenz · Grok-Stimme aurora, ohne med. Auskunft</span><div class="vd-bar"><i></i></div></div></div></div><p class="vd-note">Beispielaufnahmen mit Grok Voice (xAI Grok TTS). Ihre eigene Stimme wählen Sie im Onboarding aus allen 28 Grok-Stimmen. Betriebsnamen sind fiktiv. Die Beispiele sind illustrativ.</p><script>(function(){var a=new Audio(),cur=null;a.preload="none";function reset(){if(cur){cur.textContent="▶";cur.classList.remove("on");cur.parentNode.querySelector(".vd-bar i").style.width="0"}}document.querySelectorAll(".vd-btn").forEach(function(b){b.addEventListener("click",function(){if(cur===b&&!a.paused){a.pause();b.textContent="▶";b.classList.remove("on");return}if(cur!==b){reset();a.src=b.dataset.src;cur=b}a.play();b.textContent="❚❚";b.classList.add("on")})});a.addEventListener("timeupdate",function(){if(cur&&a.duration)cur.parentNode.querySelector(".vd-bar i").style.width=(a.currentTime/a.duration*100)+"%"});a.addEventListener("ended",function(){reset();cur=null})})();</script></div>
+        <div class="card" style="margin-bottom:20px"><div id="stimmen"><style>.vd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:18px}.vd-card{display:flex;gap:14px;align-items:center;padding:14px 16px;border:1px solid rgba(127,127,127,.3);border-radius:12px;background:rgba(127,127,127,.06)}.vd-btn{flex:0 0 48px;height:48px;border-radius:50%;border:0;background:#2563eb;color:#fff;font-size:1.1rem;cursor:pointer}.vd-btn.on{background:#16a34a}.vd-txt{flex:1;display:flex;flex-direction:column;gap:3px;font-size:.95rem}.vd-txt span{opacity:.75;font-size:.85rem}.vd-bar{height:4px;background:rgba(127,127,127,.25);border-radius:2px;overflow:hidden;margin-top:6px}.vd-bar i{display:block;height:100%;width:0;background:#2563eb}.vd-note{font-size:.85rem;opacity:.8;margin-top:14px}</style><h2>Stimmen anhören – vor dem Start</h2><p>Kurze Beispiele, wie Ihr Telefonassistent am Telefon klingt – ohne Anmeldung, einfach abspielen.</p><div class="vd-grid"><div class="vd-card"><button class="vd-btn" data-src="audio/handwerk.mp3?v=grok1" aria-label="Handwerk abspielen">▶</button><div class="vd-txt"><strong>Handwerk</strong><span>Malerbetrieb · Grok-Stimme castor</span><div class="vd-bar"><i></i></div><span class="vd-status" role="status"></span></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/gastronomie.mp3?v=grok1" aria-label="Gastronomie & Bäckerei abspielen">▶</button><div class="vd-txt"><strong>Gastronomie & Bäckerei</strong><span>Vorbestellung · Grok-Stimme ursa</span><div class="vd-bar"><i></i></div><span class="vd-status" role="status"></span></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/kfz.mp3?v=grok1" aria-label="KFZ-Werkstatt abspielen">▶</button><div class="vd-txt"><strong>KFZ-Werkstatt</strong><span>Terminannahme · Grok-Stimme atlas</span><div class="vd-bar"><i></i></div><span class="vd-status" role="status"></span></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/metzgerei.mp3?v=grok1" aria-label="Metzgerei abspielen">▶</button><div class="vd-txt"><strong>Metzgerei</strong><span>Kurze Ladenbegrüßung · Grok-Stimme sal</span><div class="vd-bar"><i></i></div><span class="vd-status" role="status"></span></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/hausverwaltung.mp3?v=grok1" aria-label="Hausverwaltung abspielen">▶</button><div class="vd-txt"><strong>Hausverwaltung</strong><span>Schadensmeldung · Grok-Stimme rigel</span><div class="vd-bar"><i></i></div><span class="vd-status" role="status"></span></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/praxis.mp3?v=grok1" aria-label="Arztpraxis (erhöhte Stufe) abspielen">▶</button><div class="vd-txt"><strong>Arztpraxis (erhöhte Stufe)</strong><span>Terminassistenz · Grok-Stimme aurora, ohne med. Auskunft</span><div class="vd-bar"><i></i></div><span class="vd-status" role="status"></span></div></div></div><p class="vd-note">Beispielaufnahmen mit Grok Voice (xAI Grok TTS). Ihre eigene Stimme wählen Sie im Onboarding aus allen 28 Grok-Stimmen. Betriebsnamen sind fiktiv. Die Beispiele sind illustrativ. Für Kanzlei und Steuerberatung sind derzeit keine eigenen Hörproben verfügbar.</p><script>(function(){var a=new Audio(),cur=null;a.preload="none";function reset(){if(cur){cur.textContent="▶";cur.classList.remove("on");cur.parentNode.querySelector(".vd-bar i").style.width="0"}}document.querySelectorAll(".vd-btn").forEach(function(b){b.addEventListener("click",function(){if(cur===b&&!a.paused){a.pause();b.textContent="▶";b.classList.remove("on");return}b.closest(".vd-card").querySelector(".vd-status").textContent="";if(cur!==b){reset();a.src=b.dataset.src;cur=b}a.play().then(function(){if(cur===b&&!a.paused){b.textContent="❚❚";b.classList.add("on")}}).catch(function(){if(cur===b){reset();cur=null;b.closest(".vd-card").querySelector(".vd-status").textContent="Hörprobe konnte nicht abgespielt werden."}})})});a.addEventListener("timeupdate",function(){if(cur&&a.duration)cur.parentNode.querySelector(".vd-bar i").style.width=(a.currentTime/a.duration*100)+"%"});a.addEventListener("ended",function(){reset();cur=null})})();</script></div>
 </div>
 <div class="card">
           <div class="step-title"><span class="step-num">1</span> Branchenvorlage wählen</div>
@@ -271,23 +271,24 @@
           <div class="step-title"><span class="step-num">2</span> Betriebsdaten & Paket zuordnen</div>
           <div class="form-group">
             <label for="ob-name">Mandanten- / Betriebsname *</label>
-            <input type="text" id="ob-name" value="SHK Meisterbetrieb Rennsteig" oninput="runOnboardingPipeline()" />
+            <input type="text" required id="ob-name" value="SHK Meisterbetrieb Rennsteig" oninput="runOnboardingPipeline()" />
           </div>
           <div class="form-group">
             <label for="ob-handoff" id="lbl-handoff">Notdienst- / Handoff-Ziel für sofortige Übergabe *</label>
-            <input type="text" id="ob-handoff" value="Bereitschaftsdienst +49 3679 000111" oninput="runOnboardingPipeline()" />
+            <input type="text" required id="ob-handoff" value="Bereitschaftsdienst +49 3679 000111" oninput="runOnboardingPipeline()" />
           </div>
           <div class="form-group">
             <input type="hidden" id="ob-hours" value="" />
             <span style="font-size: 0.82rem; color: var(--text-muted);">Öffnungszeiten, Feiertage und Betriebsferien tragen Sie in Schritt 3 ein.</span>
           </div>
           <div class="form-group">
-            <label for="ob-pkg">Paket (Stand 24.10.2026, netto zzgl. 19 % MwSt.)</label>
+            <label for="ob-pkg">Paket</label>
             <select id="ob-pkg" onchange="runOnboardingPipeline()">
               <option value="starter">Starter – 89,00 €/Monat (Web-only, 500 Min. inkl., +0,18 €/Min.)</option>
               <option value="professional" selected>Professional – 199,00 €/Monat (Web + Telefonie, 1.500 Min. inkl., +0,15 €/Min.)</option>
               <option value="kanzlei">Kanzlei – 349,00 €/Monat (Elevated Privacy, Web + Telefonie, 1.200 Min. inkl., +0,18 €/Min.)</option>
             </select>
+            <p>Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.</p>
           </div>
           <div class="form-group">
             <label for="ob-channel">Gewünschter Kanal</label>
@@ -375,9 +376,11 @@
               <input type="time" id="bh-sun-to" value="13:00" style="width:110px;" oninput="runOnboardingPipeline()" />
               <label style="display:flex;align-items:center;gap:4px;"><input type="checkbox" id="bh-sun-closed" checked onchange="runOnboardingPipeline()" /> geschlossen</label>
             </div>
-          <label class="check-row" style="margin-top:10px;">
+          <div class="check-row" style="margin-top:10px;">
             <input type="checkbox" id="chk-holidays" checked onchange="runOnboardingPipeline()" />
-            <span>Gesetzliche Feiertage automatisch sperren – Bundesland:
+            <div>
+              <label for="chk-holidays">Gesetzliche Feiertage automatisch sperren</label>
+              <label for="ob-region">Bundesland</label>
               <select id="ob-region" onchange="runOnboardingPipeline()" style="margin-left:6px;">
                 <option value="BW">Baden-Württemberg</option>
                 <option value="BY">Bayern</option>
@@ -396,8 +399,8 @@
                 <option value="SH">Schleswig-Holstein</option>
                 <option value="TH" selected>Thüringen</option>
               </select>
-            </span>
-          </label>
+            </div>
+          </div>
           <div class="form-group" style="margin-top:10px;">
             <label for="ob-closures">Schließtage & Betriebsferien (optional, eine Zeile je Eintrag)</label>
             <textarea id="ob-closures" rows="3" placeholder="2026-12-24 bis 2026-12-26 Weihnachten&#10;2027-08-02 bis 2027-08-13 Betriebsferien&#10;2026-11-20 Inventur" oninput="runOnboardingPipeline()" style="width:100%;background:var(--bg-elevated);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:8px;font-family:inherit;"></textarea>
@@ -479,6 +482,8 @@
       </div>
     </div>
   </div>
+
+  <footer style="padding: 16px; text-align: center;"><a href="https://realsyncdynamicsai.de/impressum">Impressum</a> · <a href="https://realsyncdynamicsai.de/datenschutz">Datenschutz</a></footer>
 
   <script>
     const TEMPLATES = {
@@ -850,7 +855,7 @@
       const md = `# Onboarding-Protokoll – ${r.tenant_name}
 - **Agent-ID:** \`${r.agent_id}\`
 - **Branchenvorlage:** \`${r.template}\` (Sensitivity: \`${r.data_sensitivity}\`)
-- **Paket:** ${r.package.name} (${r.package.price_eur_net_monthly} € netto/Monat zzgl. 19 % MwSt.)
+- **Paket:** ${r.package.name} (${r.package.price_eur_net_monthly} €/Monat). Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.
 - **Kanal:** \`${r.channel}\`
 - **Öffnungszeiten:** ${r.opening_hours}
 - **Feiertage:** ${r.apply_public_holidays ? "gesetzliche Feiertage " + r.holiday_region + " gesperrt" : "nicht automatisch"} · **Schließzeiten:** ${r.company_closures.length ? r.company_closures.map(c => c.from + (c.to !== c.from ? " bis " + c.to : "") + " " + c.label).join("; ") : "keine"}
