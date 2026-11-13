@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Klickanleitung für Kunden – Vertical Voice Agent Self-Service-Onboarding</title>
-  <meta name="description" content="Schritt-für-Schritt-Klickanleitung: So richten Sie den Vertical Voice Agent selbst ein – ohne Angebotsanfrage." />
+  <title>Demo – Klickanleitung für Kunden – Vertical Voice Agent</title>
+  <meta name="description" content="Klickanleitung für die Onboarding-Demo des Vertical Voice Agent. Keine Buchung, kein produktiver Assistent." />
   <style>
     body { margin:0; background:#0b0f19; color:#e5e7eb; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Helvetica,Arial,sans-serif; line-height:1.6; }
     header { background:#111827; border-bottom:1px solid #1f2937; padding:14px 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
     header a { color:#e5e7eb; text-decoration:none; margin-left:14px; }
     .btn { display:inline-block; padding:9px 16px; border-radius:8px; font-weight:600; text-decoration:none; }
     .btn-primary { background:linear-gradient(135deg,#38bdf8,#0284c7); color:#fff !important; }
+    .btn-secondary { background:#1e293b; color:#e5e7eb !important; border:1px solid #334155; }
     main { max-width:880px; margin:0 auto; padding:28px 20px 80px; }
     h1 { font-size:1.8rem; margin-bottom:6px; } h2 { margin-top:34px; font-size:1.25rem; color:#38bdf8; }
     .step { background:#111827; border:1px solid #1f2937; border-radius:12px; padding:16px 20px; margin:14px 0; }
@@ -18,16 +19,29 @@
     table { width:100%; border-collapse:collapse; font-size:0.9rem; } td,th { border-bottom:1px solid #1f2937; padding:7px 6px; text-align:left; vertical-align:top; }
     .note { color:#94a3b8; font-size:0.9rem; } .warn { border-left:3px solid #f59e0b; padding-left:10px; }
     a { color:#38bdf8; }
+
+    .badge-demo { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.55); letter-spacing: 0.04em; }
+    .demo-banner {
+      background: rgba(245, 158, 11, 0.12);
+      border-bottom: 1px solid rgba(245, 158, 11, 0.45);
+      color: #fde68a;
+      font-size: 0.9rem;
+      padding: 10px 24px;
+      text-align: center;
+    }
+    .demo-banner strong { color: #fbbf24; }
+    .demo-banner a { color: #fde68a; text-decoration: underline; text-underline-offset: 2px; }
   </style>
 </head>
 <body>
   <header>
     <strong>Vertical Voice Agent · Klickanleitung</strong>
-    <nav><a href="index.html">Startseite</a><a href="onboarding.html" class="btn btn-primary">Onboarding starten</a></nav>
+    <nav><a href="index.html">Startseite</a><a href="mailto:realsyncdynamics@gmail.com?subject=Interesse%20Vertical%20Voice%20Agent" class="btn btn-secondary">Interesse melden</a><a href="onboarding.html" class="btn btn-primary">Onboarding-Demo</a></nav>
   </header>
+  <div class="demo-banner" role="status"><strong>Demo / Vorschau:</strong> Telefonie, WhatsApp und Live-Sprachagent sind noch nicht verfügbar. Preise und Pakete sind unverbindlich, eine Buchung ist derzeit nicht möglich. Sprachverarbeitung über xAI kann außerhalb der EU stattfinden (<a href="https://docs.x.ai/developers/advanced-api-usage/regions">Regions-Dokumentation von xAI</a>).</div>
   <main>
-    <h1>Klickanleitung für Kunden</h1>
-    <p>Mit dieser Anleitung richten Sie Ihren Sprachassistenten komplett selbst ein. Eine Angebotsanfrage ist <strong>nicht</strong> nötig. Dauer: ca. 10 Minuten. Bei Fragen klicken Sie jederzeit unten rechts auf <span class="ui">💬 Fragen? Hilfe-Bot</span>.</p>
+    <h1>Klickanleitung für die Onboarding-Demo</h1>
+    <p>Diese Anleitung beschreibt die Demostrecke. Ein produktiv geschalteter Sprachassistent oder eine Buchung entsteht dadurch nicht. Dauer: ca. 10 Minuten. Interesse bitte an <a href="mailto:realsyncdynamics@gmail.com?subject=Interesse%20Vertical%20Voice%20Agent">realsyncdynamics@gmail.com</a>. Bei Fragen klicken Sie jederzeit unten rechts auf <span class="ui">💬 Fragen? Hilfe-Bot</span>.</p>
 
     <h2>Vorbereitung</h2>
     <div class="step">
@@ -46,8 +60,8 @@
         <tr><th>Feld</th><th>Was eintragen / anklicken</th></tr>
         <tr><td><span class="ui">Mandanten- / Betriebsname</span></td><td>Name Ihres Betriebs, so wie der Assistent ihn nennen soll.</td></tr>
         <tr><td><span class="ui">Handoff-Ziel</span></td><td>Nummer oder Stelle, an die bei Notfällen und kritischen Anliegen sofort übergeben wird.</td></tr>
-        <tr><td><span class="ui">Paket</span></td><td>Starter 89 € (nur Web, 500 Min.), Professional 199 € (Web + Telefonie-Option, 1.500 Min.), Kanzlei / Praxis 349 € (inkl. Datenschutzprüfung, 1.200 Min.) – jeweils netto/Monat zzgl. 19 % MwSt.; weitere Minuten 0,18 € / 0,15 € / 0,18 €.</td></tr>
-        <tr><td><span class="ui">Gewünschter Kanal</span></td><td>„Web-Sprachassistent“ oder „Telefonie + Web“ (Telefonie nicht im Starter-Paket).</td></tr>
+        <tr><td><span class="ui">Paket</span></td><td>Unverbindliche Beispielpreise, nicht bestellbar: Starter 89 € (nur Web, 500 Min.), Professional 199 € (Web + Telefonie-Option <em>geplant</em>, 1.500 Min.), Kanzlei / Praxis 349 € (<em>geplant</em>, inkl. Datenschutzprüfung, 1.200 Min.) – jeweils netto/Monat zzgl. 19 % MwSt.; weitere Minuten 0,18 € / 0,15 € / 0,18 €.</td></tr>
+        <tr><td><span class="ui">Gewünschter Kanal</span></td><td>„Web-Sprachassistent“ oder „Telefonie + Web“ (Telefonie und WhatsApp sind geplant und derzeit nicht verfügbar; Telefonie nicht im Starter-Paket).</td></tr>
         <tr><td><span class="ui">Kalender für Terminbuchungen</span></td><td><strong>Google Kalender (empfohlen)</strong> oder Outlook Kalender (Alternative).</td></tr>
         <tr><td><span class="ui">Zielkalender</span></td><td>Optional eine Kalender-E-Mail-Adresse. Leer lassen = Hauptkalender Ihres Kontos.</td></tr>
         <tr><td><span class="ui">Outlook-Postfach</span></td><td>Nur bei Outlook sichtbar: die Adresse Ihres verbundenen Outlook-Kontos.</td></tr>

@@ -2,7 +2,7 @@
 (function () {
   const FAQ = [
     { k: ["preis","kosten","paket","pakete","starter","professional","kanzlei","praxis","euro","€","monat","mwst"],
-      a: "Es gibt drei Pakete (monatlich, netto zzgl. 19 % MwSt.): Starter 89 € (nur Web, 500 Minuten inklusive, danach 0,18 € pro Minute), Professional 199 € (Web plus Telefonie-Option, 1.500 Minuten, danach 0,15 €) und Kanzlei / Praxis 349 € (Web plus Telefonie-Option, Datenschutzprüfung inklusive, 1.200 Minuten, danach 0,18 €). Je Paket 1 Agent." },
+      a: "Die genannten Pakete sind unverbindliche Beispielangaben, eine Buchung ist derzeit nicht möglich. Beispielpreise (monatlich, netto zzgl. 19 % MwSt.): Starter 89 € (nur Web, 500 Minuten inklusive, danach 0,18 € pro Minute), Professional 199 € (Web plus Telefonie-Option – geplant, 1.500 Minuten, danach 0,15 €) und Kanzlei / Praxis 349 € (geplant; Web plus Telefonie-Option, Datenschutzprüfung inklusive, 1.200 Minuten, danach 0,18 €). Telefonie, WhatsApp und der Live-Sprachagent sind noch nicht verfügbar. Interesse bitte an realsyncdynamics@gmail.com." },
     { k: ["minute","minuten","inklusiv","mehrminuten","folgepreis","überschreit"],
       a: "Inklusivminuten: Starter 500, Professional 1.500, Kanzlei / Praxis 1.200 pro Monat. Jede weitere Minute kostet netto 0,18 € (Starter), 0,15 € (Professional) bzw. 0,18 € (Kanzlei / Praxis). Den Minutenrechner finden Sie auf der Startseite unter „Minutenrechner“." },
     { k: ["branche","branchen","vorlage","handwerk","metzgerei","kfz","werkstatt","gastronomie","bäckerei","hausverwaltung","kanzlei","arzt","zahnarzt","steuer"],
@@ -24,25 +24,25 @@
     { k: ["ki","offenlegung","kennzeichnung","ki-assistent","transparenz"],
       a: "Der Assistent sagt in jeder Begrüßung, dass ein KI-Assistent spricht. Ohne diese KI-Offenlegung ist keine Aktivierung möglich." },
     { k: ["telefon","telefonie","anruf","rufnummer"],
-      a: "Telefonie gibt es ab Paket Professional und nur mit ausdrücklicher Telefonie-Freigabe (Häkchen im Onboarding, Schritt 4). Starter ist reiner Web-Sprachassistent." },
+      a: "Telefonie, SIP und WhatsApp sind geplant und derzeit nicht verfügbar. In der Produktbeschreibung ist Telefonie erst ab Paket Professional vorgesehen und zusätzlich an eine ausdrückliche Freigabe gebunden. Eine Live-Rufnummer gibt es auf dieser Website nicht. Interesse bitte an realsyncdynamics@gmail.com." },
     { k: ["aufzeichnung","aufnahme","transkript","recording","speicher","aufbewahrung"],
       a: "Aufzeichnung oder Transkript-Speicherung nur mit ausdrücklicher Freigabe und einer festgelegten Aufbewahrungsfrist in Tagen. Sonst greift die Fail-Closed-Sperre." },
     { k: ["datenschutz","dsgvo","privacy","datenschutzprüfung","elevated","sensibel"],
       a: "Für Kanzlei, Arzt- & Zahnarztpraxis und Steuerberatung ist eine dokumentierte Datenschutzprüfung Pflicht, bevor der Assistent aktiv wird. Eine garantierte Compliance-Zusage geben wir nicht." },
     { k: ["onboarding","einrichten","einrichtung","starten","anleitung","klick","schritt","wie geht"],
-      a: "Self-Service in 6 Schritten auf der Onboarding-Seite: 1. Branche wählen, 2. Betriebsdaten, Paket, Kanal und Kalender, 3. Öffnungszeiten, Feiertage, Betriebsferien, 4. Freigaben (KI-Offenlegung, Telefonie, Datenschutz), 5. Live-Status und Testgespräche prüfen, 6. Konfiguration und Protokoll herunterladen. Die Klickanleitung finden Sie unter anleitung.html." },
+      a: "Die Onboarding-Seite ist eine Demostrecke in 6 Schritten: 1. Branche wählen, 2. Betriebsdaten, Paket, Kanal und Kalender, 3. Öffnungszeiten, Feiertage, Betriebsferien, 4. Freigaben (KI-Offenlegung, Telefonie, Datenschutz), 5. Status und Testgespräche prüfen, 6. Konfiguration und Protokoll herunterladen. Das nimmt keine Buchung entgegen. Die Klickanleitung finden Sie unter anleitung.html. Interesse: realsyncdynamics@gmail.com." },
     { k: ["json","konfig","konfiguration","download","herunterladen","protokoll","datei"],
       a: "Im letzten Schritt laden Sie die Konfiguration (.json) und das Onboarding-Protokoll (.md) herunter. Die Konfiguration enthält alle Ihre Einstellungen inklusive Kalender, Öffnungszeiten und Schließtagen – ohne Passwörter oder Zugangsdaten." },
     { k: ["angebot","anfrage","anfragen","vertrag"],
-      a: "Eine Angebotsanfrage ist nicht nötig – Sie können alles selbst im Onboarding einrichten. Wer ein schriftliches Angebot möchte, kann es optional auf der Startseite unter „Angebot anfragen“ erzeugen." },
+      a: "Diese Seiten sind eine Demo / Vorschau. Das Onboarding nimmt keine Buchung entgegen und schaltet keinen Live-Agenten frei. Interesse oder ein schriftliches Angebot bitte an realsyncdynamics@gmail.com." },
     { k: ["anbieter","impressum","wer","kontakt","firma","steiner"],
       a: "Anbieter: Dominik Steiner, Einzelunternehmen, Schwarzburger Str. 31, 98724 Neuhaus am Rennweg (Thüringen). Der Vertical Voice Agent ist ein eigenständiges Produkt außerhalb von RealSyncDynamics.AI. Kontakt: realsyncdynamics@gmail.com." },
     { k: ["stimme","stimmen","voice","grok","sprecher"],
       a: "Sie wählen im Onboarding eine von 28 Grok-Stimmen (alle sprechen Deutsch, Standard: eve). Empfohlen für Betriebe: castor, atlas, celeste, ursa, rigel, lux, ara, rex, sal; für Kanzlei/Praxis/Steuerberatung: lux, liora, aurora, celeste. Die Hörbeispiele auf der Website sind echte Grok-Stimmen." },
     { k: ["sip","rufnummer","telefonie anbinden","nummer anbinden","weiterleitung"],
-      a: "Für Telefonie brauchen Sie: Paket Professional oder Kanzlei/Praxis, eigene Rufnummer, einen SIP-Trunk bei einem Anbieter, eine Übergabe-Nummer und die ausdrückliche Telefonie-Freigabe (bei Kanzlei/Praxis/Steuerberatung zusätzlich die Datenschutzprüfung). Bis dahin bleibt der Agent gesperrt. Details: telefonie.html" },
+      a: "Telefonie und SIP sind geplant und derzeit nicht verfügbar. Die spätere Anbindung würde laut Produktbeschreibung eigenes Paket Professional oder Kanzlei/Praxis, eine eigene Rufnummer, SIP-Trunk, Übergabe-Nummer und ausdrückliche Freigabe voraussetzen. Details (als Vorschau): telefonie.html. Interesse: realsyncdynamics@gmail.com." },
     { k: ["telefon","anruf","rückruf","ticket"],
-      a: "Der Telefonassistent führt echte Gespräche: KI-Hinweis, Anliegen erfragen, Angaben nachfragen, Zusammenfassung bestätigen – dann Termin buchen (wo freigegeben, nach Öffnungszeiten-/Kalenderprüfung) oder Rückruf-Ticket anlegen. Notfälle und kritische Stichworte gehen sofort an Ihr Team." },
+      a: "Ein Live-Telefonassistent ist derzeit nicht verfügbar. Geplant ist ein Gesprächsablauf mit KI-Hinweis, Nachfragen, Termin oder Rückruf-Ticket sowie sofortiger Übergabe bei Notfällen. Die Hörbeispiele auf der Website sind KI-generiert (Grok, xAI), kein Live-Gespräch." },
     { k: ["pitch","deck","präsentation","produktmappe","unterlagen"],
       a: "Unterlagen: Produktmappe (produktmappe.html) und Vertriebs-Pitch-Deck (vertical-voice-agent-pitch-deck.pptx) – beide auf der Startseite verlinkt." },
     { k: ["übergabe","mitarbeiter","mensch","handoff","weiterleiten"],
@@ -84,7 +84,7 @@
     function ask(q){ if(!q.trim()) return; add(q,true); setTimeout(()=>add(answer(q)),150); }
     const sg=box.querySelector("#vva-sugg");
     SUGGEST.forEach(s=>{const b=el("button","border:1px solid #334155;background:#0b0f19;color:#cbd5e1;border-radius:999px;padding:4px 9px;font-size:12px;cursor:pointer",esc(s)); b.type="button"; b.onclick=()=>ask(s); sg.appendChild(b);});
-    add("Hallo! Ich bin der automatische Hilfe-Bot. Fragen Sie mich jederzeit zu Paketen, Onboarding, Kalender, Terminbuchung oder Sicherheit.");
+    add("Hallo! Ich bin der automatische Hilfe-Bot (kein Mensch). Diese Seiten sind eine Demo: Telefonie, WhatsApp und Live-Sprachagent sind noch nicht verfügbar, eine Buchung ist derzeit nicht möglich. Fragen Sie mich zu Paketen, Onboarding oder Sicherheit.");
     btn.onclick=()=>{box.style.display = box.style.display==="flex"?"none":"flex"; if(box.style.display==="flex") box.querySelector("#vva-in").focus();};
     box.querySelector("#vva-x").onclick=()=>box.style.display="none";
     box.querySelector("#vva-form").onsubmit=e=>{e.preventDefault(); const i=box.querySelector("#vva-in"); ask(i.value); i.value="";};
