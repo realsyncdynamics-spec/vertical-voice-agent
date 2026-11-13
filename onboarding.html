@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Automatisiertes Branchen-Onboarding – Vertical Voice Agent</title>
+  <title>Demo – Automatisiertes Branchen-Onboarding – Vertical Voice Agent</title>
   <style>
     :root {
       --bg: #0b0f19;
@@ -54,6 +54,19 @@
     .badge-ok { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.35); }
     .badge-err { background: rgba(239, 68, 68, 0.16); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); }
     .badge-warn { background: rgba(245, 158, 11, 0.16); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
+
+    .badge-demo { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.55); letter-spacing: 0.04em; }
+    .demo-banner {
+      background: rgba(245, 158, 11, 0.12);
+      border-bottom: 1px solid rgba(245, 158, 11, 0.45);
+      color: #fde68a;
+      font-size: 0.9rem;
+      padding: 10px 24px;
+      text-align: center;
+    }
+    .demo-banner strong { color: #fbbf24; }
+    .demo-banner a { color: #fde68a; text-decoration: underline; text-underline-offset: 2px; }
+
 
     h1 { font-size: clamp(1.7rem, 3vw, 2.3rem); margin-bottom: 8px; letter-spacing: -0.02em; }
     p.sub { color: var(--text-muted); margin-bottom: 28px; max-width: 780px; }
@@ -190,20 +203,24 @@
     <div class="header-inner">
       <div class="brand">
         <span>Vertical Voice Agent</span>
-        <span class="badge badge-accent">Self-Service-Onboarding</span>
+        <span class="badge badge-demo">DEMO</span>
+        <span class="badge badge-accent">Self-Service-Onboarding (nicht produktiv)</span>
       </div>
       <div>
+        <a href="mailto:realsyncdynamics@gmail.com?subject=Interesse%20Vertical%20Voice%20Agent" class="btn btn-secondary">Interesse melden</a>
         <a href="anleitung.html" class="btn btn-secondary">Klickanleitung</a>
         <a href="index.html" class="btn btn-secondary">Zur Produkt-Webseite</a>
       </div>
     </div>
   </header>
+  <div class="demo-banner" role="status"><strong>Demo / Vorschau:</strong> Telefonie, WhatsApp und Live-Sprachagent sind noch nicht verfügbar. Preise und Pakete sind unverbindlich, eine Buchung ist derzeit nicht möglich. Sprachverarbeitung über xAI kann außerhalb der EU stattfinden (<a href="https://docs.x.ai/developers/advanced-api-usage/regions">Regions-Dokumentation von xAI</a>).</div>
 
   <div class="container">
-    <h1>Self-Service-Onboarding – in 6 Schritten selbst einrichten</h1>
+    <h1>Demo: Self-Service-Onboarding – in 6 Schritten ausprobieren</h1>
     <p class="sub">
-      Sie richten Ihren Sprachassistenten komplett selbst ein – ohne Angebotsanfrage. Jede Eingabe wird sofort geprüft (Fail-Closed),
-      rechts sehen Sie live den Status und die Testgespräche. Am Ende laden Sie Konfiguration und Protokoll herunter.
+      Dies ist eine Demostrecke. Sie können die Schritte durchspielen und Konfiguration sowie Protokoll herunterladen.
+      Ein verbindlicher Vertrag oder ein produktiv geschalteter Sprachassistent entsteht dadurch nicht. Eine Buchung ist derzeit nicht möglich.
+      Eingaben werden lokal im Browser geprüft (Fail-Closed); rechts sehen Sie den Status und Testgespräche.
     </p>
     <div class="card" style="border-color: var(--accent);">
       <div class="step-title">So geht's – Kurzanleitung</div>
@@ -225,7 +242,7 @@
       <!-- LEFT COLUMN: INPUT STEPS -->
       <div>
         <!-- STEP 1 -->
-        <div class="card" style="margin-bottom:20px"><div id="stimmen"><style>.vd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:18px}.vd-card{display:flex;gap:14px;align-items:center;padding:14px 16px;border:1px solid rgba(127,127,127,.3);border-radius:12px;background:rgba(127,127,127,.06)}.vd-btn{flex:0 0 48px;height:48px;border-radius:50%;border:0;background:#2563eb;color:#fff;font-size:1.1rem;cursor:pointer}.vd-btn.on{background:#16a34a}.vd-txt{flex:1;display:flex;flex-direction:column;gap:3px;font-size:.95rem}.vd-txt span{opacity:.75;font-size:.85rem}.vd-bar{height:4px;background:rgba(127,127,127,.25);border-radius:2px;overflow:hidden;margin-top:6px}.vd-bar i{display:block;height:100%;width:0;background:#2563eb}.vd-note{font-size:.85rem;opacity:.8;margin-top:14px}</style><h2>Stimmen anhören – vor dem Start</h2><p>Kurze Beispiele, wie Ihr Telefonassistent am Telefon klingt – ohne Anmeldung, einfach abspielen.</p><div class="vd-grid"><div class="vd-card"><button class="vd-btn" data-src="audio/handwerk.mp3?v=grok1" aria-label="Handwerk abspielen">▶</button><div class="vd-txt"><strong>Handwerk</strong><span>Malerbetrieb · Grok-Stimme castor</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/gastronomie.mp3?v=grok1" aria-label="Gastronomie & Bäckerei abspielen">▶</button><div class="vd-txt"><strong>Gastronomie & Bäckerei</strong><span>Vorbestellung · Grok-Stimme ursa</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/kfz.mp3?v=grok1" aria-label="KFZ-Werkstatt abspielen">▶</button><div class="vd-txt"><strong>KFZ-Werkstatt</strong><span>Terminannahme · Grok-Stimme atlas</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/metzgerei.mp3?v=grok1" aria-label="Metzgerei abspielen">▶</button><div class="vd-txt"><strong>Metzgerei</strong><span>Kurze Ladenbegrüßung · Grok-Stimme sal</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/hausverwaltung.mp3?v=grok1" aria-label="Hausverwaltung abspielen">▶</button><div class="vd-txt"><strong>Hausverwaltung</strong><span>Schadensmeldung · Grok-Stimme rigel</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/praxis.mp3?v=grok1" aria-label="Arztpraxis (erhöhte Stufe) abspielen">▶</button><div class="vd-txt"><strong>Arztpraxis (erhöhte Stufe)</strong><span>Terminassistenz · Grok-Stimme aurora, ohne med. Auskunft</span><div class="vd-bar"><i></i></div></div></div></div><p class="vd-note">Beispielaufnahmen mit Grok Voice (xAI Grok TTS). Ihre eigene Stimme wählen Sie im Onboarding aus allen 28 Grok-Stimmen. Betriebsnamen sind fiktiv. Die Beispiele sind illustrativ.</p><script>(function(){var a=new Audio(),cur=null;a.preload="none";function reset(){if(cur){cur.textContent="▶";cur.classList.remove("on");cur.parentNode.querySelector(".vd-bar i").style.width="0"}}document.querySelectorAll(".vd-btn").forEach(function(b){b.addEventListener("click",function(){if(cur===b&&!a.paused){a.pause();b.textContent="▶";b.classList.remove("on");return}if(cur!==b){reset();a.src=b.dataset.src;cur=b}a.play();b.textContent="❚❚";b.classList.add("on")})});a.addEventListener("timeupdate",function(){if(cur&&a.duration)cur.parentNode.querySelector(".vd-bar i").style.width=(a.currentTime/a.duration*100)+"%"});a.addEventListener("ended",function(){reset();cur=null})})();</script></div>
+        <div class="card" style="margin-bottom:20px"><div id="stimmen"><style>.vd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:18px}.vd-card{display:flex;gap:14px;align-items:center;padding:14px 16px;border:1px solid rgba(127,127,127,.3);border-radius:12px;background:rgba(127,127,127,.06)}.vd-btn{flex:0 0 48px;height:48px;border-radius:50%;border:0;background:#2563eb;color:#fff;font-size:1.1rem;cursor:pointer}.vd-btn.on{background:#16a34a}.vd-txt{flex:1;display:flex;flex-direction:column;gap:3px;font-size:.95rem}.vd-txt span{opacity:.75;font-size:.85rem}.vd-bar{height:4px;background:rgba(127,127,127,.25);border-radius:2px;overflow:hidden;margin-top:6px}.vd-bar i{display:block;height:100%;width:0;background:#2563eb}.vd-note{font-size:.85rem;opacity:.8;margin-top:14px}</style><h2>Stimmen anhören – vor dem Start</h2><p>Kurze Beispiele, wie ein Telefonassistent klingen kann – ohne Anmeldung, einfach abspielen. Diese Hörbeispiele sind KI-generiert (Grok, xAI). Sie sprechen hier nicht mit einem Live-Sprachagenten.</p><div class="vd-grid"><div class="vd-card"><button class="vd-btn" data-src="audio/handwerk.mp3?v=grok1" aria-label="Handwerk abspielen">▶</button><div class="vd-txt"><strong>Handwerk</strong><span>Malerbetrieb · Grok-Stimme castor</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/gastronomie.mp3?v=grok1" aria-label="Gastronomie & Bäckerei abspielen">▶</button><div class="vd-txt"><strong>Gastronomie & Bäckerei</strong><span>Vorbestellung · Grok-Stimme ursa</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/kfz.mp3?v=grok1" aria-label="KFZ-Werkstatt abspielen">▶</button><div class="vd-txt"><strong>KFZ-Werkstatt</strong><span>Terminannahme · Grok-Stimme atlas</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/metzgerei.mp3?v=grok1" aria-label="Metzgerei abspielen">▶</button><div class="vd-txt"><strong>Metzgerei</strong><span>Kurze Ladenbegrüßung · Grok-Stimme sal</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/hausverwaltung.mp3?v=grok1" aria-label="Hausverwaltung abspielen">▶</button><div class="vd-txt"><strong>Hausverwaltung</strong><span>Schadensmeldung · Grok-Stimme rigel</span><div class="vd-bar"><i></i></div></div></div><div class="vd-card"><button class="vd-btn" data-src="audio/praxis.mp3?v=grok1" aria-label="Arztpraxis (erhöhte Stufe) abspielen">▶</button><div class="vd-txt"><strong>Arztpraxis (erhöhte Stufe)</strong><span>Terminassistenz · Grok-Stimme aurora, ohne med. Auskunft</span><div class="vd-bar"><i></i></div></div></div></div><p class="vd-note">Beispielaufnahmen mit Grok Voice (xAI Grok TTS), KI-generiert. Betriebsnamen sind fiktiv. Die Beispiele sind illustrativ und kein Live-Gespräch.</p><script>(function(){var a=new Audio(),cur=null;a.preload="none";function reset(){if(cur){cur.textContent="▶";cur.classList.remove("on");cur.parentNode.querySelector(".vd-bar i").style.width="0"}}document.querySelectorAll(".vd-btn").forEach(function(b){b.addEventListener("click",function(){if(cur===b&&!a.paused){a.pause();b.textContent="▶";b.classList.remove("on");return}if(cur!==b){reset();a.src=b.dataset.src;cur=b}a.play();b.textContent="❚❚";b.classList.add("on")})});a.addEventListener("timeupdate",function(){if(cur&&a.duration)cur.parentNode.querySelector(".vd-bar i").style.width=(a.currentTime/a.duration*100)+"%"});a.addEventListener("ended",function(){reset();cur=null})})();</script></div>
 </div>
 <div class="card">
           <div class="step-title"><span class="step-num">1</span> Branchenvorlage wählen</div>
@@ -282,18 +299,18 @@
             <span style="font-size: 0.82rem; color: var(--text-muted);">Öffnungszeiten, Feiertage und Betriebsferien tragen Sie in Schritt 3 ein.</span>
           </div>
           <div class="form-group">
-            <label for="ob-pkg">Paket (Stand 24.10.2026, netto zzgl. 19 % MwSt.)</label>
+            <label for="ob-pkg">Paket — unverbindliche Beispielpreise, nicht bestellbar (Zahlenstand 24.10.2026, netto zzgl. 19 % MwSt.)</label>
             <select id="ob-pkg" onchange="runOnboardingPipeline()">
-              <option value="starter">Starter – 89,00 €/Monat (Web-only, 500 Min. inkl., +0,18 €/Min.)</option>
-              <option value="professional" selected>Professional – 199,00 €/Monat (Web + Telefonie, 1.500 Min. inkl., +0,15 €/Min.)</option>
-              <option value="kanzlei">Kanzlei – 349,00 €/Monat (Elevated Privacy, Web + Telefonie, 1.200 Min. inkl., +0,18 €/Min.)</option>
+              <option value="starter">[Beispiel] Starter – 89,00 €/Monat (Web-only, 500 Min. inkl., +0,18 €/Min.) — nicht bestellbar</option>
+              <option value="professional" selected>[Beispiel] Professional – 199,00 €/Monat (Web + Telefonie geplant, 1.500 Min. inkl., +0,15 €/Min.) — nicht bestellbar</option>
+              <option value="kanzlei">[Beispiel] Kanzlei – 349,00 €/Monat (Elevated Privacy, Web + Telefonie, 1.200 Min. inkl., +0,18 €/Min.) — geplant, nicht bestellbar</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="ob-channel">Gewünschter Kanal</label>
+            <label for="ob-channel">Gewünschter Kanal (Telefonie und WhatsApp sind geplant und in dieser Demo nicht verfügbar)</label>
             <select id="ob-channel" onchange="runOnboardingPipeline()">
-              <option value="web">Web-Sprachassistent (web)</option>
-              <option value="telephony" selected>Telefonie + Web (telephony)</option>
+              <option value="web">Web-Sprachassistent (web) — nur Demo</option>
+              <option value="telephony" selected>Telefonie + Web (telephony) — geplant, nicht verfügbar</option>
             </select>
           </div>
           <div class="form-group" id="voice-picker">
@@ -471,6 +488,7 @@
             <div style="display: flex; gap: 8px;">
               <button type="button" class="btn btn-primary" onclick="downloadJson()">Konfig (.json) speichern</button>
               <button type="button" class="btn btn-secondary" onclick="downloadProtocol()">Onboarding-Protokoll (.md)</button>
+              <p class="note" style="margin-top:12px">Der Download schaltet keinen Live-Agenten frei und ist keine Buchung. <a href="mailto:realsyncdynamics@gmail.com?subject=Interesse%20Vertical%20Voice%20Agent" style="color:var(--accent)">Interesse melden</a></p>
             </div>
           </div>
           <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:8px;">Die Datei enthält alle Einstellungen (ohne Passwörter oder Zugangsdaten). Damit ist Ihr Self-Service-Onboarding abgeschlossen; die Kalenderverbindung (Google oder Outlook) erfolgt mit Ihrem eigenen Konto.</p>
