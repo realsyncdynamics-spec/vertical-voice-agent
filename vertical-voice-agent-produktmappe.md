@@ -4,6 +4,8 @@
 **Anbieter:** Dominik Steiner, Einzelunternehmen, Schwarzburger Str. 31, 98724 Neuhaus am Rennweg (Thüringen, Deutschland)  
 **Produktstatus:** Eigenständiges Produkt außerhalb von RealSyncDynamics.AI
 
+**Status: Demo / Vorschau.** Telefonie, WhatsApp und Live-Sprachagent sind noch nicht verfügbar. Preise und Pakete sind unverbindlich, eine Buchung ist derzeit nicht möglich. Sprachverarbeitung über xAI kann außerhalb der EU stattfinden ([Regions-Dokumentation von xAI](https://docs.x.ai/developers/advanced-api-usage/regions)).
+
 ---
 
 ## 1. Was ist der Vertical Voice Agent?
@@ -13,7 +15,7 @@ Ein KI-Sprachassistent für kleine und mittlere Betriebe, vorkonfiguriert für 8
 - **Sicherheit zuerst:** Der Assistent darf nur, was die Branchenvorlage ausdrücklich erlaubt. Fehlt eine Freigabe, ist er gesperrt (Fail-Closed).
 - **Klare Grenzen:** keine Rechts-, Medizin- oder Steuerberatung, keine garantierte Compliance-Zusage.
 - **Transparenz:** Jede Begrüßung weist darauf hin, dass ein KI-Assistent spricht.
-- **Kanäle:** Web-Sprachassistent; Telefonie optional ab Paket Professional (nach ausdrücklicher Freigabe).
+- **Kanäle:** Web-Sprachassistent (Demo). Telefonie optional ab Paket Professional – **geplant**, nach ausdrücklicher Freigabe, derzeit nicht verfügbar. WhatsApp ist **geplant** und derzeit nicht verfügbar.
 
 ## 2. Fail-Closed-Sicherheitsmodell
 
@@ -23,7 +25,7 @@ Ein Assistent wird nur aktiv, wenn alle Pflichtfreigaben vorliegen. Bei jedem Fe
 |---|---|
 | KI-Offenlegung | Pflicht in jeder Begrüßung; ohne sie keine Aktivierung |
 | Werkzeuge | nur wenn Assistent aktiv **und** Konfiguration gültig; nur die Werkzeuge der Branchenvorlage |
-| Telefonie | nur mit ausdrücklicher Freigabe; nicht im Paket Starter |
+| Telefonie | **geplant**, derzeit nicht verfügbar; später nur mit ausdrücklicher Freigabe; nicht im Paket Starter |
 | Aufzeichnung / Transkripte | nur mit ausdrücklicher Freigabe **und** festgelegter Aufbewahrungsfrist (Tage > 0) |
 | Sensible Branchen (elevated) | Kanzlei, Praxis, Steuerberatung: Aktivierung erst nach dokumentierter Datenschutzprüfung |
 | Kritische Stichworte | sofortige Übergabe an Mitarbeitende (siehe Branchenvorlagen) |
@@ -94,13 +96,13 @@ Werkzeuge: `lookup_kb` = Wissensabfrage (FAQ, Öffnungszeiten, Leistungen); `cre
 
 ## 4. Pakete & Preise
 
-Alle Preise monatlich, netto zzgl. 19 % MwSt. Je Paket 1 Agent.
+Unverbindliche Beispielpreise, monatlich netto zzgl. 19 % MwSt. Je Paket 1 Agent. Eine Buchung ist derzeit nicht möglich. Telefonie und das Paket Kanzlei / Praxis sind geplant.
 
 | Paket | Preis netto | Preis brutto | Kanäle | Inklusivminuten | Jede weitere Minute (netto) |
 |---|---|---|---|---|---|
 | **Starter** | 89,00 € | 105,91 € | Web | 500 Min. | 0,18 € |
-| **Professional** | 199,00 € | 236,81 € | Web + Telefonie-Option | 1.500 Min. | 0,15 € |
-| **Kanzlei / Praxis** | 349,00 € | 415,31 € | Web + Telefonie-Option, Datenschutzprüfung (elevated) inkl. | 1.200 Min. | 0,18 € |
+| **Professional** | 199,00 € | 236,81 € | Web + Telefonie-Option (**geplant**) | 1.500 Min. | 0,15 € |
+| **Kanzlei / Praxis** (**geplant**) | 349,00 € | 415,31 € | Web + Telefonie-Option (**geplant**), Datenschutzprüfung (elevated) inkl. | 1.200 Min. | 0,18 € |
 
 **Rechenbeispiel Professional, 1.800 Min./Monat:** 199,00 € + 300 × 0,15 € = 244,00 € netto (290,36 € brutto).
 
@@ -130,9 +132,9 @@ Ein Termin wird nur eingetragen, wenn **alle** Prüfungen bestehen. Andernfalls 
 
 Ist die Kalenderprüfung nicht möglich oder fehlerhaft, wird ebenfalls **nicht** gebucht.
 
-## 7. Self-Service-Onboarding in 6 Schritten
+## 7. Self-Service-Onboarding in 6 Schritten (Demo)
 
-Sie richten den Assistenten komplett selbst ein – eine Angebotsanfrage ist nicht nötig. Eine Klickanleitung erklärt jedes Feld, und ein Hilfe-Bot beantwortet Fragen jederzeit.
+Die Onboarding-Strecke ist eine Demo. Sie können die Schritte durchspielen und Konfiguration sowie Protokoll herunterladen. Ein produktiv geschalteter Sprachassistent oder eine Buchung entsteht dadurch nicht.
 
 1. **Branchenvorlage wählen** – eine der 8 Vorlagen.
 2. **Betriebsdaten, Paket, Kanal & Kalender** – Name, Übergabe-Kontakt, Paket, Kanal, Kalender (Google oder Outlook, optional Zielkalender).
@@ -141,7 +143,7 @@ Sie richten den Assistenten komplett selbst ein – eine Angebotsanfrage ist nic
 5. **Fail-Closed-Prüfung & Live-Status** – automatische Validierung und Branchen-Testgespräche; nur bei vollständigen Freigaben aktiv, sonst pausiert.
 6. **Herunterladen** – Konfiguration (.json, ohne Zugangsdaten) und Onboarding-Protokoll (.md).
 
-Ein schriftliches Angebot ist optional.
+Interesse oder ein schriftliches Angebot bitte an [realsyncdynamics@gmail.com](mailto:realsyncdynamics@gmail.com?subject=Interesse%20Vertical%20Voice%20Agent).
 
 **Hilfe-Bot:** Auf allen Seiten unten rechts. Er beantwortet Fragen zu Paketen, Onboarding, Kalender, Terminbuchung und Sicherheit auf Basis dieser Produktangaben, läuft vollständig im Browser (keine Daten werden gesendet), gibt keine Rechts-, Medizin- oder Steuerberatung und verweist bei Notfällen auf 112/110.
 
@@ -154,10 +156,10 @@ Ein schriftliches Angebot ist optional.
 - **Vertriebs-Pitch-Deck (.pptx):** https://realsyncdynamics-spec.github.io/vertical-voice-agent/vertical-voice-agent-pitch-deck.pptx
 - **GitHub-Repository:** https://github.com/realsyncdynamics-spec/vertical-voice-agent
 
-## 9. Selbst starten oder Angebot anfragen
+## 9. Interesse melden
 
-Am schnellsten: selbst einrichten unter https://realsyncdynamics-spec.github.io/vertical-voice-agent/onboarding.html.
-Optional: unverbindliches Angebot über **„Angebot anfragen“** auf der Verkaufsseite (https://realsyncdynamics-spec.github.io/vertical-voice-agent/#angebot) oder per E-Mail an realsyncdynamics@gmail.com. Verbindlich sind ausschließlich die Konditionen im schriftlichen Angebot.
+Eine Buchung ist derzeit nicht möglich. Interesse oder ein unverbindliches Angebot bitte per E-Mail an [realsyncdynamics@gmail.com](mailto:realsyncdynamics@gmail.com?subject=Interesse%20Vertical%20Voice%20Agent).
+Die [Onboarding-Demo](https://voice.realsyncdynamicsai.de/onboarding.html) nimmt keine Buchung entgegen und schaltet keinen Live-Agenten frei. Verbindlich wären ausschließlich später schriftlich bestätigte Konditionen.
 
 ---
 
@@ -169,7 +171,7 @@ Schwarzburger Str. 31
 Thüringen, Deutschland  
 E-Mail: realsyncdynamics@gmail.com
 
-*Der Vertical Voice Agent erteilt keine Rechts-, Medizin- oder Steuerberatung und gibt keine garantierte Compliance-Zusage.*
+*Der Vertical Voice Agent erteilt keine Rechts-, Medizin- oder Steuerberatung und gibt keine garantierte Compliance-Zusage.* Sprachverarbeitung über xAI kann außerhalb der EU stattfinden; eine feste Region wird nicht zugesagt ([Regions-Dokumentation von xAI](https://docs.x.ai/developers/advanced-api-usage/regions)).
 
 ## Sprachdemos (Stand 30.10.2026)
 Landingpage-Abschnitt „Stimmen anhören“ (#stimmen) und Onboarding: 6 deutsche Beispielaufnahmen (Handwerk, Gastronomie/Bäckerei, KFZ, Metzgerei, Hausverwaltung, Arztpraxis), erzeugt mit Microsoft Edge Neural TTS (Conrad, Katja, Killian, Amala). Illustrativ; Stimme und Ansprache werden im Onboarding festgelegt. Keine Rechts-, Medizin-, Steuer- oder Allergenauskünfte in den Skripten.
@@ -184,7 +186,7 @@ Ihr Assistent spricht mit einer der **28 integrierten Grok-Stimmen** (Grok Voice
 | Kanzlei, Praxis, Steuerberatung (elevated) | lux, liora, aurora, celeste |
 | Alle Stimmen | ara, eve, leo, rex, sal, altair, atlas, aurora, carina, castor, celeste, cosmo, helios, helix, iris, kepler, liora, lumen, luna, lux, naksh, orion, perseus, rigel, sirius, ursa, zagan, zenith |
 
-Die Hörbeispiele auf der Website sind mit Grok TTS erzeugt (castor, ursa, atlas, sal, rigel, aurora). Im Betrieb spricht der Assistent über Grok Voice mit der gewählten Stimme.
+Die Hörbeispiele auf der Website sind KI-generiert (Grok TTS: castor, ursa, atlas, sal, rigel, aurora). Sie sprechen dabei nicht mit einem Live-Sprachagenten. Ein Live-Betrieb über Grok Voice ist derzeit nicht verfügbar.
 
 ## Telefonassistent: mehr als eine Ansage
 
@@ -197,4 +199,4 @@ Die Hörbeispiele auf der Website sind mit Grok TTS erzeugt (castor, ursa, atlas
 
 ## Telefonie anbinden
 
-Telefonie läuft über Grok Voice 3.0 per SIP (eigene Rufnummer, SIP-Trunk bei einem Anbieter, Weiterleitung auf `sip.voice.x.ai`). Bis zur ausdrücklichen Telefonie-Freigabe – bei Kanzlei, Praxis und Steuerberatung zusätzlich nach dokumentierter Datenschutzprüfung – bleibt der Agent gesperrt. Kritische Stichworte führen unabhängig vom Sprachmodell zu einer festen Übergabe-Ansage. Details: [Telefonie anbinden](telefonie.html).
+Telefonie, SIP und WhatsApp sind **geplant** und derzeit nicht verfügbar. Eine spätere Anbindung wäre über Grok Voice 3.0 per SIP vorgesehen (eigene Rufnummer, SIP-Trunk bei einem Anbieter, Weiterleitung auf `sip.voice.x.ai`) und bliebe bis zur ausdrücklichen Telefonie-Freigabe gesperrt – bei Kanzlei, Praxis und Steuerberatung zusätzlich nach dokumentierter Datenschutzprüfung. Details (als Vorschau): [Telefonie anbinden](telefonie.html).

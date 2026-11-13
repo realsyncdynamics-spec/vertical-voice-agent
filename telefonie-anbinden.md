@@ -2,13 +2,15 @@
 
 **Stand:** 30.10.2026 · Vertical Voice Agent (eigenständiges Produkt außerhalb von RealSyncDynamics.AI)
 
-Ihr Telefonassistent läuft auf **Grok Voice 3.0** (xAI Speech to Speech). Telefonie ist **standardmäßig gesperrt**: Bis alle Punkte unten erfüllt und freigegeben sind, bleibt der Agent im Status *Entwurf/pausiert* und ist nur als Web-Demo nutzbar. Auf dieser Website gibt es bewusst **keine Live-Rufnummer** zum Testen.
+**Status: Demo / Vorschau.** Telefonie, WhatsApp und Live-Sprachagent sind noch nicht verfügbar. Preise und Pakete sind unverbindlich, eine Buchung ist derzeit nicht möglich. Sprachverarbeitung über xAI kann außerhalb der EU stattfinden ([Regions-Dokumentation von xAI](https://docs.x.ai/developers/advanced-api-usage/regions)).
+
+Ein Telefonassistent auf **Grok Voice 3.0** (xAI Speech to Speech) ist **geplant** und derzeit nicht verfügbar. Telefonie und SIP bleiben **standardmäßig gesperrt**. Auf dieser Website gibt es bewusst **keine Live-Rufnummer** zum Testen. Die folgenden Schritte beschreiben die geplante Anbindung, nicht einen bereits buchbaren Dienst.
 
 ## Was Sie brauchen
 
 | Punkt | Wer | Hinweis |
 |---|---|---|
-| Paket Professional oder Kanzlei / Praxis | Sie | Starter ist Web-only |
+| Paket Professional oder Kanzlei / Praxis | Sie | Starter ist Web-only; Kanzlei / Praxis und Telefonie sind **geplant**, nicht bestellbar |
 | Eigene Rufnummer (Festnetz/Mobil, E.164, z. B. +49 3679 …) | Sie | Ihre bestehende Nummer oder eine neue Nummer Ihres Anbieters |
 | Rufnummer beim Telefonie-Anbieter | Sie / wir gemeinsam | bevorzugt Telnyx (deutsche Ortsrufnummer), alternativ Twilio |
 | Weiterleitung auf den Assistenten | Sie | Rufumleitung (sofort, bei besetzt oder nach X Sekunden) von Ihrer Nummer auf die Trunk-Nummer |
@@ -22,7 +24,7 @@ Ihr Telefonassistent läuft auf **Grok Voice 3.0** (xAI Speech to Speech). Telef
 
 - **Bevorzugt: Telnyx.** Die Anbindung an Grok Voice ist von xAI dokumentiert. Deutsche Ortsrufnummern sind verfügbar, Verbindungsdaten und Aufzeichnungen können in Deutschland (Frankfurt) gespeichert werden. Alternative: Twilio.
 - **Ihre Nummer behalten Sie.** Bei Ihrem bisherigen Anbieter (z. B. Telekom, sipgate, easybell) richten Sie eine Rufumleitung ein – sofort, bei besetzt oder nach einigen Sekunden – auf die Nummer Ihres Assistenten. Klassische deutsche SIP-Trunks wie sipgate oder easybell leiten Anrufe nicht direkt an Grok Voice weiter; dafür ist die Rufumleitung der einfachste Weg.
-- **Ehrlicher Datenschutzhinweis:** Die Sprachverarbeitung erfolgt durch xAI (Grok Voice). Dabei werden Gesprächsinhalte auch außerhalb der EU verarbeitet. Wir sagen deshalb **keine** reine EU-Verarbeitung zu; Details stehen in Ihrem Auftragsverarbeitungsvertrag und den Datenschutzhinweisen.
+- **Ehrlicher Datenschutzhinweis:** Die Sprachverarbeitung erfolgt durch xAI (Grok Voice). Sprachverarbeitung über xAI kann außerhalb der EU stattfinden; eine feste Region wird nicht zugesagt. Quelle: [Regions-Dokumentation von xAI](https://docs.x.ai/developers/advanced-api-usage/regions). Wir sagen deshalb **keine** reine EU-Verarbeitung zu; Details stehen in Ihrem Auftragsverarbeitungsvertrag und den Datenschutzhinweisen.
 - **Nachvollziehbar und begrenzt:** Pro Anruf wird ein Aktionsprotokoll geführt (Beginn, Ende, Dauer, Aktionen, Übergabe, Fehler – kein Audio; Mitschrift nur, wenn Sie sie aktivieren; Aufbewahrungsfrist einstellbar). Höchstdauer pro Anruf (Standard 10 Minuten), Minutenbudget pro Monat und maximale gleichzeitige Anrufe sind fest eingestellt.
 - **Kein Testanschluss:** Es gibt auf dieser Website keine Live-Rufnummer. Ihr Anschluss wird erst nach Ihrer Telefonie-Freigabe aktiv.
 
@@ -49,12 +51,12 @@ Ihr Telefonassistent läuft auf **Grok Voice 3.0** (xAI Speech to Speech). Telef
 
 ## Datenschutzhinweis für Anrufer (Vorlage)
 
-> Sie sprechen mit einem KI-Assistenten von **[Betrieb]**. Verantwortlich für die Verarbeitung ist **[Betrieb, Anschrift, Kontakt]**. Ihr Gespräch wird in Echtzeit von der Sprach-KI Grok Voice der xAI (USA) verarbeitet; dabei werden Daten auch außerhalb der EU verarbeitet (weltweit, abgesichert über EU-Standardvertragsklauseln im Auftragsverarbeitungsvertrag). xAI speichert Gesprächsinhalte nicht (Zero Data Retention). Wir speichern kein Audio. Gespeichert werden nur Ihr Anliegen, Name und Rückrufnummer sowie ein Aktionsprotokoll des Anrufs; eine Mitschrift nur, wenn der Betrieb sie aktiviert hat. Löschung nach **[X] Tagen**. Zweck: Bearbeitung Ihres Anliegens (Art. 6 Abs. 1 lit. b bzw. f DSGVO). Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung, Widerspruch und Beschwerde bei einer Aufsichtsbehörde. Möchten Sie nicht mit der KI sprechen, sagen Sie „Mitarbeiter“ – wir verbinden Sie oder rufen zurück.
+> Sie sprechen mit einem KI-Assistenten von **[Betrieb]**. Verantwortlich für die Verarbeitung ist **[Betrieb, Anschrift, Kontakt]**. Ihr Gespräch wird in Echtzeit von der Sprach-KI Grok Voice der xAI verarbeitet; Sprachverarbeitung über xAI kann außerhalb der EU stattfinden (abgesichert über EU-Standardvertragsklauseln im Auftragsverarbeitungsvertrag, sofern dieser vorliegt). xAI speichert Gesprächsinhalte nicht (Zero Data Retention). Wir speichern kein Audio. Gespeichert werden nur Ihr Anliegen, Name und Rückrufnummer sowie ein Aktionsprotokoll des Anrufs; eine Mitschrift nur, wenn der Betrieb sie aktiviert hat. Löschung nach **[X] Tagen**. Zweck: Bearbeitung Ihres Anliegens (Art. 6 Abs. 1 lit. b bzw. f DSGVO). Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung, Widerspruch und Beschwerde bei einer Aufsichtsbehörde. Möchten Sie nicht mit der KI sprechen, sagen Sie „Mitarbeiter“ – wir verbinden Sie oder rufen zurück.
 
-Dieser Text ist eine Vorlage und ersetzt keine Rechtsberatung. Telefonie wird erst freigeschaltet, wenn Zero Data Retention bei xAI aktiv und der Auftragsverarbeitungsvertrag unterschrieben ist. Wir sagen keine reine EU-Verarbeitung zu.
+Dieser Text ist eine Vorlage und ersetzt keine Rechtsberatung. Telefonie wird erst freigeschaltet, wenn Zero Data Retention bei xAI aktiv und der Auftragsverarbeitungsvertrag unterschrieben ist. Wir sagen keine reine EU-Verarbeitung und keine feste Verarbeitungsregion zu. Quelle: [Regions-Dokumentation von xAI](https://docs.x.ai/developers/advanced-api-usage/regions).
 
 ## Status ohne Freigabe
 
 Fehlt eine Pflichtfreigabe, antwortet ein Anruf nur mit: „Dieser Sprachassistent ist aktuell nicht freigeschaltet. Bitte wenden Sie sich direkt an den Betrieb.“ – keine Werkzeuge, keine Datenerfassung.
 
-[Jetzt im Onboarding einrichten](onboarding.html)
+Telefonie und SIP sind geplant und derzeit nicht verfügbar. [Interesse melden](mailto:realsyncdynamics@gmail.com?subject=Interesse%20Vertical%20Voice%20Agent) · [Onboarding-Demo](onboarding.html)
