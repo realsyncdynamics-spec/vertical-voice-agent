@@ -38,7 +38,7 @@
     { k: ["anbieter","impressum","wer","kontakt","firma","steiner"],
       a: "Anbieter: Dominik Steiner, Einzelunternehmen, Schwarzburger Str. 31, 98724 Neuhaus am Rennweg (Thüringen). Der Vertical Voice Agent ist ein eigenständiges Produkt außerhalb von RealSyncDynamics.AI. Kontakt: realsyncdynamics@gmail.com." },
     { k: ["stimme","stimmen","voice","grok","sprecher"],
-      a: "Sie wählen im Onboarding eine von 28 Grok-Stimmen (alle sprechen Deutsch, Standard: eve). Empfohlen für Betriebe: castor, atlas, celeste, ursa, rigel, lux, ara, rex, sal; für Kanzlei/Praxis/Steuerberatung: lux, liora, aurora, celeste. Die Hörbeispiele auf der Website sind echte Grok-Stimmen." },
+      a: "Sie wählen im Onboarding eine von 28 Grok-Stimmen (alle sprechen Deutsch, Standard: eve). Empfohlen für Betriebe: castor, atlas, celeste, ursa, rigel, lux, ara, rex, sal; für Kanzlei/Praxis/Steuerberatung: lux, liora, aurora, celeste. Die Hörbeispiele auf der Website sind KI-generiert (Grok TTS von xAI), keine menschlichen Mitschnitte und kein Live-Gespräch." },
     { k: ["sip","rufnummer","telefonie anbinden","nummer anbinden","weiterleitung"],
       a: "Telefonie und SIP sind geplant und derzeit nicht verfügbar. Die spätere Anbindung würde laut Produktbeschreibung eigenes Paket Professional oder Kanzlei/Praxis, eine eigene Rufnummer, SIP-Trunk, Übergabe-Nummer und ausdrückliche Freigabe voraussetzen. Details (als Vorschau): telefonie.html. Interesse: realsyncdynamics@gmail.com." },
     { k: ["telefon","anruf","rückruf","ticket"],

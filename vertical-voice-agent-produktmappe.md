@@ -4,7 +4,7 @@
 **Anbieter:** Dominik Steiner, Einzelunternehmen, Schwarzburger Str. 31, 98724 Neuhaus am Rennweg (Thüringen, Deutschland)  
 **Produktstatus:** Eigenständiges Produkt außerhalb von RealSyncDynamics.AI
 
-**Status: Demo / Vorschau.** Telefonie, WhatsApp und Live-Sprachagent sind noch nicht verfügbar. Preise und Pakete sind unverbindlich, eine Buchung ist derzeit nicht möglich. Sprachverarbeitung über xAI kann außerhalb der EU stattfinden ([Regions-Dokumentation von xAI](https://docs.x.ai/developers/advanced-api-usage/regions)).
+**Status: Demo / Vorschau.** Demo / Vorschau: Telefonie, WhatsApp und ein Live-Sprachagent sind derzeit nicht verfügbar. Die genannten Pakete und Preise sind unverbindliche Beispielangaben (monatlich, netto zuzüglich 19 % Umsatzsteuer, Bruttopreis angegeben). Eine Buchung oder Bestellung ist derzeit nicht möglich. Das Angebot richtet sich an Unternehmer und Betriebe, nicht an Verbraucherinnen und Verbraucher. Sprachverarbeitung über SpaceXSI / xAI (Grok Voice) kann außerhalb der EU stattfinden, unter anderem in den USA; ein fester Verarbeitungsort, insbesondere eine EU-Residenz, wird nicht zugesagt. Einzelheiten zu Empfänger, Transfergrundlage (EU-Standardvertragsklauseln, nicht das EU-US Data Privacy Framework) und Ihren Rechten finden Sie in den [Datenschutzhinweisen](telefonie.html#datenschutz).
 
 ---
 
@@ -96,7 +96,7 @@ Werkzeuge: `lookup_kb` = Wissensabfrage (FAQ, Öffnungszeiten, Leistungen); `cre
 
 ## 4. Pakete & Preise
 
-Unverbindliche Beispielpreise, monatlich netto zzgl. 19 % MwSt. Je Paket 1 Agent. Eine Buchung ist derzeit nicht möglich. Telefonie und das Paket Kanzlei / Praxis sind geplant.
+Unverbindliche Beispielpreise, monatlich netto zzgl. 19 % MwSt. Je Paket 1 Agent. Eine Buchung ist derzeit nicht möglich. Telefonie und das Paket Kanzlei / Praxis sind geplant. Preise gelten für Unternehmer und Betriebe, netto zuzüglich 19 % gesetzlicher Umsatzsteuer (Bruttopreis in Klammern). Gegenüber Verbrauchern würde der Bruttopreis den Endpreis darstellen; ein Verbrauchergeschäft wird auf dieser Seite nicht angeboten.
 
 | Paket | Preis netto | Preis brutto | Kanäle | Inklusivminuten | Jede weitere Minute (netto) |
 |---|---|---|---|---|---|
@@ -171,10 +171,12 @@ Schwarzburger Str. 31
 Thüringen, Deutschland  
 E-Mail: realsyncdynamics@gmail.com
 
-*Der Vertical Voice Agent erteilt keine Rechts-, Medizin- oder Steuerberatung und gibt keine garantierte Compliance-Zusage.* Sprachverarbeitung über xAI kann außerhalb der EU stattfinden; eine feste Region wird nicht zugesagt ([Regions-Dokumentation von xAI](https://docs.x.ai/developers/advanced-api-usage/regions)).
+*Der Vertical Voice Agent erteilt keine Rechts-, Medizin- oder Steuerberatung und gibt keine garantierte Compliance-Zusage.*
+
+**Datenschutzhinweis (in Prüfung):** Die Sprachverarbeitung erfolgt durch SpaceX Super Intelligence LLC (SpaceXSI / xAI, Grok Voice) als Auftragsverarbeiter. Sie kann außerhalb der EU stattfinden; der globale Endpunkt des Anbieters sagt keinen Verarbeitungsort zu, der dokumentierte US-Endpunkt gilt nicht für Voice-APIs (Quelle: [https://docs.x.ai/developers/advanced-api-usage/regions](https://docs.x.ai/developers/advanced-api-usage/regions)). Eine reine EU-Verarbeitung wird nicht zugesagt. Soweit personenbezogene Daten übermittelt werden, geschieht das auf Grundlage eines Auftragsverarbeitungsvertrags mit EU-Standardvertragsklauseln (Art. 46 Abs. 2 lit. c, Art. 28 DSGVO; [https://x.ai/legal/data-processing-addendum](https://x.ai/legal/data-processing-addendum)) und nur über die Zero-Data-Retention-Schnittstelle. SpaceXSI ist nicht als aktiver Teilnehmer des EU-US Data Privacy Framework gelistet (offizielle Liste, Abruf 13. November 2026). Eine Kopie der Klauseln erhalten Sie auf Anfrage. Dieser Absatz wird nur verwendet, wenn AVV und ZDR für den konkreten Zugang nachweislich gelten; andernfalls unterbleibt jede Produktions- oder Telefonie-Zusage.
 
 ## Sprachdemos (Stand 30.10.2026)
-Landingpage-Abschnitt „Stimmen anhören“ (#stimmen) und Onboarding: 6 deutsche Beispielaufnahmen (Handwerk, Gastronomie/Bäckerei, KFZ, Metzgerei, Hausverwaltung, Arztpraxis), erzeugt mit Microsoft Edge Neural TTS (Conrad, Katja, Killian, Amala). Illustrativ; Stimme und Ansprache werden im Onboarding festgelegt. Keine Rechts-, Medizin-, Steuer- oder Allergenauskünfte in den Skripten.
+Landingpage-Abschnitt „Stimmen anhören“ (#stimmen) und Onboarding: sechs deutsche Beispielaufnahmen (Handwerk, Gastronomie/Bäckerei, KFZ, Metzgerei, Hausverwaltung, Arztpraxis), erzeugt mit Grok TTS von xAI (Stimmen castor, ursa, atlas, sal, rigel, aurora; Nachweis: audio/credits.json, 30.10.2026). Die Aufnahmen sind KI-generiert und illustrativ, kein Live-Gespräch. Betriebsnamen sind fiktiv.
 
 ## Grok-Stimmen (Stand 30.10.2026)
 
