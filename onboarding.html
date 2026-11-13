@@ -282,12 +282,13 @@
             <span style="font-size: 0.82rem; color: var(--text-muted);">Öffnungszeiten, Feiertage und Betriebsferien tragen Sie in Schritt 3 ein.</span>
           </div>
           <div class="form-group">
-            <label for="ob-pkg">Paket (Stand 24.10.2026, netto zzgl. 19 % MwSt.)</label>
+            <label for="ob-pkg">Paket</label>
             <select id="ob-pkg" onchange="runOnboardingPipeline()">
               <option value="starter">Starter – 89,00 €/Monat (Web-only, 500 Min. inkl., +0,18 €/Min.)</option>
               <option value="professional" selected>Professional – 199,00 €/Monat (Web + Telefonie, 1.500 Min. inkl., +0,15 €/Min.)</option>
               <option value="kanzlei">Kanzlei – 349,00 €/Monat (Elevated Privacy, Web + Telefonie, 1.200 Min. inkl., +0,18 €/Min.)</option>
             </select>
+            <p>Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.</p>
           </div>
           <div class="form-group">
             <label for="ob-channel">Gewünschter Kanal</label>
@@ -479,6 +480,8 @@
       </div>
     </div>
   </div>
+
+  <footer style="padding: 16px; text-align: center;"><a href="https://realsyncdynamicsai.de/impressum">Impressum</a> · <a href="https://realsyncdynamicsai.de/datenschutz">Datenschutz</a></footer>
 
   <script>
     const TEMPLATES = {
@@ -850,7 +853,7 @@
       const md = `# Onboarding-Protokoll – ${r.tenant_name}
 - **Agent-ID:** \`${r.agent_id}\`
 - **Branchenvorlage:** \`${r.template}\` (Sensitivity: \`${r.data_sensitivity}\`)
-- **Paket:** ${r.package.name} (${r.package.price_eur_net_monthly} € netto/Monat zzgl. 19 % MwSt.)
+- **Paket:** ${r.package.name} (${r.package.price_eur_net_monthly} €/Monat). Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.
 - **Kanal:** \`${r.channel}\`
 - **Öffnungszeiten:** ${r.opening_hours}
 - **Feiertage:** ${r.apply_public_holidays ? "gesetzliche Feiertage " + r.holiday_region + " gesperrt" : "nicht automatisch"} · **Schließzeiten:** ${r.company_closures.length ? r.company_closures.map(c => c.from + (c.to !== c.from ? " bis " + c.to : "") + " " + c.label).join("; ") : "keine"}
