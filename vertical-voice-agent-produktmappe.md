@@ -94,15 +94,15 @@ Werkzeuge: `lookup_kb` = Wissensabfrage (FAQ, Öffnungszeiten, Leistungen); `cre
 
 ## 4. Pakete & Preise
 
-Alle Preise monatlich, netto zzgl. 19 % MwSt. Je Paket 1 Agent.
+Alle Preise monatlich. Gemäß § 19 UStG wird keine Umsatzsteuer berechnet. Je Paket 1 Agent.
 
-| Paket | Preis netto | Preis brutto | Kanäle | Inklusivminuten | Jede weitere Minute (netto) |
-|---|---|---|---|---|---|
-| **Starter** | 89,00 € | 105,91 € | Web | 500 Min. | 0,18 € |
-| **Professional** | 199,00 € | 236,81 € | Web + Telefonie-Option | 1.500 Min. | 0,15 € |
-| **Kanzlei / Praxis** | 349,00 € | 415,31 € | Web + Telefonie-Option, Datenschutzprüfung (elevated) inkl. | 1.200 Min. | 0,18 € |
+| Paket | Preis | Kanäle | Inklusivminuten | Jede weitere Minute |
+|---|---|---|---|---|
+| **Starter** | 89,00 € | Web | 500 Min. | 0,18 € |
+| **Professional** | 199,00 € | Web + Telefonie-Option | 1.500 Min. | 0,15 € |
+| **Kanzlei / Praxis** | 349,00 € | Web + Telefonie-Option, Datenschutzprüfung (elevated) inkl. | 1.200 Min. | 0,18 € |
 
-**Rechenbeispiel Professional, 1.800 Min./Monat:** 199,00 € + 300 × 0,15 € = 244,00 € netto (290,36 € brutto).
+**Rechenbeispiel Professional, 1.800 Min./Monat:** 199,00 € + 300 × 0,15 € = 244,00 €.
 
 ## 5. Kalenderanbindung – Ihre Wahl
 
