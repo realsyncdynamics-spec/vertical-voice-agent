@@ -20,3 +20,18 @@ Setzen: `wrangler secret put XAI_API_KEY --name vva-sip-webhook-test`
 ## Tests
 - `npm test` – 34 lokale Tests (Miniflare, kein Netz)
 - `node test/smoke-live.mjs` – Live-Smoke ohne PSTN (Env `XAI_API_KEY`, `VVA_TEST_WHSEC`): Test-Worker mit echter Signatur + xAI-WebSocket ohne `call_id`
+
+## Mandant aus dem Onboarding anlegen
+
+`onboarding.html` erzeugt eine Konfig-Datei (`<agent_id>.json`). Daraus wird geprüftes SQL – es wird nichts automatisch geschrieben:
+
+```bash
+cd workers/vva-sip-webhook
+node tools/onboarding-to-tenant.mjs ~/Downloads/<agent_id>.json --phone +4936791234 > tenant.sql
+# prüfen, dann bewusst einspielen (erst Test, nie direkt Prod):
+npx wrangler d1 execute vva_telephony_test --remote --file tenant.sql
+```
+
+Abgelehnt (kein SQL, Exit 1): `valid !== true`, offene Onboarding-Fehler, unbekannte Vorlage, KI-Offenlegung aus, Aufzeichnung ohne Freigabe, fehlende Begrüßung, ungültige `agent_id` oder Rufnummer nicht im E.164-Format. `telephony_approved` wird nie gesetzt; ohne Freigabe nimmt der Worker keine Anrufe an. Das SQL ist ein `INSERT` ohne `OR REPLACE` – ein bestehender Mandant wird nicht still überschrieben.
+
+Tests: `npm run test:onboarding`
