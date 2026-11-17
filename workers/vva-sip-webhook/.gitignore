@@ -1,3 +1,6 @@
 node_modules/
 .wrangler/
 .dev.vars
+
+# Kundendaten nie ins (öffentliche) Repo
+kunden/

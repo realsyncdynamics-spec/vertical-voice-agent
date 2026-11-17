@@ -1,0 +1,22 @@
+{
+  "_hinweis": "Beispiel mit erfundenen Daten. Kopie nach kunden/<name>.json legen (nicht im Repo) und ausfüllen.",
+  "agent_id": "kunde-shk-beispiel",
+  "firmenname": "SHK Beispielbetrieb",
+  "vorlage": "trades",
+  "paket": "professional",
+  "rufnummer": "+4936790000000",
+  "weiterleitung": "+4915100000000",
+  "stimme": "castor",
+  "begruessung": "Guten Tag, Sie sprechen mit dem KI-Assistenten vom SHK Beispielbetrieb. Wie kann ich helfen?",
+  "oeffnungszeiten": { "Mo–Do": "07:30–17:00", "Fr": "07:30–14:00", "Sa–So": "geschlossen" },
+  "faq": [
+    { "frage": "Notdienst?", "antwort": "Bei Gasgeruch oder Wasserrohrbruch verbinden wir sofort mit dem Bereitschaftsdienst." }
+  ],
+  "aufbewahrung_tage": 30,
+  "max_minuten_pro_anruf": 10,
+  "max_parallel": 2,
+  "abschrift": false,
+  "telefonie_freigegeben": false,
+  "avv_unterzeichnet_am": null,
+  "datenschutzpruefung_dokumentiert": false
+}
