@@ -1,10 +1,10 @@
 /* Vertical Voice Agent – Hilfe-Chatbot (offline, regel- & FAQ-basiert, keine externe API, keine Daten werden gesendet) */
 (function () {
   const FAQ = [
-    { k: ["preis","kosten","paket","pakete","starter","professional","kanzlei","praxis","euro","€","monat","mwst"],
-      a: "Es gibt drei Pakete (monatlich, netto zzgl. 19 % MwSt.): Starter 89 € (nur Web, 500 Minuten inklusive, danach 0,18 € pro Minute), Professional 199 € (Web plus Telefonie-Option, 1.500 Minuten, danach 0,15 €) und Kanzlei / Praxis 349 € (Web plus Telefonie-Option, Datenschutzprüfung inklusive, 1.200 Minuten, danach 0,18 €). Je Paket 1 Agent." },
+    { k: ["preis","kosten","ust","umsatzsteuer","paket","pakete","starter","professional","kanzlei","praxis","euro","€","monat","mwst"],
+      a: "Es gibt drei Pakete (monatlich; gemäß § 19 UStG wird keine Umsatzsteuer berechnet): Starter 89 € (nur Web, 500 Minuten inklusive, danach 0,18 € pro Minute), Professional 199 € (Web plus Telefonie-Option, 1.500 Minuten, danach 0,15 €) und Kanzlei / Praxis 349 € (Web plus Telefonie-Option, Datenschutzprüfung inklusive, 1.200 Minuten, danach 0,18 €). Je Paket 1 Agent." },
     { k: ["minute","minuten","inklusiv","mehrminuten","folgepreis","überschreit"],
-      a: "Inklusivminuten: Starter 500, Professional 1.500, Kanzlei / Praxis 1.200 pro Monat. Jede weitere Minute kostet netto 0,18 € (Starter), 0,15 € (Professional) bzw. 0,18 € (Kanzlei / Praxis). Den Minutenrechner finden Sie auf der Startseite unter „Minutenrechner“." },
+      a: "Inklusivminuten: Starter 500, Professional 1.500, Kanzlei / Praxis 1.200 pro Monat. Jede weitere Minute kostet 0,18 € (Starter), 0,15 € (Professional) bzw. 0,18 € (Kanzlei / Praxis). Den Minutenrechner finden Sie auf der Startseite unter „Minutenrechner“." },
     { k: ["branche","branchen","vorlage","handwerk","metzgerei","kfz","werkstatt","gastronomie","bäckerei","hausverwaltung","kanzlei","arzt","zahnarzt","steuer"],
       a: "Es gibt 8 Branchenvorlagen: Handwerk, Metzgerei, KFZ-Werkstatt & Autohaus, Gastronomie & Bäckerei, Hausverwaltung (Sensibilität standard) sowie Rechtsanwaltskanzlei, Arzt- & Zahnarztpraxis und Steuerberatung (erhöhte Sensibilität – Aktivierung nur nach dokumentierter Datenschutzprüfung)." },
     { k: ["metzgerei","metzger","fleischer"],
