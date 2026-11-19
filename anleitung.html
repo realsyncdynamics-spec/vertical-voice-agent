@@ -15,7 +15,8 @@
     h1 { font-size:1.8rem; margin-bottom:6px; } h2 { margin-top:34px; font-size:1.25rem; color:#38bdf8; }
     .step { background:#111827; border:1px solid #1f2937; border-radius:12px; padding:16px 20px; margin:14px 0; }
     .ui { background:#1e293b; border:1px solid #334155; border-radius:6px; padding:1px 7px; font-weight:600; white-space:nowrap; }
-    table { width:100%; border-collapse:collapse; font-size:0.9rem; } td,th { border-bottom:1px solid #1f2937; padding:7px 6px; text-align:left; vertical-align:top; }
+    table { width:100%; border-collapse:collapse; font-size:0.9rem; } td,th { border-bottom:1px solid #1f2937; padding:7px 6px; text-align:left; vertical-align:top; overflow-wrap:anywhere; }
+    @media (max-width:600px){ .ui{white-space:normal} td,th{padding:7px 4px} }
     .note { color:#94a3b8; font-size:0.9rem; } .warn { border-left:3px solid #f59e0b; padding-left:10px; }
     a { color:#38bdf8; }
   </style>
@@ -46,7 +47,7 @@
         <tr><th>Feld</th><th>Was eintragen / anklicken</th></tr>
         <tr><td><span class="ui">Mandanten- / Betriebsname</span></td><td>Name Ihres Betriebs, so wie der Assistent ihn nennen soll.</td></tr>
         <tr><td><span class="ui">Handoff-Ziel</span></td><td>Nummer oder Stelle, an die bei Notfällen und kritischen Anliegen sofort übergeben wird.</td></tr>
-        <tr><td><span class="ui">Paket</span></td><td>Starter 89 € (nur Web, 500 Min.), Professional 199 € (Web + Telefonie-Option, 1.500 Min.), Kanzlei / Praxis 349 € (inkl. Datenschutzprüfung, 1.200 Min.) – jeweils netto/Monat zzgl. 19 % MwSt.; weitere Minuten 0,18 € / 0,15 € / 0,18 €.</td></tr>
+        <tr><td><span class="ui">Paket</span></td><td>Starter 89 € (nur Web, 500 Min.), Professional 199 € (Web + Telefonie-Option, 1.500 Min.), Kanzlei / Praxis 349 € (inkl. Datenschutzprüfung, 1.200 Min.) – jeweils pro Monat, keine USt. gemäß § 19 UStG; weitere Minuten 0,18 € / 0,15 € / 0,18 €.</td></tr>
         <tr><td><span class="ui">Gewünschter Kanal</span></td><td>„Web-Sprachassistent“ oder „Telefonie + Web“ (Telefonie nicht im Starter-Paket).</td></tr>
         <tr><td><span class="ui">Kalender für Terminbuchungen</span></td><td><strong>Google Kalender (empfohlen)</strong> oder Outlook Kalender (Alternative).</td></tr>
         <tr><td><span class="ui">Zielkalender</span></td><td>Optional eine Kalender-E-Mail-Adresse. Leer lassen = Hauptkalender Ihres Kontos.</td></tr>
@@ -88,7 +89,7 @@
     <h2>Gut zu wissen</h2>
     <div class="step">
       Der Assistent gibt keine Rechts-, Medizin- oder Steuerberatung und keine garantierte Compliance-Zusage. Bei Gefahr oder Notfällen übergibt er sofort an Ihr Team. Ein schriftliches Angebot ist optional und kann auf der <a href="index.html#angebot">Startseite</a> erzeugt werden.
-      <p class="note">Anbieter: Dominik Steiner, Einzelunternehmen, Schwarzburger Str. 31, 98724 Neuhaus am Rennweg · Eigenständiges Produkt außerhalb von RealSyncDynamics.AI · realsyncdynamics@gmail.com</p>
+      <p class="note">Anbieter: Dominik Steiner, RealSync Dynamics &amp; AI, Einzelunternehmen, Schwarzburger Str. 31, 98724 Neuhaus am Rennweg · Eigenständiges Produkt außerhalb von RealSyncDynamics.AI · realsyncdynamics@gmail.com · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></p>
     </div>
   </main>
   <script src="chatbot.js"></script>
