@@ -19,15 +19,17 @@ Technik danach (xAI-Doku): FQDN SIP Connection → `sip.voice.x.ai`, Port 5060, 
 ## 2. xAI: Auftragsverarbeitung + Zero Data Retention (parallel zu 1)
 - [ ] **ZDR zuerst im TEST-Team aktivieren** (xAI Console → Team-Einstellungen; wirkt für alle Keys des Teams). Nicht zuerst im Prod-Team.
   - Bekannte Folgen: Responses-API (stateful), Files, Collections, Batch API deaktiviert; Voice-Gesprächsverlauf nicht verfügbar. Auswirkung auf SIP-Session-Resumption unklar (VVA nutzt Resumption nicht).
-  - [ ] Danach Live-Smoke erneut laufen lassen (`node test/smoke-live.mjs`, Erwartung 10/10) – erst dann ZDR im Prod-Team.
+  - [ ] Danach Live-Smoke erneut laufen lassen (`cd workers/vva-sip-webhook && node test/smoke-live.mjs`, Erwartung 11/11 gemäß zuletzt dokumentiertem Testumfang; Test-Zugangsdaten erforderlich) – erst dann ZDR im Prod-Team.
 - [ ] DPA (https://x.ai/legal/data-processing-addendum) annehmen/unterzeichnen. Laut DPA dürfen personenbezogene Daten nur über die ZDR-API verarbeitet werden.
 - [ ] Datenschutzhinweis für Anrufer übernehmen (Vorlage: https://voice.realsyncdynamicsai.de/telefonie.html). Keine EU-Hosting-Zusage; Verarbeitung USA/weltweit mit Standardvertragsklauseln.
 - [ ] Eigenen xAI-Key für Prod anlegen (Prod-Team).
 
 ## 3. Prod-Worker + D1 (während Telnyx prüft) – bereitgestellt
 - Worker `https://vva-sip-webhook-prod.realsyncdynamics.workers.dev` (Telefonie aus, ohne Secrets → 503 fail-closed), D1 `vva_telephony_prod` (nur 8 Vorlagen, keine Mandanten).
+- [ ] D1-IDs in `workers/vva-sip-webhook/wrangler.toml` sind noch Platzhalter; tatsächliche Cloudflare-Test-/Prod-IDs vor einem Deployment lesend prüfen und korrekt eintragen. Kein Deployment aus der unveränderten Platzhalter-Konfiguration.
 - [ ] Prod-Secrets setzen: `XAI_API_KEY` (Prod-Key), `XAI_WEBHOOK_SECRET` (von xAI).
-- [ ] Ersten Mandanten mit Nummer, Übergabe-Nummer, Budgets, Telefonie-Freigabe in D1 anlegen.
+- [ ] Ersten Mandanten mit Nummer, Übergabe-Nummer, Budgets und dokumentierter Datenschutz-/Telefonie-Freigabe in D1 anlegen. Das Mandantenskript erzeugt zunächst nur SQL; keine automatische Anwendung.
+- [ ] Benachrichtigungs-/Abholprozess für Kundenanliegen festlegen und end-to-end testen; aktuell nur manueller D1-Abruf, keine automatische Zustellung.
 
 ## 4. Testanrufe (später)
 - [ ] Testanrufe auf dem Test-Worker mit kurzzeitig `TELEPHONY_ENABLED=true` (nur nach deinem Go), Protokoll prüfen, dann Prod.
