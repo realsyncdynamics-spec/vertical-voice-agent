@@ -4,9 +4,22 @@ import { createHmac, randomUUID } from "node:crypto";
 import { readFileSync } from "node:fs";
 import WebSocket from "ws";
 import * as core from "../src/core.js";
+import { baueMandant, ladeVorlagen } from "../scripts/mandant.mjs";
 const U = "https://vva-sip-webhook-test.realsyncdynamics.workers.dev";
 const out = [];
-const h = await (await fetch(U + "/health")).json(); out.push(["health", h.secrets_configured === true && h.telephony_enabled === false, JSON.stringify(h)]);
+const missing = ["XAI_API_KEY", "VVA_TEST_WHSEC"].filter((key) => !process.env[key]);
+if (missing.length) {
+  console.error("Live-Smoke nicht gestartet: fehlende Test-Zugangsdaten (" + missing.join(", ") + ").");
+  process.exit(2);
+}
+// Sicherheitsabbruch vor allen schreibenden Webhook-Requests: nie versehentlich aktive Telefonie testen.
+const healthResponse = await fetch(U + "/health");
+if (!healthResponse.ok) throw new Error("Test-Worker /health: HTTP " + healthResponse.status);
+const h = await healthResponse.json();
+if (h.environment !== "test" || h.telephony_enabled !== false || h.d1_bound !== true) {
+  throw new Error("Sicherheitsabbruch: Erwartet Test-Worker mit environment=test, d1_bound=true, telephony_enabled=false.");
+}
+out.push(["health", h.secrets_configured === true, JSON.stringify(h)]);
 const raw = process.env.VVA_TEST_WHSEC.replace(/^whsec_/, "");
 const body = JSON.stringify({ object: "event", id: "evt_smoke", type: "realtime.call.incoming", created_at: 1, data: { call_id: "smoke-" + randomUUID(), sip_headers: [{ name: "From", value: "+491701111111" }, { name: "To", value: "+4936791234" }], metadata: {} } });
 const sig = (id, ts) => "v1," + createHmac("sha256", Buffer.from(raw, "base64")).update(`${id}.${ts}.${body}`).digest("base64");
@@ -18,9 +31,12 @@ r = await post({ "webhook-id": id, "webhook-timestamp": ts, "webhook-signature":
 r = await post({ "webhook-id": "x", "webhook-timestamp": ts, "webhook-signature": "v1,AAAA" }); out.push(["falsche Signatur -> 401", r[0] === 401, String(r[0])]);
 
 // xAI WebSocket ohne call_id (laut Doku normale Speech-to-Speech-Session)
-const S = "/cursor/stores/store-8d5bca21-00e8-4084-a05f-43646dd48d75/vertical-voice-agent/";
-const tpl = JSON.parse(readFileSync(S + "templates_and_validator.json")).templates.trades;
-const tenant = { ...JSON.parse(readFileSync(S + "tenants/dominik-steiner-trades.json")), enabled_tools: ["create_ticket", "schedule_appointment", "handoff_human"] };
+// Reproduzierbare, fiktive Repository-Fixture statt Entwickler-lokalem /cursor-Pfad.
+const vorlagen = ladeVorlagen();
+const kunde = JSON.parse(readFileSync(new URL("../scripts/beispiel-kunde.json", import.meta.url), "utf8"));
+const { t: tenant, fehler } = baueMandant(kunde, vorlagen);
+if (fehler.length) throw new Error("Ungültige Smoke-Fixture: " + fehler.join(", "));
+const tpl = vorlagen[kunde.vorlage].data;
 const cfg = core.sessionConfig(tenant, tpl); const addr = {}; const guardUpd = (x) => { const ins = core.addressGuard(addr, cfg.session.instructions, x); if (ins) send({ type: "session.update", session: { instructions: ins } }); };
 const turns = ["Guten Tag, wann haben Sie morgen geöffnet?", "Hallo, meine Heizung ist ausgefallen. Ich heiße Max Muster, Rückrufnummer 0170 1234567. Bitte nehmen Sie das auf.", "Ja, genau so, bitte erfassen.", "Und ich hätte gern einen Termin Dienstag um 10 Uhr. Können Sie den fest bestätigen?", "Ja, bitte so aufnehmen."];
 const ws = new WebSocket("wss://api.x.ai/v1/realtime?model=grok-voice-latest", { headers: { Authorization: "Bearer " + process.env.XAI_API_KEY } });
@@ -50,3 +66,6 @@ const asks = texts.filter((x) => core.ADDRESS_ASK_RE.test(x)).length; out.push([
 out.push(["Assistent bestätigt keinen Termin fest", !texts.some((x) => /termin (ist )?(fest )?(bestätigt|gebucht)/i.test(x) && !/nicht/i.test(x)), ""]);
 for (const [n, okk, i] of out) console.log(okk ? "PASS" : "FAIL", "-", n, "::", i.slice(0, 220));
 console.log("\nAssistent-Texte:\n- " + texts.join("\n- "));
+const failures = out.filter(([, passed]) => !passed);
+console.log("\n" + (out.length - failures.length) + "/" + out.length + " Checks bestanden.");
+if (failures.length) process.exitCode = 1;
