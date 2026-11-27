@@ -5,6 +5,7 @@ import { readFileSync } from "node:fs";
 import WebSocket from "ws";
 import * as core from "../src/core.js";
 import { baueMandant, ladeVorlagen } from "../scripts/mandant.mjs";
+import { validateLiveSmokeHealth } from "./live-preflight.mjs";
 const U = "https://vva-sip-webhook-test.realsyncdynamics.workers.dev";
 const out = [];
 const missing = ["XAI_API_KEY", "VVA_TEST_WHSEC"].filter((key) => !process.env[key]);
@@ -16,10 +17,8 @@ if (missing.length) {
 const healthResponse = await fetch(U + "/health");
 if (!healthResponse.ok) throw new Error("Test-Worker /health: HTTP " + healthResponse.status);
 const h = await healthResponse.json();
-if (h.environment !== "test" || h.telephony_enabled !== false || h.d1_bound !== true) {
-  throw new Error("Sicherheitsabbruch: Erwartet Test-Worker mit environment=test, d1_bound=true, telephony_enabled=false.");
-}
-out.push(["health", h.secrets_configured === true, JSON.stringify(h)]);
+validateLiveSmokeHealth(h);
+out.push(["health", true, JSON.stringify(h)]);
 const raw = process.env.VVA_TEST_WHSEC.replace(/^whsec_/, "");
 const body = JSON.stringify({ object: "event", id: "evt_smoke", type: "realtime.call.incoming", created_at: 1, data: { call_id: "smoke-" + randomUUID(), sip_headers: [{ name: "From", value: "+491701111111" }, { name: "To", value: "+4936791234" }], metadata: {} } });
 const sig = (id, ts) => "v1," + createHmac("sha256", Buffer.from(raw, "base64")).update(`${id}.${ts}.${body}`).digest("base64");

@@ -21,7 +21,8 @@ Setzen: `wrangler secret put XAI_API_KEY --name vva-sip-webhook-test`
 Im Verzeichnis `workers/vva-sip-webhook` mit Node.js >= 22:
 - `npm ci && npm test` – lokale Miniflare-Tests, kein PSTN und keine xAI-Kosten (zuletzt dokumentiert: 37/37).
 - `npm run test:mandant` – lokale Prüfung der Kundenkonfiguration (zuletzt dokumentiert: 9/9).
-- `node test/smoke-live.mjs` – **nur nach bewusster Freigabe und mit Test-Zugangsdaten** `XAI_API_KEY` und `VVA_TEST_WHSEC`. Nutzt das versionierte, fiktive `scripts/beispiel-kunde.json` und die Vorlagen aus `migrations/0002_seed.sql` (kein lokaler Entwicklerpfad). Prüft `/health` vor dem signierten Test-Webhook: `environment=test`, `d1_bound=true`, `telephony_enabled=false`. Ohne Zugangsdaten oder bei aktiver Telefonie bricht der Test vorher ab. Fehlschläge liefern Exit-Code 1. Er testet **keine echte SIP-/PSTN-Verbindung** und schaltet die Telefonie nicht ein.
+- `npm run test:preflight` – lokale, geheimnisfreie Prüfung des Live-Smoke-Sicherheitsabbruchs.
+- `node test/smoke-live.mjs` – **nur nach bewusster Freigabe und mit Test-Zugangsdaten** `XAI_API_KEY` und `VVA_TEST_WHSEC`. Nutzt das versionierte, fiktive `scripts/beispiel-kunde.json` und die Vorlagen aus `migrations/0002_seed.sql` (kein lokaler Entwicklerpfad). Prüft `/health` vor dem signierten Test-Webhook: `environment=test`, `d1_bound=true`, `telephony_enabled=false`, `secrets_configured=true`. Ohne Zugangsdaten oder bei unsicherem Worker-Zustand bricht der Test vorher ab. Fehlschläge liefern Exit-Code 1. Er testet **keine echte SIP-/PSTN-Verbindung** und schaltet die Telefonie nicht ein.
 
 ## Noch keine Go-live-Freigabe
 - In `wrangler.toml` sind die beiden D1-`database_id`-Felder noch Platzhalter (`REPLACE_WITH_D1_ID`, `REPLACE_WITH_PROD_D1_ID`). Die tatsächlichen IDs müssen im jeweiligen Cloudflare-Konto **lesend geprüft** werden; niemals durch erfundene Werte ersetzen oder mit diesen Platzhaltern deployen.
