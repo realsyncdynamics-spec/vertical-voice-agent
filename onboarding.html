@@ -222,8 +222,18 @@ header{background:#fff}.form-group label,h4[style],ol[style]{color:#263b58!impor
       <div class="form-group">
         <label for="ob-website">Website-Adresse</label>
         <input type="text" id="ob-website" inputmode="url" autocomplete="url" maxlength="2048" placeholder="www.ihr-betrieb.de" aria-describedby="website-note" />
-        <p id="website-note" style="font-size:.85rem;color:var(--text-muted);margin-top:6px">Nur als lokale Referenz. Automatische Analyse ist noch nicht verfügbar. Bitte tragen Sie die Betriebsdaten selbst ein.</p>
+        <p id="website-note" style="font-size:.85rem;color:var(--text-muted);margin-top:6px">Die optionale Analyse ist in der geschützten lokalen Vorschau verfügbar. Manuelle Einrichtung bleibt jederzeit möglich.</p>
       </div>
+    </div>
+    <div class="card" id="website-scan-card" hidden>
+      <h3 class="step-title">Unternehmensinformationen ermitteln</h3>
+      <p style="font-size:.85rem;color:var(--text-muted)">Nur öffentlich zugängliche Angaben werden gelesen. Keine Aktivierung und keine kostenpflichtigen KI-Aufrufe.</p>
+      <div class="form-group" style="margin-top:12px">
+        <label for="website-scan-token">Zugangscode der lokalen Vorschau</label>
+        <input type="password" id="website-scan-token" autocomplete="off" maxlength="256" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:4px" />
+      </div>
+      <button type="button" class="btn btn-primary" id="website-scan-start">Website analysieren</button>
+      <p id="website-scan-status" role="status" style="margin-top:8px;font-size:.85rem"></p>
     </div>
     <div id="website-profile-review" class="card" hidden aria-live="polite"></div>
     <div class="card" style="border-color: var(--accent);">
@@ -713,6 +723,7 @@ header{background:#fff}.form-group label,h4[style],ol[style]{color:#263b58!impor
       document.getElementById("recording-details").style.display = rec ? "block" : "none";
     }
 
+    let confirmedWebsiteProfile = null;
     function runOnboardingPipeline() {
       const tpl = TEMPLATES[currentBranch];
       const name = document.getElementById("ob-name").value.trim();
@@ -854,6 +865,7 @@ header{background:#fff}.form-group label,h4[style],ol[style]{color:#263b58!impor
           recording_approved: recEn ? recApp : false,
           retention_days: recEn ? retDays : null
         },
+        ...(confirmedWebsiteProfile ? {website_profile: confirmedWebsiteProfile} : {}),
         validation_errors: errors
       };
 
@@ -918,7 +930,7 @@ header{background:#fff}.form-group label,h4[style],ol[style]{color:#263b58!impor
       if (normalized) websiteField.value = normalized;
       websiteNote.textContent = raw && !normalized
         ? "Bitte eine gültige Unternehmensdomain eingeben oder das Feld leer lassen."
-        : "Nur als lokale Referenz. Keine automatische Analyse oder Übertragung. Bitte Betriebsdaten selbst eintragen.";
+        : "Die Analyse beginnt erst auf Ihre Anforderung in der geschützten lokalen Vorschau.";
     });
     // Init
     setBranch("trades");
@@ -926,8 +938,57 @@ header{background:#fff}.form-group label,h4[style],ol[style]{color:#263b58!impor
   <p style="text-align:center;font-size:13px;opacity:.8;padding:24px 16px">Anbieter: Dominik Steiner, RealSync Dynamics &amp; AI · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></p>
   <script type="module">
     import { mountProfileReview } from "./website-profile-review.mjs";
-    // No public transport is enabled. Keep the review controller private until an authorized endpoint exists.
-    mountProfileReview({root:document.getElementById("website-profile-review"),websiteField:document.getElementById("ob-website"),nameField:document.getElementById("ob-name"),normalize:normalizeWebsiteReference,onChange:runOnboardingPipeline});
+    const field = document.getElementById("ob-website");
+    const token = document.getElementById("website-scan-token");
+    const button = document.getElementById("website-scan-start");
+    const status = document.getElementById("website-scan-status");
+    const card = document.getElementById("website-scan-card");
+    const review = mountProfileReview({root:document.getElementById("website-profile-review"),websiteField:field,nameField:document.getElementById("ob-name"),normalize:normalizeWebsiteReference,onChange:profile=>{confirmedWebsiteProfile=profile;runOnboardingPipeline();}});
+    let request = null;
+    field.addEventListener("input",()=>{
+      if(request)request.abort();
+      request=null;
+      button.disabled=false;
+      status.textContent="";
+    });
+    async function enablePreview() {
+      if(location.hostname!=="127.0.0.1")return;
+      try {
+        const response=await fetch("/api/website-profile/status",{cache:"no-store",signal:AbortSignal.timeout(3000)});
+        if(!response.ok)return;
+        const data=await response.json();
+        if(data.status==="ok"&&data.mode==="local_preview")card.hidden=false;
+      } catch {}
+    }
+    enablePreview();
+    button.addEventListener("click",async()=>{
+      const origin=normalizeWebsiteReference(field.value);
+      const code=token.value.trim();
+      if(!origin||!code){status.textContent="Bitte Unternehmensdomain und Vorschau-Zugangscode eingeben.";return;}
+      if(request)request.abort();
+      review.clear();
+      const controller=new AbortController();
+      request=controller;
+      button.disabled=true;
+      status.textContent="Öffentliche Website wird analysiert …";
+      const timeout=setTimeout(()=>controller.abort(),15000);
+      try{
+        const response=await fetch("/api/website-profile",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+code},body:JSON.stringify({origin}),cache:"no-store",credentials:"omit",signal:controller.signal});
+        const payload=await response.json();
+        if(request!==controller)return;
+        if(!response.ok){
+          status.textContent=response.status===401?"Zugangscode ungültig.":response.status===429?"Analyselimit erreicht. Bitte später erneut versuchen.":"Website nicht analysierbar. Bitte manuell fortfahren.";
+          return;
+        }
+        if(!review.show(payload,origin)){status.textContent="Antwort konnte nicht sicher zugeordnet werden. Bitte manuell fortfahren.";return;}
+        status.textContent="Analyse abgeschlossen. Bitte prüfen und bestätigen Sie die Angaben.";
+      }catch{
+        if(request===controller)status.textContent="Analyse nicht verfügbar oder Zeitlimit erreicht. Bitte manuell fortfahren.";
+      }finally{
+        clearTimeout(timeout);
+        if(request===controller){request=null;button.disabled=false;}
+      }
+    });
   </script>
   <script src="chatbot.js"></script>
 </body>
