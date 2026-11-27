@@ -1,0 +1,37 @@
+name: Voice scanner live verification
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feat/voice-customer-first-hero
+    paths:
+      - '.github/workflows/voice-scanner-live.yml'
+permissions:
+  contents: read
+jobs:
+  live-scan:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Scan public RealSync website without mocks
+        run: |
+          PYTHONPATH=scanner python - <<'PY'
+          from website_scanner import scan_website, ScanError
+          from collections import Counter
+          origin = "https://realsyncdynamicsai.de"
+          try:
+              result = scan_website(origin)
+          except ScanError as error:
+              raise SystemExit("LIVE_SCAN_FAILED: " + error.code)
+          assert result["status"] == "ok"
+          assert result["source_origin"] == origin
+          counts = Counter(c["field"] for c in result["candidates"])
+          print("LIVE_FETCH_OK")
+          print("Candidate counts:", dict(sorted(counts.items())))
+          assert counts["business_name"] >= 1, "No business name candidate found"
+          print("LIVE_PROFILE_OK")
+          PY
