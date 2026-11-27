@@ -192,6 +192,10 @@
     .smoke-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; font-weight: 600; }
   </style>
 <style>.vp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}.vp-card{text-align:left;padding:10px 12px;border-radius:10px;border:1px solid rgba(127,127,127,.35);background:rgba(127,127,127,.06);color:inherit;cursor:pointer;font:inherit}.vp-card b{display:block;font-size:.92rem}.vp-card span{display:block;font-size:.76rem;opacity:.75;margin-top:2px}.vp-card.on{border-color:#60a5fa;background:rgba(96,165,250,.16);box-shadow:0 0 0 1px #60a5fa}.vp-card .tag{font-size:.65rem;letter-spacing:.06em;text-transform:uppercase;color:#60a5fa;margin-top:4px}</style>
+<style>
+:root{--bg:#f8faff;--bg-card:#fff;--bg-elevated:#f0f4fa;--border:#cbd6e7;--text:#0a1020;--text-muted:#465774;--accent:#1755d1;--accent-strong:#1755d1;--radius:4px}
+header{background:#fff}.form-group label,h4[style],ol[style]{color:#263b58!important}.check-row,.smoke-item,.code-box{background:#f4f7fc;color:#20334e}.badge-ok{color:#166534}.badge-err{color:#991b1b}.badge-warn{color:#854d0e}.vp-card .tag{color:#1755d1}.btn-primary{background:#1755d1}.form-group input[type=email],input[type=time]{max-width:100%;padding:8px;border:1px solid var(--border);border-radius:4px;background:#fff;color:#0a1020}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #1755d1;outline-offset:3px}
+</style><style>.profile-candidate{border-top:1px solid var(--border);padding:16px 0;overflow-wrap:anywhere}.profile-candidate p{margin:6px 0}.profile-candidate label{display:block;margin:12px 0}.profile-candidate button:disabled{opacity:.5;cursor:not-allowed}</style>
 </head>
 <body>
   <header>
@@ -211,8 +215,27 @@
     <h1>Self-Service-Onboarding – in 6 Schritten selbst einrichten</h1>
     <p class="sub">
       Sie richten Ihren Sprachassistenten komplett selbst ein – ohne Angebotsanfrage. Jede Eingabe wird sofort geprüft (Fail-Closed),
-      rechts sehen Sie live den Status und die Testgespräche. Am Ende laden Sie Konfiguration und Protokoll herunter.
+      rechts sehen Sie die lokale Prüfung und simulierte Beispielszenarien. Am Ende laden Sie Konfiguration und Protokoll herunter.
     </p>
+    <div class="card" aria-labelledby="website-title">
+      <h2 id="website-title" class="step-title">Ihre Unternehmenswebsite (optional)</h2>
+      <div class="form-group">
+        <label for="ob-website">Website-Adresse</label>
+        <input type="text" id="ob-website" inputmode="url" autocomplete="url" maxlength="2048" placeholder="www.ihr-betrieb.de" aria-describedby="website-note" />
+        <p id="website-note" style="font-size:.85rem;color:var(--text-muted);margin-top:6px">Die optionale Analyse ist in der geschützten lokalen Vorschau verfügbar. Manuelle Einrichtung bleibt jederzeit möglich.</p>
+      </div>
+    </div>
+    <div class="card" id="website-scan-card" hidden>
+      <h3 class="step-title">Unternehmensinformationen ermitteln</h3>
+      <p style="font-size:.85rem;color:var(--text-muted)">Nur öffentlich zugängliche Angaben werden gelesen. Keine Aktivierung und keine kostenpflichtigen KI-Aufrufe.</p>
+      <div class="form-group" style="margin-top:12px">
+        <label for="website-scan-token">Zugangscode der lokalen Vorschau</label>
+        <input type="password" id="website-scan-token" autocomplete="off" maxlength="256" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:4px" />
+      </div>
+      <button type="button" class="btn btn-primary" id="website-scan-start">Website analysieren</button>
+      <p id="website-scan-status" role="status" style="margin-top:8px;font-size:.85rem"></p>
+    </div>
+    <div id="website-profile-review" class="card" hidden aria-live="polite"></div>
     <div class="card" style="border-color: var(--accent);">
       <div class="step-title">So geht's – Kurzanleitung</div>
       <ol style="margin: 0 0 0 18px; font-size: 0.9rem; line-height: 1.7; color: #cbd5e1;">
@@ -220,7 +243,7 @@
         <li><strong>Schritt 2:</strong> Betriebsname, Übergabe-Kontakt, Paket, Kanal und Kalender (Google empfohlen) auswählen.</li>
         <li><strong>Schritt 3:</strong> Öffnungszeiten je Tag eintragen, Feiertage aktivieren, Betriebsferien eintragen.</li>
         <li><strong>Schritt 4:</strong> Häkchen bei den Freigaben setzen (KI-Offenlegung Pflicht; Telefonie/Datenschutz je nach Paket und Branche).</li>
-        <li><strong>Schritt 5:</strong> Rechts muss „ACTIVE · VALIDATED“ stehen – sonst nennt der rote Hinweis, was fehlt.</li>
+        <li><strong>Schritt 5:</strong> Rechts muss „LOKAL GEPRÜFT · NICHT AKTIV“ stehen – sonst nennt der rote Hinweis, was fehlt.</li>
         <li><strong>Schritt 6:</strong> „Konfig (.json) speichern“ und „Onboarding-Protokoll (.md)“ klicken – fertig.</li>
       </ol>
       <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 8px;">
@@ -279,11 +302,11 @@
           <div class="step-title"><span class="step-num">2</span> Betriebsdaten & Paket zuordnen</div>
           <div class="form-group">
             <label for="ob-name">Mandanten- / Betriebsname *</label>
-            <input type="text" id="ob-name" value="SHK Meisterbetrieb Rennsteig" oninput="runOnboardingPipeline()" />
+            <input type="text" id="ob-name" placeholder="Ihr Betriebsname" value="" oninput="runOnboardingPipeline()" />
           </div>
           <div class="form-group">
             <label for="ob-handoff" id="lbl-handoff">Notdienst- / Handoff-Ziel für sofortige Übergabe *</label>
-            <input type="text" id="ob-handoff" value="Bereitschaftsdienst +49 3679 000111" oninput="runOnboardingPipeline()" />
+            <input type="text" id="ob-handoff" placeholder="Ihre Rufnummer oder Übergabestelle" value="" oninput="runOnboardingPipeline()" />
           </div>
           <div class="form-group">
             <input type="hidden" id="ob-hours" value="" />
@@ -418,14 +441,14 @@
         <div class="card">
           <div class="step-title"><span class="step-num">4</span> Fail-Closed Sicherheits- & Datenschutzfreigaben</div>
           <label class="check-row">
-            <input type="checkbox" id="chk-disclosure" checked onchange="runOnboardingPipeline()" />
+            <input type="checkbox" id="chk-disclosure" onchange="runOnboardingPipeline()" />
             <div>
               <strong>KI-Offenlegung in der Begrüßung aktiv (Pflicht)</strong><br />
               <span style="color: var(--text-muted);">Der Agent gibt sich zu Beginn jedes Gesprächs klar als KI-Assistent zu erkennen.</span>
             </div>
           </label>
           <label class="check-row" id="row-telephony">
-            <input type="checkbox" id="chk-telephony" checked onchange="runOnboardingPipeline()" />
+            <input type="checkbox" id="chk-telephony" onchange="runOnboardingPipeline()" />
             <div>
               <strong>Explizite Telefonie-Freigabe erteilt</strong><br />
               <span style="color: var(--text-muted);">Pflicht bei Kanal <code>telephony</code> (erfordert Paket Professional oder Kanzlei).</span>
@@ -435,7 +458,7 @@
             <input type="checkbox" id="chk-privacy" onchange="runOnboardingPipeline()" />
             <div>
               <strong>Dokumentierte Datenschutzprüfung (Elevated Privacy-Review) liegt vor</strong><br />
-              <span style="color: var(--text-muted);">Zwingende Voraussetzung für Vorlage <code>law_office</code> (Berufsgeheimnisträger).</span>
+              <span style="color: var(--text-muted);">Zwingende Voraussetzung für Kanzlei, Praxis und Steuerberatung.</span>
             </div>
           </label>
           <label class="check-row">
@@ -463,13 +486,13 @@
         <div class="card">
           <div class="step-title" style="justify-content: space-between;">
             <div style="display: flex; align-items: center; gap: 10px;">
-              <span class="step-num">5</span> Fail-Closed-Prüfung & Live-Status
+              <span class="step-num">5</span> Lokale Prüfung & Konfigurationsstatus
             </div>
-            <span id="status-pill" class="badge badge-ok">ACTIVE</span>
+            <span id="status-pill" class="badge badge-warn" role="status">ENTWURF</span>
           </div>
           <div id="validation-summary" style="margin-bottom: 16px; font-size: 0.9rem;"></div>
 
-          <h4 style="font-size: 0.92rem; margin-bottom: 10px; color: #cbd5e1;">Automatischer 3-Stufen-Branchen-Smoke-Test:</h4>
+          <h4 style="font-size: 0.92rem; margin-bottom: 10px; color: #cbd5e1;">Beispielszenarien – keine ausgeführten Live-Tests:</h4>
           <div id="smoke-list"></div>
         </div>
 
@@ -481,7 +504,7 @@
               <button type="button" class="btn btn-secondary" onclick="downloadProtocol()">Onboarding-Protokoll (.md)</button>
             </div>
           </div>
-          <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:8px;">Die Datei enthält alle Einstellungen (ohne Passwörter oder Zugangsdaten). Damit ist Ihr Self-Service-Onboarding abgeschlossen; die Kalenderverbindung (Google oder Outlook) erfolgt mit Ihrem eigenen Konto.</p>
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:8px;">Die Datei enthält alle Einstellungen (ohne Passwörter oder Zugangsdaten). Damit ist der lokale Konfigurationsentwurf erstellt. Serveraktivierung, Kalenderverbindung und Telefonie müssen separat bestätigt werden.</p>
           <div class="code-box" id="json-preview"></div>
         </div>
       </div>
@@ -679,13 +702,16 @@
         document.getElementById("btn-" + k).classList.toggle("active", k === bKey);
       });
       const tpl = TEMPLATES[bKey];
-      document.getElementById("ob-name").value = tpl.defaultName;
-      document.getElementById("ob-handoff").value = tpl.defaultHandoff;
+      // Preserve customer-entered business name.
+      // Preserve customer-entered handoff contact.
       document.getElementById("lbl-handoff").textContent = tpl.handoffLabel;
       document.getElementById("ob-pkg").value = tpl.defaultPkg;
       document.getElementById("ob-channel").value = tpl.defaultChannel;
-      document.getElementById("chk-telephony").checked = (tpl.defaultChannel === "telephony");
-      document.getElementById("chk-privacy").checked = (tpl.sensitivity === "elevated");
+      document.getElementById("chk-telephony").checked = false;
+      document.getElementById("chk-privacy").checked = false;
+      document.getElementById("chk-recording").checked = false;
+      document.getElementById("chk-rec-approved").checked = false;
+      toggleRecordingRow();
       document.getElementById("branch-specific-hint").textContent = tpl.hint;
       document.getElementById("ob-voice").value = (VOICE_REC[bKey] || ["eve"])[0];
       renderVoicePicker();
@@ -697,10 +723,11 @@
       document.getElementById("recording-details").style.display = rec ? "block" : "none";
     }
 
+    let confirmedWebsiteProfile = null;
     function runOnboardingPipeline() {
       const tpl = TEMPLATES[currentBranch];
       const name = document.getElementById("ob-name").value.trim();
-      const handoff = document.getElementById("ob-handoff").value.trim() || "Zentrale";
+      const handoff = document.getElementById("ob-handoff").value.trim();
       const DAYK = ["mon","tue","wed","thu","fri","sat","sun"], DAYL = ["Mo","Di","Mi","Do","Fr","Sa","So"];
       const businessHours = {}; const hourErrs = [];
       DAYK.forEach(k => {
@@ -744,6 +771,7 @@
       const errors = [];
       if (!VOICE_IDS.includes(voiceId)) errors.push("INVALID_VOICE_ID");
       if (!name) errors.push("MISSING_AGENT_ID_OR_NAME");
+      if (!handoff) errors.push("MISSING_HANDOFF_CONTACT");
       if (!aiDisc) errors.push("MISSING_AI_DISCLOSURE");
       if (channel === "telephony" && !telApp) errors.push("TELEPHONY_WITHOUT_APPROVAL");
       if (channel === "telephony" && pkgKey === "starter") errors.push("STARTER_PACKAGE_WEB_ONLY");
@@ -761,7 +789,7 @@
       }
 
       const valid = errors.length === 0;
-      const effectiveStatus = valid ? "active" : "paused";
+      const effectiveStatus = "paused";
       const enabledTools = valid ? tpl.tools : [];
       const agentId = `vva-${currentBranch}-${slugify(name)}`;
       const greeting = tpl.greetingTpl.replace("{name}", name || "Ihrem Betrieb").replace("{handoff}", handoff);
@@ -769,9 +797,9 @@
       const pill = document.getElementById("status-pill");
       if (valid) {
         pill.className = "badge badge-ok";
-        pill.textContent = "ACTIVE · VALIDATED";
+        pill.textContent = "LOKAL GEPRÜFT · NICHT AKTIV";
         document.getElementById("validation-summary").innerHTML =
-          `<span style="color: #34d399; font-weight: 600;">Fail-Closed-Prüfung bestanden:</span> Alle Pflichtfreigaben liegen vor. Werkzeuge (<code>${enabledTools.join(", ")}</code>) sind aktiv freigeschaltet.`;
+          `<span style="color: #34d399; font-weight: 600;">Fail-Closed-Prüfung bestanden:</span> Die lokalen Pflichtfelder sind vollständig. Vorgesehene Werkzeuge: <code>${enabledTools.join(", ")}</code>. Keine serverseitige Aktivierung erfolgt.`;
       } else {
         pill.className = "badge badge-err";
         pill.textContent = "PAUSED · FAIL-CLOSED";
@@ -789,7 +817,7 @@
             <span>${st.name}</span>
             <span class="badge ${badgeClass}">${decision}</span>
           </div>
-          <div style="color: var(--text-muted); font-size: 0.82rem;">Ausgeführtes Tool: <code>${tool}</code></div>
+          <div style="color: var(--text-muted); font-size: 0.82rem;">Vorgesehenes Tool (Simulation): <code>${tool}</code></div>
         </div>`;
       }).join("");
       document.getElementById("smoke-list").innerHTML = smokeHtml;
@@ -808,11 +836,11 @@
           overage_eur_per_min: pkg.over
         },
         channel: channel,
-        requested_status: "active",
+        requested_status: "paused",
         effective_status: effectiveStatus,
         valid: valid,
         data_sensitivity: tpl.sensitivity,
-        enabled_tools: enabledTools,
+        enabled_tools: [],
         handoff_contact: handoff,
         opening_hours: hours,
         business_hours: businessHours,
@@ -837,6 +865,7 @@
           recording_approved: recEn ? recApp : false,
           retention_days: recEn ? retDays : null
         },
+        ...(confirmedWebsiteProfile ? {website_profile: confirmedWebsiteProfile} : {}),
         validation_errors: errors
       };
 
@@ -864,7 +893,7 @@
 - **Feiertage:** ${r.apply_public_holidays ? "gesetzliche Feiertage " + r.holiday_region + " gesperrt" : "nicht automatisch"} · **Schließzeiten:** ${r.company_closures.length ? r.company_closures.map(c => c.from + (c.to !== c.from ? " bis " + c.to : "") + " " + c.label).join("; ") : "keine"}
 - **Kalender:** \`${r.calendar_provider}\` ${r.calendar_provider === "google_calendar" ? "(empfohlen)" : "(Alternative – Termine über Anbindung nicht löschbar, ggf. selbst aufräumen)"} · Zielkalender: ${r.calendar_id || "Hauptkalender des verbundenen Kontos"}
 - **Fail-Closed-Validierung:** \`valid=${r.valid}\` -> Effektiver Status: \`${r.effective_status}\`
-- **Freigegebene Tools:** ${r.enabled_tools.length ? r.enabled_tools.join(", ") : "[] (gesperrt)"}
+- **Aktivierte Tools (lokaler Entwurf):** ${r.enabled_tools.length ? r.enabled_tools.join(", ") : "[] (gesperrt)"}
 - **Validierungsfehler:** ${r.validation_errors.length ? r.validation_errors.join(", ") : "Keine"}
 
 ## Konfigurierte Begrüßung
@@ -877,10 +906,90 @@
       a.click();
     }
 
+    // Optional website reference: never fetch or provision from a URL.
+    function normalizeWebsiteReference(value) {
+      const raw = value.trim();
+      if (!raw || raw.length > 2048 || /\s/.test(raw)) return "";
+      try {
+        const url = new URL(/^https?:\/\//i.test(raw) ? raw : "https://" + raw);
+        if (!["https:", "http:"].includes(url.protocol) || url.username || url.password || url.port || !url.hostname.includes(".") || !/^[a-z0-9.-]+\.[a-z]{2,}$/i.test(url.hostname)) return "";
+        return url.origin;
+      } catch { return ""; }
+    }
+    const websiteField = document.getElementById("ob-website");
+    const websiteNote = document.getElementById("website-note");
+    const websiteParams = new URLSearchParams(location.hash.slice(1));
+    if (websiteParams.has("website")) {
+      websiteField.value = normalizeWebsiteReference(websiteParams.get("website") || "");
+      history.replaceState(null, "", location.pathname + location.search);
+    }
+    websiteField.addEventListener("blur", () => {
+      const raw = websiteField.value.trim();
+      const normalized = normalizeWebsiteReference(raw);
+      websiteField.setAttribute("aria-invalid", String(Boolean(raw && !normalized)));
+      if (normalized) websiteField.value = normalized;
+      websiteNote.textContent = raw && !normalized
+        ? "Bitte eine gültige Unternehmensdomain eingeben oder das Feld leer lassen."
+        : "Die Analyse beginnt erst auf Ihre Anforderung in der geschützten lokalen Vorschau.";
+    });
     // Init
     setBranch("trades");
   </script>
   <p style="text-align:center;font-size:13px;opacity:.8;padding:24px 16px">Anbieter: Dominik Steiner, RealSync Dynamics &amp; AI · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></p>
+  <script type="module">
+    import { mountProfileReview } from "./website-profile-review.mjs";
+    const field = document.getElementById("ob-website");
+    const token = document.getElementById("website-scan-token");
+    const button = document.getElementById("website-scan-start");
+    const status = document.getElementById("website-scan-status");
+    const card = document.getElementById("website-scan-card");
+    const review = mountProfileReview({root:document.getElementById("website-profile-review"),websiteField:field,nameField:document.getElementById("ob-name"),normalize:normalizeWebsiteReference,onChange:profile=>{confirmedWebsiteProfile=profile;runOnboardingPipeline();}});
+    let request = null;
+    field.addEventListener("input",()=>{
+      if(request)request.abort();
+      request=null;
+      button.disabled=false;
+      status.textContent="";
+    });
+    async function enablePreview() {
+      if(location.hostname!=="127.0.0.1")return;
+      try {
+        const response=await fetch("/api/website-profile/status",{cache:"no-store",signal:AbortSignal.timeout(3000)});
+        if(!response.ok)return;
+        const data=await response.json();
+        if(data.status==="ok"&&data.mode==="local_preview")card.hidden=false;
+      } catch {}
+    }
+    enablePreview();
+    button.addEventListener("click",async()=>{
+      const origin=normalizeWebsiteReference(field.value);
+      const code=token.value.trim();
+      if(!origin||!code){status.textContent="Bitte Unternehmensdomain und Vorschau-Zugangscode eingeben.";return;}
+      if(request)request.abort();
+      review.clear();
+      const controller=new AbortController();
+      request=controller;
+      button.disabled=true;
+      status.textContent="Öffentliche Website wird analysiert …";
+      const timeout=setTimeout(()=>controller.abort(),15000);
+      try{
+        const response=await fetch("/api/website-profile",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+code},body:JSON.stringify({origin}),cache:"no-store",credentials:"omit",signal:controller.signal});
+        const payload=await response.json();
+        if(request!==controller)return;
+        if(!response.ok){
+          status.textContent=response.status===401?"Zugangscode ungültig.":response.status===429?"Analyselimit erreicht. Bitte später erneut versuchen.":"Website nicht analysierbar. Bitte manuell fortfahren.";
+          return;
+        }
+        if(!review.show(payload,origin)){status.textContent="Antwort konnte nicht sicher zugeordnet werden. Bitte manuell fortfahren.";return;}
+        status.textContent="Analyse abgeschlossen. Bitte prüfen und bestätigen Sie die Angaben.";
+      }catch{
+        if(request===controller)status.textContent="Analyse nicht verfügbar oder Zeitlimit erreicht. Bitte manuell fortfahren.";
+      }finally{
+        clearTimeout(timeout);
+        if(request===controller){request=null;button.disabled=false;}
+      }
+    });
+  </script>
   <script src="chatbot.js"></script>
 </body>
 </html>
