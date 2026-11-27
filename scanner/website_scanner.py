@@ -20,9 +20,10 @@ LABEL = re.compile(r"^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$", re.I)
 
 
 class ScanError(Exception):
-    def __init__(self, code):
+    def __init__(self, code, http_status=None):
         super().__init__(code)
         self.code = code
+        self.http_status = http_status
 
 
 def remaining(deadline):
@@ -159,7 +160,8 @@ def pinned_request(u, address, deadline):
         if status in (301, 302, 303, 307, 308):
             return status, response.getheader("Location"), None
         if status != 200:
-            raise ScanError("HTTP_STATUS")
+            code = "HTTP_ACCESS_DENIED" if status in (401, 403) else "HTTP_RATE_LIMIT" if status == 429 else "HTTP_STATUS"
+            raise ScanError(code, http_status=status)
         content_type = response.getheader("Content-Type", "").split(";")[0].strip().lower()
         if content_type not in ("text/html", "application/xhtml+xml"):
             raise ScanError("CONTENT_TYPE")
