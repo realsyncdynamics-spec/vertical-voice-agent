@@ -121,7 +121,16 @@ a:focus-visible,button:focus-visible{outline:2px solid #0A1020;outline-offset:3p
 #branchen .stage{margin-top:24px}
 @media(max-width:600px){.hero-actions{width:100%}.hero-actions a{width:100%;justify-content:center}.customer-hero h1{font-size:clamp(36px,10vw,54px)}}
 </style>
-</head>
+<style>
+.website-entry{width:min(100%,650px);display:grid;gap:10px;text-align:left}
+.website-entry label{font-weight:600;font-size:14px;color:#334563}
+.website-row{display:flex;align-items:stretch;gap:6px;padding:5px;border:1px solid #a9bedf;border-radius:5px;background:#fff}
+.website-row input{min-width:0;flex:1;padding:12px;border:0;background:transparent;color:#0a1020;font:inherit}
+.website-row input:focus-visible{outline:2px solid #1755d1;outline-offset:-2px}
+.website-row .btn{border:0;cursor:pointer}
+#website-entry-error{color:#991b1b;font-size:14px;margin:0}
+@media(max-width:600px){.website-row{flex-direction:column}.website-row .btn{justify-content:center}}
+</style></head>
 <body>
 <div class="page">
 <div class="haze1"></div><div class="haze2"></div>
@@ -137,9 +146,15 @@ a:focus-visible,button:focus-visible{outline:2px solid #0A1020;outline-offset:3p
 <section class="hero customer-hero" aria-labelledby="voice-title">
   <div class="eyebrow">RealSync Dynamics &amp; AI · KI-Telefonassistenz</div>
   <h1 id="voice-title">Sie arbeiten.<br><span>SYNC geht ans Telefon.</span></h1>
-  <p class="lead">Kundenanliegen aufnehmen, Rückrufe vorbereiten und Termine nach Freigabe koordinieren. Für Ihren Betrieb, mit Ihrer Stimme.</p>
+  <p class="lead">Kundenanliegen aufnehmen, Rückrufe vorbereiten und Termine nach Freigabe koordinieren. Für Ihren Betrieb, mit einer Stimme Ihrer Wahl.</p>
   <div class="voice-orb" aria-hidden="true"><div class="voice-wave"><i></i><i></i><i></i><i></i><i></i></div></div>
-  <div class="hero-actions"><a class="btn" href="onboarding.html">Eigenen Assistenten einrichten <span aria-hidden="true">→</span></a><a class="demo-link" href="#stimmen">Stimmen anhören</a></div>
+  <form id="website-entry" class="website-entry" action="onboarding.html" method="get" novalidate>
+    <label for="website-reference">Ihre Unternehmenswebsite (optional)</label>
+    <div class="website-row"><input type="text" id="website-reference" inputmode="url" autocomplete="url" maxlength="2048" placeholder="www.ihr-betrieb.de" aria-describedby="website-entry-note website-entry-error"><button type="submit" class="btn">Assistenten einrichten <span aria-hidden="true">→</span></button></div>
+    <p id="website-entry-note" class="note">Website als Referenz übernehmen. Automatische Analyse noch nicht verfügbar.</p>
+    <p id="website-entry-error" role="alert" hidden></p>
+  </form>
+  <div class="hero-actions"><a class="demo-link" href="onboarding.html">Ohne Website starten</a><a class="demo-link" href="#stimmen">Stimmen anhören</a></div>
   <p class="note">Ohne Telefonie-Freigabe keine Aktivierung. Wählen Sie Ihre Branche und Stimme im bestehenden Onboarding.</p>
   <div class="hero-benefits"><span>8 Branchenvorlagen</span><span>Kontrollierte Freigaben</span><span><a href="#pakete">Kosten im Überblick</a></span></div>
 </section>
@@ -289,6 +304,29 @@ setInterval(function(){if(auto&&!hov&&!document.hidden){active=(active+1)%8;rend
 window.addEventListener('resize',render);render();
 })();
 (function(){var a=new Audio(),cur=null;a.preload="none";function reset(){if(cur){cur.textContent="▶";cur.classList.remove("on");cur.parentNode.querySelector(".vd-bar i").style.width="0"}}document.querySelectorAll(".vd-btn").forEach(function(b){b.addEventListener("click",function(){if(cur===b&&!a.paused){a.pause();b.textContent="▶";b.classList.remove("on");return}if(cur!==b){reset();a.src=b.dataset.src;cur=b}a.play();b.textContent="❚❚";b.classList.add("on")})});a.addEventListener("timeupdate",function(){if(cur&&a.duration)cur.parentNode.querySelector(".vd-bar i").style.width=(a.currentTime/a.duration*100)+"%"});a.addEventListener("ended",function(){reset();cur=null})})();
+</script>
+<script>
+(function(){
+  const form=document.getElementById("website-entry"), field=document.getElementById("website-reference"), error=document.getElementById("website-entry-error");
+  form.addEventListener("submit",function(event){
+    event.preventDefault();
+    const raw=field.value.trim();
+    if(!raw){location.assign("onboarding.html");return;}
+    let origin="";
+    try{
+      if(raw.length>2048||/\s/.test(raw))throw Error("invalid");
+      const url=new URL(/^https?:\/\//i.test(raw)?raw:"https://"+raw);
+      if(!["https:","http:"].includes(url.protocol)||url.username||url.password||url.port||!url.hostname.includes(".")||!/^[a-z0-9.-]+\.[a-z]{2,}$/i.test(url.hostname))throw Error("invalid");
+      origin=url.origin;
+    }catch{
+      field.setAttribute("aria-invalid","true");
+      error.textContent="Bitte eine gültige Unternehmensdomain eingeben, zum Beispiel www.ihr-betrieb.de.";
+      error.hidden=false;field.focus();return;
+    }
+    location.assign("onboarding.html#website="+encodeURIComponent(origin));
+  });
+  field.addEventListener("input",function(){field.removeAttribute("aria-invalid");error.hidden=true;});
+})();
 </script>
 <script src="chatbot.js"></script>
 </body>
