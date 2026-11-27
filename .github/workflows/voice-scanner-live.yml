@@ -22,7 +22,8 @@ jobs:
           PYTHONPATH=scanner python - <<'PY'
           from website_scanner import scan_website, ScanError
           from collections import Counter
-          origin = "https://realsyncdynamicsai.de"
+          # Public production-deployment hostname, approved for read-only live testing.
+          origin = "https://e49157fc.realsyncdynamics-ai.pages.dev"
           try:
               result = scan_website(origin)
           except ScanError as error:
