@@ -6,6 +6,7 @@
     "test": "node --test test/*.test.mjs"
   },
   "devDependencies": {
-    "miniflare": "^4"
+    "miniflare": "^4",
+    "ws": "^8.21.0"
   }
 }

@@ -36,10 +36,33 @@ conservatively including periods in which no provider usage occurred. Future
 ledger dates fail closed. No audio, transcripts, keys or personal conversation
 data are stored here.
 
-Run local D1 tests with `npm ci && npm test` in this directory. The module does
-not yet implement authentication, provider integration, session timing or
-automated reconciliation.
+Run local D1 tests with `npm ci && npm test` in this directory. Production
+authentication integration, provider integration and automated reconciliation
+remain unimplemented.
 
 `src/grok-relay.js` contains the adapted Grok socket protocol and a relay
 timeout, tested with simulated sockets. It does not create a network connection
-or perform admission, and is not connected to the onboarding or a gateway.
+or perform admission, and is not connected to the onboarding or a production
+gateway.
+
+`src/supabase-auth.js` verifies tokens against Supabase Auth and checks the
+requested tenant against the existing user-scoped `memberships` table. It has
+only mock-backed tests; no Supabase environment is configured here.
+`src/simulation-gateway.js` combines that interface, the budget and the relay
+with a simulated provider. It is not an HTTP endpoint and must not be used
+as a live provider connector. SSO, onboarding data provisioning and a
+production gateway remain unimplemented.
+
+`public/p2-voice/` provides a microphone worklet and PCM playback for an
+already authorized socket. The audio bridge and the local simulated gateway
+are exercised together using simulated microphone data and a loopback
+WebSocket server. Neither is connected to the onboarding yet.
+The bridge fails closed when the browser cannot provide 24 kHz audio.
+
+## GitHub CI
+
+The GitHub Actions runs for commit `386cc9b` and `f975a1d` ended with
+`action_required` without starting jobs. The API did not expose a cause or
+logs, a rerun was rejected, and this session cannot read repository Actions
+permissions (HTTP 403). A repository administrator must inspect the Actions
+page and settings; local tests do not establish GitHub CI success.
