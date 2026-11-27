@@ -20,7 +20,8 @@ CREATE TABLE browser_budget_sessions (
   month TEXT NOT NULL,
   reserved_micros INTEGER NOT NULL CHECK (typeof(reserved_micros) = 'integer' AND reserved_micros BETWEEN 1 AND 1000000000000),
   actual_micros INTEGER CHECK (actual_micros IS NULL OR (typeof(actual_micros) = 'integer' AND actual_micros BETWEEN 0 AND 1000000000000)),
-  settled_at TEXT
+  settled_at TEXT,
+  CHECK ((actual_micros IS NULL AND settled_at IS NULL) OR (actual_micros IS NOT NULL AND settled_at IS NOT NULL))
 );
 CREATE INDEX browser_budget_sessions_day ON browser_budget_sessions(day);
 CREATE INDEX browser_budget_sessions_month ON browser_budget_sessions(month);

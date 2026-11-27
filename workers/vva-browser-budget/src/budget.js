@@ -34,12 +34,19 @@ export async function reserveBrowserBudget(db, { sessionId, tenantId, amountMicr
     WHERE g.id = 1
       AND ?3 <= g.session_limit_micros AND ?3 <= t.session_limit_micros
       AND NOT EXISTS (SELECT 1 FROM browser_budget_sessions WHERE currency != g.currency)
+      AND NOT EXISTS (SELECT 1 FROM browser_budget_sessions WHERE day > date('now') OR month > strftime('%Y-%m', 'now'))
+      AND NOT EXISTS (SELECT 1 FROM browser_budget_sessions
+                      WHERE (actual_micros IS NULL) != (settled_at IS NULL)
+                         OR settled_at > strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))
       AND COALESCE((SELECT SUM(COALESCE(actual_micros, reserved_micros))
-                    FROM browser_budget_sessions WHERE day = date('now')), 0) <= g.daily_limit_micros - ?3
+                    FROM browser_budget_sessions
+                    WHERE day <= date('now') AND (actual_micros IS NULL OR substr(settled_at, 1, 10) >= date('now'))), 0) <= g.daily_limit_micros - ?3
       AND COALESCE((SELECT SUM(COALESCE(actual_micros, reserved_micros))
-                    FROM browser_budget_sessions WHERE month = strftime('%Y-%m', 'now')), 0) <= g.monthly_limit_micros - ?3
+                    FROM browser_budget_sessions
+                    WHERE month <= strftime('%Y-%m', 'now') AND (actual_micros IS NULL OR substr(settled_at, 1, 7) >= strftime('%Y-%m', 'now'))), 0) <= g.monthly_limit_micros - ?3
       AND COALESCE((SELECT SUM(COALESCE(actual_micros, reserved_micros))
-                    FROM browser_budget_sessions WHERE tenant_id = ?2 AND month = strftime('%Y-%m', 'now')), 0) <= t.monthly_limit_micros - ?3
+                    FROM browser_budget_sessions
+                    WHERE tenant_id = ?2 AND month <= strftime('%Y-%m', 'now') AND (actual_micros IS NULL OR substr(settled_at, 1, 7) >= strftime('%Y-%m', 'now'))), 0) <= t.monthly_limit_micros - ?3
     ON CONFLICT(session_id) DO NOTHING
   `).bind(sessionId, tenantId, amountMicros).run();
 

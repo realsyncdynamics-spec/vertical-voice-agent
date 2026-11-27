@@ -129,13 +129,35 @@ test("underestimated final costs are recorded and block subsequent spending", as
   assert.equal(row.actual_micros, 101);
 });
 
-test("daily and monthly accounting uses the reservation period, including after settlement", async (t) => {
+test("reservations spanning a UTC period remain charged until settled", async (t) => {
   const db = await setup(t, { daily: 60, monthly: 120, tenantMonthly: 120 });
   assert.equal((await reserve(db, "old")).created, true);
   await db.prepare("UPDATE browser_budget_sessions SET day = '2000-01-01', month = '2000-01' WHERE session_id = 'old'").run();
+  assert.equal((await reserve(db, "while-open", "a", 1)).created, false);
   assert.equal((await settle(db, "old", "a", 60)).settled, true);
+  assert.equal((await reserve(db, "settled-today", "a", 1)).created, false);
+  await db.prepare("UPDATE browser_budget_sessions SET settled_at = '2000-01-01T12:00:00.000Z' WHERE session_id = 'old'").run();
   assert.equal((await reserve(db, "new")).created, true);
   assert.equal((await reserve(db, "more", "a", 1)).created, false);
+});
+
+test("previous-month open sessions also count against global and tenant monthly limits", async (t) => {
+  for (const [limits, secondTenant] of [
+    [{ daily: 500, monthly: 60, tenantMonthly: 500 }, "b"],
+    [{ daily: 500, monthly: 500, tenantMonthly: 60 }, "a"],
+  ]) {
+    const db = await setup(t, limits);
+    assert.equal((await reserve(db, "old")).created, true);
+    await db.prepare("UPDATE browser_budget_sessions SET day = '2000-01-01', month = '2000-01' WHERE session_id = 'old'").run();
+    assert.equal((await reserve(db, "new", secondTenant, 1)).created, false);
+  }
+});
+
+test("future ledger periods fail closed on clock anomalies", async (t) => {
+  const db = await setup(t);
+  assert.equal((await reserve(db, "old")).created, true);
+  await db.prepare("UPDATE browser_budget_sessions SET day = '9999-12-31', month = '9999-12' WHERE session_id = 'old'").run();
+  assert.equal((await reserve(db, "new", "a", 1)).created, false);
 });
 
 test("invalid inputs and database failures are surfaced without authorization", async (t) => {
