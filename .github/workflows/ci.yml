@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  local-tests:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: workers/vva-sip-webhook
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: workers/vva-sip-webhook/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npm run test:mandant
+      - run: npm run test:preflight

@@ -18,8 +18,16 @@ Steuerebene für VVA-Telefonie (xAI SIP → Webhook → Durable Object pro call_
 Setzen: `wrangler secret put XAI_API_KEY --name vva-sip-webhook-test`
 
 ## Tests
-- `npm test` – 34 lokale Tests (Miniflare, kein Netz)
-- `node test/smoke-live.mjs` – Live-Smoke ohne PSTN (Env `XAI_API_KEY`, `VVA_TEST_WHSEC`): Test-Worker mit echter Signatur + xAI-WebSocket ohne `call_id`
+Im Verzeichnis `workers/vva-sip-webhook` mit Node.js >= 22:
+- `npm ci && npm test` – lokale Miniflare-Tests, kein PSTN und keine xAI-Kosten (zuletzt dokumentiert: 37/37).
+- `npm run test:mandant` – lokale Prüfung der Kundenkonfiguration (zuletzt dokumentiert: 9/9).
+- `npm run test:preflight` – lokale, geheimnisfreie Prüfung des Live-Smoke-Sicherheitsabbruchs.
+- `node test/smoke-live.mjs` – **nur nach bewusster Freigabe und mit Test-Zugangsdaten** `XAI_API_KEY` und `VVA_TEST_WHSEC`. Nutzt das versionierte, fiktive `scripts/beispiel-kunde.json` und die Vorlagen aus `migrations/0002_seed.sql` (kein lokaler Entwicklerpfad). Prüft `/health` vor dem signierten Test-Webhook: `environment=test`, `d1_bound=true`, `telephony_enabled=false`, `secrets_configured=true`. Ohne Zugangsdaten oder bei unsicherem Worker-Zustand bricht der Test vorher ab. Fehlschläge liefern Exit-Code 1. Er testet **keine echte SIP-/PSTN-Verbindung** und schaltet die Telefonie nicht ein.
+
+## Noch keine Go-live-Freigabe
+- In `wrangler.toml` sind die beiden D1-`database_id`-Felder noch Platzhalter (`REPLACE_WITH_D1_ID`, `REPLACE_WITH_PROD_D1_ID`). Die tatsächlichen IDs müssen im jeweiligen Cloudflare-Konto **lesend geprüft** werden; niemals durch erfundene Werte ersetzen oder mit diesen Platzhaltern deployen.
+- `TELEPHONY_ENABLED=false` gilt für Test und Produktion. Kein produktives Deployment oder Freischalten ohne ausdrücklich genehmigte Tests, xAI-DPA/ZDR, registrierte Rufnummer, Freigabe des Mandanten und tatsächlichen SIP-Test.
+- Die automatische Zustellung der in D1 erfassten Anliegen an Kunden ist **nicht implementiert**. Eine manuelle Abfrage ist möglich (siehe unten); ein späterer Benachrichtigungskanal benötigt geklärte Empfänger, Einwilligungen/Vertrag, Zustellfehlerbehandlung und sichere Geheimnisverwaltung.
 
 ## Ersten Kunden anlegen (`scripts/mandant.mjs`)
 Erzeugt nur eine SQL-Datei, führt nichts aus. Kundendaten liegen in `kunden/` (per `.gitignore` ausgeschlossen, das Repo ist öffentlich).
