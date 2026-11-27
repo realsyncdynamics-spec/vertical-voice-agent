@@ -216,6 +216,14 @@ header{background:#fff}.form-group label,h4[style],ol[style]{color:#263b58!impor
       Sie richten Ihren Sprachassistenten komplett selbst ein – ohne Angebotsanfrage. Jede Eingabe wird sofort geprüft (Fail-Closed),
       rechts sehen Sie die lokale Prüfung und simulierte Beispielszenarien. Am Ende laden Sie Konfiguration und Protokoll herunter.
     </p>
+    <div class="card" aria-labelledby="website-title">
+      <h2 id="website-title" class="step-title">Ihre Unternehmenswebsite (optional)</h2>
+      <div class="form-group">
+        <label for="ob-website">Website-Adresse</label>
+        <input type="text" id="ob-website" inputmode="url" autocomplete="url" maxlength="2048" placeholder="www.ihr-betrieb.de" aria-describedby="website-note" />
+        <p id="website-note" style="font-size:.85rem;color:var(--text-muted);margin-top:6px">Nur als lokale Referenz. Automatische Analyse ist noch nicht verfügbar. Bitte tragen Sie die Betriebsdaten selbst ein.</p>
+      </div>
+    </div>
     <div class="card" style="border-color: var(--accent);">
       <div class="step-title">So geht's – Kurzanleitung</div>
       <ol style="margin: 0 0 0 18px; font-size: 0.9rem; line-height: 1.7; color: #cbd5e1;">
@@ -884,6 +892,32 @@ header{background:#fff}.form-group label,h4[style],ol[style]{color:#263b58!impor
       a.click();
     }
 
+    // Optional website reference: never fetch or provision from a URL.
+    function normalizeWebsiteReference(value) {
+      const raw = value.trim();
+      if (!raw || raw.length > 2048 || /\s/.test(raw)) return "";
+      try {
+        const url = new URL(/^https?:\/\//i.test(raw) ? raw : "https://" + raw);
+        if (!["https:", "http:"].includes(url.protocol) || url.username || url.password || url.port || !url.hostname.includes(".") || !/^[a-z0-9.-]+\.[a-z]{2,}$/i.test(url.hostname)) return "";
+        return url.origin;
+      } catch { return ""; }
+    }
+    const websiteField = document.getElementById("ob-website");
+    const websiteNote = document.getElementById("website-note");
+    const websiteParams = new URLSearchParams(location.hash.slice(1));
+    if (websiteParams.has("website")) {
+      websiteField.value = normalizeWebsiteReference(websiteParams.get("website") || "");
+      history.replaceState(null, "", location.pathname + location.search);
+    }
+    websiteField.addEventListener("blur", () => {
+      const raw = websiteField.value.trim();
+      const normalized = normalizeWebsiteReference(raw);
+      websiteField.setAttribute("aria-invalid", String(Boolean(raw && !normalized)));
+      if (normalized) websiteField.value = normalized;
+      websiteNote.textContent = raw && !normalized
+        ? "Bitte eine gültige Unternehmensdomain eingeben oder das Feld leer lassen."
+        : "Nur als lokale Referenz. Keine automatische Analyse oder Übertragung. Bitte Betriebsdaten selbst eintragen.";
+    });
     // Init
     setBranch("trades");
   </script>
