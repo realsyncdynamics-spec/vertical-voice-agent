@@ -10,6 +10,13 @@ function publicOrigin(value) {
     return u.origin;
   } catch { return null; }
 }
+function sameSiteSource(source, expected) {
+  const candidate = publicOrigin(source);
+  if (!candidate) return false;
+  const a = new URL(expected), b = new URL(candidate);
+  const bare = h => h.startsWith("www.") ? h.slice(4) : h;
+  return bare(a.hostname) === bare(b.hostname) && !(a.protocol === "https:" && b.protocol !== "https:");
+}
 const bounded = (v, max) => typeof v === "string" && v.trim().length > 0 && v.length <= max;
 export function validateProfile(payload, expectedOrigin) {
   const origin = publicOrigin(expectedOrigin);
@@ -19,7 +26,7 @@ export function validateProfile(payload, expectedOrigin) {
   const candidates = [];
   for (const c of payload.candidates) {
     if (!c || !FIELDS.has(c.field) || !bounded(c.value, 2000) || !bounded(c.evidence, 1000) ||
-        !bounded(c.source_url, 2048) || publicOrigin(c.source_url) !== origin) return null;
+        !bounded(c.source_url, 2048) || !sameSiteSource(c.source_url, origin)) return null;
     const source = new URL(c.source_url);
     source.search = ""; source.hash = "";
     candidates.push(Object.freeze({field:c.field,value:c.value.trim(),source_url:source.href,evidence:c.evidence.trim()}));
