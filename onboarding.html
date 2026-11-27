@@ -195,7 +195,8 @@
 <style>
 :root{--bg:#f8faff;--bg-card:#fff;--bg-elevated:#f0f4fa;--border:#cbd6e7;--text:#0a1020;--text-muted:#465774;--accent:#1755d1;--accent-strong:#1755d1;--radius:4px}
 header{background:#fff}.form-group label,h4[style],ol[style]{color:#263b58!important}.check-row,.smoke-item,.code-box{background:#f4f7fc;color:#20334e}.badge-ok{color:#166534}.badge-err{color:#991b1b}.badge-warn{color:#854d0e}.vp-card .tag{color:#1755d1}.btn-primary{background:#1755d1}.form-group input[type=email],input[type=time]{max-width:100%;padding:8px;border:1px solid var(--border);border-radius:4px;background:#fff;color:#0a1020}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #1755d1;outline-offset:3px}
-</style></head>
+</style><style>.profile-candidate{border-top:1px solid var(--border);padding:16px 0;overflow-wrap:anywhere}.profile-candidate p{margin:6px 0}.profile-candidate label{display:block;margin:12px 0}.profile-candidate button:disabled{opacity:.5;cursor:not-allowed}</style>
+</head>
 <body>
   <header>
     <div class="header-inner">
@@ -224,6 +225,7 @@ header{background:#fff}.form-group label,h4[style],ol[style]{color:#263b58!impor
         <p id="website-note" style="font-size:.85rem;color:var(--text-muted);margin-top:6px">Nur als lokale Referenz. Automatische Analyse ist noch nicht verfügbar. Bitte tragen Sie die Betriebsdaten selbst ein.</p>
       </div>
     </div>
+    <div id="website-profile-review" class="card" hidden aria-live="polite"></div>
     <div class="card" style="border-color: var(--accent);">
       <div class="step-title">So geht's – Kurzanleitung</div>
       <ol style="margin: 0 0 0 18px; font-size: 0.9rem; line-height: 1.7; color: #cbd5e1;">
@@ -922,6 +924,11 @@ header{background:#fff}.form-group label,h4[style],ol[style]{color:#263b58!impor
     setBranch("trades");
   </script>
   <p style="text-align:center;font-size:13px;opacity:.8;padding:24px 16px">Anbieter: Dominik Steiner, RealSync Dynamics &amp; AI · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></p>
+  <script type="module">
+    import { mountProfileReview } from "./website-profile-review.mjs";
+    // No public transport is enabled. Keep the review controller private until an authorized endpoint exists.
+    mountProfileReview({root:document.getElementById("website-profile-review"),websiteField:document.getElementById("ob-website"),nameField:document.getElementById("ob-name"),normalize:normalizeWebsiteReference,onChange:runOnboardingPipeline});
+  </script>
   <script src="chatbot.js"></script>
 </body>
 </html>
