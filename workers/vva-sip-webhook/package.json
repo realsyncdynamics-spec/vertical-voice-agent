@@ -1,3 +1,3 @@
 { "name": "vva-sip-webhook", "private": true, "type": "module",
-  "scripts": { "test": "node test/run.mjs", "test:mandant": "node test/mandant.test.mjs", "mandant": "node scripts/mandant.mjs" },
+  "scripts": { "test": "node test/run.mjs", "test:mandant": "node test/mandant.test.mjs", "test:r13": "node test/privacy-r13.test.mjs", "mandant": "node scripts/mandant.mjs" },
   "devDependencies": { "miniflare": "^4" } }
