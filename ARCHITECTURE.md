@@ -55,6 +55,17 @@ Adresse/Dringlichkeit bei `lead_erfassen` ausdrücklich optional (System-Prompt,
 ## Einsatzort (30.10.2026)
 Kein globales Pflichtfeld. Nur Handwerk (Reparatur/Wartung/Notfall), Kfz (Panne vor Ort) und Hausverwaltung (Schaden) fragen einmal danach; bei Öffnungszeiten-Fragen nie. Live-Smoke 10/10.
 
+## Aufbewahrung und Datenminimierung (R13, 28.11.2026)
+| Datensatz | Gespeichert | Löschung (Cron `purge`, täglich 03:17 UTC) |
+|---|---|---|
+| Anruf eines Mandanten (angenommen oder abgelehnt) | Anrufernummer für Rückruf | `retention_days` des Mandanten, Standard 30 Tage |
+| Abgelehnter Anruf ohne Mandanten (`TELEPHONY_DISABLED`, `UNKNOWN_NUMBER`, `MISSING_XAI_API_KEY`) | **keine** Anrufernummer, kein Gesprächsinhalt | 7 Tage (`ORPHAN_RETENTION_DAYS`) |
+| Anrufe, Protokolle, Transkripte, Aufgaben gelöschter Mandanten | – | 7 Tage nach Entstehung |
+| `webhook_events` (Idempotenz) | Webhook-ID, Call-ID | 7 Tage |
+| Hängengebliebener `active`-Anruf (kein Gesprächsende gemeldet) | wie Mandanten-Anruf | wird nach 2 h bzw. dem Doppelten der reservierten Dauer auf `ended` gesetzt (`STALE_ACTIVE_CLOSED`, reservierte Minuten werden angerechnet), danach normale Aufbewahrung |
+
+Laufende Anrufe werden nie gelöscht. Ein fehlerhafter Mandanten-Datensatz bricht den Lauf nicht ab; dann gilt die Standard-Aufbewahrung (30 Tage). Tests: `npm run test:r13` (30 Fälle, Miniflare).
+
 ## Go-live-Reihenfolge
 1. Telnyx DE-Nummer → 2. xAI DPA + ZDR (erst Test-Team, Smoke, dann Prod) → 3. Prod-Secrets + erster Mandant → 4. Testanrufe → 5. Stripe-Name. Details: `GO_LIVE.md`.
 

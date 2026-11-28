@@ -14,6 +14,9 @@ export const ONSITE = {
   property_management: "Objektadresse und Wohnung, bei Schadensmeldung oder Reparaturbedarf",
 };
 const DEF = { max_call_minutes: 10, monthly_minute_budget: 300, max_parallel_calls: 2, retention_days: 30, transcript_enabled: false };
+/** R13: Aufbewahrung für Datensätze ohne (gültigen) Mandanten – abgelehnte Anrufe, Protokolle gelöschter Mandanten. */
+export const ORPHAN_RETENTION_DAYS = 7;
+export const STALE_ACTIVE_MIN_SEC = 2 * 3600; // R13: "active" länger als 2 h (bzw. 2× reservierte Dauer) gilt als hängengeblieben
 const E164 = /^\+\d{8,15}$/;
 export const now = () => new Date().toISOString();
 const month = (d = new Date()) => d.toISOString().slice(0, 7);
@@ -60,8 +63,11 @@ async function loadTenantByNumber(env, to) {
  */
 export async function admit(env, { call_id, from, to }) {
   const reject = async (reason, x = {}) => {
+    // R13 Datenminimierung: Ohne Mandantenzuordnung gibt es keinen Zweck für die Anrufernummer
+    // (kein Rückruf, keine Übergabe) – sie wird gar nicht erst gespeichert.
+    const caller = x.agent_id ? (from || null) : null;
     await env.DB.prepare("INSERT OR IGNORE INTO calls (call_id, agent_id, template, template_version, from_number, to_number, status, reject_reason, started_at, month) VALUES (?,?,?,?,?,?,'rejected',?,?,?)")
-      .bind(call_id, x.agent_id || null, x.template || null, x.version || null, from || null, to || null, reason, now(), month()).run();
+      .bind(call_id, x.agent_id || null, x.template || null, x.version || null, caller, to || null, reason, now(), month()).run();
     await logAction(env, call_id, x.agent_id, "call_admission", "REJECTED", { to }, { reason });
     return { accept: false, reason };
   };
@@ -196,13 +202,29 @@ async function task(env, id, agent, call_id, kind, payload) {
 }
 /** Aufbewahrung je Mandant (retention_days, Standard 30). Läuft per Cron. */
 export async function purge(env) {
-  const rows = (await env.DB.prepare("SELECT agent_id, data FROM tenants").all()).results; let n = 0;
+  let n = 0;
+  // R13: Hängengebliebene "active"-Anrufe (Worker-Abbruch, kein endCall) schließen. Sonst fielen sie nie unter
+  // die Aufbewahrung und belegten dauerhaft max_parallel_calls. Grenze: das Doppelte der reservierten Dauer,
+  // mindestens STALE_ACTIVE_MIN_SEC. Abgerechnet wird konservativ die reservierte Dauer.
+  n += (await env.DB.prepare(
+    `UPDATE calls SET status='ended', ended_at=?, duration_sec=COALESCE(duration_sec, reserved_min*60), errors=COALESCE(errors, 'STALE_ACTIVE_CLOSED')
+     WHERE status='active' AND (strftime('%s','now') - strftime('%s', started_at)) > MAX(?, COALESCE(reserved_min,0)*120)`)
+    .bind(now(), STALE_ACTIVE_MIN_SEC).run()).meta.changes;
+  const rows = (await env.DB.prepare("SELECT agent_id, data FROM tenants").all()).results;
   for (const r of rows) {
-    const days = telephonySettings(JSON.parse(r.data)).retention_days || DEF.retention_days;
+    // R13: Ein fehlerhafter Mandanten-Datensatz darf die Aufbewahrung nicht abbrechen; dann gilt der Standard.
+    let days = DEF.retention_days;
+    try { days = telephonySettings(JSON.parse(r.data)).retention_days || DEF.retention_days; } catch { days = DEF.retention_days; }
     const cut = new Date(Date.now() - days * 864e5).toISOString();
     for (const tb of ["transcripts", "call_actions", "tasks"]) n += (await env.DB.prepare(`DELETE FROM ${tb} WHERE agent_id=? AND created_at < ?`).bind(r.agent_id, cut).run()).meta.changes;
     n += (await env.DB.prepare("DELETE FROM calls WHERE agent_id=? AND started_at < ? AND status!='active'").bind(r.agent_id, cut).run()).meta.changes;
   }
+  // R13: Datensätze ohne Mandanten (agent_id NULL) oder von gelöschten Mandanten fallen nicht unter die
+  // Schleife oben und würden sonst unbegrenzt bleiben. NOT EXISTS statt NOT IN (robust gegen NULL in tenants).
+  const orphanCut = new Date(Date.now() - ORPHAN_RETENTION_DAYS * 864e5).toISOString();
+  const noTenant = (tb) => `(${tb}.agent_id IS NULL OR NOT EXISTS (SELECT 1 FROM tenants tn WHERE tn.agent_id = ${tb}.agent_id))`;
+  for (const tb of ["transcripts", "call_actions", "tasks"]) n += (await env.DB.prepare(`DELETE FROM ${tb} WHERE ${noTenant(tb)} AND created_at < ?`).bind(orphanCut).run()).meta.changes;
+  n += (await env.DB.prepare(`DELETE FROM calls WHERE ${noTenant("calls")} AND started_at < ? AND status!='active'`).bind(orphanCut).run()).meta.changes;
   await env.DB.prepare("DELETE FROM webhook_events WHERE received_at < ?").bind(new Date(Date.now() - 7 * 864e5).toISOString()).run();
   return n;
 }
